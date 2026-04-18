@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurea Hosting — Content Manager</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Admin-specific styles ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body.admin-body {
+      background: #0f1419;
+      color: #e4e8eb;
+      font-family: 'Satoshi', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .admin-header {
+      background: #161b22;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0 32px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .admin-header-logo {
+      font-size: 17px;
+      font-weight: 700;
+      color: #e4e8eb;
+      letter-spacing: -0.01em;
+    }
+    .admin-header-logo span { color: #c8a35d; }
+    .admin-header-badge {
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(27,127,116,0.18);
+      color: #1b7f74;
+      border: 1px solid rgba(27,127,116,0.3);
+      border-radius: 4px;
+      padding: 2px 8px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .admin-header-spacer { flex: 1; }
+    .admin-header-link {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+    }
+    .admin-header-link:hover { color: rgba(255,255,255,0.7); }
+
+    /* Tab navigation */
+    .admin-tabs {
+      background: #161b22;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 0 24px;
+      position: sticky;
+      top: 60px;
+      z-index: 99;
+    }
+    .admin-tabs::-webkit-scrollbar { display: none; }
+    .admin-tab {
+      flex-shrink: 0;
+      padding: 14px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.45);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 200ms, border-color 200ms;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .admin-tab:hover { color: rgba(255,255,255,0.75); }
+    .admin-tab.active {
+      color: #e4e8eb;
+      border-bottom-color: #1b7f74;
+    }
+
+    /* Layout */
+    .admin-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 32px 120px;
+    }
+
+    /* Sections */
+    .admin-section { display: none; }
+    .admin-section.active { display: block; }
+
+    .admin-section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #e4e8eb;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+    .admin-section-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    /* Fields */
+    .admin-field {
+      margin-bottom: 20px;
+    }
+    .admin-field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 6px;
+    }
+    .admin-field input,
+    .admin-field textarea,
+    .admin-field select {
+      width: 100%;
+      background: #1c2128;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      color: #e4e8eb;
+      font-family: inherit;
+      font-size: 14px;
+      padding: 10px 14px;
+      transition: border-color 200ms;
+      outline: none;
+    }
+    .admin-field input:focus,
+    .admin-field textarea:focus,
+    .admin-field select:focus {
+      border-color: rgba(27,127,116,0.5);
+    }
+    .admin-field textarea { resize: vertical; min-height: 80px; }
+
+    /* Buttons */
+    .admin-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background 200ms, opacity 200ms;
+    }
+    .admin-btn:hover { opacity: 0.85; }
+    .admin-btn-primary { background: #1b7f74; color: #fff; }
+    .admin-btn-secondary {
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .admin-btn-danger {
+      background: rgba(220,60,60,0.15);
+      color: #e87070;
+      border: 1px solid rgba(220,60,60,0.2);
+    }
+    .admin-btn-gold { background: #c8a35d; color: #172226; }
+    .admin-btn-gold:hover { background: #b89044; }
+
+    /* Sticky action bar */
+    .admin-actions {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #161b22;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 200;
+    }
+    .admin-actions-spacer { flex: 1; }
+
+    /* Sub-groups */
+    .admin-subgroup {
+      background: #1c2128;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .admin-subgroup h4 {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #c8a35d;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    /* Grids */
+    .admin-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .admin-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .admin-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+    /* Utilities */
+    .admin-hint {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      margin-top: 4px;
+    }
+    .admin-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin: 24px 0;
+    }
+    .admin-notice {
+      background: rgba(27,127,116,0.12);
+      border: 1px solid rgba(27,127,116,0.25);
+      border-radius: 8px;
+      padding: 16px;
+      color: rgba(255,255,255,0.7);
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .admin-notice strong { color: #e4e8eb; }
+
+    /* Bedroom range row */
+    .beds-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .beds-range {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .beds-range input {
+      width: 100%;
+      background: #1c2128;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      color: #e4e8eb;
+      font-family: inherit;
+      font-size: 13px;
+      padding: 8px 10px;
+      outline: none;
+    }
+    .beds-range input:focus { border-color: rgba(27,127,116,0.5); }
+    .beds-sep {
+      color: rgba(255,255,255,0.25);
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 80px;
+      right: 24px;
+      background: #1b7f74;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 300ms;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .toast.show { opacity: 1; }
+
+    /* Export section */
+    .export-card {
+      background: #161b22;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .export-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #e4e8eb;
+    }
+    .export-card p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .export-card .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .import-textarea {
+      width: 100%;
+      background: #1c2128;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      color: #e4e8eb;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      padding: 12px;
+      resize: vertical;
+      min-height: 140px;
+      outline: none;
+      margin-bottom: 12px;
+    }
+    .import-textarea:focus { border-color: rgba(27,127,116,0.5); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .admin-content { padding: 24px 16px 120px; }
+      .admin-grid-2 { grid-template-columns: 1fr; }
+      .admin-grid-3 { grid-template-columns: 1fr; }
+      .admin-grid-4 { grid-template-columns: 1fr 1fr; }
+      .admin-actions { padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+<!-- Toast notification -->
+<div class="toast" id="adminToast"></div>
+
+<!-- Header -->
+<header class="admin-header">
+  <div class="admin-header-logo">
+    <span>Aurea</span> Hosting
+  </div>
+  <span class="admin-header-badge">Content Manager</span>
+  <div class="admin-header-spacer"></div>
+  <a href="index.html" class="admin-header-link">← Back to site</a>
+</header>
+
+<!-- Tab navigation -->
+<nav class="admin-tabs" id="adminTabs">
+  <div class="admin-tab active" data-section="brand">Brand</div>
+  <div class="admin-tab" data-section="homepage">Homepage</div>
+  <div class="admin-tab" data-section="intel">Intel Strip</div>
+  <div class="admin-tab" data-section="calculator">Calculator</div>
+  <div class="admin-tab" data-section="testimonials">Testimonials</div>
+  <div class="admin-tab" data-section="services">Services</div>
+  <div class="admin-tab" data-section="whyus">Why Us</div>
+  <div class="admin-tab" data-section="technology">Technology</div>
+  <div class="admin-tab" data-section="areas">Areas</div>
+  <div class="admin-tab" data-section="faq">FAQ</div>
+  <div class="admin-tab" data-section="apply">Apply</div>
+  <div class="admin-tab" data-section="export">Export</div>
+</nav>
+
+<!-- Main content -->
+<main class="admin-content">
+
+  <!-- ══════════════ BRAND ══════════════ -->
+  <section class="admin-section active" id="section-brand">
+    <div class="admin-section-title">Brand</div>
+    <div class="admin-section-desc">Core identity, contact details, and colour tokens used site-wide.</div>
+
+    <div class="admin-subgroup">
+      <h4>Identity</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Brand Name</label>
+          <input type="text" data-key="brandName" placeholder="Aurea Hosting">
+        </div>
+        <div class="admin-field">
+          <label>Tagline</label>
+          <input type="text" data-key="tagline">
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Contact</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Phone</label>
+          <input type="text" data-key="phone" placeholder="0404 608 196">
+        </div>
+        <div class="admin-field">
+          <label>Email</label>
+          <input type="text" data-key="email" placeholder="noah@aureahosting.com.au">
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Call to Action Block</h4>
+      <div class="admin-field">
+        <label>CTA Title</label>
+        <input type="text" data-key="ctaTitle">
+      </div>
+      <div class="admin-field">
+        <label>CTA Text</label>
+        <input type="text" data-key="ctaText">
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Colour Tokens</h4>
+      <div class="admin-grid-3">
+        <div class="admin-field">
+          <label>Primary (Teal)</label>
+          <input type="text" data-key="primary" placeholder="#1b7f74">
+          <div class="admin-hint">CSS hex value — e.g. #1b7f74</div>
+        </div>
+        <div class="admin-field">
+          <label>Gold</label>
+          <input type="text" data-key="gold" placeholder="#c8a35d">
+        </div>
+        <div class="admin-field">
+          <label>Sand (Background light)</label>
+          <input type="text" data-key="sand" placeholder="#fffdf9">
+        </div>
+      </div>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Ink (Dark text/bg)</label>
+          <input type="text" data-key="ink" placeholder="#172226">
+        </div>
+        <div class="admin-field">
+          <label>Primary Deep</label>
+          <input type="text" data-key="primaryDeep" placeholder="#14605a">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ HOMEPAGE ══════════════ -->
+  <section class="admin-section" id="section-homepage">
+    <div class="admin-section-title">Homepage</div>
+    <div class="admin-section-desc">Performance stats and the "Apply" close section on the homepage.</div>
+
+    <div class="admin-subgroup">
+      <h4>Stat 1 — Occupancy</h4>
+      <div class="admin-grid-3">
+        <div class="admin-field">
+          <label>Label</label>
+          <input type="text" data-key="perfLabel1" placeholder="Average occupancy">
+        </div>
+        <div class="admin-field">
+          <label>Number (target)</label>
+          <input type="text" data-key="perfNum1" placeholder="74">
+        </div>
+        <div class="admin-field">
+          <label>Suffix</label>
+          <input type="text" data-key="perfSuffix1" placeholder="%">
+        </div>
+      </div>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Counter Start</label>
+          <input type="text" data-key="perfStart1" placeholder="45">
+          <div class="admin-hint">Animation begins from this number</div>
+        </div>
+        <div class="admin-field">
+          <label>Context Line</label>
+          <input type="text" data-key="perfContext1">
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Stat 2 — Revenue Lift</h4>
+      <div class="admin-grid-3">
+        <div class="admin-field">
+          <label>Label</label>
+          <input type="text" data-key="perfLabel2" placeholder="Revenue lift vs self-managed">
+        </div>
+        <div class="admin-field">
+          <label>Number (target)</label>
+          <input type="text" data-key="perfNum2" placeholder="32">
+        </div>
+        <div class="admin-field">
+          <label>Suffix</label>
+          <input type="text" data-key="perfSuffix2" placeholder="%">
+        </div>
+      </div>
+      <div class="admin-grid-3">
+        <div class="admin-field">
+          <label>Prefix</label>
+          <input type="text" data-key="perfPrefix2" placeholder="+">
+          <div class="admin-hint">Shown before the number (e.g. +)</div>
+        </div>
+        <div class="admin-field">
+          <label>Counter Start</label>
+          <input type="text" data-key="perfStart2" placeholder="20">
+        </div>
+        <div class="admin-field">
+          <label>Context Line</label>
+          <input type="text" data-key="perfContext2">
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Stat 3 — Response Time (static)</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Label</label>
+          <input type="text" data-key="perfLabel3" placeholder="Guest response time">
+        </div>
+        <div class="admin-field">
+          <label>Context Line</label>
+          <input type="text" data-key="perfContext3">
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Apply / Close Section</h4>
+      <div class="admin-field">
+        <label>Overline</label>
+        <input type="text" data-key="applyOverline" placeholder="Limited availability">
+      </div>
+      <div class="admin-field">
+        <label>Headline</label>
+        <input type="text" data-key="applyHeadline">
+      </div>
+      <div class="admin-field">
+        <label>Sub-copy</label>
+        <input type="text" data-key="applySub">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ INTEL STRIP ══════════════ -->
+  <section class="admin-section" id="section-intel">
+    <div class="admin-section-title">Intel Strip</div>
+    <div class="admin-section-desc">The scrolling event ticker on the homepage. Six event cards, displayed in a continuous loop.</div>
+
+    <div class="admin-notice">
+      <strong>Field IDs:</strong> intel_1_event, intel_1_period, intel_1_uplift, intel_1_ctx — up to intel_6_*.
+      The <code>uplift</code> field should include the + sign and $ symbol (e.g. <strong>+$175</strong>).
+    </div>
+
+    <!-- Event 1 -->
+    <div class="admin-subgroup">
+      <h4>Event 1</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Event Name</label>
+          <input type="text" id="intel_1_event" placeholder="WomAdelaide">
+        </div>
+        <div class="admin-field">
+          <label>Period</label>
+          <input type="text" id="intel_1_period" placeholder="March · Annual">
+        </div>
+        <div class="admin-field">
+          <label>Uplift per night</label>
+          <input type="text" id="intel_1_uplift" placeholder="+$175">
+        </div>
+        <div class="admin-field">
+          <label>Context</label>
+          <input type="text" id="intel_1_ctx" placeholder="portfolio average">
+        </div>
+      </div>
+    </div>
+
+    <!-- Event 2 -->
+    <div class="admin-subgroup">
+      <h4>Event 2</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Event Name</label>
+          <input type="text" id="intel_2_event" placeholder="Adelaide Fringe">
+        </div>
+        <div class="admin-field">
+          <label>Period</label>
+          <input type="text" id="intel_2_period" placeholder="Feb–Mar · 14 nights">
+        </div>
+        <div class="admin-field">
+          <label>Uplift per night</label>
+          <input type="text" id="intel_2_uplift" placeholder="+$160">
+        </div>
+        <div class="admin-field">
+          <label>Context</label>
+          <input type="text" id="intel_2_ctx" placeholder="above baseline rate">
+        </div>
+      </div>
+    </div>
+
+    <!-- Event 3 -->
+    <div class="admin-subgroup">
+      <h4>Event 3</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Event Name</label>
+          <input type="text" id="intel_3_event" placeholder="Gather Round">
+        </div>
+        <div class="admin-field">
+          <label>Period</label>
+          <input type="text" id="intel_3_period" placeholder="April · 4-night surge">
+        </div>
+        <div class="admin-field">
+          <label>Uplift per night</label>
+          <input type="text" id="intel_3_uplift" placeholder="+$210">
+        </div>
+        <div class="admin-field">
+          <label>Context</label>
+          <input type="text" id="intel_3_ctx" placeholder="AFL city premium">
+        </div>
+      </div>
+    </div>
+
+    <!-- Event 4 -->
+    <div class="admin-subgroup">
+      <h4>Event 4</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Event Name</label>
+          <input type="text" id="intel_4_event" placeholder="Tour Down Under">
+        </div>
+        <div class="admin-field">
+          <label>Period</label>
+          <input type="text" id="intel_4_period" placeholder="January · Coastal">
+        </div>
+        <div class="admin-field">
+          <label>Uplift per night</label>
+          <input type="text" id="intel_4_uplift" placeholder="+$140">
+        </div>
+        <div class="admin-field">
+          <label>Context</label>
+          <input type="text" id="intel_4_ctx" placeholder="beachside corridor">
+        </div>
+      </div>
+    </div>
+
+    <!-- Event 5 -->
+    <div class="admin-subgroup">
+      <h4>Event 5</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Event Name</label>
+          <input type="text" id="intel_5_event" placeholder="LIV Golf">
+        </div>
+        <div class="admin-field">
+          <label>Period</label>
+          <input type="text" id="intel_5_period" placeholder="April · Glenelg">
+        </div>
+        <div class="admin-field">
+          <label>Uplift per night</label>
+          <input type="text" id="intel_5_uplift" placeholder="+$190">
+        </div>
+        <div class="admin-field">
+          <label>Context</label>
+          <input type="text" id="intel_5_ctx" placeholder="above event baseline">
+        </div>
+      </div>
+    </div>
+
+    <!-- Event 6 -->
+    <div class="admin-subgroup">
+      <h4>Event 6</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Event Name</label>
+          <input type="text" id="intel_6_event" placeholder="Tasting Australia">
+        </div>
+        <div class="admin-field">
+          <label>Period</label>
+          <input type="text" id="intel_6_period" placeholder="Apr–May · Hills + CBD">
+        </div>
+        <div class="admin-field">
+          <label>Uplift per night</label>
+          <input type="text" id="intel_6_uplift" placeholder="+$120">
+        </div>
+        <div class="admin-field">
+          <label>Context</label>
+          <input type="text" id="intel_6_ctx" placeholder="food &amp; wine season">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ CALCULATOR ══════════════ -->
+  <section class="admin-section" id="section-calculator">
+    <div class="admin-section-title">Calculator</div>
+    <div class="admin-section-desc">Revenue estimate data for each suburb cluster. Lo/Hi values are monthly estimates in AUD.</div>
+
+    <div class="admin-notice">
+      <strong>Bedroom ranges</strong> are monthly revenue estimates in AUD. Enter low and high values for each bedroom count.
+      The events string is shown to owners as context below their estimate.
+    </div>
+
+    <!-- Glenelg -->
+    <div class="admin-subgroup">
+      <h4>Glenelg · West Beach · Henley</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Cluster Label</label>
+          <input type="text" id="calc_glenelg_label" placeholder="Glenelg · West Beach · Henley">
+        </div>
+        <div class="admin-field">
+          <label>Events String</label>
+          <input type="text" id="calc_glenelg_events" placeholder="WomAdelaide +$175/night · LIV Golf +$190/night">
+        </div>
+      </div>
+      <div style="margin-top:8px;">
+        <div class="admin-grid-4">
+          <div>
+            <div class="beds-label">1 Bedroom</div>
+            <div class="beds-range">
+              <input type="number" id="calc_glenelg_1_lo" placeholder="2800">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_glenelg_1_hi" placeholder="3400">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">2 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_glenelg_2_lo" placeholder="3600">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_glenelg_2_hi" placeholder="4400">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">3 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_glenelg_3_lo" placeholder="4800">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_glenelg_3_hi" placeholder="6000">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">4 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_glenelg_4_lo" placeholder="5600">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_glenelg_4_hi" placeholder="7200">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CBD -->
+    <div class="admin-subgroup">
+      <h4>Adelaide CBD</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Cluster Label</label>
+          <input type="text" id="calc_cbd_label" placeholder="Adelaide CBD">
+        </div>
+        <div class="admin-field">
+          <label>Events String</label>
+          <input type="text" id="calc_cbd_events" placeholder="Adelaide Fringe +$155/night · Gather Round +$210/night">
+        </div>
+      </div>
+      <div style="margin-top:8px;">
+        <div class="admin-grid-4">
+          <div>
+            <div class="beds-label">1 Bedroom</div>
+            <div class="beds-range">
+              <input type="number" id="calc_cbd_1_lo" placeholder="2600">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_cbd_1_hi" placeholder="3200">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">2 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_cbd_2_lo" placeholder="3400">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_cbd_2_hi" placeholder="4000">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">3 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_cbd_3_lo" placeholder="4800">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_cbd_3_hi" placeholder="5600">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">4 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_cbd_4_lo" placeholder="5500">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_cbd_4_hi" placeholder="6800">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Norwood -->
+    <div class="admin-subgroup">
+      <h4>Norwood · Unley · Burnside</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Cluster Label</label>
+          <input type="text" id="calc_norwood_label" placeholder="Norwood · Unley · Burnside">
+        </div>
+        <div class="admin-field">
+          <label>Events String</label>
+          <input type="text" id="calc_norwood_events" placeholder="Adelaide Fringe +$140/night · Gather Round +$180/night">
+        </div>
+      </div>
+      <div style="margin-top:8px;">
+        <div class="admin-grid-4">
+          <div>
+            <div class="beds-label">1 Bedroom</div>
+            <div class="beds-range">
+              <input type="number" id="calc_norwood_1_lo" placeholder="2400">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_norwood_1_hi" placeholder="3000">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">2 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_norwood_2_lo" placeholder="3200">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_norwood_2_hi" placeholder="3900">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">3 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_norwood_3_lo" placeholder="4200">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_norwood_3_hi" placeholder="5200">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">4 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_norwood_4_lo" placeholder="5000">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_norwood_4_hi" placeholder="6200">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stirling -->
+    <div class="admin-subgroup">
+      <h4>Stirling · Hahndorf · Hills</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Cluster Label</label>
+          <input type="text" id="calc_stirling_label" placeholder="Stirling · Hahndorf · Hills">
+        </div>
+        <div class="admin-field">
+          <label>Events String</label>
+          <input type="text" id="calc_stirling_events" placeholder="Tasting Australia +$140/night · Winter retreats Jun–Aug">
+        </div>
+      </div>
+      <div style="margin-top:8px;">
+        <div class="admin-grid-4">
+          <div>
+            <div class="beds-label">1 Bedroom</div>
+            <div class="beds-range">
+              <input type="number" id="calc_stirling_1_lo" placeholder="2200">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_stirling_1_hi" placeholder="2800">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">2 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_stirling_2_lo" placeholder="3400">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_stirling_2_hi" placeholder="4200">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">3 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_stirling_3_lo" placeholder="5000">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_stirling_3_hi" placeholder="6500">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">4 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_stirling_4_lo" placeholder="6000">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_stirling_4_hi" placeholder="8000">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brighton -->
+    <div class="admin-subgroup">
+      <h4>Brighton · Marino · Hallett Cove</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Cluster Label</label>
+          <input type="text" id="calc_brighton_label" placeholder="Brighton · Marino · Hallett Cove">
+        </div>
+        <div class="admin-field">
+          <label>Events String</label>
+          <input type="text" id="calc_brighton_events" placeholder="LIV Golf +$160/night · Summer season Dec–Feb">
+        </div>
+      </div>
+      <div style="margin-top:8px;">
+        <div class="admin-grid-4">
+          <div>
+            <div class="beds-label">1 Bedroom</div>
+            <div class="beds-range">
+              <input type="number" id="calc_brighton_1_lo" placeholder="2600">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_brighton_1_hi" placeholder="3200">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">2 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_brighton_2_lo" placeholder="3400">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_brighton_2_hi" placeholder="4000">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">3 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_brighton_3_lo" placeholder="4400">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_brighton_3_hi" placeholder="5400">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">4 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_brighton_4_lo" placeholder="5200">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_brighton_4_hi" placeholder="6500">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prospect -->
+    <div class="admin-subgroup">
+      <h4>Prospect · Nailsworth · Broadview</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Cluster Label</label>
+          <input type="text" id="calc_prospect_label" placeholder="Prospect · Nailsworth · Broadview">
+        </div>
+        <div class="admin-field">
+          <label>Events String</label>
+          <input type="text" id="calc_prospect_events" placeholder="Gather Round +$160/night · Tasting Australia +$80/night">
+        </div>
+      </div>
+      <div style="margin-top:8px;">
+        <div class="admin-grid-4">
+          <div>
+            <div class="beds-label">1 Bedroom</div>
+            <div class="beds-range">
+              <input type="number" id="calc_prospect_1_lo" placeholder="2200">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_prospect_1_hi" placeholder="2800">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">2 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_prospect_2_lo" placeholder="2900">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_prospect_2_hi" placeholder="3600">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">3 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_prospect_3_lo" placeholder="3800">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_prospect_3_hi" placeholder="4600">
+            </div>
+          </div>
+          <div>
+            <div class="beds-label">4 Bedrooms</div>
+            <div class="beds-range">
+              <input type="number" id="calc_prospect_4_lo" placeholder="4500">
+              <span class="beds-sep">–</span>
+              <input type="number" id="calc_prospect_4_hi" placeholder="5500">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ TESTIMONIALS ══════════════ -->
+  <section class="admin-section" id="section-testimonials">
+    <div class="admin-section-title">Testimonials</div>
+    <div class="admin-section-desc">Owner result quotes displayed on the homepage results section.</div>
+
+    <div class="admin-subgroup">
+      <h4>Result 1</h4>
+      <div class="admin-field">
+        <label>Quote</label>
+        <textarea data-key="result1Quote" rows="3"></textarea>
+      </div>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Meta (owner · suburb · property)</label>
+          <input type="text" data-key="result1Meta" placeholder="S.M. · Norwood · Townhouse">
+        </div>
+        <div class="admin-field">
+          <label>Stat / Result Badge</label>
+          <input type="text" data-key="result1Stat" placeholder="+34% revenue, Q1 2025">
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Result 2</h4>
+      <div class="admin-field">
+        <label>Quote</label>
+        <textarea data-key="result2Quote" rows="3"></textarea>
+      </div>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Meta</label>
+          <input type="text" data-key="result2Meta" placeholder="T.K. · Glenelg · 2BR Apartment">
+        </div>
+        <div class="admin-field">
+          <label>Stat / Result Badge</label>
+          <input type="text" data-key="result2Stat" placeholder="+$8,400 Fringe season 2025">
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Result 3</h4>
+      <div class="admin-field">
+        <label>Quote</label>
+        <textarea data-key="result3Quote" rows="3"></textarea>
+      </div>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Meta</label>
+          <input type="text" data-key="result3Meta" placeholder="R. &amp; J.P. · Stirling · Hills Retreat">
+        </div>
+        <div class="admin-field">
+          <label>Stat / Result Badge</label>
+          <input type="text" data-key="result3Stat" placeholder="74% occupancy, first quarter">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ SERVICES ══════════════ -->
+  <section class="admin-section" id="section-services">
+    <div class="admin-section-title">Services</div>
+    <div class="admin-section-desc">Homepage process steps (4 rows) and Services page detail (5 rows) + the Stop/Get list.</div>
+
+    <div class="admin-subgroup">
+      <h4>Homepage — Process Steps</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Step 1 Title</label>
+          <input type="text" data-key="proc1Title" placeholder="Assessment">
+        </div>
+        <div class="admin-field">
+          <label>Step 1 Timeline</label>
+          <input type="text" data-key="proc1Timeline" placeholder="Day 1">
+        </div>
+      </div>
+      <div class="admin-field">
+        <label>Step 1 Text</label>
+        <textarea data-key="proc1Text" rows="2"></textarea>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Step 2 Title</label>
+          <input type="text" data-key="proc2Title" placeholder="Setup">
+        </div>
+        <div class="admin-field">
+          <label>Step 2 Timeline</label>
+          <input type="text" data-key="proc2Timeline" placeholder="Days 2–5">
+        </div>
+      </div>
+      <div class="admin-field">
+        <label>Step 2 Text</label>
+        <textarea data-key="proc2Text" rows="2"></textarea>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Step 3 Title</label>
+          <input type="text" data-key="proc3Title" placeholder="Go Live">
+        </div>
+        <div class="admin-field">
+          <label>Step 3 Timeline</label>
+          <input type="text" data-key="proc3Timeline" placeholder="Day 7">
+        </div>
+      </div>
+      <div class="admin-field">
+        <label>Step 3 Text</label>
+        <textarea data-key="proc3Text" rows="2"></textarea>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Step 4 Title</label>
+          <input type="text" data-key="proc4Title" placeholder="Ongoing">
+        </div>
+        <div class="admin-field">
+          <label>Step 4 Timeline</label>
+          <input type="text" data-key="proc4Timeline" placeholder="Continuous">
+        </div>
+      </div>
+      <div class="admin-field">
+        <label>Step 4 Text</label>
+        <textarea data-key="proc4Text" rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Services Page — Detail Rows</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Service 1 Title</label>
+          <input type="text" data-key="serv1Title">
+        </div>
+        <div class="admin-field">
+          <label>Service 1 Timeline</label>
+          <input type="text" data-key="serv1Timeline">
+        </div>
+      </div>
+      <div class="admin-field">
+        <label>Service 1 Text</label>
+        <textarea data-key="serv1Text" rows="2"></textarea>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Service 2 Title</label>
+          <input type="text" data-key="serv2Title">
+        </div>
+        <div class="admin-field">
+          <label>Service 2 Timeline</label>
+          <input type="text" data-key="serv2Timeline">
+        </div>
+      </div>
+      <div class="admin-field">
+        <label>Service 2 Text</label>
+        <textarea data-key="serv2Text" rows="2"></textarea>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Service 3 Title</label>
+          <input type="text" data-key="serv3Title">
+        </div>
+        <div class="admin-field">
+          <label>Service 3 Timeline</label>
+          <input type="text" data-key="serv3Timeline">
+        </div>
+      </div>
+      <div class="admin-field">
+        <label>Service 3 Text</label>
+        <textarea data-key="serv3Text" rows="2"></textarea>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Service 4 Title</label>
+          <input type="text" data-key="serv4Title">
+        </div>
+        <div class="admin-field">
+          <label>Service 4 Timeline</label>
+          <input type="text" data-key="serv4Timeline">
+        </div>
+      </div>
+      <div class="admin-field">
+        <label>Service 4 Text</label>
+        <textarea data-key="serv4Text" rows="2"></textarea>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Service 5 Title</label>
+          <input type="text" data-key="serv5Title">
+        </div>
+        <div class="admin-field">
+          <label>Service 5 Timeline</label>
+          <input type="text" data-key="serv5Timeline">
+        </div>
+      </div>
+      <div class="admin-field">
+        <label>Service 5 Text</label>
+        <textarea data-key="serv5Text" rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Stop Doing / Start Getting List</h4>
+      <div class="admin-grid-2">
+        <div>
+          <div class="admin-field">
+            <label>Stop 1</label>
+            <input type="text" data-key="servicesStop1">
+          </div>
+          <div class="admin-field">
+            <label>Stop 2</label>
+            <input type="text" data-key="servicesStop2">
+          </div>
+          <div class="admin-field">
+            <label>Stop 3</label>
+            <input type="text" data-key="servicesStop3">
+          </div>
+          <div class="admin-field">
+            <label>Stop 4</label>
+            <input type="text" data-key="servicesStop4">
+          </div>
+          <div class="admin-field">
+            <label>Stop 5</label>
+            <input type="text" data-key="servicesStop5">
+          </div>
+        </div>
+        <div>
+          <div class="admin-field">
+            <label>Get 1</label>
+            <input type="text" data-key="servicesGet1">
+          </div>
+          <div class="admin-field">
+            <label>Get 2</label>
+            <input type="text" data-key="servicesGet2">
+          </div>
+          <div class="admin-field">
+            <label>Get 3</label>
+            <input type="text" data-key="servicesGet3">
+          </div>
+          <div class="admin-field">
+            <label>Get 4</label>
+            <input type="text" data-key="servicesGet4">
+          </div>
+          <div class="admin-field">
+            <label>Get 5</label>
+            <input type="text" data-key="servicesGet5">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ WHY US ══════════════ -->
+  <section class="admin-section" id="section-whyus">
+    <div class="admin-section-title">Why Us</div>
+    <div class="admin-section-desc">Content for the comparison page — hero, comparison table, edge cards, and fit list.</div>
+
+    <div class="admin-subgroup">
+      <h4>Hero</h4>
+      <div class="admin-field">
+        <label>Hero Title</label>
+        <input type="text" data-key="whyHeroTitle">
+      </div>
+      <div class="admin-field">
+        <label>Hero Text</label>
+        <textarea data-key="whyHeroText" rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Comparison Table Rows</h4>
+      <div class="admin-grid-3">
+        <div class="admin-field">
+          <label>Row 1 — Feature</label>
+          <input type="text" data-key="whyRow1Label">
+        </div>
+        <div class="admin-field">
+          <label>Generic Agency</label>
+          <input type="text" data-key="whyRow1Left">
+        </div>
+        <div class="admin-field">
+          <label>Aurea Hosting</label>
+          <input type="text" data-key="whyRow1Right">
+        </div>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-3">
+        <div class="admin-field">
+          <label>Row 2 — Feature</label>
+          <input type="text" data-key="whyRow2Label">
+        </div>
+        <div class="admin-field">
+          <label>Generic Agency</label>
+          <input type="text" data-key="whyRow2Left">
+        </div>
+        <div class="admin-field">
+          <label>Aurea Hosting</label>
+          <input type="text" data-key="whyRow2Right">
+        </div>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-3">
+        <div class="admin-field">
+          <label>Row 3 — Feature</label>
+          <input type="text" data-key="whyRow3Label">
+        </div>
+        <div class="admin-field">
+          <label>Generic Agency</label>
+          <input type="text" data-key="whyRow3Left">
+        </div>
+        <div class="admin-field">
+          <label>Aurea Hosting</label>
+          <input type="text" data-key="whyRow3Right">
+        </div>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-3">
+        <div class="admin-field">
+          <label>Row 4 — Feature</label>
+          <input type="text" data-key="whyRow4Label">
+        </div>
+        <div class="admin-field">
+          <label>Generic Agency</label>
+          <input type="text" data-key="whyRow4Left">
+        </div>
+        <div class="admin-field">
+          <label>Aurea Hosting</label>
+          <input type="text" data-key="whyRow4Right">
+        </div>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-3">
+        <div class="admin-field">
+          <label>Row 5 — Feature</label>
+          <input type="text" data-key="whyRow5Label">
+        </div>
+        <div class="admin-field">
+          <label>Generic Agency</label>
+          <input type="text" data-key="whyRow5Left">
+        </div>
+        <div class="admin-field">
+          <label>Aurea Hosting</label>
+          <input type="text" data-key="whyRow5Right">
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>The Aurea Edge — Cards</h4>
+      <div class="admin-grid-3">
+        <div>
+          <div class="admin-field">
+            <label>Card 1 Title</label>
+            <input type="text" data-key="whyCard1Title">
+          </div>
+          <div class="admin-field">
+            <label>Card 1 Text</label>
+            <textarea data-key="whyCard1Text" rows="3"></textarea>
+          </div>
+        </div>
+        <div>
+          <div class="admin-field">
+            <label>Card 2 Title</label>
+            <input type="text" data-key="whyCard2Title">
+          </div>
+          <div class="admin-field">
+            <label>Card 2 Text</label>
+            <textarea data-key="whyCard2Text" rows="3"></textarea>
+          </div>
+        </div>
+        <div>
+          <div class="admin-field">
+            <label>Card 3 Title</label>
+            <input type="text" data-key="whyCard3Title">
+          </div>
+          <div class="admin-field">
+            <label>Card 3 Text</label>
+            <textarea data-key="whyCard3Text" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Best Fit For Owners Who…</h4>
+      <div class="admin-field">
+        <label>Fit Point 1</label>
+        <input type="text" data-key="whyFit1">
+      </div>
+      <div class="admin-field">
+        <label>Fit Point 2</label>
+        <input type="text" data-key="whyFit2">
+      </div>
+      <div class="admin-field">
+        <label>Fit Point 3</label>
+        <input type="text" data-key="whyFit3">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ TECHNOLOGY ══════════════ -->
+  <section class="admin-section" id="section-technology">
+    <div class="admin-section-title">Technology</div>
+    <div class="admin-section-desc">Content for the technology/Guesty page.</div>
+
+    <div class="admin-subgroup">
+      <h4>Hero</h4>
+      <div class="admin-field">
+        <label>Hero Title</label>
+        <input type="text" data-key="techHeroTitle">
+      </div>
+      <div class="admin-field">
+        <label>Hero Text</label>
+        <textarea data-key="techHeroText" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Outcome / Results Cards</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Outcome 1 — Caption</label>
+          <input type="text" data-key="techOutcome1Cap">
+        </div>
+        <div class="admin-field">
+          <label>Outcome 1 — Result Text</label>
+          <textarea data-key="techOutcome1Res" rows="3"></textarea>
+        </div>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Outcome 2 — Caption</label>
+          <input type="text" data-key="techOutcome2Cap">
+        </div>
+        <div class="admin-field">
+          <label>Outcome 2 — Result Text</label>
+          <textarea data-key="techOutcome2Res" rows="3"></textarea>
+        </div>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Outcome 3 — Caption</label>
+          <input type="text" data-key="techOutcome3Cap">
+        </div>
+        <div class="admin-field">
+          <label>Outcome 3 — Result Text</label>
+          <textarea data-key="techOutcome3Res" rows="3"></textarea>
+        </div>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Outcome 4 — Caption</label>
+          <input type="text" data-key="techOutcome4Cap">
+        </div>
+        <div class="admin-field">
+          <label>Outcome 4 — Result Text</label>
+          <textarea data-key="techOutcome4Res" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Feature Cards</h4>
+      <div class="admin-grid-3">
+        <div>
+          <div class="admin-field">
+            <label>Card 1 Title</label>
+            <input type="text" data-key="techCard1Title">
+          </div>
+          <div class="admin-field">
+            <label>Card 1 Text</label>
+            <textarea data-key="techCard1Text" rows="3"></textarea>
+          </div>
+        </div>
+        <div>
+          <div class="admin-field">
+            <label>Card 2 Title</label>
+            <input type="text" data-key="techCard2Title">
+          </div>
+          <div class="admin-field">
+            <label>Card 2 Text</label>
+            <textarea data-key="techCard2Text" rows="3"></textarea>
+          </div>
+        </div>
+        <div>
+          <div class="admin-field">
+            <label>Card 3 Title</label>
+            <input type="text" data-key="techCard3Title">
+          </div>
+          <div class="admin-field">
+            <label>Card 3 Text</label>
+            <textarea data-key="techCard3Text" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Connected Channels Signal</h4>
+      <div class="admin-field">
+        <label>Channel List Text</label>
+        <input type="text" data-key="techSignalText">
+        <div class="admin-hint">Dot-separated channel names shown in the scrolling signal strip</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ AREAS ══════════════ -->
+  <section class="admin-section" id="section-areas">
+    <div class="admin-section-title">Areas</div>
+    <div class="admin-section-desc">Hero copy for the Areas We Operate page.</div>
+
+    <div class="admin-subgroup">
+      <h4>Hero</h4>
+      <div class="admin-field">
+        <label>Hero Title</label>
+        <input type="text" data-key="areasHeroTitle">
+      </div>
+      <div class="admin-field">
+        <label>Hero Text</label>
+        <textarea data-key="areasHeroText" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-notice">
+      Suburb names and area tags are currently hardcoded in the HTML pages. Contact your developer to update individual suburb listings or add new area categories.
+    </div>
+  </section>
+
+  <!-- ══════════════ FAQ ══════════════ -->
+  <section class="admin-section" id="section-faq">
+    <div class="admin-section-title">FAQ</div>
+    <div class="admin-section-desc">Hero copy and all 8 question/answer pairs on the FAQ page.</div>
+
+    <div class="admin-subgroup">
+      <h4>Hero</h4>
+      <div class="admin-field">
+        <label>Hero Title</label>
+        <input type="text" data-key="faqHeroTitle">
+      </div>
+      <div class="admin-field">
+        <label>Hero Text</label>
+        <textarea data-key="faqHeroText" rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>FAQ 1</h4>
+      <div class="admin-field">
+        <label>Question</label>
+        <input type="text" data-key="faq1Q">
+      </div>
+      <div class="admin-field">
+        <label>Answer</label>
+        <textarea data-key="faq1A" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>FAQ 2</h4>
+      <div class="admin-field">
+        <label>Question</label>
+        <input type="text" data-key="faq2Q">
+      </div>
+      <div class="admin-field">
+        <label>Answer</label>
+        <textarea data-key="faq2A" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>FAQ 3</h4>
+      <div class="admin-field">
+        <label>Question</label>
+        <input type="text" data-key="faq3Q">
+      </div>
+      <div class="admin-field">
+        <label>Answer</label>
+        <textarea data-key="faq3A" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>FAQ 4</h4>
+      <div class="admin-field">
+        <label>Question</label>
+        <input type="text" data-key="faq4Q">
+      </div>
+      <div class="admin-field">
+        <label>Answer</label>
+        <textarea data-key="faq4A" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>FAQ 5</h4>
+      <div class="admin-field">
+        <label>Question</label>
+        <input type="text" data-key="faq5Q">
+      </div>
+      <div class="admin-field">
+        <label>Answer</label>
+        <textarea data-key="faq5A" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>FAQ 6</h4>
+      <div class="admin-field">
+        <label>Question</label>
+        <input type="text" data-key="faq6Q">
+      </div>
+      <div class="admin-field">
+        <label>Answer</label>
+        <textarea data-key="faq6A" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>FAQ 7</h4>
+      <div class="admin-field">
+        <label>Question</label>
+        <input type="text" data-key="faq7Q">
+      </div>
+      <div class="admin-field">
+        <label>Answer</label>
+        <textarea data-key="faq7A" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>FAQ 8</h4>
+      <div class="admin-field">
+        <label>Question</label>
+        <input type="text" data-key="faq8Q">
+      </div>
+      <div class="admin-field">
+        <label>Answer</label>
+        <textarea data-key="faq8A" rows="3"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ APPLY ══════════════ -->
+  <section class="admin-section" id="section-apply">
+    <div class="admin-section-title">Apply</div>
+    <div class="admin-section-desc">Content for the Apply / Contact page.</div>
+
+    <div class="admin-subgroup">
+      <h4>Hero</h4>
+      <div class="admin-field">
+        <label>Hero Title</label>
+        <input type="text" data-key="contactHeroTitle">
+      </div>
+      <div class="admin-field">
+        <label>Hero Text</label>
+        <textarea data-key="contactHeroText" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Process Steps (3 steps shown below the form)</h4>
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Step 1 Title</label>
+          <input type="text" data-key="contactFastTitle">
+        </div>
+        <div class="admin-field">
+          <label>Step 1 Text</label>
+          <textarea data-key="contactFastText" rows="2"></textarea>
+        </div>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Step 2 Title</label>
+          <input type="text" data-key="contactHonestTitle">
+        </div>
+        <div class="admin-field">
+          <label>Step 2 Text</label>
+          <textarea data-key="contactHonestText" rows="2"></textarea>
+        </div>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Step 3 Title</label>
+          <input type="text" data-key="contactLocalTitle">
+        </div>
+        <div class="admin-field">
+          <label>Step 3 Text</label>
+          <textarea data-key="contactLocalText" rows="2"></textarea>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ EXPORT ══════════════ -->
+  <section class="admin-section" id="section-export">
+    <div class="admin-section-title">Export &amp; Deploy</div>
+    <div class="admin-section-desc">Save changes in-session, download a permanent cms.js, or export/import a JSON snapshot.</div>
+
+    <div class="admin-notice">
+      <strong>How content updates work:</strong><br>
+      Changes saved here are <strong>in-memory only</strong> — they apply to this browser session but reset on page refresh.
+      To make changes permanent, click <strong>Download cms.js</strong> and replace the existing <code>cms.js</code> file on your server.
+      Use JSON export/import to transfer settings between sessions or environments.
+    </div>
+
+    <div class="export-card">
+      <h3>Save (this session)</h3>
+      <p>Collects all field values, saves them to the in-memory store, and calls applyAureaSettings() so changes are immediately reflected on open site pages.</p>
+      <div class="btn-row">
+        <button class="admin-btn admin-btn-primary" onclick="doSave()">Save Changes</button>
+      </div>
+    </div>
+
+    <div class="export-card">
+      <h3>Download cms.js</h3>
+      <p>Generates a new <code>cms.js</code> file with your current settings baked into <code>AUREA_DEFAULTS</code>. Replace the file on your server to make changes permanent across all visitors.</p>
+      <div class="btn-row">
+        <button class="admin-btn admin-btn-gold" onclick="doSaveThenExportCms()">Download cms.js</button>
+      </div>
+    </div>
+
+    <div class="export-card">
+      <h3>Export JSON Snapshot</h3>
+      <p>Downloads a <code>aurea-settings.json</code> file with all current settings. Useful for backups or transferring settings between environments.</p>
+      <div class="btn-row">
+        <button class="admin-btn admin-btn-secondary" onclick="doSaveThenExportJSON()">Export JSON</button>
+      </div>
+    </div>
+
+    <div class="export-card">
+      <h3>Import JSON Snapshot</h3>
+      <p>Paste a previously exported JSON snapshot below and click Import to restore those settings into the current session.</p>
+      <textarea class="import-textarea" id="importJsonTextarea" placeholder='{"brandName": "Aurea Hosting", ...}'></textarea>
+      <div class="btn-row">
+        <button class="admin-btn admin-btn-secondary" onclick="doImportJSON()">Import JSON</button>
+      </div>
+    </div>
+
+    <div class="export-card">
+      <h3>Reset to Defaults</h3>
+      <p>Clears all in-session overrides and reloads form fields with the original defaults from <code>AUREA_DEFAULTS</code>. This does not affect any saved server files.</p>
+      <div class="btn-row">
+        <button class="admin-btn admin-btn-danger" onclick="doReset()">Reset Defaults</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Sticky action bar -->
+<div class="admin-actions">
+  <button class="admin-btn admin-btn-primary" onclick="doSave()">Save (session)</button>
+  <button class="admin-btn admin-btn-gold" onclick="doSaveThenExportCms()">Download cms.js</button>
+  <div class="admin-actions-spacer"></div>
+  <button class="admin-btn admin-btn-danger" onclick="doReset()">Reset Defaults</button>
+</div>
+
+<!-- Scripts -->
+<script src="cms.js"></script>
+<script>
+  /* ── Tab switching ── */
+  var tabs    = document.querySelectorAll('.admin-tab');
+  var sections = document.querySelectorAll('.admin-section');
+
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var target = this.getAttribute('data-section');
+
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      sections.forEach(function(s) { s.classList.remove('active'); });
+
+      this.classList.add('active');
+      var sec = document.getElementById('section-' + target);
+      if (sec) sec.classList.add('active');
+
+      // Scroll tab into view on mobile
+      this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
+  });
+
+  /* ── Toast ── */
+  function showToast(msg, isError) {
+    var toast = document.getElementById('adminToast');
+    toast.textContent = msg || 'Saved.';
+    toast.style.background = isError ? '#c0392b' : '#1b7f74';
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 2800);
+  }
+
+  /* ── Save ── */
+  function doSave() {
+    try {
+      saveAdminForm();
+      showToast('Changes saved for this session.');
+    } catch(e) {
+      showToast('Save failed: ' + e.message, true);
+    }
+  }
+
+  /* ── Export cms.js ── */
+  function doSaveThenExportCms() {
+    try {
+      saveAdminForm();
+      exportCmsJs();
+      showToast('cms.js downloaded. Deploy to make permanent.');
+    } catch(e) {
+      showToast('Export failed: ' + e.message, true);
+    }
+  }
+
+  /* ── Export JSON ── */
+  function doSaveThenExportJSON() {
+    try {
+      saveAdminForm();
+      exportJSON();
+      showToast('JSON snapshot exported.');
+    } catch(e) {
+      showToast('Export failed: ' + e.message, true);
+    }
+  }
+
+  /* ── Import JSON ── */
+  function doImportJSON() {
+    var textarea = document.getElementById('importJsonTextarea');
+    var text = textarea.value.trim();
+    if (!text) {
+      showToast('Paste JSON into the textarea first.', true);
+      return;
+    }
+    var ok = importJSON(text);
+    if (ok) {
+      showToast('Settings imported and applied.');
+      textarea.value = '';
+    } else {
+      showToast('Invalid JSON — check the pasted content.', true);
+    }
+  }
+
+  /* ── Reset ── */
+  function doReset() {
+    if (!confirm('Reset all fields to defaults? Any unsaved changes in this session will be lost.')) return;
+    resetAureaAdmin();
+    showToast('All fields reset to defaults.');
+  }
+
+  /* ── Init ── */
+  document.addEventListener('DOMContentLoaded', function() {
+    loadAdminForm();
+  });
+</script>
+</body>
+</html>

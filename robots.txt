@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin.html
+Disallow: /Aurea-Owner-Agreement.html
+Disallow: /Aurea-Owner-Appointment-Form.html
+
+Sitemap: https://aureahosting.com.au/sitemap.xml

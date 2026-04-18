@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply — Aurea Hosting</title>
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<meta name="description" content="Apply for Airbnb and short-term rental management in Adelaide. Tell us about your property and we'll assess its fit within one business day.">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="Aurea Hosting">
+<meta property="og:url"         content="https://aureahosting.com.au/contact.html">
+<meta property="og:title"       content="Apply for Asset Management — Aurea Hosting">
+<meta property="og:description" content="We take on a limited number of properties each quarter. Apply for Aurea's Adelaide short-term rental management.">
+<meta name="twitter:card"       content="summary">
+<meta name="twitter:title"      content="Apply for Asset Management — Aurea Hosting">
+<meta name="twitter:description" content="We take on a limited number of properties each quarter. Apply for Aurea's Adelaide short-term rental management.">
+<link rel="canonical" href="https://aureahosting.com.au/contact.html">
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+<!-- ─── Header ─── -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="Aurea Hosting Home">
+      <img src="images/favicon.svg" alt="Aurea Hosting" class="badge-logo">
+      <span class="logo-text" data-content="brandName">Aurea Hosting</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false"><span></span></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="why-us.html">Why Us</a>
+      <a href="services.html">Services</a>
+      <a href="technology.html">Technology</a>
+      <a href="areas.html">Areas</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html" class="nav-apply active">Apply</a>
+      <a href="admin.html" style="font-size:0;width:1px;overflow:hidden;opacity:0;position:absolute;" tabindex="-1" aria-hidden="true">Admin</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ─── Hero ─── -->
+<section class="hero-type" id="top">
+  <div class="container">
+    <div class="reveal">
+      <span class="hero-type-kicker">Asset Management Application</span>
+      <h1 class="hero-type-headline">Let's assess<br>your property.</h1>
+      <p class="hero-type-sub">We take on a limited number of properties each quarter for Airbnb and short-term rental management in Adelaide, and we evaluate every application individually. Tell us about yours — we'll respond within one business day.</p>
+      <div class="hero-type-chips">
+        <a href="tel:0404608196" class="chip chip-light" style="text-decoration:none;" data-content="phone" data-setting="phone">0404 608 196</a>
+        <a href="mailto:noah@aureahosting.com.au" class="chip chip-light" style="text-decoration:none;" data-content="email" data-setting="email">noah@aureahosting.com.au</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Application Form ─── -->
+<section class="section">
+  <div class="container container-narrow">
+    <div class="form-card reveal">
+      <h2>Your application</h2>
+      <p class="form-intro">All fields help us assess your property accurately. We don't share your information and we don't follow up with unsolicited sales calls.</p>
+      <form id="contact-form" novalidate>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="fullName">Full name</label>
+            <input class="form-input" type="text" id="fullName" name="fullName" autocomplete="name" required placeholder="Your full name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email address</label>
+            <input class="form-input" type="email" id="email" name="email" autocomplete="email" required placeholder="you@example.com">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone number</label>
+            <input class="form-input" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="04XX XXX XXX">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="suburb">Property suburb</label>
+            <input class="form-input" type="text" id="suburb" name="suburb" placeholder="e.g. Glenelg, Norwood, Stirling">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="propertyType">Property type</label>
+            <select class="form-input form-select" id="propertyType" name="propertyType">
+              <option value="">Select type…</option>
+              <option value="apartment">Apartment</option>
+              <option value="house">House</option>
+              <option value="townhouse">Townhouse</option>
+              <option value="studio">Studio</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="currentStatus">Current management situation</label>
+            <select class="form-input form-select" id="currentStatus" name="currentStatus">
+              <option value="">Select…</option>
+              <option value="not-listed">Not yet listed — ready to start</option>
+              <option value="self-managed">Self-managing on Airbnb or similar</option>
+              <option value="other-manager">Currently with another property manager</option>
+              <option value="long-term">Long-term rental, considering STR</option>
+              <option value="exploring">Just exploring my options</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="bedrooms">Number of bedrooms</label>
+            <select class="form-input form-select" id="bedrooms" name="bedrooms">
+              <option value="">Select…</option>
+              <option value="1">1 bedroom</option>
+              <option value="2">2 bedrooms</option>
+              <option value="3">3 bedrooms</option>
+              <option value="4">4+ bedrooms</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="goLive">Preferred go-live timeframe</label>
+            <select class="form-input form-select" id="goLive" name="goLive">
+              <option value="">Select…</option>
+              <option value="asap">As soon as possible (within 4 weeks)</option>
+              <option value="1-3mo">Within 1–3 months</option>
+              <option value="3-6mo">3–6 months from now</option>
+              <option value="exploring">Not sure yet — just gathering information</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="message">Tell us about your property</label>
+          <textarea class="form-input form-textarea" id="message" name="message" rows="5" placeholder="Property configuration, current earnings (if any), what's prompted you to explore management options, and what you're looking for from a management partner. The more context, the better we can assess your property's fit."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-gold btn-lg btn-full">Submit my application</button>
+        <p class="form-disclaimer">We respond to every application within one business day. No sales calls — just a straightforward assessment.</p>
+
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ─── What Happens Next ─── -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-kicker">The Process</span>
+      <h2 class="section-title">What happens after you apply</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="card reveal">
+        <div class="card-icon"><i data-lucide="file-check"></i></div>
+        <h3 class="card-title">We review your application</h3>
+        <p class="card-text">Within one business day, we assess your property's suburb, configuration, and situation against our current portfolio capacity. You'll hear from us either way.</p>
+      </div>
+      <div class="card reveal reveal-delay-1">
+        <div class="card-icon"><i data-lucide="phone-call"></i></div>
+        <h3 class="card-title">A brief assessment call</h3>
+        <p class="card-text">If your property looks like a strong fit, we'll schedule a 20-minute call to discuss your goals, timeframe, and answer any questions about how we work.</p>
+      </div>
+      <div class="card reveal reveal-delay-2">
+        <div class="card-icon"><i data-lucide="trending-up"></i></div>
+        <h3 class="card-title">Onboarding begins</h3>
+        <p class="card-text">Once we agree it's the right match, onboarding starts immediately. Photography, listing creation, channel distribution — live within seven days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="color:var(--white);" aria-label="Aurea Hosting">
+          <img src="images/favicon.svg" alt="Aurea Hosting" class="badge-logo">
+          <span class="logo-text">Aurea Hosting</span>
+        </a>
+        <p data-content="tagline">Adelaide's most selective short-term rental management.</p>
+      </div>
+      <div class="footer-col"><h4>Pages</h4><a href="why-us.html">Why Us</a><a href="services.html">Services</a><a href="technology.html">Technology</a><a href="areas.html">Areas</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="faq.html">FAQ</a><a href="contact.html">Apply</a><a href="privacy.html">Privacy Policy</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="tel:0404608196" data-content="phone" data-setting="phone">0404 608 196</a><a href="mailto:noah@aureahosting.com.au" data-content="email" data-setting="email">noah@aureahosting.com.au</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Aurea Hosting. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<script src="cms.js"></script>
+<script src="app.js"></script>
+<script>document.addEventListener('DOMContentLoaded',function(){if(window.lucide){lucide.createIcons();}else{var s=document.querySelector('script[src*=lucide]');if(s)s.addEventListener('load',function(){lucide.createIcons();});}});</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = form.querySelector('[type=submit]');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    fetch('https://formspree.io/f/xkopyjkj', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(res) {
+      if (res.ok) {
+        btn.textContent = 'Application received ✓';
+        btn.style.background = 'var(--positive)';
+        form.reset();
+      } else {
+        btn.textContent = 'Something went wrong — please try again';
+        btn.style.background = 'var(--error)';
+        btn.disabled = false;
+      }
+    })
+    .catch(function() {
+      btn.textContent = 'Network error — please try again';
+      btn.style.background = 'var(--error)';
+      btn.disabled = false;
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Areas — Aurea Hosting</title>
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<meta name="description" content="Airbnb and short-term rental management across Adelaide's key suburbs, including beachside, city fringe and Hills locations with strong demand.">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.1.2/dist/maplibre-gl.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+<!-- MapLibre GL loaded at end of body for reliable synchronous init -->
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="Aurea Hosting">
+<meta property="og:url"         content="https://aureahosting.com.au/areas.html">
+<meta property="og:title"       content="Areas — Adelaide STR Coverage by Yield Curve">
+<meta property="og:description" content="Beachside, city fringe, Adelaide Hills. Every suburb we manage is mapped by demand, event uplift, and seasonal yield.">
+<meta name="twitter:card"       content="summary">
+<meta name="twitter:title"      content="Areas — Adelaide STR Coverage by Yield Curve">
+<meta name="twitter:description" content="Beachside, city fringe, Adelaide Hills. Every suburb we manage is mapped by demand, event uplift, and seasonal yield.">
+<link rel="canonical" href="https://aureahosting.com.au/areas.html">
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+<!-- ─── Header ─── -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="Aurea Hosting Home">
+      <img src="images/favicon.svg" alt="Aurea Hosting" class="badge-logo">
+      <span class="logo-text" data-content="brandName">Aurea Hosting</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false"><span></span></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="why-us.html">Why Us</a>
+      <a href="services.html">Services</a>
+      <a href="technology.html">Technology</a>
+      <a href="areas.html" class="active">Areas</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html" class="nav-apply">Apply</a>
+      <a href="admin.html" style="font-size:0;width:1px;overflow:hidden;opacity:0;position:absolute;" tabindex="-1" aria-hidden="true">Admin</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ─── Hero ─── -->
+<section class="hero-type" id="top">
+  <div class="container">
+    <div class="reveal">
+      <span class="hero-type-kicker">Coverage</span>
+      <h1 class="hero-type-headline">We know every suburb<br>by its yield curve.</h1>
+      <p class="hero-type-sub">From beachside surge suburbs to Hills retreat properties, our Airbnb and short-term rental management across Adelaide is mapped by demand, event uplift, and seasonal yield.</p>
+      <div class="hero-type-chips">
+        <span class="chip chip-light">Beachside</span>
+        <span class="chip chip-light">City Fringe</span>
+        <span class="chip chip-gold">Adelaide Hills</span>
+        <span class="chip chip-gold">Event Corridors</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Zone Photography ─── -->
+<section class="section" style="padding-bottom:0;">
+  <div class="container">
+    <div class="grid grid-3">
+      <div class="area-card reveal">
+        <img src="images/area-beachside.jpg" alt="Glenelg and West Beach aerial — Adelaide's premier beachside STR corridor" loading="lazy" width="675" height="675">
+        <div class="area-card-overlay">
+          <h3>Beachside</h3>
+          <p>Glenelg · West Beach · Henley Beach</p>
+        </div>
+      </div>
+      <div class="area-card reveal reveal-delay-1">
+        <img src="images/area-city.jpg" alt="Adelaide CBD aerial showing treelined streets and Gulf St Vincent" loading="lazy" width="900" height="675">
+        <div class="area-card-overlay">
+          <h3>City Fringe</h3>
+          <p>CBD · Norwood · Unley · Burnside</p>
+        </div>
+      </div>
+      <div class="area-card reveal reveal-delay-2">
+        <img src="images/area-hills.jpg" alt="Adelaide Hills and foothills green landscape" loading="lazy" width="900" height="652">
+        <div class="area-card-overlay">
+          <h3>Adelaide Hills</h3>
+          <p>Stirling · Hahndorf · Crafers</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Coverage Cards ─── -->
+<section class="section coverage-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-kicker">Demand Zones</span>
+      <h2 class="section-title">Where we operate</h2>
+    </div>
+    <div class="coverage-grid">
+      <div class="coverage-card reveal">
+        <div class="coverage-card-top">
+          <span class="coverage-area">Beachside</span>
+          <div class="demand-indicator" aria-label="Demand: 4 out of 5">
+            <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span>
+          </div>
+        </div>
+        <div class="coverage-suburbs">Glenelg · West Beach · Henley Beach · Semaphore</div>
+        <div class="coverage-peaks">Peak: Dec–Feb · WomAdelaide · LIV Golf</div>
+        <div class="coverage-yield">2BR avg <strong>$3,900<span>/mo</span></strong></div>
+      </div>
+      <div class="coverage-card reveal reveal-delay-1">
+        <div class="coverage-card-top">
+          <span class="coverage-area">City Fringe</span>
+          <div class="demand-indicator" aria-label="Demand: 5 out of 5">
+            <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span>
+          </div>
+        </div>
+        <div class="coverage-suburbs">Adelaide CBD · Norwood · Unley · Burnside · Prospect</div>
+        <div class="coverage-peaks">Peak: Fringe · Gather Round · Year-round business</div>
+        <div class="coverage-yield">2BR avg <strong>$3,600<span>/mo</span></strong></div>
+      </div>
+      <div class="coverage-card reveal reveal-delay-2">
+        <div class="coverage-card-top">
+          <span class="coverage-area">Adelaide Hills</span>
+          <div class="demand-indicator" aria-label="Demand: 3.5 out of 5">
+            <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot half"></span><span class="dot"></span>
+          </div>
+        </div>
+        <div class="coverage-suburbs">Stirling · Crafers · Hahndorf · Aldgate · Mt Barker</div>
+        <div class="coverage-peaks">Peak: Fringe · Tasting Australia · Jun–Aug retreats</div>
+        <div class="coverage-yield">2BR avg <strong>$3,800<span>/mo</span></strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Interactive Map ─── -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-kicker">Service Area</span>
+      <h2 class="section-title">Our service area</h2>
+    </div>
+    <div id="aurea-map" class="map-container" aria-label="Map of Aurea Hosting service areas across Adelaide"></div>
+  </div>
+</section>
+
+<!-- ─── Yield Table (replaces suburb cloud) ─── -->
+<section class="section">
+  <div class="rule-line js-rule"></div>
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-kicker">Yield Intelligence</span>
+      <h2 class="section-title">Revenue by suburb cluster</h2>
+    </div>
+    <div style="overflow-x:auto;" class="reveal">
+      <table class="yield-table" aria-label="Suburb yield data table">
+        <thead>
+          <tr>
+            <th>Suburb Cluster</th>
+            <th>2BR Monthly Range</th>
+            <th>Peak Event Uplift</th>
+            <th>Demand</th>
+            <th>Peak Season</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="yield-cluster">Glenelg · West Beach · Henley</div>
+              <div class="yield-suburbs">Glenelg, West Beach, Henley Beach, Semaphore</div>
+            </td>
+            <td class="yield-avg">$3,600–$4,400</td>
+            <td>
+              <div class="yield-event">
+                <span class="yield-event-name">LIV Golf</span>
+                <span class="yield-event-uplift">+$190/night avg</span>
+              </div>
+            </td>
+            <td>
+              <div class="yield-demand" aria-label="4 out of 5">
+                <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span>
+              </div>
+            </td>
+            <td>Dec–Feb · Apr</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="yield-cluster">Adelaide CBD</div>
+              <div class="yield-suburbs">Adelaide CBD, North Adelaide</div>
+            </td>
+            <td class="yield-avg">$3,400–$4,000</td>
+            <td>
+              <div class="yield-event">
+                <span class="yield-event-name">Gather Round</span>
+                <span class="yield-event-uplift">+$210/night avg</span>
+              </div>
+            </td>
+            <td>
+              <div class="yield-demand" aria-label="5 out of 5">
+                <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span>
+              </div>
+            </td>
+            <td>Feb–Apr · year-round</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="yield-cluster">Norwood · Unley · Burnside</div>
+              <div class="yield-suburbs">Norwood, Unley, Burnside, Kensington, Prospect</div>
+            </td>
+            <td class="yield-avg">$3,200–$3,900</td>
+            <td>
+              <div class="yield-event">
+                <span class="yield-event-name">Adelaide Fringe</span>
+                <span class="yield-event-uplift">+$140/night avg</span>
+              </div>
+            </td>
+            <td>
+              <div class="yield-demand" aria-label="4 out of 5">
+                <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span>
+              </div>
+            </td>
+            <td>Feb–Apr</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="yield-cluster">Stirling · Hahndorf · Hills</div>
+              <div class="yield-suburbs">Stirling, Crafers, Hahndorf, Aldgate, Mt Barker</div>
+            </td>
+            <td class="yield-avg">$3,400–$4,200</td>
+            <td>
+              <div class="yield-event">
+                <span class="yield-event-name">Tasting Australia</span>
+                <span class="yield-event-uplift">+$140/night avg</span>
+              </div>
+            </td>
+            <td>
+              <div class="yield-demand" aria-label="3.5 out of 5">
+                <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot half"></span><span class="dot"></span>
+              </div>
+            </td>
+            <td>Feb–May · Jun–Aug</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="yield-cluster">Brighton · Marino · Hallett Cove</div>
+              <div class="yield-suburbs">Brighton, Marino, Hallett Cove, O'Halloran Hill</div>
+            </td>
+            <td class="yield-avg">$3,400–$4,000</td>
+            <td>
+              <div class="yield-event">
+                <span class="yield-event-name">LIV Golf</span>
+                <span class="yield-event-uplift">+$160/night avg</span>
+              </div>
+            </td>
+            <td>
+              <div class="yield-demand" aria-label="3 out of 5">
+                <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span>
+              </div>
+            </td>
+            <td>Dec–Feb · Apr</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="yield-cluster">Prospect · Nailsworth · Broadview</div>
+              <div class="yield-suburbs">Prospect, Nailsworth, Broadview, Blair Athol</div>
+            </td>
+            <td class="yield-avg">$2,900–$3,600</td>
+            <td>
+              <div class="yield-event">
+                <span class="yield-event-name">Gather Round</span>
+                <span class="yield-event-uplift">+$160/night avg</span>
+              </div>
+            </td>
+            <td>
+              <div class="yield-demand" aria-label="3 out of 5">
+                <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span>
+              </div>
+            </td>
+            <td>Feb–Apr</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="yield-table-note">Revenue ranges based on Aurea portfolio data. 2BR monthly figures. Event uplift figures are per-night averages above portfolio baseline during event windows.</p>
+  </div>
+  <div class="rule-line js-rule"></div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta-panel--ink">
+  <div class="container">
+    <div class="cta-panel-inner reveal">
+      <h2>Your suburb.<br>Your yield curve.</h2>
+      <p>Use the calculator on our homepage for a personalised revenue estimate, or apply for a full property assessment.</p>
+      <a href="contact.html" class="btn btn-gold btn-lg">Apply for asset management</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="color:var(--white);" aria-label="Aurea Hosting">
+          <img src="images/favicon.svg" alt="Aurea Hosting" class="badge-logo">
+          <span class="logo-text">Aurea Hosting</span>
+        </a>
+        <p data-content="tagline">Adelaide's most selective short-term rental management.</p>
+      </div>
+      <div class="footer-col"><h4>Pages</h4><a href="why-us.html">Why Us</a><a href="services.html">Services</a><a href="technology.html">Technology</a><a href="areas.html">Areas</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="faq.html">FAQ</a><a href="contact.html">Apply</a><a href="privacy.html">Privacy Policy</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="tel:0404608196" data-content="phone" data-setting="phone">0404 608 196</a><a href="mailto:noah@aureahosting.com.au" data-content="email" data-setting="email">noah@aureahosting.com.au</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Aurea Hosting. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- MapLibre loaded synchronously so it’s available when the init script below runs -->
+<script src="https://unpkg.com/maplibre-gl@4.1.2/dist/maplibre-gl.js"></script>
+<script src="cms.js"></script>
+<script src="app.js"></script>
+<script>document.addEventListener('DOMContentLoaded',function(){if(window.lucide){lucide.createIcons();}else{var s=document.querySelector('script[src*=lucide]');if(s)s.addEventListener('load',function(){lucide.createIcons();});}});</script>
+<script>
+(function initAureaMap() {
+  var mapEl = document.getElementById('aurea-map');
+  if (!mapEl || typeof maplibregl === 'undefined') return;
+  var map = new maplibregl.Map({
+    container: 'aurea-map',
+    style: 'https://tiles.openfreemap.org/styles/liberty',
+    center: [138.6007, -34.9285],
+    zoom: 10.5,
+    attributionControl: true
+  });
+  var markers = [
+    { coords: [138.5153,-34.9816], name: 'Glenelg',      desc: 'Beachside — 2BR avg $3,900/mo · LIV Golf +$190/night' },
+    { coords: [138.4969,-34.9219], name: 'Henley Beach',  desc: 'Premium coastal — strong weekend demand' },
+    { coords: [138.6007,-34.9285], name: 'Adelaide CBD',  desc: 'Fringe · Gather Round · year-round occupancy' },
+    { coords: [138.5884,-34.9499], name: 'Unley',         desc: 'Leafy city-fringe — boutique appeal' },
+    { coords: [138.6297,-34.9211], name: 'Norwood',       desc: '2BR avg $3,600/mo · Fringe +$140/night' },
+    { coords: [138.6456,-34.9387], name: 'Burnside',      desc: 'Upscale residential — Hills proximity premium' },
+    { coords: [138.7140,-35.0003], name: 'Stirling',      desc: 'Hills — 2BR avg $3,800/mo · Tasting Australia' },
+    { coords: [138.5161,-35.0233], name: 'Brighton',      desc: 'Southern coastal — 2BR avg $3,700/mo' }
+  ];
+  map.on('load', function() {
+    markers.forEach(function(m) {
+      var el = document.createElement('div');
+      el.style.cssText = 'width:13px;height:13px;background:#c8a35d;border:2.5px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.25);cursor:pointer;';
+      var popup = new maplibregl.Popup({ offset: 12, closeButton: false })
+        .setHTML('<div style="font-family:\'Satoshi\',sans-serif;padding:2px 0"><strong style="color:#172226;font-size:13px;font-family:\'Switzer\',sans-serif">' + m.name + '</strong><p style="color:#7a8a8f;font-size:12px;margin:4px 0 0;max-width:200px;line-height:1.4">' + m.desc + '</p></div>');
+      new maplibregl.Marker({ element: el }).setLngLat(m.coords).setPopup(popup).addTo(map);
+    });
+  });
+  map.addControl(new maplibregl.NavigationControl(), 'top-right');
+}());
+</script>
+</body>
+</html>

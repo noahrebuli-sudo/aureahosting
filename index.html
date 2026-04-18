@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Airbnb Management Adelaide | Aurea Hosting</title>
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<meta name="description" content="Airbnb and short-term rental management in Adelaide for owners who want stronger returns, dynamic pricing and fully managed guest operations.">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="Aurea Hosting">
+<meta property="og:url"         content="https://aureahosting.com.au/">
+<meta property="og:title"       content="Aurea Hosting — Premium Short-Term Rental Management, Adelaide">
+<meta property="og:description" content="Adelaide's most selective short-term rental management. For owners who treat their property as a high-yield asset, not a hobby.">
+<meta name="twitter:card"       content="summary">
+<meta name="twitter:title"      content="Aurea Hosting — Premium Short-Term Rental Management, Adelaide">
+<meta name="twitter:description" content="Adelaide's most selective short-term rental management. For owners who treat their property as a high-yield asset, not a hobby.">
+<link rel="canonical" href="https://aureahosting.com.au/">
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+<!-- ─── Header ─── -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="Aurea Hosting Home">
+      <img src="images/favicon.svg" alt="Aurea Hosting" class="badge-logo">
+      <span class="logo-text" data-content="brandName">Aurea Hosting</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false"><span></span></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="why-us.html">Why Us</a>
+      <a href="services.html">Services</a>
+      <a href="technology.html">Technology</a>
+      <a href="areas.html">Areas</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html" class="nav-apply">Apply</a>
+      <a href="admin.html" style="font-size:0;width:1px;overflow:hidden;opacity:0;position:absolute;" tabindex="-1" aria-hidden="true">Admin</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ─── Hero: Statement + Calculator ─── -->
+<section class="hero-split" id="top">
+  <div class="hero-calc-bg" aria-hidden="true">
+    <div class="hero-bg-image-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=85&auto=format&fit=crop"
+        alt="Luxury home with city balcony sunset view"
+        class="hero-bg-img"
+        loading="eager"
+        fetchpriority="high"
+      >
+      <div class="hero-bg-overlay" aria-hidden="true"></div>
+    </div>
+  </div>
+  <div class="hero-split-inner">
+
+    <!-- Left: Statement -->
+    <div class="hero-statement reveal">
+      <div class="hero-kicker">
+        <span class="kicker-pulse" aria-hidden="true"></span>
+        <span>Adelaide Short-Term Rental Management</span>
+      </div>
+      <h1 class="hero-headline">We manage fewer<br>properties.<br><em>On purpose.</em></h1>
+      <p class="hero-sub">Airbnb and short-term rental management in Adelaide for owners who want stronger returns without managing guests, pricing or turnovers themselves.</p>
+      <div class="hero-ctas">
+        <a href="#calc" class="btn btn-gold btn-lg js-scroll-calc">Get your property's number</a>
+        <a href="contact.html" class="btn-apply">Apply for asset management <span aria-hidden="true">→</span></a>
+      </div>
+      <a href="#calc" class="hero-calc-nudge js-scroll-calc" aria-label="Jump to revenue calculator">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Estimate your revenue below
+      </a>
+    </div>
+
+    <!-- Right: Calculator + Stats Card -->
+    <div class="hero-calc-wrap reveal reveal-delay-2" id="calc">
+      <div class="calc-card">
+        <div class="calc-card-header">
+          <span class="calc-kicker">EST. MONTHLY REVENUE</span>
+          <span class="calc-disclaimer">Based on Aurea portfolio data</span>
+        </div>
+
+        <div class="calc-output-area" id="calcOutput" aria-live="polite">
+          <div class="calc-empty-state">
+            <span class="calc-empty-icon" aria-hidden="true">↓</span>
+            Select your suburb and bedrooms below
+          </div>
+        </div>
+
+        <div class="calc-inputs">
+          <div class="calc-field">
+            <label class="calc-label" for="calcSuburb">Suburb</label>
+            <div class="calc-select-wrap">
+              <select class="calc-select" id="calcSuburb">
+                <option value="">Select suburb cluster…</option>
+                <option value="glenelg">Glenelg · West Beach · Henley</option>
+                <option value="cbd">Adelaide CBD</option>
+                <option value="norwood">Norwood · Unley · Burnside</option>
+                <option value="stirling">Stirling · Hahndorf · Hills</option>
+                <option value="brighton">Brighton · Marino · Hallett Cove</option>
+                <option value="prospect">Prospect · Nailsworth · Broadview</option>
+              </select>
+              <span class="calc-select-arrow" aria-hidden="true">↓</span>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label class="calc-label" id="bedsLabel">Bedrooms</label>
+            <div class="calc-bed-toggle" role="group" aria-labelledby="bedsLabel">
+              <button class="bed-btn" data-beds="1" type="button">1</button>
+              <button class="bed-btn active" data-beds="2" type="button">2</button>
+              <button class="bed-btn" data-beds="3" type="button">3</button>
+              <button class="bed-btn" data-beds="4" type="button">4+</button>
+            </div>
+          </div>
+        </div>
+
+        <a href="contact.html" class="calc-bottom-cta">Get your full property analysis <span aria-hidden="true">→</span></a>
+      </div>
+
+      
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Market Intelligence Ticker ─── -->
+<div class="intel-strip" role="region" aria-label="Adelaide STR market intelligence">
+  <div class="intel-label-col" aria-hidden="true">
+    <span>Adelaide<br>STR<br>Intel</span>
+  </div>
+  <div class="intel-ticker-mask">
+    <div class="intel-ticker" id="intelTicker" aria-hidden="true">
+      <!-- Set A -->
+      <div class="intel-card"><span class="intel-event">WomAdelaide</span><span class="intel-period">March · Annual</span><span class="intel-uplift">+$175<em>/night</em></span><span class="intel-ctx">portfolio average</span></div>
+      <span class="intel-sep">◆</span>
+      <div class="intel-card"><span class="intel-event">Adelaide Fringe</span><span class="intel-period">Feb–Mar · 14 nights</span><span class="intel-uplift">+$160<em>/night</em></span><span class="intel-ctx">above baseline rate</span></div>
+      <span class="intel-sep">◆</span>
+      <div class="intel-card"><span class="intel-event">Gather Round</span><span class="intel-period">April · 4-night surge</span><span class="intel-uplift">+$210<em>/night</em></span><span class="intel-ctx">AFL city premium</span></div>
+      <span class="intel-sep">◆</span>
+      <div class="intel-card"><span class="intel-event">Tour Down Under</span><span class="intel-period">January · Coastal</span><span class="intel-uplift">+$140<em>/night</em></span><span class="intel-ctx">beachside corridor</span></div>
+      <span class="intel-sep">◆</span>
+      <div class="intel-card"><span class="intel-event">LIV Golf</span><span class="intel-period">April · Glenelg</span><span class="intel-uplift">+$190<em>/night</em></span><span class="intel-ctx">above event baseline</span></div>
+      <span class="intel-sep">◆</span>
+      <div class="intel-card"><span class="intel-event">Tasting Australia</span><span class="intel-period">Apr–May · Hills + CBD</span><span class="intel-uplift">+$120<em>/night</em></span><span class="intel-ctx">food &amp; wine season</span></div>
+      <span class="intel-sep">◆</span>
+      <!-- Set B (duplicate for loop) -->
+      <div class="intel-card"><span class="intel-event">WomAdelaide</span><span class="intel-period">March · Annual</span><span class="intel-uplift">+$175<em>/night</em></span><span class="intel-ctx">portfolio average</span></div>
+      <span class="intel-sep">◆</span>
+      <div class="intel-card"><span class="intel-event">Adelaide Fringe</span><span class="intel-period">Feb–Mar · 14 nights</span><span class="intel-uplift">+$160<em>/night</em></span><span class="intel-ctx">above baseline rate</span></div>
+      <span class="intel-sep">◆</span>
+      <div class="intel-card"><span class="intel-event">Gather Round</span><span class="intel-period">April · 4-night surge</span><span class="intel-uplift">+$210<em>/night</em></span><span class="intel-ctx">AFL city premium</span></div>
+      <span class="intel-sep">◆</span>
+      <div class="intel-card"><span class="intel-event">Tour Down Under</span><span class="intel-period">January · Coastal</span><span class="intel-uplift">+$140<em>/night</em></span><span class="intel-ctx">beachside corridor</span></div>
+      <span class="intel-sep">◆</span>
+      <div class="intel-card"><span class="intel-event">LIV Golf</span><span class="intel-period">April · Glenelg</span><span class="intel-uplift">+$190<em>/night</em></span><span class="intel-ctx">above event baseline</span></div>
+      <span class="intel-sep">◆</span>
+      <div class="intel-card"><span class="intel-event">Tasting Australia</span><span class="intel-period">Apr–May · Hills + CBD</span><span class="intel-uplift">+$120<em>/night</em></span><span class="intel-ctx">food &amp; wine season</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Position Statement ─── -->
+<section class="section position-section">
+  <div class="rule-line js-rule"></div>
+  <div class="container">
+    <div class="position-inner">
+      <p class="position-quote reveal">Most agencies optimise for volume.<br>We optimise for yield.</p>
+      <div class="position-compare reveal reveal-delay-1">
+        <div class="compare-col compare-against">
+          <div class="compare-col-label">Volume operator</div>
+          <ul>
+            <li>Fixed nightly rates — set and forgotten</li>
+            <li>1–3 platforms, passive distribution</li>
+            <li>Business-hours communication only</li>
+            <li>Monthly PDF with no context or insight</li>
+          </ul>
+        </div>
+        <div class="compare-divider" aria-hidden="true"></div>
+        <div class="compare-col compare-aurea">
+          <div class="compare-col-label">Aurea approach</div>
+          <ul>
+            <li>Dynamic pricing across Adelaide's full event calendar</li>
+            <li>50+ channels via Guesty, live-synced, zero double-bookings</li>
+            <li>24/7 guest comms — under 4-minute average response</li>
+            <li>Real-time owner dashboard, monthly performance statements</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rule-line js-rule"></div>
+</section>
+
+<!-- ─── Performance Record ─── -->
+<section class="perf-section">
+  <div class="container">
+    <div class="perf-kicker reveal">Performance Record — Adelaide Portfolio</div>
+    <div class="perf-grid">
+      <div class="perf-stat reveal">
+        <div class="perf-label">Average occupancy</div>
+        <div class="perf-number" data-counter="74" data-suffix="%" data-start="45">45%</div>
+        <div class="perf-context">Across all managed Adelaide properties</div>
+      </div>
+      <div class="perf-stat reveal reveal-delay-1">
+        <div class="perf-label">Revenue lift vs self-managed</div>
+        <div class="perf-number" data-counter="32" data-suffix="%" data-prefix="+" data-start="20">+20%</div>
+        <div class="perf-context">Average across owners' first 12 months</div>
+      </div>
+      <div class="perf-stat reveal reveal-delay-2">
+        <div class="perf-label">Guest response time</div>
+        <div class="perf-number perf-number--static">&lt;&thinsp;4<span class="perf-unit">min</span></div>
+        <div class="perf-context">Every message, every platform, every hour</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── The Process ─── -->
+<section class="section process-section">
+  <div class="rule-line js-rule"></div>
+  <div class="container">
+    <div class="process-header reveal">
+      <span class="section-kicker">The Process</span>
+      <h2 class="section-title">From assessment to income,<br>in seven days.</h2>
+    </div>
+    <div class="process-list" role="list">
+      <div class="process-row reveal" role="listitem">
+        <div class="process-num" aria-hidden="true">01</div>
+        <div class="process-content">
+          <h3 class="process-title">Assessment</h3>
+          <p class="process-text">We evaluate your property's position, earning potential, and fit with Aurea's portfolio standards. Honest, specific, no obligation.</p>
+        </div>
+        <div class="process-timeline">Day 1</div>
+      </div>
+      <div class="process-row reveal" role="listitem">
+        <div class="process-num" aria-hidden="true">02</div>
+        <div class="process-content">
+          <h3 class="process-title">Setup</h3>
+          <p class="process-text">Professional photography, SEO-optimised listing creation, and full onboarding into Guesty's enterprise property management platform.</p>
+        </div>
+        <div class="process-timeline">Days 2–5</div>
+      </div>
+      <div class="process-row reveal" role="listitem">
+        <div class="process-num" aria-hidden="true">03</div>
+        <div class="process-content">
+          <h3 class="process-title">Go Live</h3>
+          <p class="process-text">Listed across 50+ booking channels simultaneously. Pricing calibrated to Adelaide's current market conditions and upcoming event demand.</p>
+        </div>
+        <div class="process-timeline">Day 7</div>
+      </div>
+      <div class="process-row reveal" role="listitem">
+        <div class="process-num" aria-hidden="true">04</div>
+        <div class="process-content">
+          <h3 class="process-title">Ongoing</h3>
+          <p class="process-text">Dynamic pricing, 24/7 guest communications, hotel-grade property turnovers, and monthly owner performance statements with full transparency.</p>
+        </div>
+        <div class="process-timeline">Continuous</div>
+      </div>
+    </div>
+  </div>
+  <div class="rule-line js-rule"></div>
+</section>
+
+<!-- ─── Adelaide Coverage ─── -->
+<section class="section coverage-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-kicker">Coverage</span>
+      <h2 class="section-title">We know every suburb<br>by its yield curve.</h2>
+    </div>
+    <div class="coverage-grid">
+
+      <!-- Card 1: Beachside -->
+      <div class="coverage-card reveal">
+        <div class="coverage-card-bg">
+          <img
+            src="images/coverage-beach.jpg"
+            alt="Glenelg beach Adelaide"
+            class="coverage-card-img"
+            loading="lazy"
+          >
+          <div class="coverage-card-overlay"></div>
+        </div>
+        <div class="coverage-card-content">
+          <div class="coverage-card-top">
+            <span class="coverage-area">Beachside</span>
+            <div class="demand-indicator" aria-label="Demand: 4 out of 5">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span>
+            </div>
+          </div>
+          <div class="coverage-suburbs">Glenelg · West Beach · Henley Beach · Semaphore</div>
+          <div class="coverage-peaks">Peak: Dec–Feb · WomAdelaide · LIV Golf</div>
+          <div class="coverage-yield">2BR avg <strong>$3,900<span>/mo</span></strong></div>
+        </div>
+      </div>
+
+      <!-- Card 2: City Fringe -->
+      <div class="coverage-card reveal reveal-delay-1">
+        <div class="coverage-card-bg">
+          <img
+            src="images/coverage-city.jpg"
+            alt="Adelaide city skyline and Torrens"
+            class="coverage-card-img"
+            loading="lazy"
+          >
+          <div class="coverage-card-overlay"></div>
+        </div>
+        <div class="coverage-card-content">
+          <div class="coverage-card-top">
+            <span class="coverage-area">City Fringe</span>
+            <div class="demand-indicator" aria-label="Demand: 5 out of 5">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span>
+            </div>
+          </div>
+          <div class="coverage-suburbs">Adelaide CBD · Norwood · Unley · Burnside · Prospect</div>
+          <div class="coverage-peaks">Peak: Fringe · Gather Round · Year-round business</div>
+          <div class="coverage-yield">2BR avg <strong>$3,600<span>/mo</span></strong></div>
+        </div>
+      </div>
+
+      <!-- Card 3: Adelaide Hills -->
+      <div class="coverage-card reveal reveal-delay-2">
+        <div class="coverage-card-bg">
+          <img
+            src="images/coverage-hills.jpg"
+            alt="Adelaide Hills green landscape"
+            class="coverage-card-img"
+            loading="lazy"
+          >
+          <div class="coverage-card-overlay"></div>
+        </div>
+        <div class="coverage-card-content">
+          <div class="coverage-card-top">
+            <span class="coverage-area">Adelaide Hills</span>
+            <div class="demand-indicator" aria-label="Demand: 3.5 out of 5">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot half"></span><span class="dot"></span>
+            </div>
+          </div>
+          <div class="coverage-suburbs">Stirling · Crafers · Hahndorf · Aldgate · Mt Barker</div>
+          <div class="coverage-peaks">Peak: Fringe · Tasting Australia · Jun–Aug retreats</div>
+          <div class="coverage-yield">2BR avg <strong>$3,800<span>/mo</span></strong></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="text-center mt-8 reveal">
+      <a href="areas.html" class="btn-text-link">View all coverage areas →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Owner Results ─── -->
+<section class="section results-section">
+  <div class="results-bg-img">
+    <img
+      src="https://images.unsplash.com/photo-1600607687939-ce8a6d8bde56?w=1600&q=80&auto=format&fit=crop"
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+    >
+    <div class="results-bg-overlay"></div>
+  </div>
+  <div class="rule-line js-rule"></div>
+  <div class="container">
+    <div class="section-kicker reveal" style="display:block;margin-bottom:var(--space-8);">Owner Results</div>
+    <div class="results-list">
+      <div class="result-row reveal">
+        <div class="result-quote">"Switching to Aurea added $1,100 to my monthly income within the first 60 days. The dynamic pricing alone was worth it."</div>
+        <div class="result-meta">S.M. · Norwood · Townhouse · <span class="result-stat">+34% revenue, Q1 2025</span></div>
+      </div>
+      <div class="result-row reveal">
+        <div class="result-quote">"I'd been self-managing for two years. In our first Fringe season with Aurea, the property earned more in six weeks than it had in the previous six months."</div>
+        <div class="result-meta">T.K. · Glenelg · 2BR Apartment · <span class="result-stat">+$8,400 Fringe season 2025</span></div>
+      </div>
+      <div class="result-row reveal">
+        <div class="result-quote">"A Hills property at 74% occupancy in its first quarter wasn't what we were expecting. We're now looking at a second property."</div>
+        <div class="result-meta">R. &amp; J.P. · Stirling · Hills Retreat · <span class="result-stat">74% occupancy, first quarter</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="rule-line js-rule"></div>
+</section>
+
+<!-- ─── Application CTA ─── -->
+<section class="section apply-section">
+  <div class="container">
+    <div class="apply-inner reveal">
+      <p class="apply-overline">Limited availability</p>
+      <h2 class="apply-headline">We take on a limited number<br>of properties each quarter.</h2>
+      <p class="apply-sub">Currently assessing properties in Glenelg, Norwood, Burnside, Stirling, and surrounds.</p>
+      <a href="contact.html" class="btn btn-gold btn-lg">Apply for asset management</a>
+      <p class="apply-phone">Or call <a href="tel:0404608196" data-content="phone" data-setting="phone">0404 608 196</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="color:var(--white);" aria-label="Aurea Hosting">
+          <img src="images/favicon.svg" alt="Aurea Hosting" class="badge-logo">
+          <span class="logo-text">Aurea Hosting</span>
+        </a>
+        <p data-content="tagline">Adelaide's most selective short-term rental management.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="why-us.html">Why Us</a>
+        <a href="services.html">Services</a>
+        <a href="technology.html">Technology</a>
+        <a href="areas.html">Areas</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Apply</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:0404608196" data-content="phone" data-setting="phone">0404 608 196</a>
+        <a href="mailto:noah@aureahosting.com.au" data-content="email" data-setting="email">noah@aureahosting.com.au</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Aurea Hosting. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="cms.js"></script>
+<script src="app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.lucide) { lucide.createIcons(); }
+    else {
+      var s = document.querySelector('script[src*=lucide]');
+      if (s) s.addEventListener('load', function() { lucide.createIcons(); });
+    }
+  });
+</script>
+</body>
+</html>
