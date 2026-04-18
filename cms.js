@@ -30,10 +30,10 @@ const AUREA_DEFAULTS = {
 
   /* ── Performance Stats ──────────────────── */
   perfLabel1:   "Average occupancy",
-  perfNum1:     "74",
+  perfNum1:     "66",
   perfSuffix1:  "%",
   perfPrefix1:  "",
-  perfStart1:   "45",
+  perfStart1:   "42",
   perfContext1: "Across all managed Adelaide properties",
   perfLabel2:   "Revenue lift vs self-managed",
   perfNum2:     "32",
@@ -61,9 +61,9 @@ const AUREA_DEFAULTS = {
   result2Quote: "I\u2019d been self-managing for two years. In our first Fringe season with Aurea, the property earned more in six weeks than it had in the previous six months.",
   result2Meta:  "T.K. \u00b7 Glenelg \u00b7 2BR Apartment",
   result2Stat:  "+$8,400 Fringe season 2025",
-  result3Quote: "A Hills property at 74% occupancy in its first quarter wasn\u2019t what we were expecting. We\u2019re now looking at a second property.",
+  result3Quote: "A Hills property at 66% occupancy in its first quarter wasn\u2019t what we were expecting. We\u2019re now looking at a second property.",
   result3Meta:  "R. & J.P. \u00b7 Stirling \u00b7 Hills Retreat",
-  result3Stat:  "74% occupancy, first quarter",
+  result3Stat:  "66% occupancy, first quarter",
 
   /* ── Apply Close ─────────────────────────── */
   applyOverline: "Limited availability",
@@ -287,7 +287,7 @@ function renderPerfStats(s) {
   var n1 = document.querySelector('.perf-stat:nth-child(1) .perf-number[data-counter]');
   var l1 = document.querySelector('.perf-stat:nth-child(1) .perf-label');
   var c1 = document.querySelector('.perf-stat:nth-child(1) .perf-context');
-  if (n1) { n1.setAttribute('data-counter', s.perfNum1 || '74'); n1.setAttribute('data-suffix', s.perfSuffix1 || '%'); n1.setAttribute('data-prefix', s.perfPrefix1 || ''); n1.setAttribute('data-start', s.perfStart1 || '45'); }
+  if (n1) { n1.setAttribute('data-counter', s.perfNum1 || '66'); n1.setAttribute('data-suffix', s.perfSuffix1 || '%'); n1.setAttribute('data-prefix', s.perfPrefix1 || ''); n1.setAttribute('data-start', s.perfStart1 || '42'); }
   if (l1) l1.textContent = s.perfLabel1 || AUREA_DEFAULTS.perfLabel1;
   if (c1) c1.textContent = s.perfContext1 || AUREA_DEFAULTS.perfContext1;
   // Stat 2
