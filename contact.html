@@ -33,6 +33,7 @@
 </head>
 <body>
 
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 
 <!-- ─── Header ─── -->
@@ -55,6 +56,8 @@
     </nav>
   </div>
 </header>
+
+<main id="main-content">
 
 <!-- ─── Hero ─── -->
 <section class="hero-type" id="top">
@@ -154,6 +157,8 @@
           <textarea class="form-input form-textarea" id="message" name="message" rows="5" placeholder="Property configuration, current earnings (if any), what's prompted you to explore management options, and what you're looking for from a management partner. The more context, the better we can assess your property's fit."></textarea>
         </div>
 
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+        <div role="alert" aria-live="polite" id="form-errors" class="form-errors" hidden></div>
         <button type="submit" class="btn btn-gold btn-lg btn-full">Submit my application</button>
         <p class="form-disclaimer">We respond to every application within one business day. No sales calls — just a straightforward assessment.</p>
 
@@ -188,6 +193,8 @@
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- ─── Footer ─── -->
 <footer class="site-footer">
