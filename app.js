@@ -308,22 +308,55 @@ document.addEventListener('DOMContentLoaded', () => {
     map.addControl(new maplibregl.NavigationControl(), 'top-right');
   }
 
-  /* ─── Contact Form ─── */
+  /* ─── Contact Form — validation + accessible error region ─── */
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
+    const errorRegion = document.getElementById('form-errors');
+
+    function setFormError(msg) {
+      if (!errorRegion) return;
+      errorRegion.textContent = msg;
+      errorRegion.removeAttribute('hidden');
+    }
+
+    function clearFormError() {
+      if (!errorRegion) return;
+      errorRegion.textContent = '';
+      errorRegion.setAttribute('hidden', '');
+    }
+
+    /* Clear error as soon as the user starts correcting any field */
+    contactForm.addEventListener('input', clearFormError);
+
     contactForm.addEventListener('submit', e => {
       e.preventDefault();
-      const btn = contactForm.querySelector('button[type="submit"]');
-      if (btn) {
-        const orig = btn.textContent;
-        btn.textContent = 'Application sent ✓';
-        btn.style.background = '#27ae60';
-        setTimeout(() => {
-          btn.textContent   = orig;
-          btn.style.background = '';
-          contactForm.reset();
-        }, 4000);
+      const nameField  = contactForm.querySelector('#fullName');
+      const emailField = contactForm.querySelector('#email');
+      const nameVal    = nameField  ? nameField.value.trim()  : '';
+      const emailVal   = emailField ? emailField.value.trim() : '';
+      const emailOk    = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+
+      if (!nameVal && (!emailVal || !emailOk)) {
+        setFormError('Please enter your full name and a valid email address.');
+        if (nameField) nameField.focus();
+        e.stopImmediatePropagation();
+        return;
       }
+      if (!nameVal) {
+        setFormError('Please enter your full name.');
+        if (nameField) nameField.focus();
+        e.stopImmediatePropagation();
+        return;
+      }
+      if (!emailVal || !emailOk) {
+        setFormError('Please enter a valid email address.');
+        if (emailField) emailField.focus();
+        e.stopImmediatePropagation();
+        return;
+      }
+
+      clearFormError();
+      /* Validation passed — the inline Formspree handler in contact.html takes over */
     });
   }
 

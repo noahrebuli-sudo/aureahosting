@@ -1839,3 +1839,47 @@ a.chip:hover { opacity: 0.82; }
   position: relative;
   z-index: 1;
 }
+
+/* ─── Skip-to-main link (item 6/7) ─── */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  width: auto;
+  height: auto;
+  padding: 12px 24px;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-gold);
+  z-index: 9999;
+}
+
+/* ─── Form error region (item 8) ─── */
+.form-errors {
+  color: var(--error);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-4);
+}
+
+/* ─── Reduced-motion (item 5) ─── */
+@media (prefers-reduced-motion: reduce) {
+  .intel-strip { animation: none; }
+  .parallax-bg { transform: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
