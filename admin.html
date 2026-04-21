@@ -361,7 +361,7 @@
   <div class="admin-tab" data-section="homepage">Homepage</div>
   <div class="admin-tab" data-section="intel">Intel Strip</div>
   <div class="admin-tab" data-section="calculator">Calculator</div>
-  <div class="admin-tab" data-section="testimonials">Testimonials</div>
+  <div class="admin-tab" data-section="testimonials">Homepage Content</div>
   <div class="admin-tab" data-section="services">Services</div>
   <div class="admin-tab" data-section="whyus">Why Us</div>
   <div class="admin-tab" data-section="technology">Technology</div>
@@ -1013,60 +1013,163 @@
     </div>
   </section>
 
-  <!-- ══════════════ TESTIMONIALS ══════════════ -->
+  <!-- ══════════════ HOMEPAGE CONTENT ══════════════ -->
   <section class="admin-section" id="section-testimonials">
-    <div class="admin-section-title">Testimonials</div>
-    <div class="admin-section-desc">Owner result quotes displayed on the homepage results section.</div>
+    <div class="admin-section-title">Homepage Content</div>
+    <div class="admin-section-desc">Founder's letter, insight cards, scarcity band, and report CTA. Owner results below are archived — the homepage now shows the founder letter section instead.</div>
 
     <div class="admin-subgroup">
-      <h4>Result 1</h4>
+      <h4>Founder's Letter</h4>
       <div class="admin-field">
-        <label>Quote</label>
+        <label>Section Heading</label>
+        <input type="text" data-key="founderLetterHeading" placeholder="A letter from the founder">
+      </div>
+      <div class="admin-field">
+        <label>Paragraph 1</label>
+        <textarea data-key="founderLetterP1" rows="3"></textarea>
+      </div>
+      <div class="admin-field">
+        <label>Paragraph 2</label>
+        <textarea data-key="founderLetterP2" rows="3"></textarea>
+      </div>
+      <div class="admin-field">
+        <label>Paragraph 3</label>
+        <textarea data-key="founderLetterP3" rows="3"></textarea>
+      </div>
+      <div class="admin-field">
+        <label>Paragraph 4</label>
+        <textarea data-key="founderLetterP4" rows="2"></textarea>
+      </div>
+      <div class="admin-field">
+        <label>Signature Line</label>
+        <input type="text" data-key="founderLetterSignature" placeholder="— Noah Rebuli, Founder">
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Insight Cards</h4>
+      <div class="admin-field">
+        <label>Section Heading</label>
+        <input type="text" data-key="insightCardsHeading" placeholder="Lessons from twenty Adelaide properties">
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Card 1 Eyebrow</label>
+          <input type="text" data-key="insight1Eyebrow" placeholder="LESSON 01">
+        </div>
+        <div class="admin-field">
+          <label>Card 1 Title</label>
+          <input type="text" data-key="insight1Title" placeholder="The peak isn't where owners lose money">
+        </div>
+      </div>
+      <div class="admin-field">
+        <label>Card 1 Body</label>
+        <textarea data-key="insight1Body" rows="3"></textarea>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Card 2 Eyebrow</label>
+          <input type="text" data-key="insight2Eyebrow" placeholder="LESSON 02">
+        </div>
+        <div class="admin-field">
+          <label>Card 2 Title</label>
+          <input type="text" data-key="insight2Title" placeholder="Reviews compound">
+        </div>
+      </div>
+      <div class="admin-field">
+        <label>Card 2 Body</label>
+        <textarea data-key="insight2Body" rows="3"></textarea>
+      </div>
+      <hr class="admin-divider">
+      <div class="admin-grid-2">
+        <div class="admin-field">
+          <label>Card 3 Eyebrow</label>
+          <input type="text" data-key="insight3Eyebrow" placeholder="LESSON 03">
+        </div>
+        <div class="admin-field">
+          <label>Card 3 Title</label>
+          <input type="text" data-key="insight3Title" placeholder="The right owner is worth more than the right property">
+        </div>
+      </div>
+      <div class="admin-field">
+        <label>Card 3 Body</label>
+        <textarea data-key="insight3Body" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Scarcity Band <span style="font-weight:400;color:#7a8a8f;">(homepage + contact page — single source)</span></h4>
+      <div class="admin-field">
+        <label>Bold Line</label>
+        <input type="text" data-key="scarcityMain" placeholder="Currently accepting 5–6 properties for Q2 2026.">
+      </div>
+      <div class="admin-field">
+        <label>Sub-line</label>
+        <input type="text" data-key="scarcitySub" placeholder="Our cohort model means we only onboard a small number of properties per quarter — each with our full attention.">
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Report CTA Band <span style="font-weight:400;color:#7a8a8f;">(homepage)</span></h4>
+      <div class="admin-field">
+        <label>Heading</label>
+        <input type="text" data-key="reportCtaHeading" placeholder="Considering short-stay?">
+      </div>
+      <div class="admin-field">
+        <label>Sub-text</label>
+        <textarea data-key="reportCtaSub" rows="2"></textarea>
+      </div>
+      <div class="admin-field">
+        <label>Button Label</label>
+        <input type="text" data-key="reportCtaBtn" placeholder="Read the report →">
+      </div>
+    </div>
+
+    <div class="admin-subgroup">
+      <h4>Owner Results <span style="font-weight:400;color:#7a8a8f;">(archived — kept for data reference)</span></h4>
+      <div class="admin-field">
+        <label>Result 1 — Quote</label>
         <textarea data-key="result1Quote" rows="3"></textarea>
       </div>
       <div class="admin-grid-2">
         <div class="admin-field">
-          <label>Meta (owner · suburb · property)</label>
+          <label>Result 1 — Meta (owner · suburb · property)</label>
           <input type="text" data-key="result1Meta" placeholder="S.M. · Norwood · Townhouse">
         </div>
         <div class="admin-field">
-          <label>Stat / Result Badge</label>
+          <label>Result 1 — Stat / Result Badge</label>
           <input type="text" data-key="result1Stat" placeholder="+34% revenue, Q1 2025">
         </div>
       </div>
-    </div>
-
-    <div class="admin-subgroup">
-      <h4>Result 2</h4>
+      <hr class="admin-divider">
       <div class="admin-field">
-        <label>Quote</label>
+        <label>Result 2 — Quote</label>
         <textarea data-key="result2Quote" rows="3"></textarea>
       </div>
       <div class="admin-grid-2">
         <div class="admin-field">
-          <label>Meta</label>
+          <label>Result 2 — Meta</label>
           <input type="text" data-key="result2Meta" placeholder="T.K. · Glenelg · 2BR Apartment">
         </div>
         <div class="admin-field">
-          <label>Stat / Result Badge</label>
+          <label>Result 2 — Stat / Result Badge</label>
           <input type="text" data-key="result2Stat" placeholder="+$8,400 Fringe season 2025">
         </div>
       </div>
-    </div>
-
-    <div class="admin-subgroup">
-      <h4>Result 3</h4>
+      <hr class="admin-divider">
       <div class="admin-field">
-        <label>Quote</label>
+        <label>Result 3 — Quote</label>
         <textarea data-key="result3Quote" rows="3"></textarea>
       </div>
       <div class="admin-grid-2">
         <div class="admin-field">
-          <label>Meta</label>
+          <label>Result 3 — Meta</label>
           <input type="text" data-key="result3Meta" placeholder="R. &amp; J.P. · Stirling · Hills Retreat">
         </div>
         <div class="admin-field">
-          <label>Stat / Result Badge</label>
+          <label>Result 3 — Stat / Result Badge</label>
           <input type="text" data-key="result3Stat" placeholder="74% occupancy, first quarter">
         </div>
       </div>

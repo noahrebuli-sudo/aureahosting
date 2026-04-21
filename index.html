@@ -162,6 +162,10 @@
 
     <!-- Right: Calculator + Stats Card -->
     <div class="hero-calc-wrap reveal reveal-delay-2" id="calc">
+      <aside class="scarcity-band" aria-label="Current availability">
+        <p class="scarcity-band-main" data-content="scarcityMain">Currently accepting 5–6 properties for Q2 2026.</p>
+        <p class="scarcity-band-sub" data-content="scarcitySub">Our cohort model means we only onboard a small number of properties per quarter — each with our full attention.</p>
+      </aside>
       <div class="calc-card">
         <div class="calc-card-header">
           <span class="calc-kicker">EST. MONTHLY REVENUE</span>
@@ -437,34 +441,45 @@
   </div>
 </section>
 
-<!-- ─── Owner Results ─── -->
-<section class="section results-section">
-  <div class="results-bg-img">
-    <img
-      src="https://images.unsplash.com/photo-1600607687939-ce8a6d8bde56?w=1600&q=80&auto=format&fit=crop"
-      alt=""
-      aria-hidden="true"
-      loading="lazy"
-    >
-    <div class="results-bg-overlay"></div>
-  </div>
+<!-- ─── Founder's Letter & Insight Cards ─── -->
+<section class="section founder-section">
   <div class="rule-line js-rule"></div>
   <div class="container">
-    <div class="section-kicker reveal" style="display:block;margin-bottom:var(--space-8);">Owner Results</div>
-    <div class="results-list">
-      <div class="result-row reveal">
-        <div class="result-quote">"Switching to Aurea added $1,100 to my monthly income within the first 60 days. The dynamic pricing alone was worth it."</div>
-        <div class="result-meta">S.M. · Norwood · Townhouse · <span class="result-stat">+34% revenue, Q1 2025</span></div>
+
+    <!-- Sub-section A: Founder's Letter -->
+    <div class="founder-letter reveal">
+      <h2 class="founder-letter-heading" data-content="founderLetterHeading">A letter from the founder</h2>
+      <div class="founder-letter-body">
+        <p data-content="founderLetterP1">When I started managing Adelaide short-stays almost six years ago, I thought the job was operational — price the nights, clean the linen, answer the messages. Execution, repeated at volume.</p>
+        <p data-content="founderLetterP2">Twenty properties later, I think the job is actually about judgement. Which nights to price firm and which to discount. Which owners to take on. When to push back on a guest and when to absorb a cost quietly. The operational side matters, but it's not where the real money hides.</p>
+        <p data-content="founderLetterP3">Aurea exists because I wanted to build a management company that hires for that judgement — not for scale. We manage fewer properties than our competitors, on purpose. Every property gets proper pricing attention, proper guest communication, proper accountability.</p>
+        <p data-content="founderLetterP4">If that resonates with how you think about your own asset, we should talk.</p>
       </div>
-      <div class="result-row reveal">
-        <div class="result-quote">"I'd been self-managing for two years. In our first Fringe season with Aurea, the property earned more in six weeks than it had in the previous six months."</div>
-        <div class="result-meta">T.K. · Glenelg · 2BR Apartment · <span class="result-stat">+$8,400 Fringe season 2025</span></div>
-      </div>
-      <div class="result-row reveal">
-        <div class="result-quote">"A Hills property at 66% occupancy in its first quarter wasn't what we were expecting. We're now looking at a second property."</div>
-        <div class="result-meta">R. &amp; J.P. · Stirling · Hills Retreat · <span class="result-stat">66% occupancy, first quarter</span></div>
+      <span class="founder-signature" data-content="founderLetterSignature">— Noah Rebuli, Founder</span>
+    </div>
+
+    <!-- Sub-section B: Insight Cards -->
+    <div class="reveal">
+      <h2 class="insight-cards-heading" data-content="insightCardsHeading">Lessons from twenty Adelaide properties</h2>
+      <div class="insight-grid">
+        <div class="insight-card reveal">
+          <span class="insight-eyebrow" data-content="insight1Eyebrow">LESSON 01</span>
+          <h3 class="insight-title" data-content="insight1Title">The peak isn't where owners lose money</h3>
+          <p class="insight-body" data-content="insight1Body">Most owners are well-priced in March. The losses happen in the shoulder weeks around the peak — where complacent pricing assumes the peak will carry the year. It doesn't.</p>
+        </div>
+        <div class="insight-card reveal reveal-delay-1">
+          <span class="insight-eyebrow" data-content="insight2Eyebrow">LESSON 02</span>
+          <h3 class="insight-title" data-content="insight2Title">Reviews compound</h3>
+          <p class="insight-body" data-content="insight2Body">Airbnb's algorithm rewards consistency more than peaks. A property averaging 4.85 across 50 reviews outperforms one averaging 4.9 across 12, even with identical nightly rates. Cadence matters.</p>
+        </div>
+        <div class="insight-card reveal reveal-delay-2">
+          <span class="insight-eyebrow" data-content="insight3Eyebrow">LESSON 03</span>
+          <h3 class="insight-title" data-content="insight3Title">The right owner is worth more than the right property</h3>
+          <p class="insight-body" data-content="insight3Body">A mid-tier property with an engaged owner outperforms a premium property with a disengaged one, every time. Maintenance responsiveness and openness to pricing feedback are the two biggest leverage points — and neither shows up on a listing.</p>
+        </div>
       </div>
     </div>
+
   </div>
   <div class="rule-line js-rule"></div>
 </section>
@@ -479,6 +494,15 @@
       <a href="contact.html" class="btn btn-gold btn-lg">Apply for asset management</a>
       <p class="apply-phone">Or call <a href="tel:0404608196" data-content="phone" data-setting="phone">0404 608 196</a></p>
     </div>
+  </div>
+</section>
+
+<!-- ─── Report CTA Band ─── -->
+<section class="report-cta-band">
+  <div class="report-cta-inner reveal">
+    <h2 class="report-cta-heading" data-content="reportCtaHeading">Considering short-stay?</h2>
+    <p class="report-cta-sub" data-content="reportCtaSub">Download our 2026 Adelaide Short-Stay Yield Report — public data, operator insight, and five principles every owner should know.</p>
+    <a href="report.html" class="btn btn-outline" data-content="reportCtaBtn">Read the report →</a>
   </div>
 </section>
 
@@ -506,6 +530,7 @@
         <h4>Support</h4>
         <a href="faq.html">FAQ</a>
         <a href="contact.html">Apply</a>
+        <a href="report.html">2026 Yield Report</a>
         <a href="privacy.html">Privacy Policy</a>
       </div>
       <div class="footer-col">

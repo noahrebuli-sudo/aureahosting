@@ -232,6 +232,35 @@ const AUREA_DEFAULTS = {
   faq8Q: "Is my property a good fit for Aurea?",
   faq8A: "We look for quality properties in Adelaide\u2019s key short-term rental corridors \u2014 beachside, city fringe, and Hills regions. Properties should be well-presented and ideally achieve a nightly rate above the suburb median. The best way to find out is to apply \u2014 we\u2019ll give you an honest assessment.",
 
+  /* ── Founder's Letter (index.html) ──────── */
+  founderLetterHeading:   "A letter from the founder",
+  founderLetterP1:        "When I started managing Adelaide short-stays almost six years ago, I thought the job was operational — price the nights, clean the linen, answer the messages. Execution, repeated at volume.",
+  founderLetterP2:        "Twenty properties later, I think the job is actually about judgement. Which nights to price firm and which to discount. Which owners to take on. When to push back on a guest and when to absorb a cost quietly. The operational side matters, but it’s not where the real money hides.",
+  founderLetterP3:        "Aurea exists because I wanted to build a management company that hires for that judgement — not for scale. We manage fewer properties than our competitors, on purpose. Every property gets proper pricing attention, proper guest communication, proper accountability.",
+  founderLetterP4:        "If that resonates with how you think about your own asset, we should talk.",
+  founderLetterSignature: "— Noah Rebuli, Founder",
+
+  /* ── Insight Cards (index.html) ─────────── */
+  insightCardsHeading: "Lessons from twenty Adelaide properties",
+  insight1Eyebrow:     "LESSON 01",
+  insight1Title:       "The peak isn’t where owners lose money",
+  insight1Body:        "Most owners are well-priced in March. The losses happen in the shoulder weeks around the peak — where complacent pricing assumes the peak will carry the year. It doesn’t.",
+  insight2Eyebrow:     "LESSON 02",
+  insight2Title:       "Reviews compound",
+  insight2Body:        "Airbnb’s algorithm rewards consistency more than peaks. A property averaging 4.85 across 50 reviews outperforms one averaging 4.9 across 12, even with identical nightly rates. Cadence matters.",
+  insight3Eyebrow:     "LESSON 03",
+  insight3Title:       "The right owner is worth more than the right property",
+  insight3Body:        "A mid-tier property with an engaged owner outperforms a premium property with a disengaged one, every time. Maintenance responsiveness and openness to pricing feedback are the two biggest leverage points — and neither shows up on a listing.",
+
+  /* ── Scarcity Band (index.html + contact.html) ── */
+  scarcityMain: "Currently accepting 5–6 properties for Q2 2026.",
+  scarcitySub:  "Our cohort model means we only onboard a small number of properties per quarter — each with our full attention.",
+
+  /* ── Report CTA Band (index.html) ───────── */
+  reportCtaHeading: "Considering short-stay?",
+  reportCtaSub:     "Download our 2026 Adelaide Short-Stay Yield Report — public data, operator insight, and five principles every owner should know.",
+  reportCtaBtn:     "Read the report →",
+
   /* ── Contact / Apply ─────────────────────── */
   contactHeroTitle:  "Let\u2019s assess your property.",
   contactHeroText:   "We take on a limited number of properties each quarter and evaluate every application individually. Tell us about yours \u2014 we\u2019ll respond within one business day.",
