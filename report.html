@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 Adelaide Short-Stay Yield Report — Aurea Hosting</title>
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<meta name="description" content="Free PDF: occupancy, pricing, and demand patterns across Adelaide's short-term rental market. Subscribe and receive the 2026 Annual Yield Report instantly.">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.js" defer></script>
+<meta property="og:type"             content="website">
+<meta property="og:site_name"        content="Aurea Hosting">
+<meta property="og:url"              content="https://aureahosting.com.au/report.html">
+<meta property="og:title"            content="2026 Adelaide Short-Stay Yield Report — Aurea Hosting">
+<meta property="og:description"      content="A field guide to occupancy, pricing, and demand patterns in Adelaide's short-term rental market. Free for Adelaide owners.">
+<meta property="og:image"            content="https://aureahosting.com.au/images/og-cover.jpg">
+<meta property="og:image:secure_url" content="https://aureahosting.com.au/images/og-cover.jpg">
+<meta property="og:image:type"       content="image/jpeg">
+<meta property="og:image:width"      content="1200">
+<meta property="og:image:height"     content="630">
+<meta property="og:image:alt"        content="Aurea Hosting — 2026 Adelaide Short-Stay Yield Report">
+<meta name="twitter:card"            content="summary_large_image">
+<meta name="twitter:title"           content="2026 Adelaide Short-Stay Yield Report — Aurea Hosting">
+<meta name="twitter:description"     content="A field guide to occupancy, pricing, and demand patterns in Adelaide's short-term rental market. Free for Adelaide owners.">
+<meta name="twitter:image"           content="https://aureahosting.com.au/images/og-cover.jpg">
+<meta name="twitter:image:alt"       content="Aurea Hosting — 2026 Adelaide Short-Stay Yield Report">
+<link rel="canonical" href="https://aureahosting.com.au/report.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["CreativeWork", "Article"],
+  "name": "The Adelaide Short-Stay Yield Report 2026",
+  "headline": "The Adelaide Short-Stay Yield Report 2026",
+  "description": "A field guide to occupancy, pricing, and demand patterns in Adelaide's short-term rental market.",
+  "url": "https://aureahosting.com.au/report.html",
+  "datePublished": "2026-04-21",
+  "dateModified": "2026-04-21",
+  "inLanguage": "en-AU",
+  "isAccessibleForFree": true,
+  "about": {
+    "@type": "Thing",
+    "name": "Adelaide short-term rental market"
+  },
+  "keywords": "Adelaide short-term rental, Airbnb Adelaide, STR yield, occupancy rate Adelaide, short-stay investment",
+  "author": {
+    "@type": "Person",
+    "name": "Noah Rebuli",
+    "url": "https://aureahosting.com.au/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://aureahosting.com.au/",
+    "name": "Aurea Hosting",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aureahosting.com.au/images/favicon.svg"
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://aureahosting.com.au/images/yield-report-cover.png"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Adelaide",
+    "containedInPlace": {
+      "@type": "AdministrativeArea",
+      "name": "South Australia, Australia"
+    }
+  }
+}
+</script>
+
+<style>
+/* ─── Report page — scoped styles ─────────────────────────────────────────── */
+
+/* Hero */
+.report-hero {
+  padding-top: calc(var(--header-height) + var(--space-20));
+  padding-bottom: var(--space-20);
+  background: var(--sand);
+  border-bottom: 1px solid var(--border);
+}
+.report-hero-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+}
+.report-hero-text {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.report-eyebrow {
+  font-family: 'Satoshi', -apple-system, sans-serif;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0;
+}
+.report-hero-text h1 {
+  font-size: var(--text-4xl);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0;
+}
+.report-lede {
+  font-size: var(--text-lg);
+  color: var(--ink-light);
+  line-height: 1.65;
+  max-width: 48ch;
+  margin: 0;
+}
+.report-hero-image {
+  flex: 0 0 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.report-hero-image img {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+  display: block;
+}
+
+/* What's Inside */
+.report-features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-12);
+}
+.report-feature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: var(--sand);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-8);
+}
+.report-feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: var(--gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.report-feature-icon [data-lucide] {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.8;
+}
+.report-feature h3 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+.report-feature p {
+  font-size: var(--text-base);
+  color: var(--ink-light);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Who It's For */
+.report-prose {
+  font-size: var(--text-lg);
+  color: var(--ink-light);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Signup */
+.report-signup-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-5);
+}
+.report-signup-center h2 {
+  margin: 0;
+}
+.report-signup-subtext {
+  font-size: var(--text-lg);
+  color: var(--ink-light);
+  line-height: 1.65;
+  max-width: 52ch;
+  margin: 0;
+}
+.report-form-wrap {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+/* Scarcity band */
+.report-scarcity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  background: var(--sand-mid);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--space-6) var(--space-8);
+  margin-top: var(--space-10);
+}
+.report-scarcity p {
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* FAQ: native details / summary */
+.report-faq {
+  margin-top: var(--space-10);
+}
+.report-faq details {
+  border-bottom: 1px solid var(--border);
+}
+.report-faq details:first-child {
+  border-top: 1px solid var(--border);
+}
+.report-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding: var(--space-6) 0;
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  list-style: none;
+  line-height: 1.3;
+  transition: color 200ms;
+}
+.report-faq summary::-webkit-details-marker { display: none; }
+.report-faq summary::marker { display: none; }
+.report-faq summary:hover { color: var(--teal); }
+.report-faq summary::after {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23c8a35d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: transform 250ms var(--ease-out);
+}
+.report-faq details[open] summary::after {
+  transform: rotate(45deg);
+}
+.report-faq details[open] summary {
+  color: var(--teal);
+}
+.report-faq-answer {
+  padding: 0 0 var(--space-6);
+  color: var(--ink-light);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  max-width: 68ch;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .report-hero-image {
+    flex: 0 0 280px;
+  }
+  .report-hero-image img {
+    max-width: 280px;
+  }
+}
+@media (max-width: 768px) {
+  .report-hero {
+    padding-top: calc(var(--header-height) + var(--space-12));
+    padding-bottom: var(--space-12);
+  }
+  .report-hero-inner {
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+  .report-hero-image {
+    flex: unset;
+    width: 100%;
+    order: -1;
+  }
+  .report-hero-image img {
+    max-width: 240px;
+    margin: 0 auto;
+  }
+  .report-features-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+  }
+  .report-scarcity {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .report-faq summary {
+    font-size: var(--text-base);
+  }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+<!-- ─── Header ─── -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="Aurea Hosting Home">
+      <img src="images/favicon.svg" alt="Aurea Hosting" class="badge-logo">
+      <span class="logo-text" data-content="brandName">Aurea Hosting</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false"><span></span></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="why-us.html">Why Us</a>
+      <a href="services.html">Services</a>
+      <a href="technology.html">Technology</a>
+      <a href="areas.html">Areas</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html" class="nav-apply">Apply</a>
+      <a href="admin.html" style="font-size:0;width:1px;overflow:hidden;opacity:0;position:absolute;" tabindex="-1" aria-hidden="true">Admin</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+
+<!-- ─── Hero ─── -->
+<section class="report-hero" aria-labelledby="report-h1">
+  <div class="container">
+    <div class="report-hero-inner">
+      <div class="report-hero-text reveal">
+        <p class="report-eyebrow">2026 Annual Edition</p>
+        <h1 id="report-h1">The Adelaide Short-Stay Yield Report</h1>
+        <p class="report-lede">A field guide to occupancy, pricing, and demand patterns in Adelaide's short-term rental market. Free for Adelaide owners.</p>
+        <div>
+          <a href="#signup" class="btn btn-gold btn-lg">Get the report</a>
+        </div>
+      </div>
+      <div class="report-hero-image reveal reveal-delay-2">
+        <img
+          src="images/yield-report-cover.png"
+          alt="Cover of the 2026 Adelaide Short-Stay Yield Report by Aurea Hosting"
+          loading="eager"
+          fetchpriority="high"
+          width="340"
+          height="480"
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── What's Inside ─── -->
+<section class="section section-alt" aria-labelledby="inside-heading">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-kicker">Inside the report</span>
+      <h2 id="inside-heading" class="section-title">What's inside the 2026 edition</h2>
+    </div>
+    <div class="report-features-grid">
+
+      <div class="report-feature reveal">
+        <div class="report-feature-icon" aria-hidden="true">
+          <i data-lucide="bar-chart-3"></i>
+        </div>
+        <h3>Market in numbers</h3>
+        <p>ADR, occupancy, and revenue ranges across multiple data sources — the actual figures, not approximations.</p>
+      </div>
+
+      <div class="report-feature reveal reveal-delay-1">
+        <div class="report-feature-icon" aria-hidden="true">
+          <i data-lucide="calendar-days"></i>
+        </div>
+        <h3>Seasonal rhythm</h3>
+        <p>How Adelaide's short-stay demand shifts across peaks and troughs, month by month through the calendar year.</p>
+      </div>
+
+      <div class="report-feature reveal reveal-delay-2">
+        <div class="report-feature-icon" aria-hidden="true">
+          <i data-lucide="trophy"></i>
+        </div>
+        <h3>Event calendar effect</h3>
+        <p>Fringe, Gather Round, and TDU pricing impact — what events actually move nightly rates, and by how much.</p>
+      </div>
+
+      <div class="report-feature reveal reveal-delay-3">
+        <div class="report-feature-icon" aria-hidden="true">
+          <i data-lucide="map-pin"></i>
+        </div>
+        <h3>Suburb notes</h3>
+        <p>Operator observations from managing 20+ Adelaide properties across the city's most active short-stay suburbs.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Who It's For ─── -->
+<section class="section" aria-labelledby="whois-heading">
+  <div class="rule-line js-rule"></div>
+  <div class="container container-narrow">
+    <div class="reveal">
+      <span class="section-kicker">Audience</span>
+      <h2 id="whois-heading" class="section-title">Who this is for</h2>
+      <p class="report-prose">For Adelaide property owners weighing short-term rental as an investment strategy, and for existing hosts wondering whether their numbers match the market. Every figure is sourced from public data, layered with what we've learned managing properties across Adelaide's most active suburbs.</p>
+    </div>
+  </div>
+  <div class="rule-line js-rule"></div>
+</section>
+
+<!-- ─── Signup ─── -->
+<section class="section section-alt" id="signup" aria-labelledby="signup-heading">
+  <div class="container">
+    <div class="report-signup-center reveal">
+      <h2 id="signup-heading" class="section-title">Get the full report</h2>
+      <p class="report-signup-subtext">Delivered as a PDF to your inbox, usually within a minute. No spam, no drip campaigns — just the report and the occasional quarterly update if you want it.</p>
+      <div class="report-form-wrap">
+        <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1776073");</style>
+        <style type="text/css">
+        /* LOADER */
+        .ml-form-embedSubmitLoad {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+        }
+
+        .g-recaptcha {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+        height: ;
+        }
+
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0,0,0,0);
+          border: 0;
+        }
+
+        .ml-form-embedSubmitLoad:after {
+          content: " ";
+          display: block;
+          width: 11px;
+          height: 11px;
+          margin: 1px;
+          border-radius: 50%;
+          border: 4px solid #fff;
+        border-color: #ffffff #ffffff #ffffff transparent;
+        animation: ml-form-embedSubmitLoad 1.2s linear infinite;
+        }
+        @keyframes ml-form-embedSubmitLoad {
+          0% {
+          transform: rotate(0deg);
+          }
+          100% {
+          transform: rotate(360deg);
+          }
+        }
+          #mlb2-40196315.ml-form-embedContainer {
+            box-sizing: border-box;
+            display: table;
+            margin: 0 auto;
+            position: static;
+            width: 100% !important;
+          }
+          #mlb2-40196315.ml-form-embedContainer h4,
+          #mlb2-40196315.ml-form-embedContainer p,
+          #mlb2-40196315.ml-form-embedContainer span,
+          #mlb2-40196315.ml-form-embedContainer button {
+            text-transform: none !important;
+            letter-spacing: normal !important;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper {
+            background-color: #f5f2eb;
+
+            border-width: 0px;
+            border-color: transparent;
+            border-radius: 4px;
+            border-style: solid;
+            box-sizing: border-box;
+            display: inline-block !important;
+            margin: 0;
+            padding: 0;
+            position: relative;
+                  }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper.embedPopup,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper.embedDefault { width: 400px; }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper.embedForm { max-width: 400px; width: 100%; }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-align-left { text-align: left; }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-align-center { text-align: center; }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-align-default { display: table-cell !important; vertical-align: middle !important; text-align: center !important; }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-align-right { text-align: right; }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedHeader img {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            height: auto;
+            margin: 0 auto !important;
+            max-width: 100%;
+            width: undefinedpx;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody {
+            padding: 20px 20px 0 20px;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody.ml-form-embedBodyHorizontal {
+            padding-bottom: 0;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent {
+            text-align: left;
+            margin: 0 0 20px 0;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent h4,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent h4 {
+            color: #172226;
+            font-family: 'Inter', sans-serif;
+            font-size: 29px;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            text-align: center;
+            word-break: break-word;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p {
+            color: #3a4a50;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            margin: 0 0 10px 0;
+            text-align: center;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ul,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ul,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol {
+            color: #3a4a50;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol ol,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol ol {
+            list-style-type: lower-alpha;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent ol ol ol,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent ol ol ol {
+            list-style-type: lower-roman;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p a,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p a {
+            color: #3a4a50;
+            text-decoration: underline;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group {
+            text-align: left!important;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group label {
+            margin-bottom: 5px;
+            color: #3a4a50;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold; font-style: normal; text-decoration: none;;
+            display: inline-block;
+            line-height: 20px;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent p:last-child,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p:last-child {
+            margin: 0;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form {
+            margin: 0;
+            width: 100%;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
+            margin: 0 0 20px 0;
+            width: 100%;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow {
+            float: left;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent.horozintalForm {
+            margin: 0;
+            padding: 0 0 20px 0;
+            width: 100%;
+            height: auto;
+            float: left;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow {
+            margin: 0 0 10px 0;
+            width: 100%;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-last-item {
+            margin: 0;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-formfieldHorizintal {
+            margin: 0;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input {
+            background-color: #ffffff !important;
+            color: #172226 !important;
+            border-color: #d7ceb8;
+            border-radius: 4px !important;
+            border-style: solid !important;
+            border-width: 1px !important;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px !important;
+            height: auto;
+            line-height: 21px !important;
+            margin-bottom: 0;
+            margin-top: 0;
+            margin-left: 0;
+            margin-right: 0;
+            padding: 10px 10px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            max-width: 100% !important;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-webkit-input-placeholder,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::-webkit-input-placeholder { color: #172226; }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::-moz-placeholder,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::-moz-placeholder { color: #172226; }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-ms-input-placeholder,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input:-ms-input-placeholder { color: #172226; }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:-moz-placeholder,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input:-moz-placeholder { color: #172226; }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow textarea, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow textarea {
+            background-color: #ffffff !important;
+            color: #172226 !important;
+            border-color: #d7ceb8;
+            border-radius: 4px !important;
+            border-style: solid !important;
+            border-width: 1px !important;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px !important;
+            height: auto;
+            line-height: 21px !important;
+            margin-bottom: 0;
+            margin-top: 0;
+            padding: 10px 10px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            max-width: 100% !important;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
+              border-color: #d7ceb8!important;
+              background-color: #ffffff!important;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input.custom-control-input[type="checkbox"]{
+            box-sizing: border-box;
+            padding: 0;
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+            margin-top: 5px;
+            margin-left: -1.5rem;
+            overflow: visible;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
+            border-radius: 4px!important;
+          }
+
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::after, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox input[type=checkbox]:checked~.label-description::after, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked~.custom-control-label::after, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input:checked~.custom-control-label::after, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked~.label-description::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::after, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input:checked~.custom-control-label::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-input:checked~.custom-control-label::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input:checked~.custom-control-label::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input:checked~.custom-control-label::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox input[type=checkbox]:checked~.label-description::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox input[type=checkbox]:checked~.label-description::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::before  {
+              border-color: #000000!important;
+              background-color: #000000!important;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label::after, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label::after, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label::after, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label::after {
+               top: 2px;
+               box-sizing: border-box;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+               top: 0px!important;
+               box-sizing: border-box!important;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+            top: 0px!important;
+               box-sizing: border-box!important;
+          }
+
+           #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::after {
+                top: 0px!important;
+                box-sizing: border-box!important;
+                position: absolute;
+                left: -1.5rem;
+                display: block;
+                width: 1rem;
+                height: 1rem;
+                content: "";
+           }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before {
+            top: 0px!important;
+            box-sizing: border-box!important;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-control-label::before {
+              position: absolute;
+              top: 4px;
+              left: -1.5rem;
+              display: block;
+              width: 16px;
+              height: 16px;
+              pointer-events: none;
+              content: "";
+              background-color: #ffffff;
+              border: #adb5bd solid 1px;
+              border-radius: 50%;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-control-label::after {
+              position: absolute;
+              top: 2px!important;
+              left: -1.5rem;
+              display: block;
+              width: 1rem;
+              height: 1rem;
+              content: "";
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::before, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before {
+              position: absolute;
+              top: 4px;
+              left: -1.5rem;
+              display: block;
+              width: 16px;
+              height: 16px;
+              pointer-events: none;
+              content: "";
+              background-color: #ffffff;
+              border: #adb5bd solid 1px;
+              border-radius: 50%;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after {
+              position: absolute;
+              top: 0px!important;
+              left: -1.5rem;
+              display: block;
+              width: 1rem;
+              height: 1rem;
+              content: "";
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+              position: absolute;
+              top: 0px!important;
+              left: -1.5rem;
+              display: block;
+              width: 1rem;
+              height: 1rem;
+              content: "";
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-radio .custom-control-label::after {
+              background: no-repeat 50%/50% 50%;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .custom-checkbox .custom-control-label::after, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsOptionsCheckbox .label-description::after, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-interestGroupsRow .ml-form-interestGroupsRowCheckbox .label-description::after, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::after {
+              background: no-repeat 50%/50% 50%;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-control, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-control {
+            position: relative;
+            display: block;
+            min-height: 1.5rem;
+            padding-left: 1.5rem;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-input, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-input, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-input, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-input {
+              position: absolute;
+              z-index: -1;
+              opacity: 0;
+              box-sizing: border-box;
+              padding: 0;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-radio .custom-control-label, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-radio .custom-control-label, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-checkbox .custom-control-label, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-checkbox .custom-control-label {
+              color: #000000;
+              font-size: 12px!important;
+              font-family: 'Inter', sans-serif;
+              line-height: 22px;
+              margin-bottom: 0;
+              position: relative;
+              vertical-align: top;
+              font-style: normal;
+              font-weight: 700;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-select, #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow .custom-select {
+            background-color: #ffffff !important;
+            color: #172226 !important;
+            border-color: #d7ceb8;
+            border-radius: 4px !important;
+            border-style: solid !important;
+            border-width: 1px !important;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px !important;
+            line-height: 20px !important;
+            margin-bottom: 0;
+            margin-top: 0;
+            padding: 10px 28px 10px 12px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            max-width: 100% !important;
+            height: auto;
+            display: inline-block;
+            vertical-align: middle;
+            background: url('https://assets.mlcdn.com/ml/images/default/dropdown.svg') no-repeat right .75rem center/8px 10px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+          }
+
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow {
+            height: auto;
+            width: 100%;
+            float: left;
+          }
+          .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { width: 70%; float: left; }
+          .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal { width: 30%; float: left; }
+          .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal.labelsOn { padding-top: 25px;  }
+          .ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields { box-sizing: border-box; float: left; padding-right: 10px;  }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input {
+            background-color: #ffffff;
+            color: #172226;
+            border-color: #d7ceb8;
+            border-radius: 4px;
+            border-style: solid;
+            border-width: 1px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            margin-bottom: 0;
+            margin-top: 0;
+            padding: 10px 10px;
+            width: 100%;
+            box-sizing: border-box;
+            overflow-y: initial;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button {
+            background-color: #c8a35d !important;
+            border-color: #c8a35d;
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 25px;
+            box-shadow: none;
+            color: #ffffff !important;
+            cursor: pointer;
+            font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+            font-size: 14px !important;
+            font-weight: 400;
+            line-height: 20px;
+            margin: 0 !important;
+            padding: 10px !important;
+            width: 100%;
+            height: auto;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button:hover {
+            background-color: #b8924d !important;
+            border-color: #b8924d !important;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type="checkbox"] {
+            box-sizing: border-box;
+            padding: 0;
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+            margin-top: 5px;
+            margin-left: -1.5rem;
+            overflow: visible;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description {
+            color: #000000;
+            display: block;
+            font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            text-align: left;
+            margin-bottom: 0;
+            position: relative;
+            vertical-align: top;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label {
+            font-weight: normal;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            display: block;
+            min-height: 24px;
+            padding-left: 24px;
+
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label a {
+            color: #000000;
+            text-decoration: underline;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p {
+            color: #000000 !important;
+            font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
+            font-size: 12px !important;
+            font-weight: normal !important;
+            line-height: 18px !important;
+            padding: 0 !important;
+            margin: 0 5px 0 0 !important;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p:last-child {
+            margin: 0;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit {
+            margin: 0 0 20px 0;
+            float: left;
+            width: 100%;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button {
+            background-color: #c8a35d !important;
+            border: none !important;
+            border-radius: 25px !important;
+            box-shadow: none !important;
+            color: #ffffff !important;
+            cursor: pointer;
+            font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
+            font-size: 14px !important;
+            font-weight: 400 !important;
+            line-height: 21px !important;
+            height: auto;
+            padding: 10px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button.loading {
+            display: none;
+          }
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button:hover {
+            background-color: #b8924d !important;
+          }
+          .ml-subscribe-close {
+            width: 30px;
+            height: 30px;
+            background: url('https://assets.mlcdn.com/ml/images/default/modal_close.png') no-repeat;
+            background-size: 30px;
+            cursor: pointer;
+            margin-top: -10px;
+            margin-right: -10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+          }
+          .ml-error input, .ml-error textarea, .ml-error select {
+            border-color: red!important;
+          }
+
+          .ml-error .custom-checkbox-radio-list {
+            border: 1px solid red !important;
+            border-radius: 4px;
+            padding: 10px;
+          }
+
+          .ml-error .label-description,
+          .ml-error .label-description p,
+          .ml-error .label-description p a,
+          .ml-error label:first-child {
+            color: #ff0000 !important;
+          }
+
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow.ml-error .label-description p,
+          #mlb2-40196315.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow.ml-error .label-description p:first-letter {
+            color: #ff0000 !important;
+          }
+                @media only screen and (max-width: 400px){
+
+            .ml-form-embedWrapper.embedDefault, .ml-form-embedWrapper.embedPopup { width: 100%!important; }
+            .ml-form-formContent.horozintalForm { float: left!important; }
+            .ml-form-formContent.horozintalForm .ml-form-horizontalRow { height: auto!important; width: 100%!important; float: left!important; }
+            .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { width: 100%!important; }
+            .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal > div { padding-right: 0px!important; padding-bottom: 10px; }
+            .ml-form-formContent.horozintalForm .ml-button-horizontal { width: 100%!important; }
+            .ml-form-formContent.horozintalForm .ml-button-horizontal.labelsOn { padding-top: 0px!important; }
+
+          }
+        </style>
+
+        <div id="mlb2-40196315" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-40196315">
+          <div class="ml-form-align-center ">
+            <div class="ml-form-embedWrapper embedForm">
+
+              <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+
+                <div class="ml-form-embedContent" style=" ">
+
+                    <h4>Get the 2026 Yield Report</h4>
+                    <p>Public data, operator insight, and five principles every Adelaide owner should know. Delivered as a PDF to your inbox.</p>
+
+                </div>
+
+                <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2282268/forms/185332787313640602/subscribe" data-code="" method="post" target="_blank">
+                  <div class="ml-form-formContent">
+
+                      <div class="ml-form-fieldRow ">
+                        <div class="ml-field-group ml-field-name ml-validate-required">
+                          <input aria-label="name" aria-required="true" type="text" class="form-control" data-inputmask="" name="fields[name]" placeholder="Name" autocomplete="given-name">
+                        </div>
+                      </div>
+                      <div class="ml-form-fieldRow ">
+                        <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                          <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Email" autocomplete="email">
+                        </div>
+                      </div>
+                      <div class="ml-form-fieldRow ml-last-item">
+                        <div class="ml-field-group ml-field-city">
+                          <input aria-label="city" type="text" class="form-control" data-inputmask="" name="fields[city]" placeholder="Suburb" autocomplete="">
+                        </div>
+                      </div>
+
+                  </div>
+
+                  <input type="hidden" name="ml-submit" value="1">
+
+                  <div class="ml-form-embedSubmit">
+                    <button type="submit" class="primary">Send me the report</button>
+                    <button disabled="disabled" style="display: none;" type="button" class="loading">
+                      <div class="ml-form-embedSubmitLoad"></div>
+                      <span class="sr-only">Loading...</span>
+                    </button>
+                  </div>
+
+                  <input type="hidden" name="anticsrf" value="true">
+                </form>
+              </div>
+
+              <div class="ml-form-successBody row-success" style="display: none">
+
+                <div class="ml-form-successContent">
+
+                    <h4>Check your inbox</h4>
+                    <p>Your copy of the 2026 Adelaide Short-Stay Yield Report is on its way. It should land within a minute or two. If it doesn't arrive, check your spam folder — and if you still can't find it, reply to any Aurea email and I'll send it manually.<br><br>— Noah</p>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          function ml_webform_success_40196315() {
+            var $ = ml_jQuery || jQuery;
+            $('.ml-subscribe-form-40196315 .row-success').show();
+            $('.ml-subscribe-form-40196315 .row-form').hide();
+          }
+        </script>
+
+        <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v95037e5bac78f29ed026832ca21a7c7b" type="text/javascript"></script>
+        <script>
+          fetch("https://assets.mailerlite.com/jsonp/2282268/forms/185332787313640602/takel")
+        </script>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Credibility ─── -->
+<section class="section" aria-labelledby="trust-heading">
+  <div class="rule-line js-rule"></div>
+  <div class="container container-narrow">
+    <div class="reveal">
+      <span class="section-kicker">About Aurea</span>
+      <h2 id="trust-heading" class="section-title">Why trust this report</h2>
+      <p class="report-prose">Aurea is Adelaide's selective short-stay asset manager. Our founder, Noah Rebuli, has managed 20+ Adelaide properties across more than five years in the industry before launching Aurea.</p>
+    </div>
+    <aside class="report-scarcity reveal" aria-label="Current availability">
+      <p>Currently accepting 5–6 properties for Q2 2026.</p>
+      <a href="contact.html" class="btn-text-link">Apply to work with us <span aria-hidden="true">→</span></a>
+    </aside>
+  </div>
+  <div class="rule-line js-rule"></div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section class="section section-alt" aria-labelledby="faq-heading">
+  <div class="container container-narrow">
+    <div class="reveal">
+      <span class="section-kicker">Questions</span>
+      <h2 id="faq-heading" class="section-title">Common questions</h2>
+    </div>
+    <div class="report-faq reveal">
+
+      <details>
+        <summary>Is it really free?</summary>
+        <p class="report-faq-answer">Yes. No payment, no trial, no strings. We publish an annual edition to share what we've learned about the Adelaide market.</p>
+      </details>
+
+      <details>
+        <summary>Will you spam me?</summary>
+        <p class="report-faq-answer">No. You'll receive the report immediately, plus occasional quarterly market notes if you want them. Unsubscribe anytime from any email.</p>
+      </details>
+
+      <details>
+        <summary>When will the next edition come out?</summary>
+        <p class="report-faq-answer">We publish annually. The 2027 edition will arrive in Q1 2027. Subscribers get it first.</p>
+      </details>
+
+      <details>
+        <summary>Can I share the report with other property owners?</summary>
+        <p class="report-faq-answer">Yes, share it freely. The only thing we ask is that if they want their own copy and future editions, they subscribe themselves.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ─── Footer ─── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="color:var(--white);" aria-label="Aurea Hosting">
+          <img src="images/favicon.svg" alt="Aurea Hosting" class="badge-logo">
+          <span class="logo-text">Aurea Hosting</span>
+        </a>
+        <p data-content="tagline">Adelaide's most selective short-term rental management.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="why-us.html">Why Us</a>
+        <a href="services.html">Services</a>
+        <a href="technology.html">Technology</a>
+        <a href="areas.html">Areas</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Apply</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:0404608196" data-content="phone" data-setting="phone">0404 608 196</a>
+        <a href="mailto:noah@aureahosting.com.au" data-content="email" data-setting="email">noah@aureahosting.com.au</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Aurea Hosting. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="cms.js"></script>
+<script src="app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.lucide) { lucide.createIcons(); }
+    else { var s = document.querySelector('script[src*=lucide]'); if (s) s.addEventListener('load', function() { lucide.createIcons(); }); }
+  });
+</script>
+</body>
+</html>
