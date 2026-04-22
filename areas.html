@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Areas — Aurea Hosting</title>
+<title>Adelaide STR Coverage Areas by Yield Zone | Aurea Hosting</title>
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
@@ -66,8 +66,8 @@
   <div class="container">
     <div class="reveal">
       <span class="hero-type-kicker">Coverage</span>
-      <h1 class="hero-type-headline">We know every suburb<br>by its yield curve.</h1>
-      <p class="hero-type-sub">From beachside surge suburbs to Hills retreat properties, our Airbnb and short-term rental management across Adelaide is mapped by demand, event uplift, and seasonal yield.</p>
+      <h1 class="hero-type-headline" data-content="areasHeroTitle">We know every suburb<br>by its yield curve.</h1>
+      <p class="hero-type-sub" data-content="areasHeroText">From beachside surge suburbs to Hills retreat properties, our Airbnb and short-term rental management across Adelaide is mapped by demand, event uplift, and seasonal yield.</p>
       <div class="hero-type-chips">
         <span class="chip chip-light">Beachside</span>
         <span class="chip chip-light">City Fringe</span>
@@ -342,38 +342,5 @@
 <script src="cms.js"></script>
 <script src="app.js"></script>
 <script>document.addEventListener('DOMContentLoaded',function(){if(window.lucide){lucide.createIcons();}else{var s=document.querySelector('script[src*=lucide]');if(s)s.addEventListener('load',function(){lucide.createIcons();});}});</script>
-<script>
-(function initAureaMap() {
-  var mapEl = document.getElementById('aurea-map');
-  if (!mapEl || typeof maplibregl === 'undefined') return;
-  var map = new maplibregl.Map({
-    container: 'aurea-map',
-    style: 'https://tiles.openfreemap.org/styles/liberty',
-    center: [138.6007, -34.9285],
-    zoom: 10.5,
-    attributionControl: true
-  });
-  var markers = [
-    { coords: [138.5153,-34.9816], name: 'Glenelg',      desc: 'Beachside — 2BR avg $3,900/mo · LIV Golf +$190/night' },
-    { coords: [138.4969,-34.9219], name: 'Henley Beach',  desc: 'Premium coastal — strong weekend demand' },
-    { coords: [138.6007,-34.9285], name: 'Adelaide CBD',  desc: 'Fringe · Gather Round · year-round occupancy' },
-    { coords: [138.5884,-34.9499], name: 'Unley',         desc: 'Leafy city-fringe — boutique appeal' },
-    { coords: [138.6297,-34.9211], name: 'Norwood',       desc: '2BR avg $3,600/mo · Fringe +$140/night' },
-    { coords: [138.6456,-34.9387], name: 'Burnside',      desc: 'Upscale residential — Hills proximity premium' },
-    { coords: [138.7140,-35.0003], name: 'Stirling',      desc: 'Hills — 2BR avg $3,800/mo · Tasting Australia' },
-    { coords: [138.5161,-35.0233], name: 'Brighton',      desc: 'Southern coastal — 2BR avg $3,700/mo' }
-  ];
-  map.on('load', function() {
-    markers.forEach(function(m) {
-      var el = document.createElement('div');
-      el.style.cssText = 'width:13px;height:13px;background:#c8a35d;border:2.5px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.25);cursor:pointer;';
-      var popup = new maplibregl.Popup({ offset: 12, closeButton: false })
-        .setHTML('<div style="font-family:\'Satoshi\',sans-serif;padding:2px 0"><strong style="color:#172226;font-size:13px;font-family:\'Switzer\',sans-serif">' + m.name + '</strong><p style="color:#7a8a8f;font-size:12px;margin:4px 0 0;max-width:200px;line-height:1.4">' + m.desc + '</p></div>');
-      new maplibregl.Marker({ element: el }).setLngLat(m.coords).setPopup(popup).addTo(map);
-    });
-  });
-  map.addControl(new maplibregl.NavigationControl(), 'top-right');
-}());
-</script>
 </body>
 </html>
