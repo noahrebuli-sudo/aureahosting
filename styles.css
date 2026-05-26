@@ -1,5 +1,5 @@
 /* =========================================
-   AUREA HOSTING — Asset Intelligence Design System
+   AUREA HOSTING: Asset Intelligence Design System
    ========================================= */
 
 /* ─── Design Tokens ─── */
@@ -218,7 +218,7 @@ h1, h2, h3, h4, h5, h6 {
     top: 100%;                                        /* flush below header bottom edge */
     left: 0; right: 0;
     height: calc(100vh - var(--header-height));       /* fallback for older browsers */
-    height: calc(100dvh - var(--header-height));      /* dynamic viewport — handles Safari address bar */
+    height: calc(100dvh - var(--header-height));      /* dynamic viewport, handles Safari address bar */
     flex-direction: column; gap: var(--space-2);
     padding: var(--space-8) var(--space-6);
     background: rgba(255, 253, 249, 0.98);
@@ -440,11 +440,11 @@ a.chip:hover { opacity: 0.82; }
   overflow: hidden;
 }
 
-/* Right panel background — dot grid + sand-mid tint */
+/* Right panel background: dot grid + sand-mid tint */
 .hero-calc-bg {
   position: absolute;
   inset: 0;
-  left: 50%;           /* starts at the midpoint — right half only */
+  left: 50%;           /* starts at the midpoint, right half only */
   overflow: hidden;
   z-index: 0;
 }
@@ -463,7 +463,7 @@ a.chip:hover { opacity: 0.82; }
   display: block;
 }
 
-/* Gradient overlay — fades left edge into your hero bg colour
+/* Gradient overlay: fades left edge into your hero bg colour
    and darkens slightly so the calculator card stays readable */
 .hero-bg-overlay {
   position: absolute;
@@ -1219,7 +1219,7 @@ a.chip:hover { opacity: 0.82; }
   transform: scale(1.05);
 }
 
-/* Dark gradient overlay — stronger at bottom so text pops */
+/* Dark gradient overlay, stronger at bottom so text pops */
 .coverage-card-overlay {
   position: absolute;
   inset: 0;
@@ -1556,7 +1556,7 @@ a.chip:hover { opacity: 0.82; }
   .cursor-dot { display: none; }
 }
 
-/* ─── CTA Panel — Ink (subpages) ─── */
+/* ─── CTA Panel: Ink (subpages) ─── */
 .cta-panel--ink {
   background: var(--ink);
   padding: var(--space-20) 0;
