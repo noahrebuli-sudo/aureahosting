@@ -9,7 +9,8 @@ const AUREA_DEFAULTS = {
 
   /* ── Brand ─────────────────────────────── */
   brandName:   "Aurea Hosting",
-  tagline:     "Adelaide's most selective short-term rental management.",
+  tagline:    "We manage less so we can deliver more.",
+  taglineSub: "Short-stay management built around fewer, better properties.",
   phone:       "0404 608 196",
   email:       "noah@aureahosting.com.au",
   ctaTitle:    "Ready to earn more from your property?",
@@ -260,6 +261,9 @@ const AUREA_DEFAULTS = {
   reportCtaHeading: "Considering short-stay?",
   reportCtaSub:     "Download our 2026 Adelaide Short-Stay Yield Report: public data, operator insight, and five principles every owner should know.",
   reportCtaBtn:     "Read the report →",
+  yieldCtaHeading:  "Understand your property's earning potential.",
+  yieldCtaSub:      "Our Adelaide Yield Report breaks down short-stay returns by suburb, occupancy trends, and what separates high-performing listings from the rest.",
+  yieldCtaBtn:      "View the Yield Report →",
 
   /* ── Contact / Apply ─────────────────────── */
   contactHeroTitle:  "Let\u2019s assess your property.",
