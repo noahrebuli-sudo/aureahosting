@@ -1,5 +1,5 @@
 /* =========================================
-   AUREA HOSTING — CMS System v2
+   AUREA HOSTING: CMS System v2
    All site content, calculator data, and
    intel strip data live here as the single
    source of truth.
@@ -234,31 +234,31 @@ const AUREA_DEFAULTS = {
 
   /* ── Founder's Letter (index.html) ──────── */
   founderLetterHeading:   "A letter from the founder",
-  founderLetterP1:        "When I started managing Adelaide short-stays almost six years ago, I thought the job was operational — price the nights, clean the linen, answer the messages. Execution, repeated at volume.",
+  founderLetterP1:        "When I started managing Adelaide short-stays almost six years ago, I thought the job was operational: price the nights, clean the linen, answer the messages. Execution, repeated at volume.",
   founderLetterP2:        "Twenty properties later, I think the job is actually about judgement. Which nights to price firm and which to discount. Which owners to take on. When to push back on a guest and when to absorb a cost quietly. The operational side matters, but it’s not where the real money hides.",
-  founderLetterP3:        "Aurea exists because I wanted to build a management company that hires for that judgement — not for scale. We manage fewer properties than our competitors, on purpose. Every property gets proper pricing attention, proper guest communication, proper accountability.",
+  founderLetterP3:        "Aurea exists because I wanted to build a management company that hires for that judgement, not for scale. We manage fewer properties than our competitors, on purpose. Every property gets proper pricing attention, proper guest communication, proper accountability.",
   founderLetterP4:        "If that resonates with how you think about your own asset, we should talk.",
-  founderLetterSignature: "— Noah Rebuli, Founder",
+  founderLetterSignature: "Noah Rebuli, Founder",
 
   /* ── Insight Cards (index.html) ─────────── */
   insightCardsHeading: "Lessons from twenty Adelaide properties",
   insight1Eyebrow:     "LESSON 01",
   insight1Title:       "The peak isn’t where owners lose money",
-  insight1Body:        "Most owners are well-priced in March. The losses happen in the shoulder weeks around the peak — where complacent pricing assumes the peak will carry the year. It doesn’t.",
+  insight1Body:        "Most owners are well-priced in March. The losses happen in the shoulder weeks around the peak, where complacent pricing assumes the peak will carry the year. It doesn’t.",
   insight2Eyebrow:     "LESSON 02",
   insight2Title:       "Reviews compound",
   insight2Body:        "Airbnb’s algorithm rewards consistency more than peaks. A property averaging 4.85 across 50 reviews outperforms one averaging 4.9 across 12, even with identical nightly rates. Cadence matters.",
   insight3Eyebrow:     "LESSON 03",
   insight3Title:       "The right owner is worth more than the right property",
-  insight3Body:        "A mid-tier property with an engaged owner outperforms a premium property with a disengaged one, every time. Maintenance responsiveness and openness to pricing feedback are the two biggest leverage points — and neither shows up on a listing.",
+  insight3Body:        "A mid-tier property with an engaged owner outperforms a premium property with a disengaged one, every time. Maintenance responsiveness and openness to pricing feedback are the two biggest leverage points. Neither shows up on a listing.",
 
   /* ── Scarcity Band (index.html + contact.html) ── */
   scarcityMain: "Currently accepting 5–6 properties for Q2 2026.",
-  scarcitySub:  "Our cohort model means we only onboard a small number of properties per quarter — each with our full attention.",
+  scarcitySub:  "Our cohort model means we only onboard a small number of properties per quarter, giving each one our full attention.",
 
   /* ── Report CTA Band (index.html) ───────── */
   reportCtaHeading: "Considering short-stay?",
-  reportCtaSub:     "Download our 2026 Adelaide Short-Stay Yield Report — public data, operator insight, and five principles every owner should know.",
+  reportCtaSub:     "Download our 2026 Adelaide Short-Stay Yield Report: public data, operator insight, and five principles every owner should know.",
   reportCtaBtn:     "Read the report →",
 
   /* ── Contact / Apply ─────────────────────── */
@@ -326,7 +326,7 @@ function renderPerfStats(s) {
   if (n2) { n2.setAttribute('data-counter', s.perfNum2 || '32'); n2.setAttribute('data-suffix', s.perfSuffix2 || '%'); n2.setAttribute('data-prefix', s.perfPrefix2 || '+'); n2.setAttribute('data-start', s.perfStart2 || '20'); }
   if (l2) l2.textContent = s.perfLabel2 || AUREA_DEFAULTS.perfLabel2;
   if (c2) c2.textContent = s.perfContext2 || AUREA_DEFAULTS.perfContext2;
-  // Stat 3 (static — no counter)
+  // Stat 3 (static, no counter)
   var l3 = document.querySelector('.perf-stat:nth-child(3) .perf-label');
   var c3 = document.querySelector('.perf-stat:nth-child(3) .perf-context');
   if (l3) l3.textContent = s.perfLabel3 || AUREA_DEFAULTS.perfLabel3;
@@ -403,7 +403,7 @@ function loadAdminForm() {
   var s = getAllAureaSettings();
   document.querySelectorAll('[data-key]').forEach(function(el) {
     var key = el.getAttribute('data-key');
-    /* Skip complex objects — handled separately */
+    /* Skip complex objects, handled separately */
     var val = s[key];
     if (val === undefined || typeof val === 'object') return;
     if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') {
@@ -494,11 +494,11 @@ function saveIntelFields() {
 function exportCmsJs() {
   var s = getAllAureaSettings();
   /* Produce a new cms.js with current values baked into AUREA_DEFAULTS */
-  var lines = ['/* AUREA HOSTING — cms.js (exported ' + new Date().toLocaleDateString('en-AU') + ') */\n'];
+  var lines = ['/* AUREA HOSTING: cms.js (exported ' + new Date().toLocaleDateString('en-AU') + ') */\n'];
   lines.push('/* This file was generated by the admin panel. Deploy it to make changes permanent. */\n\n');
   lines.push('const AUREA_DEFAULTS = ' + JSON.stringify(s, null, 2) + ';\n\n');
   /* Append the runtime code from the original cms.js (everything after AUREA_DEFAULTS) */
-  lines.push('/* ─ runtime helpers — do not edit below this line ─ */\n');
+  lines.push('/* ─ runtime helpers; do not edit below this line ─ */\n');
   lines.push('let aureaStore = {};\n');
   lines.push('function getAureaSetting(k){return aureaStore[k]!==undefined?aureaStore[k]:AUREA_DEFAULTS[k];}\n');
   lines.push('function setAureaSetting(k,v){aureaStore[k]=v;}\n');

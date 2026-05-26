@@ -1,5 +1,5 @@
 /* =========================================
-   AUREA HOSTING — App JavaScript
+   AUREA HOSTING: App JavaScript
    ========================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -287,14 +287,14 @@ document.addEventListener('DOMContentLoaded', () => {
       attributionControl: true
     });
     const markers = [
-      { coords: [138.5153,-34.9816], name: 'Glenelg',        desc: 'Beachside — 2BR avg $3,900/mo · WomAdelaide +$175/night' },
+      { coords: [138.5153,-34.9816], name: 'Glenelg',        desc: 'Beachside, 2BR avg $3,900/mo · WomAdelaide +$175/night' },
       { coords: [138.5157,-34.9502], name: 'West Beach',     desc: 'Airport proximity meets coastal demand' },
-      { coords: [138.4969,-34.9219], name: 'Henley Beach',   desc: 'Premium coastal village — strong weekend demand' },
-      { coords: [138.6007,-34.9285], name: 'Adelaide CBD',   desc: 'Business, Fringe, Gather Round — year-round occupancy' },
-      { coords: [138.5884,-34.9499], name: 'Unley',          desc: 'Leafy city-fringe — boutique appeal' },
-      { coords: [138.6297,-34.9211], name: 'Norwood',        desc: 'Vibrant café precinct — 2BR avg $3,600/mo' },
-      { coords: [138.6456,-34.9387], name: 'Burnside',       desc: 'Upscale residential — Hills proximity premium' },
-      { coords: [138.7140,-35.0003], name: 'Stirling',       desc: 'Hills gateway — 2BR avg $3,800/mo · Tasting Australia' }
+      { coords: [138.4969,-34.9219], name: 'Henley Beach',   desc: 'Premium coastal village with strong weekend demand' },
+      { coords: [138.6007,-34.9285], name: 'Adelaide CBD',   desc: 'Business, Fringe, Gather Round driving year-round occupancy' },
+      { coords: [138.5884,-34.9499], name: 'Unley',          desc: 'Leafy city-fringe with boutique appeal' },
+      { coords: [138.6297,-34.9211], name: 'Norwood',        desc: 'Vibrant café precinct, 2BR avg $3,600/mo' },
+      { coords: [138.6456,-34.9387], name: 'Burnside',       desc: 'Upscale residential with Hills proximity premium' },
+      { coords: [138.7140,-35.0003], name: 'Stirling',       desc: 'Hills gateway, 2BR avg $3,800/mo · Tasting Australia' }
     ];
     map.on('load', () => {
       markers.forEach(m => {
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
     map.addControl(new maplibregl.NavigationControl(), 'top-right');
   }
 
-  /* ─── Contact Form — validation + accessible error region ─── */
+  /* ─── Contact Form: validation + accessible error region ─── */
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     const errorRegion = document.getElementById('form-errors');
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       clearFormError();
-      /* Validation passed — the inline Formspree handler in contact.html takes over */
+      /* Validation passed; the inline Formspree handler in contact.html takes over */
     });
   }
 
