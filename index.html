@@ -126,6 +126,7 @@
       <a href="technology.html">Technology</a>
       <a href="areas.html">Areas</a>
       <a href="faq.html">FAQ</a>
+      <a href="/report">Free Report</a>
       <a href="contact.html" class="nav-apply">Apply</a>
     </nav>
   </div>
@@ -138,13 +139,13 @@
   <div class="hero-calc-bg" aria-hidden="true">
     <div class="hero-bg-image-wrap">
       <img
-        src="images/hero-home.jpg"
-        alt="Luxury home with city balcony sunset view"
+        src="images/hero-interior.png"
+        alt="Well-presented Adelaide short-stay property interior"
         class="hero-bg-img"
         loading="eager"
         fetchpriority="high"
-        width="1200"
-        height="796"
+        width="2752"
+        height="1536"
       >
       <div class="hero-bg-overlay" aria-hidden="true"></div>
     </div>
@@ -221,6 +222,29 @@
 
       
 
+    </div>
+  </div>
+</section>
+
+<!-- ─── Short-stay vs Long-stay ─── -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Is short-stay right for your property?</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3 class="card-title">More flexibility than a long-term lease, used wisely.</h3>
+        <p class="card-text">Short-stay gives you the ability to block dates for personal use when it suits. Most of our owners find they rarely need to. Once they see what their property earns during peak periods, they're happy to let it run.</p>
+      </div>
+      <div class="card">
+        <h3 class="card-title">Better maintained, not worse.</h3>
+        <p class="card-text">Every turnover includes a full inspection. Wear and tear gets caught in days, not months. Your asset is looked after more closely than any long-term tenant ever would.</p>
+      </div>
+      <div class="card">
+        <h3 class="card-title">Adelaide's event calendar is your income calendar.</h3>
+        <p class="card-text">WomAdelaide. Adelaide Fringe. Gather Round. LIV Golf. Long-term rentals earn a flat rate through all of it. Short-stay owners don't.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -317,6 +341,18 @@
   </div>
 </section>
 
+<!-- ─── Testimonials ─── -->
+<section class="section section-alt testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">What Adelaide owners say</h2>
+    </div>
+    <div id="testimonials">
+      <!-- rendered by renderTestimonials() in app.js -->
+    </div>
+  </div>
+</section>
+
 <!-- ─── The Process ─── -->
 <section class="section process-section">
   <div class="rule-line js-rule"></div>
@@ -329,32 +365,48 @@
       <div class="process-row reveal" role="listitem">
         <div class="process-num" aria-hidden="true">01</div>
         <div class="process-content">
-          <h3 class="process-title">Assessment</h3>
+          <h3 class="process-title process-toggle">Assessment <span class="process-chevron" aria-hidden="true">+</span></h3>
           <p class="process-text">We evaluate your property's position, earning potential, and fit with Aurea's portfolio standards. Honest, specific, no obligation.</p>
+          <div class="process-detail">
+            <p>We evaluate your property's location, configuration, and earning potential against current Adelaide market data. You'll receive an honest assessment with no obligation. If it's a strong fit, we move immediately.</p>
+            <a href="contact.html">Start your assessment</a>
+          </div>
         </div>
         <div class="process-timeline">Day 1</div>
       </div>
       <div class="process-row reveal" role="listitem">
         <div class="process-num" aria-hidden="true">02</div>
         <div class="process-content">
-          <h3 class="process-title">Setup</h3>
+          <h3 class="process-title process-toggle">Setup <span class="process-chevron" aria-hidden="true">+</span></h3>
           <p class="process-text">Professional photography, SEO-optimised listing creation, and full onboarding into Guesty's enterprise property management platform.</p>
+          <div class="process-detail">
+            <p>Professional photography is booked and completed. Your listing is written with SEO-optimised copy across all 50+ platforms. Linen is arranged, the property is cleaned to hotel standard, and everything is configured in Guesty before go-live.</p>
+            <a href="why-us.html">See how we compare</a>
+          </div>
         </div>
         <div class="process-timeline">Days 2–5</div>
       </div>
       <div class="process-row reveal" role="listitem">
         <div class="process-num" aria-hidden="true">03</div>
         <div class="process-content">
-          <h3 class="process-title">Go Live</h3>
+          <h3 class="process-title process-toggle">Go Live <span class="process-chevron" aria-hidden="true">+</span></h3>
           <p class="process-text">Listed across 50+ booking channels simultaneously. Pricing calibrated to Adelaide's current market conditions and upcoming event demand.</p>
+          <div class="process-detail">
+            <p>Your listing goes live simultaneously across Airbnb, Booking.com, Vrbo, Expedia, and 46 more channels. Nightly pricing is calibrated to Adelaide's current market conditions and upcoming event demand from day one.</p>
+            <a href="/report">See Adelaide yield data</a>
+          </div>
         </div>
         <div class="process-timeline">Day 7</div>
       </div>
       <div class="process-row reveal" role="listitem">
         <div class="process-num" aria-hidden="true">04</div>
         <div class="process-content">
-          <h3 class="process-title">Ongoing</h3>
+          <h3 class="process-title process-toggle">Ongoing <span class="process-chevron" aria-hidden="true">+</span></h3>
           <p class="process-text">Dynamic pricing, 24/7 guest communications, hotel-grade property turnovers, and monthly owner performance statements with full transparency.</p>
+          <div class="process-detail">
+            <p>Dynamic pricing adjusted daily. Guest communications handled around the clock. Hotel-grade turnovers after every stay. Monthly performance statements with full transparency on every booking, rate, and cost.</p>
+            <a href="contact.html">Apply now</a>
+          </div>
         </div>
         <div class="process-timeline">Continuous</div>
       </div>
@@ -466,10 +518,12 @@
     <div class="founder-letter reveal">
       <h2 class="founder-letter-heading">A letter from the founder</h2>
       <div class="founder-letter-body">
-        <p>When I started managing Adelaide short-stays almost six years ago, I thought the job was operational: price the nights, clean the linen, answer the messages. Execution, repeated at volume.</p>
-        <p>Twenty properties later, I think the job is actually about judgement. Which nights to price firm and which to discount. Which owners to take on. When to push back on a guest and when to absorb a cost quietly. The operational side matters, but it's not where the real money hides.</p>
-        <p>Aurea exists because I wanted to build a management company that hires for that judgement, not for scale. We manage fewer properties than our competitors, on purpose. Every property gets proper pricing attention, proper guest communication, proper accountability.</p>
-        <p>If that resonates with how you think about your own asset, we should talk.</p>
+        <p>When I started managing Adelaide short-stays almost six years ago, I thought the job was about listing properties. It isn't. It's about decisions and how fast you make them.</p>
+        <p>The owners I've seen lose money aren't victims of bad luck. They're victims of agents who set a nightly rate in January and check back in June. Pricing needs to move daily. Adelaide's event calendar, corporate travel patterns, seasonal demand: every one of these is an opportunity, and every one gets missed by an operator running on autopilot.</p>
+        <p>What I've built at Aurea is a system that doesn't sleep. Guesty's enterprise platform manages distribution across 50+ channels simultaneously. A contracted cleaning company with documented procedures and rented linen handles every turnover to hotel standard. Photography that makes your listing stop the scroll, not blend into it. And when something goes wrong, because it will, you hear from me the same day, not when I get around to it.</p>
+        <p>The part most operators miss is the guest experience itself. We use technology to offer guests easy check-in, personalised guidebooks, and curated upsell experiences. Think private chef bookings, local wine tastings, premium add-ons that guests actually pay for. Those upsells go to revenue. That revenue is shared with you.</p>
+        <p>Aurea exists because I wanted to build the operation I would want managing my own asset. Selective about what we take on. Obsessive about what we deliver.</p>
+        <p>If that's how you think about your property, we should talk.</p>
       </div>
       <span class="founder-signature">Noah Rebuli, Founder</span>
     </div>
@@ -510,15 +564,6 @@
       <a href="contact.html" class="btn btn-gold btn-lg">Apply for asset management</a>
       <p class="apply-phone">Or call <a href="tel:0404608196">0404 608 196</a></p>
     </div>
-  </div>
-</section>
-
-<!-- ─── Report CTA Band ─── -->
-<section class="report-cta-band">
-  <div class="report-cta-inner reveal">
-    <h2 class="report-cta-heading">Considering short-stay?</h2>
-    <p class="report-cta-sub">Download our 2026 Adelaide Short-Stay Yield Report: public data, operator insight, and five principles every owner should know.</p>
-    <a href="report.html" class="btn btn-outline">Read the report →</a>
   </div>
 </section>
 
