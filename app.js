@@ -4,15 +4,31 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ─── Calculator Data (sourced from cms.js) ─── */
-  /* REVENUE_DATA is defined in cms.js as AUREA_DEFAULTS.calculatorData
-     and exposed as window.AUREA_REVENUE_DATA by applyAureaSettings().
-     We fall back to AUREA_DEFAULTS.calculatorData if the global isn’t ready. */
+  /* ─── Calculator Data ─── */
   function getRevenueData() {
-    return window.AUREA_REVENUE_DATA ||
-           (window.AUREA_DEFAULTS && window.AUREA_DEFAULTS.calculatorData) ||
-           {};
+    return (typeof AUREA_DATA !== 'undefined' && AUREA_DATA.calculatorData) || {};
   }
+
+  /* ─── Intel Strip ─── */
+  (function renderIntelStrip() {
+    const ticker = document.getElementById('intelTicker');
+    if (!ticker) return;
+    const events = AUREA_DATA.intelEvents;
+    const sep = '<span class="intel-sep">◆</span>';
+    let html = '';
+    for (let pass = 0; pass < 2; pass++) {
+      events.forEach(function(e, i) {
+        html += '<div class="intel-card">' +
+          '<span class="intel-event">' + e.event + '</span>' +
+          '<span class="intel-period">' + e.period + '</span>' +
+          '<span class="intel-uplift">' + e.uplift + '<em>/night</em></span>' +
+          '<span class="intel-ctx">' + e.ctx + '</span>' +
+          '</div>';
+        if (i < events.length - 1 || pass === 0) html += sep;
+      });
+    }
+    ticker.innerHTML = html;
+  })();
 
   /* ─── Calculator Logic ─── */
   const calcSuburb = document.getElementById('calcSuburb');
