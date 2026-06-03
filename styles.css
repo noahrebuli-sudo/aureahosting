@@ -564,6 +564,16 @@ a.chip:hover { opacity: 0.82; }
   align-items: center;
   gap: var(--space-6);
 }
+.hero-phone {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: var(--space-2);
+}
+.hero-phone a {
+  color: inherit;
+  text-decoration: none;
+}
+.hero-phone a:hover { text-decoration: underline; }
 
 /* ─── Calculator Card ─── */
 .hero-calc-wrap {
