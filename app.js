@@ -292,6 +292,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ─── Comparison Table Row Expand/Collapse ─── */
+  document.querySelectorAll('.compare-row').forEach(function(row) {
+    row.addEventListener('click', function() {
+      var isOpen = row.classList.contains('open');
+      document.querySelectorAll('.compare-row').forEach(function(r) {
+        r.classList.remove('open');
+        r.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        row.classList.add('open');
+        row.setAttribute('aria-expanded', 'true');
+      }
+    });
+    row.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); row.click(); }
+    });
+  });
+
   /* ─── Process Step Expand/Collapse ─── */
   document.querySelectorAll('.process-toggle').forEach(function(heading) {
     heading.style.cursor = 'pointer';
