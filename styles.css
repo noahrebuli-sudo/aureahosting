@@ -517,6 +517,9 @@ a.chip:hover { opacity: 0.82; }
   gap: var(--space-16);
   align-items: center;
 }
+.hero-statement {
+  min-width: 0;
+}
 
 /* ─── Hero Statement ─── */
 .hero-kicker {
@@ -1535,6 +1538,7 @@ a.chip:hover { opacity: 0.82; }
 /* ─── Responsive ─── */
 @media (max-width: 1100px) {
   .hero-split-inner { grid-template-columns: 1fr 440px; gap: var(--space-12); }
+  .hero-headline { font-size: clamp(36px, 4vw, 64px); }
 }
 @media (max-width: 900px) {
   .hero-split { padding-top: calc(var(--header-height) + var(--space-12)); padding-bottom: var(--space-16); }
