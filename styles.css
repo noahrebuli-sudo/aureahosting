@@ -519,9 +519,6 @@ a.chip:hover { opacity: 0.82; }
 }
 .hero-statement {
   min-width: 0;
-  width: 50%;
-  max-width: 50%;
-  overflow: hidden;
 }
 
 /* ─── Hero Statement ─── */
