@@ -254,7 +254,7 @@ const AUREA_DEFAULTS = {
   insight3Body:        "A mid-tier property with an engaged owner outperforms a premium property with a disengaged one, every time. Maintenance responsiveness and openness to pricing feedback are the two biggest leverage points. Neither shows up on a listing.",
 
   /* ── Scarcity Band (index.html + contact.html) ── */
-  scarcityMain: "Currently accepting 5–6 properties for Q2 2026.",
+  scarcityMain: "Currently accepting 5–6 properties for Q3 2026.",
   scarcitySub:  "Our cohort model means we only onboard a small number of properties per quarter, giving each one our full attention.",
 
   /* ── Report CTA Band (index.html) ───────── */
