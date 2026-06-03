@@ -993,7 +993,7 @@ a.chip:hover { opacity: 0.82; }
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.4);
+  color: #ffffff;
   margin-bottom: var(--space-3);
 }
 
@@ -1026,7 +1026,7 @@ a.chip:hover { opacity: 0.82; }
 
 .perf-context {
   font-size: var(--text-sm);
-  color: rgba(255,255,255,0.35);
+  color: #ffffff;
   max-width: 24ch;
   line-height: 1.5;
 }
