@@ -2057,3 +2057,33 @@ a.chip:hover { opacity: 0.82; }
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ─── Comparison table expand/collapse ─── */
+.compare-row { cursor: pointer; }
+.compare-row:hover { background: var(--sand); }
+.compare-feature { position: relative; user-select: none; }
+.compare-chevron {
+  display: inline-block;
+  margin-left: var(--space-2);
+  font-size: 14px;
+  color: var(--muted);
+  transition: transform 300ms var(--ease-out);
+  vertical-align: middle;
+}
+.compare-row.open .compare-chevron { transform: rotate(90deg); }
+.compare-row.open { background: var(--sand); }
+.compare-detail-row td { padding: 0; border-bottom: 1px solid var(--border); }
+.compare-detail-inner {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 400ms var(--ease-out), padding 400ms var(--ease-out);
+  padding: 0 var(--space-6);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  background: var(--sand);
+}
+.compare-row.open + .compare-detail-row .compare-detail-inner {
+  max-height: 200px;
+  padding: var(--space-5) var(--space-6);
+}
