@@ -2091,3 +2091,44 @@ a.chip:hover { opacity: 0.82; }
   max-height: 200px;
   padding: var(--space-5) var(--space-6);
 }
+
+/* ─── Hero scroll indicator ─── */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--gold);
+  opacity: 0.65;
+  animation: hero-bob 2.4s ease-in-out infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes hero-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(7px); }
+}
+
+/* ─── Process step connectors ─── */
+.process-connector {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-1) 0;
+  color: var(--gold);
+  opacity: 0.4;
+}
+
+@media (max-width: 900px) {
+  .process-connector svg { transform: rotate(90deg); }
+}
+
+/* ─── Section down cues ─── */
+.section-down-cue {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-3) 0;
+  color: var(--gold);
+  opacity: 0.35;
+  pointer-events: none;
+}
