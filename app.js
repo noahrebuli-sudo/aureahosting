@@ -292,6 +292,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ─── Process Step Expand/Collapse ─── */
+  document.querySelectorAll('.process-toggle').forEach(function(heading) {
+    heading.style.cursor = 'pointer';
+    heading.addEventListener('click', function() {
+      const row     = heading.closest('.process-row');
+      const detail  = row.querySelector('.process-detail');
+      const chevron = heading.querySelector('.process-chevron');
+      if (!detail) return;
+      const isOpen = row.classList.contains('open');
+      row.classList.toggle('open', !isOpen);
+      detail.style.maxHeight = isOpen ? '0' : detail.scrollHeight + 'px';
+      if (chevron) chevron.textContent = isOpen ? '+' : '−';
+    });
+    heading.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); heading.click(); }
+    });
+  });
+
   /* ─── MapLibre Map (Areas Page) ─── */
   const mapEl = document.getElementById('aurea-map');
   if (mapEl && window.maplibregl) {
@@ -375,6 +393,53 @@ document.addEventListener('DOMContentLoaded', () => {
       /* Validation passed; the inline Formspree handler in contact.html takes over */
     });
   }
+
+  /* ─── Testimonials ─── */
+  (function renderTestimonials() {
+    const container = document.getElementById('testimonials');
+    if (!container || typeof AUREA_DATA === 'undefined') return;
+    const items = AUREA_DATA.testimonials;
+    if (!items || !items.length) return;
+
+    let active = 0;
+    const inner = document.createElement('div');
+    inner.className = 'testimonials-inner';
+
+    items.forEach(function(t, i) {
+      const card = document.createElement('div');
+      card.className = 'card testimonial-card' + (i === 0 ? ' active' : '');
+      card.innerHTML =
+        '<blockquote class="testimonial-quote">' + t.quote + '</blockquote>' +
+        '<div class="testimonial-meta">' + t.meta + '</div>' +
+        '<div class="testimonial-stat">' + t.stat + '</div>';
+      inner.appendChild(card);
+    });
+
+    const nav = document.createElement('div');
+    nav.className = 'testimonials-nav';
+    nav.innerHTML =
+      '<button class="testimonials-prev" aria-label="Previous testimonial">&#8592;</button>' +
+      '<button class="testimonials-next" aria-label="Next testimonial">&#8594;</button>';
+
+    container.appendChild(inner);
+    container.appendChild(nav);
+
+    function showCard(idx) {
+      inner.querySelectorAll('.testimonial-card').forEach(function(c) {
+        c.classList.remove('active');
+      });
+      inner.querySelectorAll('.testimonial-card')[idx].classList.add('active');
+    }
+
+    nav.querySelector('.testimonials-prev').addEventListener('click', function() {
+      active = (active - 1 + items.length) % items.length;
+      showCard(active);
+    });
+    nav.querySelector('.testimonials-next').addEventListener('click', function() {
+      active = (active + 1) % items.length;
+      showCard(active);
+    });
+  })();
 
   /* ─── Cursor Dot ─── */
   const cursorDot = document.getElementById('cursorDot');
