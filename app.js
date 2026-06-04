@@ -349,6 +349,35 @@ document.addEventListener('DOMContentLoaded', () => {
       { coords: [138.7140,-35.0003], name: 'Stirling',       desc: 'Hills gateway, 2BR avg $3,800/mo · Tasting Australia' }
     ];
     map.on('load', () => {
+      map.addSource('coverage-zone', {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          geometry: {
+            type: 'Polygon',
+            coordinates: [[
+              [138.48, -34.88],
+              [138.47, -34.91],
+              [138.46, -34.95],
+              [138.47, -34.99],
+              [138.50, -35.03],
+              [138.52, -35.06],
+              [138.58, -35.07],
+              [138.65, -35.06],
+              [138.72, -35.02],
+              [138.75, -34.95],
+              [138.76, -34.90],
+              [138.73, -34.87],
+              [138.66, -34.86],
+              [138.58, -34.86],
+              [138.52, -34.87],
+              [138.48, -34.88]
+            ]]
+          }
+        }
+      });
+      map.addLayer({ id: 'coverage-fill', type: 'fill', source: 'coverage-zone', paint: { 'fill-color': '#1b7f74', 'fill-opacity': 0.15 } });
+      map.addLayer({ id: 'coverage-stroke', type: 'line', source: 'coverage-zone', paint: { 'line-color': '#1b7f74', 'line-opacity': 0.40, 'line-width': 2 } });
       markers.forEach(m => {
         const markerEl       = document.createElement('div');
         markerEl.style.cssText = 'width:14px;height:14px;background:#c8a35d;border:2.5px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.25);cursor:pointer;';
