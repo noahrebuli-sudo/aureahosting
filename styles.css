@@ -238,6 +238,7 @@ h1, h2, h3, h4, h5, h6 {
   .nav-links a { font-size: var(--text-lg); padding: var(--space-4); }
   .nav-apply { text-align: center !important; }
   .nav-links a.active::after { display: none; }
+  .page-home .site-header .nav-links.open a { color: var(--ink); }
 }
 
 /* ─── Sections ─── */
