@@ -27,8 +27,9 @@
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 <meta name="description" content="Airbnb and short-term rental management in Adelaide for owners who want stronger returns, dynamic pricing and fully managed guest operations.">
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-<link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="preload" as="image" href="images/editorial/hero-1.jpg" imagesrcset="images/editorial/hero-1-1200.jpg 1200w, images/editorial/hero-1.jpg 2400w" imagesizes="100vw" fetchpriority="high">
 <script src="lucide.js" defer></script>
 <meta property="og:type"        content="website">
 <meta property="og:site_name"   content="Aurea Hosting">
@@ -135,6 +136,38 @@ src="https://www.facebook.com/tr?id=1027065616568144&ev=PageView&noscript=1"
 <body class="page-home">
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Intro veil: plays once per session, skipped under reduced motion -->
+<div class="ed-veil" id="edVeil" aria-hidden="true">
+  <div class="ed-veil-inner">
+    <span class="ed-veil-wordmark">AUREA <em>HOSTING</em></span>
+    <span class="ed-veil-line"></span>
+  </div>
+</div>
+<script>
+(function () {
+  var veil = document.getElementById('edVeil');
+  if (!veil) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen = false;
+  try { seen = sessionStorage.getItem('edVeilSeen') === '1'; } catch (err) {}
+  if (reduce || seen) {
+    veil.parentNode.removeChild(veil);
+    document.body.classList.add('ed-veil-done');
+    return;
+  }
+  try { sessionStorage.setItem('edVeilSeen', '1'); } catch (err) {}
+  document.body.classList.add('ed-veil-lock');
+  veil.classList.add('ed-veil-play');
+  veil.addEventListener('animationend', function (e) {
+    if (e.animationName !== 'edVeilLift') return;
+    veil.parentNode.removeChild(veil);
+    document.body.classList.remove('ed-veil-lock');
+    document.body.classList.add('ed-veil-done');
+  });
+})();
+</script>
+
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 
 <!-- ─── Header ─── -->
@@ -159,102 +192,125 @@ src="https://www.facebook.com/tr?id=1027065616568144&ev=PageView&noscript=1"
 
 <main id="main-content">
 
-<!-- ─── Hero: Statement + Calculator ─── -->
-<section class="hero-split" id="top">
-  <div class="hero-calc-bg" aria-hidden="true">
-    <div class="hero-bg-image-wrap">
+<!-- ─── Hero: Editorial slideshow ─── -->
+<section class="ed-hero" id="top">
+  <div class="ed-hero-slides">
+    <figure class="ed-slide is-active" data-caption="Southern beaches, golden hour">
       <img
-        src="images/hero-interior.jpg"
-        alt="Well-presented Adelaide short-stay property interior"
-        class="hero-bg-img"
-        loading="eager"
-        fetchpriority="high"
-        width="1920"
-        height="1072"
-      >
-      <div class="hero-bg-overlay" aria-hidden="true"></div>
+        src="images/editorial/hero-1.jpg"
+        srcset="images/editorial/hero-1-1200.jpg 1200w, images/editorial/hero-1.jpg 2400w"
+        sizes="100vw"
+        alt="Timber beach stairs above the surf on Adelaide's southern coast at dusk"
+        width="2400" height="1600"
+        fetchpriority="high" decoding="async">
+    </figure>
+    <figure class="ed-slide ed-slide-alt" data-caption="The beachfront esplanade">
+      <img
+        src="images/editorial/hero-2.jpg"
+        srcset="images/editorial/hero-2-1200.jpg 1200w, images/editorial/hero-2.jpg 2400w"
+        sizes="100vw"
+        alt="Palm-lined beachfront esplanade in Adelaide's west"
+        width="2400" height="1600"
+        loading="lazy" decoding="async">
+    </figure>
+    <figure class="ed-slide" data-caption="Adelaide from the foothills">
+      <img
+        src="images/editorial/hero-3.jpg"
+        srcset="images/editorial/hero-3-1200.jpg 1200w, images/editorial/hero-3.jpg 2400w"
+        sizes="100vw"
+        alt="Adelaide city skyline seen from the eastern foothills"
+        width="2400" height="1600"
+        loading="lazy" decoding="async">
+    </figure>
+    <figure class="ed-slide ed-slide-alt" data-caption="Riverbank, after dark">
+      <img
+        src="images/editorial/hero-4.jpg"
+        srcset="images/editorial/hero-4-1200.jpg 1200w, images/editorial/hero-4.jpg 2400w"
+        sizes="100vw"
+        alt="Adelaide Riverbank precinct reflected in the Torrens at night"
+        width="2400" height="1600"
+        loading="lazy" decoding="async">
+    </figure>
+  </div>
+  <div class="ed-hero-scrim" aria-hidden="true"></div>
+  <div class="ed-hero-grain" aria-hidden="true"></div>
+  <div class="ed-hero-frame" aria-hidden="true"></div>
+  <div class="ed-hero-content">
+    <div class="ed-hero-kicker">
+      <span class="ed-kicker-dot" aria-hidden="true"></span>
+      <span>Adelaide Short-Term Rental Management</span>
+    </div>
+    <h1 class="ed-hero-headline">
+      <span class="ed-hl-line"><span class="ed-hl-inner">We manage fewer</span></span>
+      <span class="ed-hl-line"><span class="ed-hl-inner">properties.</span></span>
+      <span class="ed-hl-line"><span class="ed-hl-inner"><em>On purpose.</em></span></span>
+    </h1>
+    <p class="ed-hero-sub">Airbnb and short-term rental management in Adelaide for owners who want stronger returns without managing guests, pricing or turnovers themselves.</p>
+    <div class="ed-hero-ctas">
+      <a href="contact" class="ed-pill ed-magnetic">Apply now</a>
+      <p class="ed-hero-phone"><a href="tel:0404608196" onclick="gtag('event', 'phone_click', {'event_category': 'lead', 'event_label': 'homepage'});">or call 0404 608 196</a></p>
     </div>
   </div>
-  <div class="hero-split-inner">
-
-    <!-- Left: Statement -->
-    <div class="hero-statement reveal">
-      <div class="hero-kicker">
-        <span class="kicker-pulse" aria-hidden="true"></span>
-        <span>Adelaide Short-Term Rental Management</span>
-      </div>
-      <h1 class="hero-headline">We manage fewer<br>properties.<br><em>On purpose.</em></h1>
-      <p class="hero-sub">Airbnb and short-term rental management in Adelaide for owners who want stronger returns without managing guests, pricing or turnovers themselves.</p>
-      <div class="hero-ctas">
-        <a href="contact" class="btn btn-gold btn-lg">Apply now</a>
-        <a href="#calc" class="btn-apply js-scroll-calc">Get your property's number <span aria-hidden="true">→</span></a>
-      </div>
-      <p class="hero-phone"><a href="tel:0404608196" onclick="gtag('event', 'phone_click', {'event_category': 'lead', 'event_label': 'homepage'});">or call 0404 608 196</a></p>
-      <a href="#calc" class="hero-calc-nudge js-scroll-calc" aria-label="Jump to revenue calculator">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Estimate your revenue below
-      </a>
-    </div>
-
-    <!-- Right: Calculator + Stats Card -->
-    <div class="hero-calc-wrap reveal reveal-delay-2" id="calc">
-      <aside class="scarcity-band" aria-label="Current availability">
-        <p class="scarcity-band-main">Currently accepting 5 properties for Q3 2026.</p>
-        <p class="scarcity-band-sub">Our cohort model means we only onboard a small number of properties per quarter, giving each one our full attention.</p>
-      </aside>
-      <div class="calc-card">
-        <div class="calc-card-header">
-          <span class="calc-kicker">EST. MONTHLY REVENUE</span>
-          <span class="calc-disclaimer">Based on Aurea portfolio data</span>
-        </div>
-
-        <div class="calc-output-area" id="calcOutput" aria-live="polite">
-          <div class="calc-empty-state">
-            <span class="calc-empty-icon" aria-hidden="true">↓</span>
-            Select your suburb and bedrooms below
-          </div>
-        </div>
-
-        <div class="calc-inputs">
-          <div class="calc-field">
-            <label class="calc-label" for="calcSuburb">Suburb</label>
-            <div class="calc-select-wrap">
-              <select class="calc-select" id="calcSuburb">
-                <option value="">Select suburb cluster…</option>
-                <option value="glenelg">Glenelg · West Beach · Henley</option>
-                <option value="cbd">Adelaide CBD</option>
-                <option value="norwood">Norwood · Unley · Burnside</option>
-                <option value="stirling">Stirling · Hahndorf · Hills</option>
-                <option value="brighton">Brighton · Marino · Hallett Cove</option>
-                <option value="prospect">Prospect · Nailsworth · Broadview</option>
-              </select>
-              <span class="calc-select-arrow" aria-hidden="true">↓</span>
-            </div>
-          </div>
-          <div class="calc-field">
-            <label class="calc-label" id="bedsLabel">Bedrooms</label>
-            <div class="calc-bed-toggle" role="group" aria-labelledby="bedsLabel">
-              <button class="bed-btn" data-beds="1" type="button">1</button>
-              <button class="bed-btn active" data-beds="2" type="button">2</button>
-              <button class="bed-btn" data-beds="3" type="button">3</button>
-              <button class="bed-btn" data-beds="4" type="button">4+</button>
-            </div>
-          </div>
-        </div>
-
-        <a href="contact" class="calc-bottom-cta">Get your full property analysis <span aria-hidden="true">→</span></a>
-      </div>
-
-      
-
-    </div>
-  </div>
-  <div class="hero-scroll-indicator" aria-hidden="true">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+  <div class="ed-hero-caption" aria-hidden="true"><span id="edHeroCaption">Southern beaches, golden hour</span></div>
+  <div class="ed-hero-progress" id="edHeroProgress">
+    <button type="button" class="ed-prog is-active" data-slide="0" aria-label="Show slide 1"><span aria-hidden="true"></span></button>
+    <button type="button" class="ed-prog" data-slide="1" aria-label="Show slide 2"><span aria-hidden="true"></span></button>
+    <button type="button" class="ed-prog" data-slide="2" aria-label="Show slide 3"><span aria-hidden="true"></span></button>
+    <button type="button" class="ed-prog" data-slide="3" aria-label="Show slide 4"><span aria-hidden="true"></span></button>
   </div>
 </section>
+
+<!-- ─── Suburb marquee ─── -->
+<div class="ed-marquee" role="region" aria-label="Adelaide coverage suburbs">
+  <div class="ed-marquee-track">
+    <span class="ed-marquee-seq">
+      <span>Glenelg</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>West Beach</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Henley Beach</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Semaphore</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Adelaide CBD</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>North Adelaide</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Norwood</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Unley</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Burnside</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Kensington</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Prospect</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Nailsworth</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Broadview</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Brighton</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Marino</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Hallett Cove</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Stirling</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Crafers</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Hahndorf</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Aldgate</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+      <span>Mt Barker</span><span class="ed-marquee-sep" aria-hidden="true">&#9670;</span>
+    </span>
+    <span class="ed-marquee-seq" aria-hidden="true">
+      <span>Glenelg</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>West Beach</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Henley Beach</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Semaphore</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Adelaide CBD</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>North Adelaide</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Norwood</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Unley</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Burnside</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Kensington</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Prospect</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Nailsworth</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Broadview</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Brighton</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Marino</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Hallett Cove</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Stirling</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Crafers</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Hahndorf</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Aldgate</span><span class="ed-marquee-sep">&#9670;</span>
+      <span>Mt Barker</span><span class="ed-marquee-sep">&#9670;</span>
+    </span>
+  </div>
+</div>
 
 <!-- ─── Short-stay vs Long-stay ─── -->
 <section class="section section-alt">
@@ -321,11 +377,11 @@ src="https://www.facebook.com/tr?id=1027065616568144&ev=PageView&noscript=1"
 </div>
 
 <!-- ─── Position Statement ─── -->
-<section class="section position-section">
+<section class="section position-section ed-position">
   <div class="rule-line js-rule"></div>
   <div class="container">
     <div class="position-inner">
-      <p class="position-quote reveal">Most agencies optimise for volume.<br>We optimise for yield.</p>
+      <p class="ed-statement reveal"><span class="ed-statement-muted">Most agencies optimise for volume.</span><br>We optimise for yield.</p>
       <div class="position-compare reveal reveal-delay-1">
         <div class="compare-col compare-against">
           <div class="compare-col-label">Volume operator</div>
@@ -352,51 +408,59 @@ src="https://www.facebook.com/tr?id=1027065616568144&ev=PageView&noscript=1"
   <div class="rule-line js-rule"></div>
 </section>
 
-<!-- ─── Performance Record ─── -->
-<section class="perf-section">
+<!-- ─── Appraisal band ─── -->
+<section class="ed-appraisal">
   <div class="container">
-    <div class="perf-kicker reveal">Performance Record: Adelaide Portfolio</div>
-    <div class="perf-grid">
-      <div class="perf-stat reveal">
-        <div class="perf-label">Average occupancy</div>
-        <div class="perf-number" data-counter="66" data-suffix="%" data-start="42">42%</div>
-        <div class="perf-context">Across all managed Adelaide properties</div>
-      </div>
-      <div class="perf-stat reveal reveal-delay-1">
-        <div class="perf-label">Revenue lift vs self-managed</div>
-        <div class="perf-number" data-counter="32" data-suffix="%" data-prefix="+" data-start="20">+20%</div>
-        <div class="perf-context">Average across owners' first 12 months</div>
-      </div>
-      <div class="perf-stat reveal reveal-delay-2">
-        <div class="perf-label">Guest response time</div>
-        <div class="perf-number perf-number--static">&lt;&thinsp;4<span class="perf-unit">min</span></div>
-        <div class="perf-context">Every message, every platform, every hour</div>
-      </div>
+    <div class="ed-appraisal-inner reveal">
+      <span class="ed-kicker">Your number</span>
+      <h2 class="ed-appraisal-heading">Every home is different. Your number comes from a written appraisal, not a widget.</h2>
+      <p class="ed-appraisal-sub">Tell us about your property and we will prepare a specific revenue appraisal for it, based on real comparable performance in your suburb.</p>
+      <a href="contact" class="ed-pill ed-magnetic">Request your written appraisal</a>
     </div>
   </div>
 </section>
-<div class="section-down-cue" aria-hidden="true">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</div>
 
-<!-- ─── Testimonials ─── -->
-<section class="section section-alt testimonials-section">
+<!-- ─── Performance Record ─── -->
+<!-- ─── Market field, performance and owners ─── -->
+<section class="ed-market" id="edMarket">
   <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">What Adelaide owners say</h2>
+    <div class="ed-market-copy reveal">
+      <p class="ed-market-line1" id="edMarketLine1">Adelaide has thousands of short stay listings.</p>
+      <p class="ed-market-line2" id="edMarketLine2">We manage <span class="ed-gold">fifteen</span>. On purpose.</p>
     </div>
-    <div id="testimonials">
-      <!-- rendered by renderTestimonials() in app.js -->
+    <div class="ed-dotfield" id="edDotfield" aria-hidden="true"></div>
+    <p class="ed-market-caption reveal" id="edMarketCaption">A deliberately small portfolio is what keeps guest replies under four minutes and pricing reviewed weekly. When a place opens, we would genuinely like to hear about your property.</p>
+    <p class="ed-market-footnote reveal" id="edMarketFootnote">Dot field illustrative of the Adelaide market.</p>
+
+    <div class="ed-market-stats">
+      <div class="ed-kicker ed-market-stats-kicker reveal">Performance Record: Adelaide Portfolio</div>
+      <div class="perf-grid">
+        <div class="perf-stat reveal">
+          <div class="perf-label">Average occupancy</div>
+          <div class="perf-number" data-counter="66" data-suffix="%" data-start="42">42%</div>
+          <div class="perf-context">Across all managed Adelaide properties</div>
+        </div>
+        <div class="perf-stat reveal reveal-delay-1">
+          <div class="perf-label">Revenue lift vs self-managed</div>
+          <div class="perf-number" data-counter="32" data-suffix="%" data-prefix="+" data-start="20">+20%</div>
+          <div class="perf-context">Average across owners' first 12 months</div>
+        </div>
+        <div class="perf-stat reveal reveal-delay-2">
+          <div class="perf-label">Guest response time</div>
+          <div class="perf-number perf-number--static">&lt;&thinsp;4<span class="perf-unit">min</span></div>
+          <div class="perf-context">Every message, every platform, every hour</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ed-market-quotes">
+      <h2 class="ed-market-quotes-title reveal">What Adelaide owners say</h2>
+      <div id="testimonials">
+        <!-- rendered by renderTestimonials() in app.js -->
+      </div>
     </div>
   </div>
 </section>
-<div class="section-down-cue" aria-hidden="true">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</div>
 
 <!-- ─── The Process ─── -->
 <section class="section process-section">
@@ -475,102 +539,143 @@ src="https://www.facebook.com/tr?id=1027065616568144&ev=PageView&noscript=1"
   <div class="rule-line js-rule"></div>
 </section>
 
-<!-- ─── Adelaide Coverage ─── -->
-<section class="section coverage-section">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-kicker">Coverage</span>
-      <h2 class="section-title">We know every suburb<br>by its yield curve.</h2>
-    </div>
-    <div class="coverage-grid">
+<!-- ─── Adelaide collage ─── -->
+<section class="ed-collage" id="edCollage">
+  <div class="ed-collage-word" aria-hidden="true"><span id="edCollageWord">ADELAIDE</span></div>
+  <div class="ed-collage-grid">
+    <figure class="ed-collage-item ed-collage-a" data-speed="0.06">
+      <img
+        src="images/editorial/collage-1.jpg"
+        srcset="images/editorial/collage-1-1200.jpg 1200w, images/editorial/collage-1.jpg 1800w"
+        sizes="(max-width: 840px) 92vw, 42vw"
+        alt="Southern Adelaide coastline with surf breaking along the beach"
+        width="1800" height="1200" loading="lazy" decoding="async">
+    </figure>
+    <figure class="ed-collage-item ed-collage-b" data-speed="-0.05">
+      <img
+        src="images/editorial/collage-2.jpg"
+        srcset="images/editorial/collage-2-1200.jpg 1200w, images/editorial/collage-2.jpg 1400w"
+        sizes="(max-width: 840px) 72vw, 24vw"
+        alt="Timber boardwalk winding down the cliffs to an Adelaide beach"
+        width="1400" height="2066" loading="lazy" decoding="async">
+    </figure>
+    <figure class="ed-collage-item ed-collage-c" data-speed="0.04">
+      <img
+        src="images/editorial/hero-2.jpg"
+        srcset="images/editorial/hero-2-1200.jpg 1200w, images/editorial/hero-2.jpg 2400w"
+        sizes="(max-width: 840px) 92vw, 36vw"
+        alt="Palm trees and a quiet roundabout on the Adelaide beachfront"
+        width="2400" height="1600" loading="lazy" decoding="async">
+    </figure>
+  </div>
+  <div class="ed-collage-caption reveal">
+    <h2 class="ed-collage-heading">We know every suburb<br>by its yield curve.</h2>
+    <p class="ed-collage-sub">From beachside surge suburbs to Hills retreat properties, our Airbnb and short-term rental management across Adelaide is mapped by demand, event uplift, and seasonal yield.</p>
+  </div>
+</section>
 
-      <!-- Card 1: Beachside -->
-      <div class="coverage-card reveal">
-        <div class="coverage-card-bg">
+<!-- ─── Adelaide Coverage: horizontal chapters ─── -->
+<section class="ed-chapters" id="edChapters">
+  <div class="ed-chapters-pin">
+    <div class="ed-chapters-head reveal">
+      <span class="ed-kicker">Coverage</span>
+      <div class="ed-chapters-meta">
+        <span class="ed-chapters-counter" id="edChaptersCounter" aria-live="polite">01/03</span>
+        <div class="ed-chapters-hairline" aria-hidden="true"><span id="edChaptersBar"></span></div>
+      </div>
+    </div>
+    <div class="ed-chapters-track" id="edChaptersTrack">
+
+      <article class="ed-chapter">
+        <div class="ed-chapter-media">
+          <span class="ed-chapter-num" aria-hidden="true">01</span>
           <img
             src="images/coverage-beach.jpg"
             alt="Glenelg beach Adelaide"
-            class="coverage-card-img"
             loading="lazy"
             width="1600"
-            height="1067"
-          >
-          <div class="coverage-card-overlay"></div>
+            height="1067">
         </div>
-        <div class="coverage-card-content">
-          <div class="coverage-card-top">
-            <span class="coverage-area">Beachside</span>
+        <div class="ed-chapter-body">
+          <div class="ed-chapter-top">
+            <h3 class="ed-chapter-title">Beachside</h3>
             <div class="demand-indicator" aria-label="Demand: 4 out of 5">
               <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span>
             </div>
           </div>
-          <div class="coverage-suburbs">Glenelg · West Beach · Henley Beach · Semaphore</div>
-          <div class="coverage-peaks">Peak: Dec–Feb · WomAdelaide · LIV Golf</div>
-          <div class="coverage-yield">2BR avg <strong>$3,900<span>/mo</span></strong></div>
+          <div class="ed-chapter-suburbs">Glenelg · West Beach · Henley Beach · Semaphore</div>
+          <div class="ed-chapter-peaks">Peak: Dec–Feb · WomAdelaide · LIV Golf</div>
+          <div class="ed-chapter-yield">2BR avg <strong>$3,900<span>/mo</span></strong></div>
+          <div class="ed-chapter-links">
+            <a href="areas/glenelg">Glenelg</a>
+            <a href="areas/brighton">Brighton</a>
+          </div>
         </div>
-      </div>
+      </article>
 
-      <!-- Card 2: City Fringe -->
-      <div class="coverage-card reveal reveal-delay-1">
-        <div class="coverage-card-bg">
+      <article class="ed-chapter">
+        <div class="ed-chapter-media">
+          <span class="ed-chapter-num" aria-hidden="true">02</span>
           <img
             src="images/coverage-city.jpg"
             alt="Adelaide city skyline and Torrens"
-            class="coverage-card-img"
             loading="lazy"
             width="800"
-            height="534"
-          >
-          <div class="coverage-card-overlay"></div>
+            height="534">
         </div>
-        <div class="coverage-card-content">
-          <div class="coverage-card-top">
-            <span class="coverage-area">City Fringe</span>
+        <div class="ed-chapter-body">
+          <div class="ed-chapter-top">
+            <h3 class="ed-chapter-title">City Fringe</h3>
             <div class="demand-indicator" aria-label="Demand: 5 out of 5">
               <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span>
             </div>
           </div>
-          <div class="coverage-suburbs">Adelaide CBD · Norwood · Unley · Burnside · Prospect</div>
-          <div class="coverage-peaks">Peak: Fringe · Gather Round · Year-round business</div>
-          <div class="coverage-yield">2BR avg <strong>$3,600<span>/mo</span></strong></div>
+          <div class="ed-chapter-suburbs">Adelaide CBD · Norwood · Unley · Burnside · Prospect</div>
+          <div class="ed-chapter-peaks">Peak: Fringe · Gather Round · Year-round business</div>
+          <div class="ed-chapter-yield">2BR avg <strong>$3,600<span>/mo</span></strong></div>
+          <div class="ed-chapter-links">
+            <a href="areas/cbd">Adelaide CBD</a>
+            <a href="areas/norwood">Norwood</a>
+            <a href="areas/prospect">Prospect</a>
+          </div>
         </div>
-      </div>
+      </article>
 
-      <!-- Card 3: Adelaide Hills -->
-      <div class="coverage-card reveal reveal-delay-2">
-        <div class="coverage-card-bg">
+      <article class="ed-chapter">
+        <div class="ed-chapter-media">
+          <span class="ed-chapter-num" aria-hidden="true">03</span>
           <img
             src="images/coverage-hills.jpg"
             alt="Adelaide Hills green landscape"
-            class="coverage-card-img"
             loading="lazy"
             width="800"
-            height="600"
-          >
-          <div class="coverage-card-overlay"></div>
+            height="600">
         </div>
-        <div class="coverage-card-content">
-          <div class="coverage-card-top">
-            <span class="coverage-area">Adelaide Hills</span>
+        <div class="ed-chapter-body">
+          <div class="ed-chapter-top">
+            <h3 class="ed-chapter-title">Adelaide Hills</h3>
             <div class="demand-indicator" aria-label="Demand: 3.5 out of 5">
               <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot half"></span><span class="dot"></span>
             </div>
           </div>
-          <div class="coverage-suburbs">Stirling · Crafers · Hahndorf · Aldgate · Mt Barker</div>
-          <div class="coverage-peaks">Peak: Fringe · Tasting Australia · Jun–Aug retreats</div>
-          <div class="coverage-yield">2BR avg <strong>$3,800<span>/mo</span></strong></div>
+          <div class="ed-chapter-suburbs">Stirling · Crafers · Hahndorf · Aldgate · Mt Barker</div>
+          <div class="ed-chapter-peaks">Peak: Fringe · Tasting Australia · Jun–Aug retreats</div>
+          <div class="ed-chapter-yield">2BR avg <strong>$3,800<span>/mo</span></strong></div>
+          <div class="ed-chapter-links">
+            <a href="areas/stirling">Stirling</a>
+          </div>
         </div>
-      </div>
+      </article>
 
     </div>
-    <div class="text-center mt-8 reveal">
+    <div class="ed-chapters-foot reveal">
       <a href="areas" class="btn-text-link">View all coverage areas →</a>
     </div>
   </div>
 </section>
 
 <!-- ─── Founder's Letter & Insight Cards ─── -->
-<section class="section founder-section">
+<section class="section founder-section ed-founder">
   <div class="rule-line js-rule"></div>
   <div class="container">
 
@@ -615,14 +720,28 @@ src="https://www.facebook.com/tr?id=1027065616568144&ev=PageView&noscript=1"
 </section>
 
 <!-- ─── Application CTA ─── -->
-<section class="section apply-section">
+<section class="section apply-section ed-apply">
+  <div class="ed-apply-bg" aria-hidden="true">
+    <img
+      src="images/editorial/hero-1.jpg"
+      srcset="images/editorial/hero-1-1200.jpg 1200w, images/editorial/hero-1.jpg 2400w"
+      sizes="100vw"
+      alt=""
+      width="2400" height="1600"
+      loading="lazy" decoding="async">
+    <div class="ed-apply-overlay"></div>
+  </div>
   <div class="container">
     <div class="apply-inner reveal">
       <p class="apply-overline">Limited availability</p>
       <h2 class="apply-headline">We take on a limited number<br>of properties each quarter.</h2>
       <p class="apply-sub">Currently assessing properties in Glenelg, Norwood, Burnside, Stirling, and surrounds.</p>
-      <a href="contact" class="btn btn-gold btn-lg">Apply for asset management</a>
+      <a href="contact" class="ed-pill ed-magnetic">Apply for asset management</a>
       <p class="apply-phone">Or call <a href="tel:0404608196" onclick="gtag('event', 'phone_click', {'event_category': 'lead', 'event_label': 'homepage'});">0404 608 196</a></p>
+      <aside class="scarcity-band ed-scarcity" aria-label="Current availability">
+        <p class="scarcity-band-main">Currently accepting 5 properties for Q3 2026.</p>
+        <p class="scarcity-band-sub">Our cohort model means we only onboard a small number of properties per quarter, giving each one our full attention.</p>
+      </aside>
     </div>
   </div>
 </section>
@@ -639,6 +758,7 @@ src="https://www.facebook.com/tr?id=1027065616568144&ev=PageView&noscript=1"
 
 <!-- ─── Footer ─── -->
 <footer class="site-footer">
+  <div class="ed-footer-wordmark" aria-hidden="true">AUREA</div>
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
@@ -676,6 +796,7 @@ src="https://www.facebook.com/tr?id=1027065616568144&ev=PageView&noscript=1"
 
 <script src="data.js"></script>
 <script src="app.js"></script>
+<script src="ed-home.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     if (window.lucide) { lucide.createIcons(); }

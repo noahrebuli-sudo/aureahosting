@@ -31,15 +31,6 @@ const AUREA_DATA = {
       meta:  "R. & J.P. · Stirling · Hills Retreat",
       stat:  "66% occupancy, first quarter"
     }
-  ],
-
-  calculatorData: {
-    glenelg:  { label: "Glenelg · West Beach · Henley",      beds: { 1:[2800,3400], 2:[3600,4400], 3:[4800,6000], 4:[5600,7200] }, events: "WomAdelaide +$175/night · LIV Golf +$190/night · Summer peak Dec–Feb" },
-    cbd:      { label: "Adelaide CBD",                                   beds: { 1:[2600,3200], 2:[3400,4000], 3:[4800,5600], 4:[5500,6800] }, events: "Adelaide Fringe +$155/night · Gather Round +$210/night · Tour Down Under +$130/night" },
-    norwood:  { label: "Norwood · Unley · Burnside",          beds: { 1:[2400,3000], 2:[3200,3900], 3:[4200,5200], 4:[5000,6200] }, events: "Adelaide Fringe +$140/night · Tasting Australia +$90/night · Gather Round +$180/night" },
-    stirling: { label: "Stirling · Hahndorf · Hills",         beds: { 1:[2200,2800], 2:[3400,4200], 3:[5000,6500], 4:[6000,8000] }, events: "Adelaide Fringe +$120/night · Tasting Australia +$140/night · Winter retreats Jun–Aug" },
-    brighton: { label: "Brighton · Marino · Hallett Cove",    beds: { 1:[2600,3200], 2:[3400,4000], 3:[4400,5400], 4:[5200,6500] }, events: "Adelaide Fringe +$130/night · LIV Golf +$160/night · Summer season Dec–Feb" },
-    prospect: { label: "Prospect · Nailsworth · Broadview",   beds: { 1:[2200,2800], 2:[2900,3600], 3:[3800,4600], 4:[4500,5500] }, events: "Adelaide Fringe +$120/night · Gather Round +$160/night · Tasting Australia +$80/night" }
-  }
+  ]
 
 };

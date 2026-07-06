@@ -4,11 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ─── Calculator Data ─── */
-  function getRevenueData() {
-    return (typeof AUREA_DATA !== 'undefined' && AUREA_DATA.calculatorData) || {};
-  }
-
   /* ─── Intel Strip ─── */
   (function renderIntelStrip() {
     const ticker = document.getElementById('intelTicker');
@@ -29,115 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     ticker.innerHTML = html;
   })();
-
-  /* ─── Calculator Logic ─── */
-  const calcSuburb = document.getElementById('calcSuburb');
-  const calcOutput = document.getElementById('calcOutput');
-  const bedBtns    = document.querySelectorAll('.bed-btn');
-  let activeBeds   = 2;
-  let calcAnimFrame = null;
-
-  function getActiveBeds() {
-    const active = document.querySelector('.bed-btn.active');
-    return active ? parseInt(active.dataset.beds) : null;
-  }
-
-  function formatMoney(val) {
-    return '$' + val.toLocaleString('en-AU');
-  }
-
-  function updateCalc() {
-    const suburb = calcSuburb ? calcSuburb.value : '';
-    const beds   = getActiveBeds();
-
-    if (!calcOutput) return;
-
-    if (!suburb || !beds) {
-      calcOutput.innerHTML = `
-        <div class="calc-empty-state">
-          <span class="calc-empty-icon" aria-hidden="true">↓</span>
-          Select suburb and bedrooms to estimate your revenue
-        </div>`;
-      return;
-    }
-
-    const data = getRevenueData()[suburb];
-    if (!data) return;
-
-    const bedKey = Math.min(beds, 4);
-    const [low, high] = data.beds[bedKey] || data.beds[4];
-
-    calcOutput.innerHTML = `
-      <div class="calc-result" style="width:100%;">
-        <div class="calc-range-row">
-          <span class="calc-range-low" aria-live="off">${formatMoney(Math.round(low * 0.6))}</span>
-          <span class="calc-range-sep">–</span>
-          <span class="calc-range-high" aria-live="off">${formatMoney(Math.round(high * 0.6))}</span>
-          <span class="calc-range-unit">/mo</span>
-        </div>
-        <div class="calc-suburb-label">${data.label} · ${beds === 4 ? '4+' : beds} bedroom${beds === 1 ? '' : 's'}</div>
-        <div class="calc-events">${data.events}</div>
-      </div>`;
-
-    animateCalcNumbers(low, high);
-  }
-
-  function animateCalcNumbers(targetLow, targetHigh) {
-    if (calcAnimFrame) cancelAnimationFrame(calcAnimFrame);
-
-    const lowEl  = calcOutput ? calcOutput.querySelector('.calc-range-low')  : null;
-    const highEl = calcOutput ? calcOutput.querySelector('.calc-range-high') : null;
-    if (!lowEl || !highEl) return;
-
-    const startLow  = Math.round(targetLow  * 0.6);
-    const startHigh = Math.round(targetHigh * 0.6);
-    const duration  = 1100;
-    const startTime = performance.now();
-
-    function step(now) {
-      const progress = Math.min((now - startTime) / duration, 1);
-      const eased    = 1 - Math.pow(1 - progress, 3);
-
-      lowEl.textContent  = formatMoney(Math.round(startLow  + (targetLow  - startLow)  * eased));
-      highEl.textContent = formatMoney(Math.round(startHigh + (targetHigh - startHigh) * eased));
-
-      if (progress < 1) {
-        calcAnimFrame = requestAnimationFrame(step);
-      } else {
-        lowEl.textContent  = formatMoney(targetLow);
-        highEl.textContent = formatMoney(targetHigh);
-      }
-    }
-    calcAnimFrame = requestAnimationFrame(step);
-  }
-
-  if (calcSuburb) {
-    calcSuburb.addEventListener('change', updateCalc);
-  }
-
-  bedBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      bedBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeBeds = parseInt(btn.dataset.beds);
-      updateCalc();
-    });
-  });
-
-  /* ─── Scroll-to-calculator ─── */
-  document.querySelectorAll('.js-scroll-calc').forEach(el => {
-    el.addEventListener('click', e => {
-      const target = document.getElementById('calc');
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(() => {
-          const sel = document.getElementById('calcSuburb');
-          if (sel) sel.focus();
-        }, 600);
-      }
-    });
-  });
 
   /* ─── Sticky Header ─── */
   const header = document.getElementById('siteHeader') || document.querySelector('.site-header');
@@ -232,6 +118,13 @@ document.addEventListener('DOMContentLoaded', () => {
           const startVal = parseInt(el.getAttribute('data-start')  || '0', 10);
           const suffix   = el.getAttribute('data-suffix')  || '';
           const prefix   = el.getAttribute('data-prefix')  || '';
+
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            el.textContent = prefix + target + suffix;
+            counterObs.unobserve(el);
+            return;
+          }
+
           const duration = 2000;
           const startTime = performance.now();
 
@@ -496,7 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     animateDot();
 
-    const interactiveEls = 'a, button, .bed-btn, .calc-select, input, select, textarea, [role="button"]';
+    const interactiveEls = 'a, button, input, select, textarea, [role="button"]';
     document.querySelectorAll(interactiveEls).forEach(el => {
       el.addEventListener('mouseenter', () => cursorDot.classList.add('expanded'));
       el.addEventListener('mouseleave', () => cursorDot.classList.remove('expanded'));
