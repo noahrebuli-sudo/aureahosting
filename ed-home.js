@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     update();
   })();
 
-  /* ─── Areas as chapters ─── */
+  /* ─── Areas as chapters: free horizontal scroller ─── */
   (function areaChapters() {
     const section = document.getElementById('edChapters');
     if (!section) return;
@@ -129,46 +129,73 @@ document.addEventListener('DOMContentLoaded', () => {
     const track   = document.getElementById('edChaptersTrack');
     const counter = document.getElementById('edChaptersCounter');
     const bar     = document.getElementById('edChaptersBar');
-    const total   = track.children.length;
-    const pinned  = window.matchMedia('(min-width: 841px) and (prefers-reduced-motion: no-preference) and (pointer: fine)');
+    const prev    = document.getElementById('edChaptersPrev');
+    const next    = document.getElementById('edChaptersNext');
+    const cards   = Array.from(track.children);
+    const total   = cards.length;
 
     function pad(n) { return (n < 10 ? '0' : '') + n; }
 
-    function setProgress(progress) {
-      const idx = Math.min(Math.floor(progress * total), total - 1);
+    /* Counter, hairline and arrow visibility all follow scrollLeft */
+    function update() {
+      const max = Math.max(track.scrollWidth - track.clientWidth, 0);
+      const progress = max > 0 ? Math.min(track.scrollLeft / max, 1) : 0;
+      const idx = total > 1 ? Math.round(progress * (total - 1)) : 0;
       if (counter) counter.textContent = pad(idx + 1) + '/' + pad(total);
       if (bar) bar.style.transform = 'scaleX(' + progress.toFixed(4) + ')';
+      if (prev) prev.classList.toggle('is-hidden', track.scrollLeft <= 2);
+      if (next) next.classList.toggle('is-hidden', track.scrollLeft >= max - 2);
     }
 
-    /* Carousel mode: counter and hairline follow horizontal scroll */
-    track.addEventListener('scroll', () => {
-      if (pinned.matches) return;
-      const max = track.scrollWidth - track.clientWidth;
-      setProgress(max > 0 ? track.scrollLeft / max : 0);
-    }, { passive: true });
-
-    /* Pinned mode: track translated by page scroll over the 320vh wrapper */
-    let ticking = false;
-    function update() {
-      ticking = false;
-      if (!pinned.matches) return;
-      const range = section.offsetHeight - window.innerHeight;
-      if (range <= 0) return;
-      const progress = Math.min(Math.max(-section.getBoundingClientRect().top / range, 0), 1);
-      const shift = Math.max(track.scrollWidth - track.clientWidth, 0);
-      track.style.transform = 'translate3d(' + (-progress * shift).toFixed(1) + 'px, 0, 0)';
-      setProgress(progress);
-    }
-    window.addEventListener('scroll', () => {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
+    track.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
-    if (pinned.addEventListener) {
-      pinned.addEventListener('change', () => {
-        track.style.transform = '';
-        update();
-      });
+
+    function step(dir) {
+      const stride = total > 1
+        ? cards[1].offsetLeft - cards[0].offsetLeft
+        : track.clientWidth;
+      track.scrollBy({ left: dir * stride, behavior: reduceMotion ? 'auto' : 'smooth' });
     }
+    if (prev) prev.addEventListener('click', () => step(-1));
+    if (next) next.addEventListener('click', () => step(1));
+
+    /* Drag to scroll on mouse pointers; snap is suspended while dragging */
+    if (finePointer) {
+      let down = false;
+      let dragged = false;
+      let startX = 0;
+      let startLeft = 0;
+
+      track.addEventListener('pointerdown', e => {
+        if (e.pointerType !== 'mouse') return;
+        down = true;
+        dragged = false;
+        startX = e.clientX;
+        startLeft = track.scrollLeft;
+      });
+      track.addEventListener('pointermove', e => {
+        if (!down) return;
+        const dx = e.clientX - startX;
+        if (!dragged && Math.abs(dx) > 5) {
+          dragged = true;
+          track.classList.add('is-dragging');
+          track.setPointerCapture(e.pointerId);
+        }
+        if (dragged) track.scrollLeft = startLeft - dx;
+      });
+      function endDrag() {
+        down = false;
+        track.classList.remove('is-dragging');
+      }
+      track.addEventListener('pointerup', endDrag);
+      track.addEventListener('pointercancel', endDrag);
+
+      /* A drag must not register as a click on the card links */
+      track.addEventListener('click', e => {
+        if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
+      }, true);
+    }
+
     update();
   })();
 

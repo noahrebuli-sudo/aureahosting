@@ -2474,10 +2474,38 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
 .ed-chapters-track {
   display: flex;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
   scrollbar-width: none;
 }
 .ed-chapters-track::-webkit-scrollbar { display: none; }
+.ed-chapters-track.is-dragging { scroll-snap-type: none; }
+
+.ed-chapters-arrows {
+  display: none;
+  gap: var(--space-2);
+}
+.ed-chapters-arrow {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--gold-rule);
+  color: var(--gold-text);
+  background: none;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease),
+              opacity 0.3s var(--ease), visibility 0.3s;
+}
+.ed-chapters-arrow:hover {
+  color: var(--ink);
+  border-color: var(--gold);
+}
+.ed-chapters-arrow.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 
 .ed-chapter {
   flex: 0 0 100%;
@@ -2571,30 +2599,15 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
   padding: 0 var(--space-6);
 }
 
-/* Desktop with motion allowed: pinned horizontal scroll.
-   Reduced motion keeps the carousel at every width */
-@media (min-width: 841px) and (prefers-reduced-motion: no-preference) and (pointer: fine) {
-  .ed-chapters {
-    height: 320vh;
-    padding: 0;
-    position: relative;
-  }
-  .ed-chapters-pin {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .ed-chapters-head { width: 100%; margin-bottom: var(--space-10); }
+/* Desktop: free horizontal scroller, one card mostly in view
+   with the next peeking. Same scroll code path as mobile */
+@media (min-width: 841px) {
+  .ed-chapters-head { margin-bottom: var(--space-10); }
+  .ed-chapters-arrows { display: flex; }
   .ed-chapters-track {
-    overflow: visible;
-    scroll-snap-type: none;
-    will-change: transform;
     padding-left: max(var(--space-6), calc((100vw - var(--container-wide)) / 2));
     padding-right: max(var(--space-6), calc((100vw - var(--container-wide)) / 2));
+    scroll-padding-left: max(var(--space-6), calc((100vw - var(--container-wide)) / 2));
   }
   .ed-chapter {
     flex: 0 0 min(58vw, 780px);
@@ -2603,6 +2616,11 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
   }
   .ed-chapter-media img { height: 46vh; }
   .ed-chapters-foot { margin-top: var(--space-10); }
+}
+@media (min-width: 841px) and (pointer: fine) {
+  .ed-chapters-track { cursor: grab; }
+  .ed-chapters-track.is-dragging { cursor: grabbing; }
+  .ed-chapters-track.is-dragging .ed-chapter { pointer-events: none; }
 }
 
 /* ─── Market field, performance and owners ─── */
