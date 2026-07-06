@@ -109,6 +109,57 @@ document.addEventListener('DOMContentLoaded', () => {
     update();
   })();
 
+  /* ─── Areas as chapters ─── */
+  (function areaChapters() {
+    const section = document.getElementById('edChapters');
+    if (!section) return;
+
+    const track   = document.getElementById('edChaptersTrack');
+    const counter = document.getElementById('edChaptersCounter');
+    const bar     = document.getElementById('edChaptersBar');
+    const total   = track.children.length;
+    const pinned  = window.matchMedia('(min-width: 841px) and (prefers-reduced-motion: no-preference)');
+
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+    function setProgress(progress) {
+      const idx = Math.min(Math.floor(progress * total), total - 1);
+      if (counter) counter.textContent = pad(idx + 1) + '/' + pad(total);
+      if (bar) bar.style.transform = 'scaleX(' + progress.toFixed(4) + ')';
+    }
+
+    /* Carousel mode: counter and hairline follow horizontal scroll */
+    track.addEventListener('scroll', () => {
+      if (pinned.matches) return;
+      const max = track.scrollWidth - track.clientWidth;
+      setProgress(max > 0 ? track.scrollLeft / max : 0);
+    }, { passive: true });
+
+    /* Pinned mode: track translated by page scroll over the 320vh wrapper */
+    let ticking = false;
+    function update() {
+      ticking = false;
+      if (!pinned.matches) return;
+      const range = section.offsetHeight - window.innerHeight;
+      if (range <= 0) return;
+      const progress = Math.min(Math.max(-section.getBoundingClientRect().top / range, 0), 1);
+      const shift = Math.max(track.scrollWidth - track.clientWidth, 0);
+      track.style.transform = 'translate3d(' + (-progress * shift).toFixed(1) + 'px, 0, 0)';
+      setProgress(progress);
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    if (pinned.addEventListener) {
+      pinned.addEventListener('change', () => {
+        track.style.transform = '';
+        update();
+      });
+    }
+    update();
+  })();
+
   /* ─── Magnetic hover, pointer fine only ─── */
   (function magneticButtons() {
     if (!finePointer || reduceMotion) return;

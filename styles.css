@@ -2427,3 +2427,179 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
   .ed-collage-c { width: 92%; }
   .ed-collage-word { top: clamp(40px, 6vh, 70px); }
 }
+
+/* ─── Areas as chapters ─── */
+.ed-chapters {
+  background: var(--sand);
+  padding: var(--space-20) 0 var(--space-16);
+}
+.ed-chapters-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  max-width: var(--container-wide);
+  margin: 0 auto var(--space-8);
+  padding: 0 var(--space-6);
+}
+.ed-chapters-head .ed-kicker { margin-bottom: 0; }
+.ed-chapters-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.ed-chapters-counter {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--ink-light);
+  font-variant-numeric: tabular-nums;
+}
+.ed-chapters-hairline {
+  width: clamp(80px, 14vw, 200px);
+  height: 1px;
+  background: var(--gold-rule);
+  overflow: hidden;
+}
+.ed-chapters-hairline span {
+  display: block;
+  height: 100%;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.ed-chapters-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.ed-chapters-track::-webkit-scrollbar { display: none; }
+
+.ed-chapter {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  padding: 0 var(--space-6);
+}
+.ed-chapter-media { position: relative; }
+.ed-chapter-media img {
+  width: 100%;
+  height: clamp(220px, 38vh, 340px);
+  object-fit: cover;
+}
+.ed-chapter-num {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  z-index: 2;
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 800;
+  font-size: clamp(44px, 6vw, 72px);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 253, 249, 0.85);
+}
+@supports not (-webkit-text-stroke: 2px black) {
+  .ed-chapter-num { color: rgba(255, 253, 249, 0.7); }
+}
+.ed-chapter-body { padding-top: var(--space-5); }
+.ed-chapter-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+.ed-chapter-title {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.ed-chapter-suburbs {
+  color: var(--ink-light);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-1);
+}
+.ed-chapter-peaks {
+  color: var(--muted);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-3);
+}
+.ed-chapter-yield {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  color: var(--ink);
+  margin-bottom: var(--space-4);
+}
+.ed-chapter-yield strong {
+  font-weight: 800;
+  font-size: var(--text-xl);
+  letter-spacing: -0.02em;
+}
+.ed-chapter-yield strong span {
+  font-weight: 500;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+.ed-chapter-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+.ed-chapter-links a {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+  border-bottom: 1px solid var(--gold-rule);
+  padding-bottom: 2px;
+}
+.ed-chapter-links a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--gold);
+}
+.ed-chapters-foot {
+  max-width: var(--container-wide);
+  margin: var(--space-8) auto 0;
+  padding: 0 var(--space-6);
+}
+
+/* Desktop with motion allowed: pinned horizontal scroll.
+   Reduced motion keeps the carousel at every width */
+@media (min-width: 841px) and (prefers-reduced-motion: no-preference) {
+  .ed-chapters {
+    height: 320vh;
+    padding: 0;
+    position: relative;
+  }
+  .ed-chapters-pin {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .ed-chapters-head { width: 100%; margin-bottom: var(--space-10); }
+  .ed-chapters-track {
+    overflow: visible;
+    scroll-snap-type: none;
+    will-change: transform;
+    padding-left: max(var(--space-6), calc((100vw - var(--container-wide)) / 2));
+    padding-right: max(var(--space-6), calc((100vw - var(--container-wide)) / 2));
+  }
+  .ed-chapter {
+    flex: 0 0 min(58vw, 780px);
+    padding: 0;
+    margin-right: 5vw;
+  }
+  .ed-chapter-media img { height: 46vh; }
+  .ed-chapters-foot { margin-top: var(--space-10); }
+}
