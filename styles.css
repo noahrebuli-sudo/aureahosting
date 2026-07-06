@@ -2036,8 +2036,9 @@ body.ed-veil-done .ed-hero-frame { opacity: 1; }
 }
 .ed-hero-headline em {
   font-style: normal;
-  color: transparent;
+  color: rgba(200, 163, 93, 0.14);
   -webkit-text-stroke: clamp(1.5px, 0.16vw, 2.5px) var(--gold);
+  filter: drop-shadow(0 3px 18px rgba(10, 16, 19, 0.55));
 }
 @supports not (-webkit-text-stroke: 2px black) {
   .ed-hero-headline em { color: var(--gold); }
