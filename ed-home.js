@@ -322,10 +322,18 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    const inner = bar.querySelector('.ed-sticky-cta-inner');
     const mobile = window.matchMedia('(max-width: 720px)');
     const footer = document.querySelector('.site-footer');
     let footerInView = false;
 
+    /* Feed the outer positioner the pill's real rendered height so it can
+       sit flush above the URL bar. Guarded so desktop (bar display:none,
+       height 0) keeps the CSS fallback of 64px. */
+    function measure() {
+      const h = inner && inner.offsetHeight;
+      if (h) bar.style.setProperty('--ed-cta-h', h + 'px');
+    }
     function pastHalf() {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       return max > 0 && window.scrollY / max >= 0.5;
@@ -344,7 +352,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('scroll', sync, { passive: true });
-    window.addEventListener('resize', sync);
+    window.addEventListener('resize', () => { measure(); sync(); });
+    window.addEventListener('load', measure);
+    measure();
     sync();
 
     document.getElementById('edStickyCtaDismiss').addEventListener('click', () => {

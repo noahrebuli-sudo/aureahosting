@@ -2977,22 +2977,43 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
 }
 
 /* ─── Mobile sticky CTA ─── */
+/* Outer positioner — anchors above the iOS Safari URL bar via dvh.
+   Never carries transform/opacity, so it can't fight the inner slide. */
 .ed-sticky-cta {
   position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1100;
+  left: 12px;
+  right: 12px;
+  top: calc(100dvh - var(--ed-cta-h, 64px) - max(env(safe-area-inset-bottom), 12px));
+  bottom: auto;
+  z-index: 90;
   display: none;
+}
+/* Where dvh is unsupported (old iOS/Android), pin to the physical bottom. */
+@supports not (top: 100dvh) {
+  .ed-sticky-cta {
+    top: auto;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+  }
+}
+/* Inner pill — carries the show/hide + dismiss animation only. */
+.ed-sticky-cta-inner {
+  display: flex;
   align-items: center;
   gap: var(--space-3);
   padding: 10px var(--space-4);
-  padding-bottom: calc(10px + env(safe-area-inset-bottom));
   background: var(--ed-ink);
-  transform: translateY(100%);
-  transition: transform 0.4s var(--ease);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+  pointer-events: none;
 }
-.ed-sticky-cta.is-visible { transform: translateY(0); }
+.ed-sticky-cta.is-visible .ed-sticky-cta-inner {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 .ed-sticky-cta-pill {
   flex: 1;
   display: flex;
@@ -3019,10 +3040,10 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
   color: rgba(255, 253, 249, 0.65);
 }
 @media (max-width: 720px) {
-  .ed-sticky-cta { display: flex; }
+  .ed-sticky-cta { display: block; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ed-sticky-cta { transition: none; }
+  .ed-sticky-cta-inner { transition: none; }
 }
 
 /* ─── Difference-blend cursor, fine pointers only ─── */
