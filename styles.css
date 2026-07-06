@@ -2319,3 +2319,111 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
   line-height: 1.7;
   margin: 0 0 var(--space-8);
 }
+
+/* ─── Adelaide collage ─── */
+.ed-collage {
+  position: relative;
+  overflow: hidden;
+  background: var(--sand);
+  padding: clamp(90px, 14vh, 160px) 0 clamp(70px, 10vh, 120px);
+}
+.ed-collage-word {
+  position: absolute;
+  top: clamp(60px, 9vh, 110px);
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.ed-collage-word span {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 900;
+  font-size: clamp(90px, 17vw, 260px);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(200, 163, 93, 0.5);
+  will-change: transform;
+}
+@supports not (-webkit-text-stroke: 2px black) {
+  .ed-collage-word span { color: rgba(200, 163, 93, 0.28); }
+}
+
+.ed-collage-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: start;
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+.ed-collage-item {
+  margin: 0;
+  will-change: transform;
+}
+.ed-collage-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: var(--shadow-lg);
+}
+.ed-collage-a {
+  grid-column: 1 / span 6;
+  grid-row: 1;
+  margin-top: 16vh;
+  z-index: 2;
+}
+.ed-collage-b {
+  grid-column: 6 / span 3;
+  grid-row: 1;
+  margin-top: 2vh;
+  z-index: 3;
+}
+.ed-collage-c {
+  grid-column: 9 / span 4;
+  grid-row: 1;
+  margin-top: 26vh;
+  z-index: 2;
+}
+
+.ed-collage-caption {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  margin: clamp(60px, 9vh, 110px) auto 0;
+  padding: 0 var(--space-6);
+  text-align: center;
+}
+.ed-collage-heading {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: var(--text-3xl);
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: 0 0 var(--space-4);
+}
+.ed-collage-sub {
+  color: var(--ink-light);
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media (max-width: 840px) {
+  .ed-collage-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  .ed-collage-a,
+  .ed-collage-b,
+  .ed-collage-c { margin-top: 0; }
+  .ed-collage-a { width: 92%; }
+  .ed-collage-b { width: 72%; align-self: flex-end; }
+  .ed-collage-c { width: 92%; }
+  .ed-collage-word { top: clamp(40px, 6vh, 70px); }
+}

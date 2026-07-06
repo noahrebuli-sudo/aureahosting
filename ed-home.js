@@ -75,6 +75,40 @@ document.addEventListener('DOMContentLoaded', () => {
     startTimer();
   })();
 
+  /* ─── Collage scroll parallax, pointer fine only ─── */
+  (function collageParallax() {
+    if (!finePointer || reduceMotion) return;
+    const section = document.getElementById('edCollage');
+    if (!section) return;
+
+    const items = Array.from(section.querySelectorAll('.ed-collage-item'));
+    const word  = document.getElementById('edCollageWord');
+    let ticking = false;
+
+    function update() {
+      const r = section.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < window.innerHeight) {
+        const delta = r.top + r.height / 2 - window.innerHeight / 2;
+        items.forEach(item => {
+          const speed = parseFloat(item.getAttribute('data-speed')) || 0;
+          item.style.transform = 'translate3d(0, ' + (delta * speed).toFixed(1) + 'px, 0)';
+        });
+        if (word) {
+          word.style.transform = 'translate3d(' + (delta * 0.12).toFixed(1) + 'px, 0, 0)';
+        }
+      }
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+    update();
+  })();
+
   /* ─── Magnetic hover, pointer fine only ─── */
   (function magneticButtons() {
     if (!finePointer || reduceMotion) return;
