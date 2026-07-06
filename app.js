@@ -28,6 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ─── Sticky Header ─── */
   const header = document.getElementById('siteHeader') || document.querySelector('.site-header');
   if (header) {
+    const reduceMotionNav = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const heroSection = document.querySelector('.ed-hero');
+    /* Hide only after the hero on the editorial homepage, 200px elsewhere */
+    let hideAfter = heroSection ? heroSection.offsetHeight : 200;
+    window.addEventListener('resize', () => {
+      if (heroSection) hideAfter = heroSection.offsetHeight;
+    });
     let lastScroll = 0;
     let ticking    = false;
     window.addEventListener('scroll', () => {
@@ -35,7 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(() => {
           const y = window.scrollY;
           header.classList.toggle('scrolled', y > 60);
-          header.classList.toggle('hidden',   y > lastScroll && y > 200);
+          header.classList.toggle('hidden',
+            !reduceMotionNav.matches && y > lastScroll && y > hideAfter);
           lastScroll = y;
           ticking    = false;
         });
