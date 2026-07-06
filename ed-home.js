@@ -275,6 +275,19 @@ document.addEventListener('DOMContentLoaded', () => {
     fieldObs.observe(field);
   })();
 
+  /* ─── Hero scroll cue: gone for good on first scroll ─── */
+  (function scrollCue() {
+    const cue = document.getElementById('edScrollCue');
+    if (!cue) return;
+    function onFirstScroll() {
+      if (window.scrollY <= 4) return;
+      cue.classList.add('is-done');
+      window.removeEventListener('scroll', onFirstScroll);
+    }
+    window.addEventListener('scroll', onFirstScroll, { passive: true });
+    onFirstScroll();
+  })();
+
   /* ─── Mobile sticky CTA ─── */
   (function stickyCta() {
     const bar = document.getElementById('edStickyCta');
