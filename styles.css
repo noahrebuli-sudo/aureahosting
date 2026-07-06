@@ -1854,6 +1854,18 @@ a.chip:hover { opacity: 0.82; }
   --ed-ink:    #121c20;
 }
 
+/* Keyboard focus is always visible, everywhere, even where the
+   custom cursor is in play */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
 /* ─── Intro veil ─── */
 .ed-veil {
   position: fixed;
@@ -2311,6 +2323,10 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
 }
 @keyframes edMarquee {
   to { transform: translateX(-50%); }
+}
+.ed-marquee:hover .ed-marquee-track,
+.ed-marquee:focus-within .ed-marquee-track {
+  animation-play-state: paused;
 }
 
 /* ─── Position statement ─── */
