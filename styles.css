@@ -2733,3 +2733,90 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .ed-dot { transition: none; opacity: 1; transform: scale(1); }
 }
+
+/* ─── Founder letter restyle ─── */
+.ed-founder { background: var(--sand-mid); }
+.ed-founder .founder-letter-body {
+  position: relative;
+  padding-top: 46px;
+}
+.ed-founder .founder-letter-body::before {
+  content: '\201C';
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--gold);
+}
+.ed-founder .founder-letter-body p {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 500;
+  font-size: clamp(22px, 2.5vw, 31px);
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+.ed-founder .founder-signature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.ed-founder .founder-signature::before {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* ─── Final CTA over full-bleed image ─── */
+.ed-apply {
+  position: relative;
+  overflow: hidden;
+  background: var(--ed-ink);
+}
+.ed-apply-bg {
+  position: absolute;
+  inset: 0;
+}
+.ed-apply-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ed-apply-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 16, 19, 0.72);
+}
+.ed-apply .container { position: relative; z-index: 2; }
+.ed-apply .apply-overline { color: var(--gold); }
+.ed-apply .apply-headline { color: var(--sand); }
+.ed-apply .apply-sub { color: rgba(255, 253, 249, 0.78); }
+.ed-apply .apply-phone { color: rgba(255, 253, 249, 0.6); }
+.ed-apply .apply-phone a {
+  color: rgba(255, 253, 249, 0.85);
+  border-bottom-color: rgba(255, 253, 249, 0.3);
+}
+.ed-apply .apply-phone a:hover { color: var(--sand); border-color: var(--gold); }
+.ed-apply .scarcity-band { background: rgba(245, 242, 235, 0.96); }
+
+/* ─── Footer wordmark ─── */
+.ed-footer-wordmark {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 900;
+  font-size: clamp(72px, 15vw, 240px);
+  line-height: 0.9;
+  text-align: center;
+  letter-spacing: 0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 253, 249, 0.22);
+  padding: var(--space-10) var(--space-4) var(--space-12);
+  user-select: none;
+}
+@supports not (-webkit-text-stroke: 2px black) {
+  .ed-footer-wordmark { color: rgba(255, 253, 249, 0.12); }
+}
