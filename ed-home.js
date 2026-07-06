@@ -10,10 +10,9 @@ const ED_MARKET = {
   populateStaggerMs: 2.4,
   igniteEveryMs: 150,
   line1: 'Adelaide has thousands of short stay listings.',
-  line2: 'We manage fifteen. On purpose.',
-  goldWord: 'fifteen',
-  caption: 'A deliberately small portfolio is what keeps guest replies under four minutes and pricing reviewed weekly. When a place opens, we would genuinely like to hear about your property.',
-  footnote: 'Dot field illustrative of the Adelaide market.'
+  line2: 'Every home we manage gets our full attention.',
+  goldWord: 'full attention',
+  caption: 'That attention is the product: pricing reviewed weekly, guests answered in minutes, an operator who knows your property personally. It is why we keep the portfolio deliberately small, and why the results follow.'
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -122,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     update();
   })();
 
-  /* ─── Areas as chapters ─── */
+  /* ─── Areas as chapters: free horizontal scroller ─── */
   (function areaChapters() {
     const section = document.getElementById('edChapters');
     if (!section) return;
@@ -130,46 +129,73 @@ document.addEventListener('DOMContentLoaded', () => {
     const track   = document.getElementById('edChaptersTrack');
     const counter = document.getElementById('edChaptersCounter');
     const bar     = document.getElementById('edChaptersBar');
-    const total   = track.children.length;
-    const pinned  = window.matchMedia('(min-width: 841px) and (prefers-reduced-motion: no-preference) and (pointer: fine)');
+    const prev    = document.getElementById('edChaptersPrev');
+    const next    = document.getElementById('edChaptersNext');
+    const cards   = Array.from(track.children);
+    const total   = cards.length;
 
     function pad(n) { return (n < 10 ? '0' : '') + n; }
 
-    function setProgress(progress) {
-      const idx = Math.min(Math.floor(progress * total), total - 1);
+    /* Counter, hairline and arrow visibility all follow scrollLeft */
+    function update() {
+      const max = Math.max(track.scrollWidth - track.clientWidth, 0);
+      const progress = max > 0 ? Math.min(track.scrollLeft / max, 1) : 0;
+      const idx = total > 1 ? Math.round(progress * (total - 1)) : 0;
       if (counter) counter.textContent = pad(idx + 1) + '/' + pad(total);
       if (bar) bar.style.transform = 'scaleX(' + progress.toFixed(4) + ')';
+      if (prev) prev.classList.toggle('is-hidden', track.scrollLeft <= 2);
+      if (next) next.classList.toggle('is-hidden', track.scrollLeft >= max - 2);
     }
 
-    /* Carousel mode: counter and hairline follow horizontal scroll */
-    track.addEventListener('scroll', () => {
-      if (pinned.matches) return;
-      const max = track.scrollWidth - track.clientWidth;
-      setProgress(max > 0 ? track.scrollLeft / max : 0);
-    }, { passive: true });
-
-    /* Pinned mode: track translated by page scroll over the 320vh wrapper */
-    let ticking = false;
-    function update() {
-      ticking = false;
-      if (!pinned.matches) return;
-      const range = section.offsetHeight - window.innerHeight;
-      if (range <= 0) return;
-      const progress = Math.min(Math.max(-section.getBoundingClientRect().top / range, 0), 1);
-      const shift = Math.max(track.scrollWidth - track.clientWidth, 0);
-      track.style.transform = 'translate3d(' + (-progress * shift).toFixed(1) + 'px, 0, 0)';
-      setProgress(progress);
-    }
-    window.addEventListener('scroll', () => {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
+    track.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
-    if (pinned.addEventListener) {
-      pinned.addEventListener('change', () => {
-        track.style.transform = '';
-        update();
-      });
+
+    function step(dir) {
+      const stride = total > 1
+        ? cards[1].offsetLeft - cards[0].offsetLeft
+        : track.clientWidth;
+      track.scrollBy({ left: dir * stride, behavior: reduceMotion ? 'auto' : 'smooth' });
     }
+    if (prev) prev.addEventListener('click', () => step(-1));
+    if (next) next.addEventListener('click', () => step(1));
+
+    /* Drag to scroll on mouse pointers; snap is suspended while dragging */
+    if (finePointer) {
+      let down = false;
+      let dragged = false;
+      let startX = 0;
+      let startLeft = 0;
+
+      track.addEventListener('pointerdown', e => {
+        if (e.pointerType !== 'mouse') return;
+        down = true;
+        dragged = false;
+        startX = e.clientX;
+        startLeft = track.scrollLeft;
+      });
+      track.addEventListener('pointermove', e => {
+        if (!down) return;
+        const dx = e.clientX - startX;
+        if (!dragged && Math.abs(dx) > 5) {
+          dragged = true;
+          track.classList.add('is-dragging');
+          track.setPointerCapture(e.pointerId);
+        }
+        if (dragged) track.scrollLeft = startLeft - dx;
+      });
+      function endDrag() {
+        down = false;
+        track.classList.remove('is-dragging');
+      }
+      track.addEventListener('pointerup', endDrag);
+      track.addEventListener('pointercancel', endDrag);
+
+      /* A drag must not register as a click on the card links */
+      track.addEventListener('click', e => {
+        if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
+      }, true);
+    }
+
     update();
   })();
 
@@ -183,10 +209,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const line1    = document.getElementById('edMarketLine1');
     const line2    = document.getElementById('edMarketLine2');
     const caption  = document.getElementById('edMarketCaption');
-    const footnote = document.getElementById('edMarketFootnote');
     if (line1) line1.textContent = ED_MARKET.line1;
     if (caption) caption.textContent = ED_MARKET.caption;
-    if (footnote) footnote.textContent = ED_MARKET.footnote;
     if (line2) {
       const at = ED_MARKET.line2.indexOf(ED_MARKET.goldWord);
       line2.textContent = '';
@@ -249,6 +273,87 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, { threshold: 0.3 });
     fieldObs.observe(field);
+  })();
+
+  /* ─── Testimonial rotation: crossfade every 8s, paused on hover/focus ─── */
+  (function testimonialRotation() {
+    if (reduceMotion) return;
+    const container = document.querySelector('.ed-market #testimonials');
+    if (!container) return;
+    const nextBtn = container.querySelector('.testimonials-next');
+    const cards   = container.querySelectorAll('.testimonial-card');
+    if (!nextBtn || cards.length < 2) return;
+
+    let paused = false;
+    container.addEventListener('mouseenter', () => { paused = true; });
+    container.addEventListener('mouseleave', () => { paused = false; });
+    container.addEventListener('focusin',    () => { paused = true; });
+    container.addEventListener('focusout',   () => { paused = false; });
+
+    /* Advancing through the existing nav button keeps manual and
+       automatic control on the same state */
+    setInterval(() => {
+      if (!paused && !document.hidden) nextBtn.click();
+    }, 8000);
+  })();
+
+  /* ─── Hero scroll cue: gone for good on first scroll ─── */
+  (function scrollCue() {
+    const cue = document.getElementById('edScrollCue');
+    if (!cue) return;
+    function onFirstScroll() {
+      if (window.scrollY <= 4) return;
+      cue.classList.add('is-done');
+      window.removeEventListener('scroll', onFirstScroll);
+    }
+    window.addEventListener('scroll', onFirstScroll, { passive: true });
+    onFirstScroll();
+  })();
+
+  /* ─── Mobile sticky CTA ─── */
+  (function stickyCta() {
+    const bar = document.getElementById('edStickyCta');
+    if (!bar) return;
+
+    let dismissed = false;
+    try { dismissed = sessionStorage.getItem('edStickyCtaDismissed') === '1'; } catch (err) {}
+    if (dismissed) {
+      bar.parentNode.removeChild(bar);
+      return;
+    }
+
+    const mobile = window.matchMedia('(max-width: 720px)');
+    const footer = document.querySelector('.site-footer');
+    let footerInView = false;
+
+    function pastHalf() {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      return max > 0 && window.scrollY / max >= 0.5;
+    }
+    function sync() {
+      bar.classList.toggle('is-visible', mobile.matches && pastHalf() && !footerInView);
+    }
+
+    if (footer && 'IntersectionObserver' in window) {
+      new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          footerInView = e.isIntersecting;
+          sync();
+        });
+      }, { threshold: 0 }).observe(footer);
+    }
+
+    window.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+
+    document.getElementById('edStickyCtaDismiss').addEventListener('click', () => {
+      try { sessionStorage.setItem('edStickyCtaDismissed', '1'); } catch (err) {}
+      bar.classList.remove('is-visible');
+      setTimeout(() => {
+        if (bar.parentNode) bar.parentNode.removeChild(bar);
+      }, 450);
+    });
   })();
 
   /* ─── Difference-blend cursor ring, pointer fine only ─── */
