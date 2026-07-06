@@ -2133,3 +2133,77 @@ a.chip:hover { opacity: 0.82; }
   opacity: 0.35;
   pointer-events: none;
 }
+
+/* ============================================================
+   EDITORIAL HOMEPAGE LAYER
+   All classes below are prefixed ed- and used only by
+   index.html. Nothing above this line was changed for the
+   editorial redesign.
+   ============================================================ */
+
+:root {
+  --ease:      cubic-bezier(0.16, 0.8, 0.24, 1);
+  --ease-slow: cubic-bezier(0.22, 1, 0.36, 1);
+  --ed-ink:    #121c20;
+}
+
+/* ─── Intro veil ─── */
+.ed-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  background: var(--ed-ink);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.ed-veil.ed-veil-play { display: flex; }
+body.ed-veil-lock { overflow: hidden; }
+
+.ed-veil-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+.ed-veil-wordmark {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 800;
+  font-size: clamp(20px, 3.2vw, 34px);
+  letter-spacing: 0.18em;
+  color: var(--sand);
+  opacity: 0;
+}
+.ed-veil-wordmark em {
+  font-style: normal;
+  color: var(--gold);
+}
+.ed-veil-line {
+  width: 120px;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+}
+
+.ed-veil-play .ed-veil-wordmark { animation: edVeilWord 0.9s var(--ease) 0.1s both; }
+.ed-veil-play .ed-veil-line     { animation: edVeilLine 1.3s var(--ease) 0.2s both; }
+.ed-veil-play                   { animation: edVeilLift 1s var(--ease) 1.7s both; }
+
+@keyframes edVeilWord {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes edVeilLine {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes edVeilLift {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-100%); }
+}
+
+/* Belt and braces: the inline gate script already removes the veil
+   under reduced motion, this covers it at the CSS level too */
+@media (prefers-reduced-motion: reduce) {
+  .ed-veil { display: none !important; }
+}

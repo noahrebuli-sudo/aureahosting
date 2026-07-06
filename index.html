@@ -27,7 +27,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 <meta name="description" content="Airbnb and short-term rental management in Adelaide for owners who want stronger returns, dynamic pricing and fully managed guest operations.">
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-<link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script src="lucide.js" defer></script>
 <meta property="og:type"        content="website">
@@ -135,6 +135,38 @@ src="https://www.facebook.com/tr?id=1027065616568144&ev=PageView&noscript=1"
 <body class="page-home">
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Intro veil: plays once per session, skipped under reduced motion -->
+<div class="ed-veil" id="edVeil" aria-hidden="true">
+  <div class="ed-veil-inner">
+    <span class="ed-veil-wordmark">AUREA <em>HOSTING</em></span>
+    <span class="ed-veil-line"></span>
+  </div>
+</div>
+<script>
+(function () {
+  var veil = document.getElementById('edVeil');
+  if (!veil) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen = false;
+  try { seen = sessionStorage.getItem('edVeilSeen') === '1'; } catch (err) {}
+  if (reduce || seen) {
+    veil.parentNode.removeChild(veil);
+    document.body.classList.add('ed-veil-done');
+    return;
+  }
+  try { sessionStorage.setItem('edVeilSeen', '1'); } catch (err) {}
+  document.body.classList.add('ed-veil-lock');
+  veil.classList.add('ed-veil-play');
+  veil.addEventListener('animationend', function (e) {
+    if (e.animationName !== 'edVeilLift') return;
+    veil.parentNode.removeChild(veil);
+    document.body.classList.remove('ed-veil-lock');
+    document.body.classList.add('ed-veil-done');
+  });
+})();
+</script>
+
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 
 <!-- ─── Header ─── -->
