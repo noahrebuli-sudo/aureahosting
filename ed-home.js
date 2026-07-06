@@ -10,10 +10,9 @@ const ED_MARKET = {
   populateStaggerMs: 2.4,
   igniteEveryMs: 150,
   line1: 'Adelaide has thousands of short stay listings.',
-  line2: 'We manage fifteen. On purpose.',
-  goldWord: 'fifteen',
-  caption: 'A deliberately small portfolio is what keeps guest replies under four minutes and pricing reviewed weekly. When a place opens, we would genuinely like to hear about your property.',
-  footnote: 'Dot field illustrative of the Adelaide market.'
+  line2: 'Every home we manage gets our full attention.',
+  goldWord: 'full attention',
+  caption: 'That attention is the product: pricing reviewed weekly, guests answered in minutes, an operator who knows your property personally. It is why we keep the portfolio deliberately small, and why the results follow.'
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -183,10 +182,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const line1    = document.getElementById('edMarketLine1');
     const line2    = document.getElementById('edMarketLine2');
     const caption  = document.getElementById('edMarketCaption');
-    const footnote = document.getElementById('edMarketFootnote');
     if (line1) line1.textContent = ED_MARKET.line1;
     if (caption) caption.textContent = ED_MARKET.caption;
-    if (footnote) footnote.textContent = ED_MARKET.footnote;
     if (line2) {
       const at = ED_MARKET.line2.indexOf(ED_MARKET.goldWord);
       line2.textContent = '';
