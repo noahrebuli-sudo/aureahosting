@@ -2603,3 +2603,133 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
   .ed-chapter-media img { height: 46vh; }
   .ed-chapters-foot { margin-top: var(--space-10); }
 }
+
+/* ─── Market field, performance and owners ─── */
+.ed-market {
+  background: var(--ed-ink);
+  color: var(--sand);
+  padding: clamp(90px, 13vh, 150px) 0;
+}
+.ed-market-line1 {
+  color: rgba(255, 253, 249, 0.55);
+  font-size: var(--text-lg);
+  margin: 0 0 var(--space-2);
+}
+.ed-market-line2 {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 800;
+  font-size: clamp(30px, 4vw, 54px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--sand);
+  margin: 0;
+}
+.ed-gold { color: var(--gold); }
+
+.ed-dotfield {
+  display: grid;
+  grid-template-columns: repeat(25, 1fr);
+  gap: 10px;
+  margin: var(--space-12) 0 var(--space-8);
+}
+.ed-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  justify-self: center;
+  background: rgba(255, 253, 249, 0.13);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease),
+              background 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+.ed-dotfield.is-populated .ed-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+.ed-dot.ed-dot-gold {
+  background: var(--gold);
+  box-shadow: 0 0 10px rgba(200, 163, 93, 0.85), 0 0 24px rgba(200, 163, 93, 0.4);
+}
+
+.ed-market-caption {
+  max-width: 580px;
+  color: rgba(255, 253, 249, 0.75);
+  line-height: 1.7;
+  margin: 0 0 var(--space-3);
+}
+.ed-market-footnote {
+  font-size: 12px;
+  color: rgba(255, 253, 249, 0.42);
+  margin: 0;
+}
+
+.ed-market-stats { margin-top: clamp(70px, 10vh, 110px); }
+.ed-market-stats-kicker { display: block; margin-bottom: var(--space-8); }
+.ed-market .perf-label {
+  color: rgba(255, 253, 249, 0.6);
+}
+.ed-market .perf-number,
+.ed-market .perf-number--static {
+  font-weight: 800;
+  color: var(--sand);
+  font-size: clamp(44px, 6vw, 84px);
+}
+.ed-market .perf-number--static .perf-unit { color: rgba(255, 253, 249, 0.6); }
+.ed-market .perf-context {
+  color: rgba(255, 253, 249, 0.45);
+}
+
+.ed-market-quotes { margin-top: clamp(70px, 10vh, 110px); }
+.ed-market-quotes-title {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 600;
+  font-size: var(--text-2xl);
+  letter-spacing: -0.02em;
+  color: var(--sand);
+  margin: 0 0 var(--space-10);
+}
+.ed-market .testimonials-inner { gap: var(--space-10); }
+.ed-market .testimonial-card {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+.ed-market .testimonial-quote {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: rgba(255, 253, 249, 0.92);
+  position: relative;
+  padding-top: 34px;
+}
+.ed-market .testimonial-quote::before {
+  content: '\201C';
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 1;
+  color: var(--gold);
+}
+.ed-market .testimonial-meta { color: rgba(255, 253, 249, 0.55); }
+.ed-market .testimonial-stat { color: var(--gold); }
+.ed-market .testimonials-prev,
+.ed-market .testimonials-next {
+  color: var(--gold);
+  border: 1px solid var(--gold-rule);
+  background: none;
+}
+
+@media (max-width: 720px) {
+  .ed-dotfield { grid-template-columns: repeat(20, 1fr); gap: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ed-dot { transition: none; opacity: 1; transform: scale(1); }
+}

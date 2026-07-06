@@ -3,6 +3,19 @@
    Loaded by index.html only
    ========================================= */
 
+/* Market field configuration: all counts and copy strings live here */
+const ED_MARKET = {
+  totalDots: 400,
+  goldDots: 15,
+  populateStaggerMs: 2.4,
+  igniteEveryMs: 150,
+  line1: 'Adelaide has thousands of short stay listings.',
+  line2: 'We manage fifteen. On purpose.',
+  goldWord: 'fifteen',
+  caption: 'A deliberately small portfolio is what keeps guest replies under four minutes and pricing reviewed weekly. When a place opens, we would genuinely like to hear about your property.',
+  footnote: 'Dot field illustrative of the Adelaide market.'
+};
+
 document.addEventListener('DOMContentLoaded', () => {
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -158,6 +171,84 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
     update();
+  })();
+
+  /* ─── Market dot field ─── */
+  (function marketField() {
+    const field = document.getElementById('edDotfield');
+    if (!field) return;
+
+    /* Copy comes from the ED_MARKET config; the markup carries the
+       same strings as a no-script fallback */
+    const line1    = document.getElementById('edMarketLine1');
+    const line2    = document.getElementById('edMarketLine2');
+    const caption  = document.getElementById('edMarketCaption');
+    const footnote = document.getElementById('edMarketFootnote');
+    if (line1) line1.textContent = ED_MARKET.line1;
+    if (caption) caption.textContent = ED_MARKET.caption;
+    if (footnote) footnote.textContent = ED_MARKET.footnote;
+    if (line2) {
+      const at = ED_MARKET.line2.indexOf(ED_MARKET.goldWord);
+      line2.textContent = '';
+      if (at >= 0) {
+        line2.appendChild(document.createTextNode(ED_MARKET.line2.slice(0, at)));
+        const gold = document.createElement('span');
+        gold.className = 'ed-gold';
+        gold.textContent = ED_MARKET.goldWord;
+        line2.appendChild(gold);
+        line2.appendChild(document.createTextNode(ED_MARKET.line2.slice(at + ED_MARKET.goldWord.length)));
+      } else {
+        line2.textContent = ED_MARKET.line2;
+      }
+    }
+
+    const dots = [];
+    for (let i = 0; i < ED_MARKET.totalDots; i++) {
+      const d = document.createElement('span');
+      d.className = 'ed-dot';
+      d.style.transitionDelay = Math.round(i * ED_MARKET.populateStaggerMs) + 'ms';
+      field.appendChild(d);
+      dots.push(d);
+    }
+
+    /* Evenly spread gold dots with a fixed pseudo-random jitter so the
+       constellation is stable between visits */
+    const goldIdx = [];
+    const step = ED_MARKET.totalDots / ED_MARKET.goldDots;
+    for (let g = 0; g < ED_MARKET.goldDots; g++) {
+      const jitter = ((g * 7919) % 13) - 6;
+      const idx = Math.min(Math.max(Math.round(g * step + step / 2 + jitter), 0), ED_MARKET.totalDots - 1);
+      goldIdx.push(idx);
+    }
+
+    function ignite(instant) {
+      const populateMs = instant ? 0 : 400 + ED_MARKET.totalDots * ED_MARKET.populateStaggerMs;
+      goldIdx.forEach((idx, order) => {
+        const delay = instant ? 0 : populateMs + order * ED_MARKET.igniteEveryMs;
+        setTimeout(() => { dots[idx].classList.add('ed-dot-gold'); }, delay);
+      });
+    }
+
+    if (reduceMotion) {
+      dots.forEach(d => {
+        d.style.transitionDelay = '0ms';
+        d.style.transition = 'none';
+      });
+      field.classList.add('is-populated');
+      ignite(true);
+      return;
+    }
+
+    const fieldObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          field.classList.add('is-populated');
+          ignite(false);
+          fieldObs.unobserve(field);
+        }
+      });
+    }, { threshold: 0.3 });
+    fieldObs.observe(field);
   })();
 
   /* ─── Magnetic hover, pointer fine only ─── */
