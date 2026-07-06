@@ -325,6 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inner = bar.querySelector('.ed-sticky-cta-inner');
     const mobile = window.matchMedia('(max-width: 720px)');
     const footer = document.querySelector('.site-footer');
+    const hero = document.querySelector('.ed-hero');
     let footerInView = false;
 
     /* Feed the outer positioner the pill's real rendered height so it can
@@ -334,12 +335,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const h = inner && inner.offsetHeight;
       if (h) bar.style.setProperty('--ed-cta-h', h + 'px');
     }
-    function pastHalf() {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      return max > 0 && window.scrollY / max >= 0.5;
+    function pastHero() {
+      return !hero || hero.getBoundingClientRect().bottom < 0;
     }
     function sync() {
-      bar.classList.toggle('is-visible', mobile.matches && pastHalf() && !footerInView);
+      bar.classList.toggle('is-visible', mobile.matches && pastHero() && !footerInView);
     }
 
     if (footer && 'IntersectionObserver' in window) {
