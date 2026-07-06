@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<link rel="preload" as="image" href="images/editorial/hero-1.jpg" imagesrcset="images/editorial/hero-1-1200.jpg 1200w, images/editorial/hero-1.jpg 2400w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="images/editorial/hero-1.webp" imagesrcset="images/editorial/hero-1-1200.webp 1200w, images/editorial/hero-1.webp 2400w" imagesizes="100vw" fetchpriority="high">
 <script src="lucide.js" defer></script>
 <meta property="og:type"        content="website">
 <meta property="og:site_name"   content="Aurea Hosting">
@@ -196,40 +196,52 @@ src="https://www.facebook.com/tr?id=1027065616568144&ev=PageView&noscript=1"
 <section class="ed-hero" id="top">
   <div class="ed-hero-slides">
     <figure class="ed-slide is-active" data-caption="Southern beaches, golden hour">
-      <img
-        src="images/editorial/hero-1.jpg"
-        srcset="images/editorial/hero-1-1200.jpg 1200w, images/editorial/hero-1.jpg 2400w"
-        sizes="100vw"
-        alt="Timber beach stairs above the surf on Adelaide's southern coast at dusk"
-        width="2400" height="1600"
-        fetchpriority="high" decoding="async">
+      <picture>
+        <source type="image/webp" srcset="images/editorial/hero-1-1200.webp 1200w, images/editorial/hero-1.webp 2400w" sizes="100vw">
+        <img
+          src="images/editorial/hero-1.jpg"
+          srcset="images/editorial/hero-1-1200.jpg 1200w, images/editorial/hero-1.jpg 2400w"
+          sizes="100vw"
+          alt="Timber beach stairs above the surf on Adelaide's southern coast at dusk"
+          width="2400" height="1600"
+          fetchpriority="high" decoding="async">
+      </picture>
     </figure>
     <figure class="ed-slide ed-slide-alt" data-caption="The beachfront esplanade">
-      <img
-        src="images/editorial/hero-2.jpg"
-        srcset="images/editorial/hero-2-1200.jpg 1200w, images/editorial/hero-2.jpg 2400w"
-        sizes="100vw"
-        alt="Palm-lined beachfront esplanade in Adelaide's west"
-        width="2400" height="1600"
-        loading="lazy" decoding="async">
+      <picture>
+        <source type="image/webp" srcset="images/editorial/hero-2-1200.webp 1200w, images/editorial/hero-2.webp 2400w" sizes="100vw">
+        <img
+          src="images/editorial/hero-2.jpg"
+          srcset="images/editorial/hero-2-1200.jpg 1200w, images/editorial/hero-2.jpg 2400w"
+          sizes="100vw"
+          alt="Palm-lined beachfront esplanade in Adelaide's west"
+          width="2400" height="1600"
+          loading="lazy" decoding="async">
+      </picture>
     </figure>
     <figure class="ed-slide" data-caption="Adelaide from the foothills">
-      <img
-        src="images/editorial/hero-3.jpg"
-        srcset="images/editorial/hero-3-1200.jpg 1200w, images/editorial/hero-3.jpg 2400w"
-        sizes="100vw"
-        alt="Adelaide city skyline seen from the eastern foothills"
-        width="2400" height="1600"
-        loading="lazy" decoding="async">
+      <picture>
+        <source type="image/webp" srcset="images/editorial/hero-3-1200.webp 1200w, images/editorial/hero-3.webp 2400w" sizes="100vw">
+        <img
+          src="images/editorial/hero-3.jpg"
+          srcset="images/editorial/hero-3-1200.jpg 1200w, images/editorial/hero-3.jpg 2400w"
+          sizes="100vw"
+          alt="Adelaide city skyline seen from the eastern foothills"
+          width="2400" height="1600"
+          loading="lazy" decoding="async">
+      </picture>
     </figure>
     <figure class="ed-slide ed-slide-alt" data-caption="Riverbank, after dark">
-      <img
-        src="images/editorial/hero-4.jpg"
-        srcset="images/editorial/hero-4-1200.jpg 1200w, images/editorial/hero-4.jpg 2400w"
-        sizes="100vw"
-        alt="Adelaide Riverbank precinct reflected in the Torrens at night"
-        width="2400" height="1600"
-        loading="lazy" decoding="async">
+      <picture>
+        <source type="image/webp" srcset="images/editorial/hero-4-1200.webp 1200w, images/editorial/hero-4.webp 2400w" sizes="100vw">
+        <img
+          src="images/editorial/hero-4.jpg"
+          srcset="images/editorial/hero-4-1200.jpg 1200w, images/editorial/hero-4.jpg 2400w"
+          sizes="100vw"
+          alt="Adelaide Riverbank precinct reflected in the Torrens at night"
+          width="2400" height="1600"
+          loading="lazy" decoding="async">
+      </picture>
     </figure>
   </div>
   <div class="ed-hero-scrim" aria-hidden="true"></div>
@@ -547,28 +559,37 @@ src="https://www.facebook.com/tr?id=1027065616568144&ev=PageView&noscript=1"
   <div class="ed-collage-word" aria-hidden="true"><span id="edCollageWord">ADELAIDE</span></div>
   <div class="ed-collage-grid">
     <figure class="ed-collage-item ed-collage-a" data-speed="0.06">
-      <img
-        src="images/editorial/collage-1.jpg"
-        srcset="images/editorial/collage-1-1200.jpg 1200w, images/editorial/collage-1.jpg 1800w"
-        sizes="(max-width: 840px) 92vw, 42vw"
-        alt="Southern Adelaide coastline with surf breaking along the beach"
-        width="1800" height="1200" loading="lazy" decoding="async">
+      <picture>
+        <source type="image/webp" srcset="images/editorial/collage-1-1200.webp 1200w, images/editorial/collage-1.webp 1800w" sizes="(max-width: 840px) 92vw, 42vw">
+        <img
+          src="images/editorial/collage-1.jpg"
+          srcset="images/editorial/collage-1-1200.jpg 1200w, images/editorial/collage-1.jpg 1800w"
+          sizes="(max-width: 840px) 92vw, 42vw"
+          alt="Southern Adelaide coastline with surf breaking along the beach"
+          width="1800" height="1200" loading="lazy" decoding="async">
+      </picture>
     </figure>
     <figure class="ed-collage-item ed-collage-b" data-speed="-0.05">
-      <img
-        src="images/editorial/collage-2.jpg"
-        srcset="images/editorial/collage-2-1200.jpg 1200w, images/editorial/collage-2.jpg 1400w"
-        sizes="(max-width: 840px) 72vw, 24vw"
-        alt="Timber boardwalk winding down the cliffs to an Adelaide beach"
-        width="1400" height="2066" loading="lazy" decoding="async">
+      <picture>
+        <source type="image/webp" srcset="images/editorial/collage-2-1200.webp 1200w, images/editorial/collage-2.webp 1400w" sizes="(max-width: 840px) 72vw, 24vw">
+        <img
+          src="images/editorial/collage-2.jpg"
+          srcset="images/editorial/collage-2-1200.jpg 1200w, images/editorial/collage-2.jpg 1400w"
+          sizes="(max-width: 840px) 72vw, 24vw"
+          alt="Timber boardwalk winding down the cliffs to an Adelaide beach"
+          width="1400" height="2066" loading="lazy" decoding="async">
+      </picture>
     </figure>
     <figure class="ed-collage-item ed-collage-c" data-speed="0.04">
-      <img
-        src="images/editorial/hero-2.jpg"
-        srcset="images/editorial/hero-2-1200.jpg 1200w, images/editorial/hero-2.jpg 2400w"
-        sizes="(max-width: 840px) 92vw, 36vw"
-        alt="Palm trees and a quiet roundabout on the Adelaide beachfront"
-        width="2400" height="1600" loading="lazy" decoding="async">
+      <picture>
+        <source type="image/webp" srcset="images/editorial/hero-2-1200.webp 1200w, images/editorial/hero-2.webp 2400w" sizes="(max-width: 840px) 92vw, 36vw">
+        <img
+          src="images/editorial/hero-2.jpg"
+          srcset="images/editorial/hero-2-1200.jpg 1200w, images/editorial/hero-2.jpg 2400w"
+          sizes="(max-width: 840px) 92vw, 36vw"
+          alt="Palm trees and a quiet roundabout on the Adelaide beachfront"
+          width="2400" height="1600" loading="lazy" decoding="async">
+      </picture>
     </figure>
   </div>
   <div class="ed-collage-caption reveal">
@@ -737,13 +758,16 @@ src="https://www.facebook.com/tr?id=1027065616568144&ev=PageView&noscript=1"
 <!-- ─── Application CTA ─── -->
 <section class="section apply-section ed-apply">
   <div class="ed-apply-bg" aria-hidden="true">
-    <img
-      src="images/editorial/hero-1.jpg"
-      srcset="images/editorial/hero-1-1200.jpg 1200w, images/editorial/hero-1.jpg 2400w"
-      sizes="100vw"
-      alt=""
-      width="2400" height="1600"
-      loading="lazy" decoding="async">
+    <picture>
+      <source type="image/webp" srcset="images/editorial/hero-1-1200.webp 1200w, images/editorial/hero-1.webp 2400w" sizes="100vw">
+      <img
+        src="images/editorial/hero-1.jpg"
+        srcset="images/editorial/hero-1-1200.jpg 1200w, images/editorial/hero-1.jpg 2400w"
+        sizes="100vw"
+        alt=""
+        width="2400" height="1600"
+        loading="lazy" decoding="async">
+    </picture>
     <div class="ed-apply-overlay"></div>
   </div>
   <div class="container">

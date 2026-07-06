@@ -275,6 +275,28 @@ document.addEventListener('DOMContentLoaded', () => {
     fieldObs.observe(field);
   })();
 
+  /* ─── Testimonial rotation: crossfade every 8s, paused on hover/focus ─── */
+  (function testimonialRotation() {
+    if (reduceMotion) return;
+    const container = document.querySelector('.ed-market #testimonials');
+    if (!container) return;
+    const nextBtn = container.querySelector('.testimonials-next');
+    const cards   = container.querySelectorAll('.testimonial-card');
+    if (!nextBtn || cards.length < 2) return;
+
+    let paused = false;
+    container.addEventListener('mouseenter', () => { paused = true; });
+    container.addEventListener('mouseleave', () => { paused = false; });
+    container.addEventListener('focusin',    () => { paused = true; });
+    container.addEventListener('focusout',   () => { paused = false; });
+
+    /* Advancing through the existing nav button keeps manual and
+       automatic control on the same state */
+    setInterval(() => {
+      if (!paused && !document.hidden) nextBtn.click();
+    }, 8000);
+  })();
+
   /* ─── Hero scroll cue: gone for good on first scroll ─── */
   (function scrollCue() {
     const cue = document.getElementById('edScrollCue');
