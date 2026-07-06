@@ -2572,7 +2572,7 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
 
 /* Desktop with motion allowed: pinned horizontal scroll.
    Reduced motion keeps the carousel at every width */
-@media (min-width: 841px) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 841px) and (prefers-reduced-motion: no-preference) and (pointer: fine) {
   .ed-chapters {
     height: 320vh;
     padding: 0;
@@ -2631,6 +2631,9 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
   grid-template-columns: repeat(25, 1fr);
   gap: 10px;
   margin: var(--space-12) 0 var(--space-8);
+  /* 400 dots in 25 columns is 16 rows of 7px plus 15 gaps of 10px,
+     reserved up front so the JS-built field causes no layout shift */
+  min-height: 262px;
 }
 .ed-dot {
   width: 7px;
@@ -2727,7 +2730,7 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
 }
 
 @media (max-width: 720px) {
-  .ed-dotfield { grid-template-columns: repeat(20, 1fr); gap: 9px; }
+  .ed-dotfield { grid-template-columns: repeat(20, 1fr); gap: 9px; min-height: 311px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2819,4 +2822,34 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
 }
 @supports not (-webkit-text-stroke: 2px black) {
   .ed-footer-wordmark { color: rgba(255, 253, 249, 0.12); }
+}
+
+/* ─── Difference-blend cursor, fine pointers only ─── */
+@media (pointer: fine) {
+  body.page-home .cursor-dot {
+    background: #ffffff;
+    mix-blend-mode: difference;
+  }
+  .ed-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid #ffffff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9998;
+    mix-blend-mode: difference;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease),
+                width 0.3s var(--ease),
+                height 0.3s var(--ease);
+  }
+  .ed-cursor-ring.is-visible { opacity: 1; }
+  .ed-cursor-ring.is-hover { width: 54px; height: 54px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ed-cursor-ring { display: none; }
 }

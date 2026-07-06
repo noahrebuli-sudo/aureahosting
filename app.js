@@ -118,6 +118,13 @@ document.addEventListener('DOMContentLoaded', () => {
           const startVal = parseInt(el.getAttribute('data-start')  || '0', 10);
           const suffix   = el.getAttribute('data-suffix')  || '';
           const prefix   = el.getAttribute('data-prefix')  || '';
+
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            el.textContent = prefix + target + suffix;
+            counterObs.unobserve(el);
+            return;
+          }
+
           const duration = 2000;
           const startTime = performance.now();
 

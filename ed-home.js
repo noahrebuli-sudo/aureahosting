@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const counter = document.getElementById('edChaptersCounter');
     const bar     = document.getElementById('edChaptersBar');
     const total   = track.children.length;
-    const pinned  = window.matchMedia('(min-width: 841px) and (prefers-reduced-motion: no-preference)');
+    const pinned  = window.matchMedia('(min-width: 841px) and (prefers-reduced-motion: no-preference) and (pointer: fine)');
 
     function pad(n) { return (n < 10 ? '0' : '') + n; }
 
@@ -249,6 +249,44 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, { threshold: 0.3 });
     fieldObs.observe(field);
+  })();
+
+  /* ─── Difference-blend cursor ring, pointer fine only ─── */
+  (function cursorRing() {
+    if (!finePointer || reduceMotion) return;
+
+    const ring = document.createElement('div');
+    ring.className = 'ed-cursor-ring';
+    ring.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(ring);
+
+    let mx = -100, my = -100, rx = -100, ry = -100;
+    let visible = false;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX;
+      my = e.clientY;
+      if (!visible) {
+        visible = true;
+        rx = mx;
+        ry = my;
+        ring.classList.add('is-visible');
+      }
+    });
+
+    document.addEventListener('mouseover', e => {
+      const interactive = e.target.closest &&
+        e.target.closest('a, button, input, select, textarea, [role="button"]');
+      ring.classList.toggle('is-hover', !!interactive);
+    });
+
+    (function loop() {
+      rx += (mx - rx) * 0.14;
+      ry += (my - ry) * 0.14;
+      ring.style.left = rx.toFixed(1) + 'px';
+      ring.style.top  = ry.toFixed(1) + 'px';
+      requestAnimationFrame(loop);
+    })();
   })();
 
   /* ─── Magnetic hover, pointer fine only ─── */
