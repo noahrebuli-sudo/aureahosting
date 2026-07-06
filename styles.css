@@ -2751,35 +2751,57 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
   .ed-dot { transition: none; opacity: 1; transform: scale(1); }
 }
 
-/* ─── Founder letter restyle ─── */
-.ed-founder { background: var(--sand-mid); }
+/* ─── Founder letter restyle: compressed two-column spread ─── */
+.ed-founder {
+  background: var(--sand-mid);
+  padding: 12vh 0;
+}
+.ed-founder .container { max-width: var(--container-wide); }
+.ed-founder .founder-letter {
+  max-width: none;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 2.4fr);
+  gap: var(--space-8) clamp(40px, 5vw, 80px);
+  align-items: start;
+  margin: 0 auto var(--space-20);
+}
+.ed-founder .founder-letter-heading {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+  margin: 0 0 var(--space-6);
+}
 .ed-founder .founder-letter-body {
   position: relative;
-  padding-top: 46px;
 }
+/* Quote mark hangs in the column gutter so it adds no height */
 .ed-founder .founder-letter-body::before {
   content: '\201C';
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -8px;
+  left: -0.85em;
   font-family: 'Switzer', -apple-system, sans-serif;
   font-weight: 700;
-  font-size: 64px;
+  font-size: 56px;
   line-height: 1;
   color: var(--gold);
 }
 .ed-founder .founder-letter-body p {
   font-family: 'Switzer', -apple-system, sans-serif;
   font-weight: 500;
-  font-size: clamp(22px, 2.5vw, 31px);
-  line-height: 1.45;
-  letter-spacing: -0.015em;
+  font-size: clamp(18px, 1.9vw, 24px);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
   color: var(--ink);
+  margin-bottom: var(--space-4);
 }
 .ed-founder .founder-signature {
   display: flex;
   align-items: center;
   gap: var(--space-4);
+  margin-top: 0;
 }
 .ed-founder .founder-signature::before {
   content: '';
@@ -2787,6 +2809,15 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
   width: 44px;
   height: 1px;
   background: var(--gold);
+}
+@media (max-width: 900px) {
+  .ed-founder { padding: 10vh 0; }
+  .ed-founder .founder-letter {
+    grid-template-columns: 1fr;
+  }
+  .ed-founder .founder-letter-body { padding-top: 42px; }
+  .ed-founder .founder-letter-body::before { left: 0; top: 0; }
+  .ed-founder .founder-letter-body p { font-size: 18px; }
 }
 
 /* ─── Final CTA over full-bleed image ─── */
