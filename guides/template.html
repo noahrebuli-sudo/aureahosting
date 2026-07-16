@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Guest Guide | {{PROPERTY_NAME}}</title>
+<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css">
+<script src="../lucide.js" defer></script>
+
+<style>
+  /* Guest guide: page-scoped layout on top of the shared design system */
+  body.page-guide { background: var(--sand); }
+
+  .guide-header {
+    position: static;
+    height: auto;
+    padding: var(--space-5) 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--white);
+  }
+  .guide-header .header-inner { justify-content: center; }
+
+  .guide-main { padding-top: var(--space-8); }
+
+  .guide-hero {
+    padding: var(--space-8) 0 var(--space-6);
+    text-align: center;
+  }
+  .guide-hero-kicker {
+    display: inline-block;
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold-text);
+    background: var(--gold-light);
+    border: 1px solid var(--gold-rule);
+    border-radius: var(--radius-pill);
+    padding: var(--space-1) var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+  .guide-hero h1 { font-size: var(--text-3xl); margin-bottom: var(--space-3); }
+  .guide-hero p { color: var(--muted); max-width: 60ch; margin: 0 auto; line-height: 1.6; }
+
+  .guide-section { padding: var(--space-10) 0; border-top: 1px solid var(--border); }
+  .guide-section:first-of-type { border-top: none; }
+  .guide-section-header { margin-bottom: var(--space-6); }
+  .guide-kicker {
+    display: block;
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: var(--space-2);
+  }
+  .guide-section h2 { font-size: var(--text-2xl); }
+
+  /* Essentials box */
+  .essentials-box {
+    background: var(--sand-mid);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+  .essential-item { display: flex; align-items: flex-start; gap: var(--space-4); }
+  .essential-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    border-radius: var(--radius-md);
+    background: var(--teal-light);
+    color: var(--teal);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .essential-icon [data-lucide] { width: 20px; height: 20px; }
+  .essential-label { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: var(--space-1); }
+  .essential-value { font-size: var(--text-base); font-weight: 600; color: var(--ink); }
+  .essential-value a { color: inherit; }
+
+  /* Emergency callout */
+  .emergency-box {
+    background: var(--ink);
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5) var(--space-6);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+  .emergency-box .essential-icon { background: rgba(255,255,255,0.12); color: var(--white); }
+  .emergency-box .essential-label { color: rgba(255,255,255,0.65); }
+  .emergency-box .essential-value { color: var(--white); }
+
+  /* Generic content list (house rules, bins, safety) */
+  .guide-list { display: grid; gap: var(--space-4); }
+  .guide-list-item {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+  .guide-list-item .essential-icon { width: 36px; height: 36px; }
+  .guide-list-item .essential-icon [data-lucide] { width: 18px; height: 18px; }
+  .guide-list-item-body h3 { font-size: var(--text-base); margin-bottom: var(--space-1); }
+  .guide-list-item-body p { color: var(--muted); font-size: var(--text-sm); line-height: 1.6; margin: 0; }
+
+  /* Steps (checkout) */
+  .guide-steps { counter-reset: step; display: grid; gap: var(--space-4); }
+  .guide-step { display: flex; gap: var(--space-4); align-items: flex-start; }
+  .guide-step-num {
+    counter-increment: step;
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: var(--white);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .guide-step-num::before { content: counter(step); }
+  .guide-step-body p { margin: 0; color: var(--ink-light); line-height: 1.6; }
+
+  /* Local guide categories */
+  .local-cat { margin-bottom: var(--space-6); }
+  .local-cat h3 { font-size: var(--text-lg); margin-bottom: var(--space-3); }
+  .local-cat ul { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-2); }
+  .local-cat li {
+    padding: var(--space-3) var(--space-4);
+    background: var(--sand-mid);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+  }
+  .local-cat li strong { color: var(--ink); }
+  .local-cat li span { color: var(--muted); }
+
+  .guide-footer {
+    text-align: center;
+    padding: var(--space-8) 0 var(--space-12);
+    color: var(--muted);
+    font-size: var(--text-sm);
+  }
+
+  @media (min-width: 640px) {
+    .essentials-box { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body class="page-guide">
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header guide-header">
+  <div class="header-inner">
+    <span class="logo" aria-label="{{PROPERTY_NAME}}">
+      <img src="../images/favicon.svg" alt="Aurea Hosting" class="badge-logo">
+      <span class="logo-text">{{PROPERTY_NAME}}</span>
+    </span>
+  </div>
+</header>
+
+<main id="main-content" class="guide-main">
+
+  <!-- ─── Welcome note ─── -->
+  <section class="guide-hero container container-narrow">
+    <span class="guide-hero-kicker">Guest Guide</span>
+    <h1>Welcome, {{GUEST_FIRST_NAME}}.</h1>
+    <p>{{WELCOME_NOTE}}</p>
+  </section>
+
+  <!-- ─── Essentials ─── -->
+  <section class="guide-section container container-narrow">
+    <div class="guide-section-header">
+      <span class="guide-kicker">Essentials</span>
+      <h2>Everything you need at a glance</h2>
+    </div>
+
+    <div class="essentials-box">
+      <div class="essential-item">
+        <div class="essential-icon"><i data-lucide="wifi"></i></div>
+        <div>
+          <div class="essential-label">Wifi network</div>
+          <div class="essential-value">{{WIFI_NETWORK}}</div>
+          <div class="essential-label" style="margin-top:var(--space-2);">Password</div>
+          <div class="essential-value">{{WIFI_PASSWORD}}</div>
+        </div>
+      </div>
+      <div class="essential-item">
+        <div class="essential-icon"><i data-lucide="log-out"></i></div>
+        <div>
+          <div class="essential-label">Checkout time</div>
+          <div class="essential-value">{{CHECKOUT_TIME}}</div>
+        </div>
+      </div>
+      <div class="essential-item">
+        <div class="essential-icon"><i data-lucide="phone"></i></div>
+        <div>
+          <div class="essential-label">Host contact</div>
+          <div class="essential-value"><a href="tel:{{HOST_PHONE_TEL}}">{{HOST_PHONE_DISPLAY}}</a></div>
+          <div class="essential-label" style="margin-top:var(--space-2);">Name</div>
+          <div class="essential-value">{{HOST_NAME}}</div>
+        </div>
+      </div>
+      <div class="essential-item">
+        <div class="essential-icon"><i data-lucide="log-in"></i></div>
+        <div>
+          <div class="essential-label">Check-in time</div>
+          <div class="essential-value">{{CHECKIN_TIME}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="emergency-box">
+      <div class="essential-icon"><i data-lucide="siren"></i></div>
+      <div>
+        <div class="essential-label">Emergency line, 24/7</div>
+        <div class="essential-value"><a href="tel:{{EMERGENCY_PHONE_TEL}}">{{EMERGENCY_PHONE_DISPLAY}}</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── The home ─── -->
+  <section class="guide-section container container-narrow">
+    <div class="guide-section-header">
+      <span class="guide-kicker">The Home</span>
+      <h2>{{PROPERTY_NAME}}</h2>
+    </div>
+    <p>{{PROPERTY_DESCRIPTION}}</p>
+    <div class="guide-list" style="margin-top:var(--space-6);">
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="bed-double"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Sleeping arrangements</h3>
+          <p>{{SLEEPING_ARRANGEMENTS}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="car"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Parking</h3>
+          <p>{{PARKING_INSTRUCTIONS}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="key-round"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Access and lockbox</h3>
+          <p>{{ACCESS_INSTRUCTIONS}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="thermometer"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Heating and cooling</h3>
+          <p>{{CLIMATE_CONTROL_INSTRUCTIONS}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="tv"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Appliances and entertainment</h3>
+          <p>{{APPLIANCE_INSTRUCTIONS}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── House rules ─── -->
+  <section class="guide-section container container-narrow">
+    <div class="guide-section-header">
+      <span class="guide-kicker">House Rules</span>
+      <h2>A few things to keep in mind</h2>
+    </div>
+    <div class="guide-list">
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="users"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Maximum guests</h3>
+          <p>{{MAX_GUESTS_RULE}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="party-popper"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Parties and events</h3>
+          <p>{{PARTIES_RULE}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="cigarette-off"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Smoking</h3>
+          <p>{{SMOKING_RULE}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="paw-print"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Pets</h3>
+          <p>{{PETS_RULE}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="volume-2"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Quiet hours</h3>
+          <p>{{QUIET_HOURS_RULE}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Bins and practicalities ─── -->
+  <section class="guide-section container container-narrow">
+    <div class="guide-section-header">
+      <span class="guide-kicker">Bins and Practicalities</span>
+      <h2>Keeping the place running smoothly</h2>
+    </div>
+    <div class="guide-list">
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="trash-2"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Bin collection day</h3>
+          <p>{{BIN_COLLECTION_DAY}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="recycle"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Where the bins are</h3>
+          <p>{{BIN_LOCATION_INSTRUCTIONS}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="droplets"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Water and power</h3>
+          <p>{{UTILITIES_NOTES}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="washing-machine"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Laundry</h3>
+          <p>{{LAUNDRY_INSTRUCTIONS}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Local guide ─── -->
+  <section class="guide-section container container-narrow">
+    <div class="guide-section-header">
+      <span class="guide-kicker">Local Guide</span>
+      <h2>Getting to know {{SUBURB_NAME}}</h2>
+    </div>
+
+    <div class="local-cat">
+      <h3>Food and coffee</h3>
+      <ul>
+        <li><strong>{{CAFE_1_NAME}}</strong> <span>{{CAFE_1_NOTE}}</span></li>
+        <li><strong>{{RESTAURANT_1_NAME}}</strong> <span>{{RESTAURANT_1_NOTE}}</span></li>
+        <li><strong>{{RESTAURANT_2_NAME}}</strong> <span>{{RESTAURANT_2_NOTE}}</span></li>
+      </ul>
+    </div>
+
+    <div class="local-cat">
+      <h3>Groceries and essentials</h3>
+      <ul>
+        <li><strong>{{SUPERMARKET_NAME}}</strong> <span>{{SUPERMARKET_NOTE}}</span></li>
+        <li><strong>{{PHARMACY_NAME}}</strong> <span>{{PHARMACY_NOTE}}</span></li>
+      </ul>
+    </div>
+
+    <div class="local-cat">
+      <h3>Things to do</h3>
+      <ul>
+        <li><strong>{{ATTRACTION_1_NAME}}</strong> <span>{{ATTRACTION_1_NOTE}}</span></li>
+        <li><strong>{{ATTRACTION_2_NAME}}</strong> <span>{{ATTRACTION_2_NOTE}}</span></li>
+      </ul>
+    </div>
+
+    <div class="local-cat">
+      <h3>Getting around</h3>
+      <ul>
+        <li><strong>Public transport</strong> <span>{{TRANSPORT_NOTE}}</span></li>
+        <li><strong>Taxi and rideshare</strong> <span>{{RIDESHARE_NOTE}}</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─── Checkout steps ─── -->
+  <section class="guide-section container container-narrow">
+    <div class="guide-section-header">
+      <span class="guide-kicker">Checkout</span>
+      <h2>Before you leave</h2>
+    </div>
+    <div class="guide-steps">
+      <div class="guide-step">
+        <div class="guide-step-num" aria-hidden="true"></div>
+        <div class="guide-step-body"><p>{{CHECKOUT_STEP_1}}</p></div>
+      </div>
+      <div class="guide-step">
+        <div class="guide-step-num" aria-hidden="true"></div>
+        <div class="guide-step-body"><p>{{CHECKOUT_STEP_2}}</p></div>
+      </div>
+      <div class="guide-step">
+        <div class="guide-step-num" aria-hidden="true"></div>
+        <div class="guide-step-body"><p>{{CHECKOUT_STEP_3}}</p></div>
+      </div>
+      <div class="guide-step">
+        <div class="guide-step-num" aria-hidden="true"></div>
+        <div class="guide-step-body"><p>{{CHECKOUT_STEP_4}}</p></div>
+      </div>
+      <div class="guide-step">
+        <div class="guide-step-num" aria-hidden="true"></div>
+        <div class="guide-step-body"><p>{{CHECKOUT_STEP_5}}</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Safety information ─── -->
+  <section class="guide-section container container-narrow">
+    <div class="guide-section-header">
+      <span class="guide-kicker">Safety Information</span>
+      <h2>Good to know before you settle in</h2>
+    </div>
+    <div class="guide-list">
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="flame"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Smoke and carbon monoxide alarms</h3>
+          <p>{{SMOKE_ALARM_NOTE}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="flame-kindling"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Fire extinguisher location</h3>
+          <p>{{FIRE_EXTINGUISHER_LOCATION}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="door-open"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Nearest exits</h3>
+          <p>{{EXIT_ROUTE_NOTE}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="cross"></i></div>
+        <div class="guide-list-item-body">
+          <h3>First aid kit</h3>
+          <p>{{FIRST_AID_LOCATION}}</p>
+        </div>
+      </div>
+      <div class="guide-list-item">
+        <div class="essential-icon"><i data-lucide="building-2"></i></div>
+        <div class="guide-list-item-body">
+          <h3>Nearest hospital</h3>
+          <p>{{NEAREST_HOSPITAL_NOTE}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="guide-footer">{{PROPERTY_NAME}} is managed by Aurea Hosting on behalf of the owner.</p>
+
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.lucide) { lucide.createIcons(); }
+    else {
+      var s = document.querySelector('script[src*=lucide]');
+      if (s) s.addEventListener('load', function () { lucide.createIcons(); });
+    }
+  });
+</script>
+</body>
+</html>
