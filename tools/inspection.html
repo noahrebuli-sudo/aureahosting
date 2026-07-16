@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Aurea Inspection</title>
+<title>Aurea Property Tool</title>
 <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#c8a35d;--gold-text:#9a7a3d;--ink:#172226;--sand:#fffdf9;--rule:#d9d2c4;--teal:#1b7f74;--attn:#b3542e;}
@@ -12,11 +12,15 @@
 body{font-family:'Switzer',system-ui,sans-serif;background:var(--sand);color:var(--ink);font-size:16px;line-height:1.5;}
 .wrap{max-width:720px;margin:0 auto;padding:16px 16px 120px;}
 header.app h1{font-family:'Satoshi',sans-serif;font-weight:700;font-size:1.35rem;letter-spacing:.14em;text-align:center;margin:8px 0 2px;}
-header.app .sub{text-align:center;color:var(--gold-text);letter-spacing:.28em;font-size:.7rem;text-transform:uppercase;margin-bottom:18px;}
+header.app .sub{text-align:center;color:var(--gold-text);letter-spacing:.28em;font-size:.7rem;text-transform:uppercase;margin-bottom:14px;}
+.tabs{display:flex;gap:6px;margin-bottom:16px;background:#fff;border:1px solid var(--rule);border-radius:12px;padding:5px;}
+.tabs button{flex:1;border:none;background:none;font:inherit;font-size:.82rem;font-weight:600;padding:11px 4px;border-radius:9px;color:#8a8578;}
+.tabs button.active{background:var(--ink);color:#fff;}
 .meta{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:14px;margin-bottom:18px;}
 .meta label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-text);margin:10px 0 3px;}
 .meta label:first-child{margin-top:0;}
 .meta input,.meta select{width:100%;padding:10px;border:1px solid var(--rule);border-radius:8px;font:inherit;background:var(--sand);}
+.modeIntro{font-size:.8rem;color:#8a8578;margin:-6px 0 14px;text-align:center;}
 section.zone{background:#fff;border:1px solid var(--rule);border-radius:10px;margin-bottom:12px;overflow:hidden;}
 .zone h2{font-family:'Satoshi',sans-serif;font-size:.95rem;font-weight:700;padding:13px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
 .zone h2 .tally{font-size:.72rem;font-weight:500;color:var(--gold-text);}
@@ -26,27 +30,29 @@ section.zone{background:#fff;border:1px solid var(--rule);border-radius:10px;mar
 .item{padding:12px 14px;border-bottom:1px solid #f0ece2;}
 .item:last-child{border-bottom:none;}
 .item .row{display:flex;justify-content:space-between;align-items:center;gap:10px;}
-.item .name{font-size:.92rem;flex:1;}
+.item .name{font-size:.92rem;flex:1;font-weight:500;}
 .tri{display:flex;gap:6px;flex-shrink:0;}
 .tri button{border:1px solid var(--rule);background:var(--sand);border-radius:8px;padding:8px 11px;font:inherit;font-size:.78rem;font-weight:600;color:#8a8578;min-width:44px;min-height:40px;}
 .tri button.on-ok{background:var(--teal);border-color:var(--teal);color:#fff;}
 .tri button.on-attn{background:var(--attn);border-color:var(--attn);color:#fff;}
 .tri button.on-na{background:#8a8578;border-color:#8a8578;color:#fff;}
+.chips{display:flex;gap:8px;margin:8px 0 2px;flex-wrap:wrap;}
+.chips button{border:1px solid var(--rule);background:var(--sand);border-radius:20px;padding:7px 13px;font:inherit;font-size:.76rem;font-weight:600;color:#8a8578;}
+.chips button.on{background:var(--teal);border-color:var(--teal);color:#fff;}
 .detail{margin-top:10px;display:none;}
-.item.flagged .detail{display:block;}
-.detail textarea{width:100%;min-height:64px;padding:9px;border:1px solid var(--rule);border-radius:8px;font:inherit;font-size:.9rem;background:var(--sand);}
+.item.flagged .detail,.item.notes .detail{display:block;}
+.detail textarea{width:100%;min-height:58px;padding:9px;border:1px solid var(--rule);border-radius:8px;font:inherit;font-size:.9rem;background:var(--sand);}
 .detail .photo-row{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
 .detail .photo-row img{width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--rule);}
 .addphoto{border:1px dashed var(--gold);color:var(--gold-text);background:none;border-radius:8px;padding:10px 12px;font:inherit;font-size:.8rem;}
 .overall{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:14px;margin:6px 0 12px;}
 .overall label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-text);margin-bottom:5px;}
 .overall textarea{width:100%;min-height:84px;padding:10px;border:1px solid var(--rule);border-radius:8px;font:inherit;background:var(--sand);}
-.bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--rule);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:flex;gap:10px;max-width:100%;}
+.bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--rule);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:flex;gap:10px;}
 .bar button{flex:1;padding:14px;border-radius:10px;font:inherit;font-weight:700;border:none;}
 #genBtn{background:var(--ink);color:#fff;}
 #jsonBtn{background:none;border:1px solid var(--rule);color:var(--ink);flex:0 0 auto;padding:14px 16px;font-weight:500;}
 .hint{font-size:.75rem;color:#8a8578;text-align:center;margin:14px 0;}
-/* ---------- report ---------- */
 #report{display:none;}
 @media print{
  body{background:#fff;}
@@ -67,9 +73,9 @@ section.zone{background:#fff;border:1px solid var(--rule);border-radius:10px;mar
  #report td.st.attn{color:var(--attn);}
  #report td.st.okc{color:var(--teal);}
  #report .note{color:#4a463c;font-size:9pt;}
+ #report .chipline{color:var(--teal);font-size:8.5pt;font-weight:700;}
  #report .rphotos{display:flex;flex-wrap:wrap;gap:3mm;margin:2mm 0;}
  #report .rphotos img{width:52mm;border-radius:2mm;border:1px solid var(--rule);}
- #report .actions{margin-top:2mm;}
  #report .foot{margin-top:8mm;border-top:1px solid var(--rule);padding-top:2.5mm;font-size:8pt;color:#6a6558;text-align:center;}
  #report .zone-block{page-break-inside:avoid;}
 }
@@ -77,24 +83,32 @@ section.zone{background:#fff;border:1px solid var(--rule);border-radius:10px;mar
 </head>
 <body>
 <div class="wrap">
-<header class="app"><h1>AUREA</h1><div class="sub">Property Inspection</div></header>
+<header class="app"><h1>AUREA</h1><div class="sub">Property Tool</div></header>
+
+<div class="tabs">
+ <button data-mode="inspect" class="active">Inspection</button>
+ <button data-mode="review">Property Review</button>
+ <button data-mode="intake">Intake</button>
+</div>
+<div class="modeIntro" id="modeIntro"></div>
 
 <div class="meta">
  <label>Property address</label><input id="mAddr" placeholder="e.g. 23 Heysen Crescent, West Lakes">
- <label>Inspection type</label>
- <select id="mType"><option>Quarterly formal inspection</option><option>Interim inspection</option><option>Onboarding baseline</option></select>
- <label>Inspected by</label><input id="mBy" value="Noah Rebuli">
+ <div id="ownerWrap"><label>Owner name</label><input id="mOwner" placeholder="Owner or lead name"></div>
+ <div id="typeWrap"><label>Inspection type</label>
+ <select id="mType"><option>Quarterly formal inspection</option><option>Interim inspection</option></select></div>
+ <label>Completed by</label><input id="mBy" value="Noah Rebuli">
  <label>Date</label><input id="mDate" type="date">
 </div>
 
 <div id="zones"></div>
 
 <div class="overall">
- <label>Overall condition and general notes</label>
- <textarea id="mOverall" placeholder="One honest paragraph on the state of the home."></textarea>
+ <label id="overallLabel">Overall notes</label>
+ <textarea id="mOverall"></textarea>
 </div>
 
-<p class="hint">Progress saves automatically on this device (photos excluded). Attention items appear as actions in the report.</p>
+<p class="hint">Progress saves automatically on this device per tab (photos excluded). Finish and generate on the device you started on.</p>
 </div>
 
 <div class="bar">
@@ -105,140 +119,350 @@ section.zone{background:#fff;border:1px solid var(--rule);border-radius:10px;mar
 <div id="report"></div>
 
 <script>
-const ZONES=[
- ["Exterior and grounds",["Facade, gutters and eaves (visual)","Lawns and gardens","Fencing and gates","Driveway and paths","Outdoor furniture","Bin area and bins","Pool area, water and barrier latch"]],
- ["Entry and access",["Smart lock / lockbox operation","Front door and frame","Exterior lighting","Spare key audit"]],
- ["Living areas",["Walls, paint and skirting","Flooring and carpets","Sofas and furniture condition","TV and electronics operating","Windows, screens and locks","Blinds and curtains","Heating and cooling operating"]],
- ["Kitchen",["Oven and cooktop operating","Rangehood and filter","Dishwasher operating","Fridge and freezer","Small appliances (kettle, toaster, coffee)","Benchtops and splashback","Cupboards and drawers","Under-sink plumbing (leaks)"]],
- ["Bedrooms",["Mattresses and protectors","Bed frames and heads","Wardrobes and hangers","Bedside lamps","Linen stock condition"]],
- ["Bathrooms",["Grout, seals and silicone","Shower screen and head","Toilets (operation, leaks)","Exhaust fans","Vanity and taps","Hot water at taps"]],
- ["Laundry",["Washing machine operating","Dryer operating and lint filter","Taps and hoses","Iron and board"]],
- ["Safety and compliance",["Smoke alarms TESTED","Fire extinguisher in date","Fire blanket present","First aid kit stocked","Switchboard and RCD labelled","Trip hazards","Pool safety compliance (if applicable)"]],
- ["Consumables and presentation",["Consumables stocked to standard","Compendium present and current","QR guide frame in place","Cleanliness to turnover standard","Styling and presentation"]]
-];
-const state={items:{},photos:{}};
-const zonesEl=document.getElementById('zones');
-document.getElementById('mDate').value=new Date().toISOString().slice(0,10);
+// item forms:
+//  "Name"                          -> tri-state check (inspection)
+//  ["Name","hint"]                 -> notes + photos card
+//  ["Name","hint",["Chip","Chip"]] -> notes + photos card with quick-confirm chips
+const BED_CHIPS = ["Bedding standard", "Lamps and power"];
+const BED_HINT = "Bed size and layout. Bedding standard = protector, 4 pillows with protectors, quilt and cover. Lamps and power = bedside lamps working, powerboard available.";
 
-ZONES.forEach((z,zi)=>{
- const sec=document.createElement('section');sec.className='zone'+(zi===0?' open':'');
- const h=document.createElement('h2');h.innerHTML=`<span>${z[0]}</span><span class="tally" id="tally${zi}"></span>`;
- h.onclick=()=>sec.classList.toggle('open');
- const box=document.createElement('div');box.className='items';
- z[1].forEach((name,ii)=>{
-  const key=zi+'.'+ii;
-  const it=document.createElement('div');it.className='item';it.id='item'+key;
-  it.innerHTML=`<div class="row"><div class="name">${name}</div>
-   <div class="tri">
-    <button type="button" data-v="OK">OK</button>
-    <button type="button" data-v="Attention">!</button>
-    <button type="button" data-v="N/A">N/A</button>
-   </div></div>
-   <div class="detail">
-    <textarea placeholder="What needs attention, and what should happen next." oninput="setNote('${key}',this.value)"></textarea>
-    <div class="photo-row" id="ph${key}">
-     <button type="button" class="addphoto" onclick="document.getElementById('file${key}').click()">+ Photo</button>
-     <input type="file" id="file${key}" accept="image/*" capture="environment" multiple hidden onchange="addPhotos('${key}',this)">
-    </div>
-   </div>`;
-  it.querySelectorAll('.tri button').forEach(b=>{b.onclick=()=>setStatus(key,b.dataset.v,it,zi);});
-  box.appendChild(it);
- });
- sec.appendChild(h);sec.appendChild(box);zonesEl.appendChild(sec);
-});
-
-function setStatus(key,v,itemEl,zi){
- state.items[key]=state.items[key]||{};
- state.items[key].status=v;
- itemEl.querySelectorAll('.tri button').forEach(b=>{
-  b.className=(b.dataset.v===v)?({'OK':'on-ok','Attention':'on-attn','N/A':'on-na'})[v]:'';
- });
- itemEl.classList.toggle('flagged',v==='Attention');
- tally(zi);save();
-}
-function setNote(key,val){state.items[key]=state.items[key]||{};state.items[key].note=val;save();}
-function addPhotos(key,input){
- state.photos[key]=state.photos[key]||[];
- [...input.files].forEach(f=>{
-  const r=new FileReader();
-  r.onload=e=>{
-   state.photos[key].push(e.target.result);
-   const img=document.createElement('img');img.src=e.target.result;
-   document.getElementById('ph'+key).appendChild(img);
-  };
-  r.readAsDataURL(f);
- });
- input.value='';
-}
-function tally(zi){
- let ok=0,attn=0,done=0,total=ZONES[zi][1].length;
- ZONES[zi][1].forEach((_,ii)=>{const s=(state.items[zi+'.'+ii]||{}).status;if(s){done++;if(s==='Attention')attn++;else ok++;}});
- const t=document.getElementById('tally'+zi);
- t.textContent=attn?`${done}/${total} · ${attn} attention`:`${done}/${total}`;
- t.className='tally'+(attn?' warn':'');
-}
-function save(){
- try{localStorage.setItem('aureaInspect',JSON.stringify({
-  meta:{addr:mAddr.value,type:mType.value,by:mBy.value,date:mDate.value,overall:mOverall.value},
-  items:state.items
- }));}catch(e){}
-}
-['mAddr','mType','mBy','mDate','mOverall'].forEach(id=>document.getElementById(id).addEventListener('input',save));
-(function restore(){
- try{
-  const d=JSON.parse(localStorage.getItem('aureaInspect')||'null');if(!d)return;
-  mAddr.value=d.meta.addr||'';mType.value=d.meta.type||mType.value;mBy.value=d.meta.by||mBy.value;
-  if(d.meta.date)mDate.value=d.meta.date;mOverall.value=d.meta.overall||'';
-  Object.entries(d.items||{}).forEach(([key,val])=>{
-   state.items[key]=val;
-   const it=document.getElementById('item'+key);if(!it)return;
-   if(val.status){const zi=parseInt(key.split('.')[0]);
-    it.querySelectorAll('.tri button').forEach(b=>{b.className=(b.dataset.v===val.status)?({'OK':'on-ok','Attention':'on-attn','N/A':'on-na'})[val.status]:'';});
-    it.classList.toggle('flagged',val.status==='Attention');tally(zi);}
-   if(val.note)it.querySelector('textarea').value=val.note;
-  });
- }catch(e){}
-})();
-
-document.getElementById('jsonBtn').onclick=()=>{
- const blob=new Blob([localStorage.getItem('aureaInspect')||'{}'],{type:'application/json'});
- const a=document.createElement('a');a.href=URL.createObjectURL(blob);
- a.download=(mDate.value||'inspection')+' inspection data.json';a.click();
+const MODES = {
+ inspect: {
+  title: "Property Inspection Report",
+  intro: "Formal walkthrough. Every item OK, Attention, or N/A. Attention items become actions.",
+  overall: "Overall condition and general notes",
+  zones: [
+   ["Exterior and grounds", ["Facade, gutters and eaves (visual)","Lawns and gardens","Fencing and gates","Driveway and paths","Outdoor furniture","Bin area and bins","Pool area, water and barrier latch"]],
+   ["Entry and access", ["Smart lock / lockbox operation","Front door and frame","Exterior lighting","Spare key audit"]],
+   ["Living areas", ["Walls, paint and skirting","Flooring and carpets","Sofas and furniture condition","TV and electronics operating","Windows, screens and locks","Blinds and curtains","Heating and cooling operating"]],
+   ["Kitchen", ["Oven and cooktop operating","Rangehood and filter","Dishwasher operating","Fridge and freezer","Small appliances (kettle, toaster, coffee)","Benchtops and splashback","Cupboards and drawers","Under-sink plumbing (leaks)"]],
+   ["Bedrooms", ["Mattresses and protectors","Bed frames and heads","Wardrobes and hangers","Bedside lamps","Linen stock condition"]],
+   ["Bathrooms", ["Grout, seals and silicone","Shower screen and head","Toilets (operation, leaks)","Exhaust fans","Vanity and taps","Hot water at taps"]],
+   ["Laundry", ["Washing machine operating","Dryer operating and lint filter","Taps and hoses","Iron and board"]],
+   ["Safety and compliance", ["Smoke alarms TESTED","Fire extinguisher in date","Fire blanket present","First aid kit stocked","Switchboard and RCD labelled","Trip hazards","Pool safety compliance (if applicable)"]],
+   ["Consumables and presentation", ["Consumables stocked to standard","Compendium present and current","QR guide frame in place","Cleanliness to turnover standard","Styling and presentation"]],
+  ],
+ },
+ review: {
+  title: "Initial Property Review",
+  intro: "First onsite visit. Capture the home, the conversation, and what was agreed.",
+  overall: "Meeting summary and general impressions",
+  zones: [
+   ["Property snapshot", [
+    ["Bedrooms", "How many, sizes, current beds if furnished"],
+    ["Bathrooms", "How many, ensuites, condition at a glance"],
+    ["Parking", "Garage, driveway, street"],
+    ["Guest capacity potential", "Realistic max guests once set up"],
+    ["Furnishing state", "Furnished, partly, empty; what stays"]]],
+   ["Walkthrough", [
+    ["Street appeal and entry", "First impression, access, lockbox options"],
+    ["Living areas", "Layout, light, condition, standouts"],
+    ["Kitchen", "Age, appliances present, condition"],
+    ["Bedrooms", "Condition, sizes, built-ins"],
+    ["Bathrooms", "Condition, anything dated or leaking"],
+    ["Outdoor, pool and grounds", "Alfresco, pool state, garden upkeep"]]],
+   ["Assessment", [
+    ["Standout features", "What will actually drive bookings"],
+    ["Condition concerns", "What needs fixing before launch"],
+    ["Styling and furnishing needs", "What the home needs to reach standard"]]],
+   ["The conversation", [
+    ["Improvements discussed", "What was suggested and how it landed"],
+    ["Owner priorities and concerns", "What matters to them, hesitations, timeline drivers"],
+    ["Next steps agreed", "Who does what, by when"]]],
+  ],
+ },
+ intake: {
+  title: "Property Intake Record",
+  intro: "Post-signing documentation visit. Photograph and note everything: this becomes the property cheat sheet.",
+  overall: "General notes and anything without a home above",
+  zones: [
+   ["Access, keys and arrival", [
+    ["Key sets collected", "How many, which locks, where each set lives"],
+    ["Lockbox or smart lock", "Type, location, admin details location"],
+    ["Alarm system", "Type, panel location, code storage"],
+    ["Gates, garage and remotes", "What exists, how many remotes, quirks"],
+    ["Guest parking", "Where guests park, permits, EV charging if any"],
+    ["Mailbox and mail", "Location, key, what happens to owner mail"]]],
+   ["Utilities and services", [
+    ["Hot water system", "Type, location, controls and how to relight or reset"],
+    ["Switchboard and RCD", "Location, labelling, access"],
+    ["Gas meter and shutoff", "Location, access"],
+    ["Water mains shutoff", "Location, access"],
+    ["Solar system", "Inverter location, monitoring, quirks (if fitted)"],
+    ["Irrigation and garden", "Timers, watering system, gardener arrangement"],
+    ["Bins", "Collection day, which bin which week, where they live"],
+    ["Heating and cooling", "System, controls location, quirks"]]],
+   ["Wifi and tech", [
+    ["Wifi", "Network name and password"],
+    ["Router", "Location, restart procedure"],
+    ["TV and streaming", "How it works, what is signed in"],
+    ["Noise monitor", "Location and account, if fitted"]]],
+   ["Appliances", [
+    ["Oven and cooktop", "Brand, model, quirks"],
+    ["Dishwasher", "Brand, quirks, tablet location"],
+    ["Fridge", "Brand, ice or water features"],
+    ["Washing machine and dryer", "Brands, lint filter, quirks"],
+    ["Coffee machine and smalls", "Type, pods required, microwave, kettle"],
+    ["BBQ", "Type, gas bottle location, tools, cleaning arrangement"]]],
+   ["Rooms and bedding", [
+    ["Bedroom 1", BED_HINT, BED_CHIPS],
+    ["Bedroom 2", BED_HINT, BED_CHIPS],
+    ["Bedroom 3", BED_HINT, BED_CHIPS],
+    ["Bedroom 4", BED_HINT, BED_CHIPS],
+    ["Bedroom 5 / study", BED_HINT, BED_CHIPS],
+    ["Sofa beds and extra bedding", "What converts, where spare bedding lives"],
+    ["Living configuration", "Seating count, TV position, photo"]]],
+   ["Housekeeping setup", [
+    ["Linen inventory and storage", "Sets per bed size, where spares live, rented or owned"],
+    ["Cleaning equipment", "Vacuum, mop, supplies: what exists and where"],
+    ["Consumables storage", "Where the Aurea stock lives, restock access"],
+    ["Appliance manuals", "Where they live, or photograph them all now"]]],
+   ["Safety equipment", [
+    ["Smoke alarms", "Locations, type, last test"],
+    ["Fire extinguisher and blanket", "Locations, dates"],
+    ["First aid kit", "Location, stocked"],
+    ["Pool safety and equipment", "Barrier, latch, compliance status, pump and filter location, service arrangement"]]],
+   ["Owner items and arrangements", [
+    ["Durable items missing (clause 9.2)", "Mattresses, protectors, cookware, anything the owner must supply"],
+    ["Kitchen equipped for capacity", "Crockery, cutlery, glassware counts against max guests"],
+    ["Owner-locked or private areas", "Sheds, cupboards, rooms excluded from guest use"],
+    ["Warranties and preferred trades", "Anything under warranty, trades the owner wants used"],
+    ["Neighbour notes", "Introductions made, sensitivities, shared driveways or walls"],
+    ["Agreed owner actions", "What the owner is doing, by when"]]],
+   ["Quirks and baseline", [
+    ["Quirks guests will ask about", "The sticky door, the tricky switch"],
+    ["Condition baseline photos", "General shots of every room, pre-guest condition record"]]],
+  ],
+ },
 };
 
-document.getElementById('genBtn').onclick=()=>{
- const R=document.getElementById('report');
- const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
- const actions=[];
- let zonesHtml='';
- ZONES.forEach((z,zi)=>{
-  let rows='';
-  z[1].forEach((name,ii)=>{
-   const d=state.items[zi+'.'+ii]||{};if(!d.status)return;
-   const cls=d.status==='Attention'?'attn':(d.status==='OK'?'okc':'');
-   rows+=`<tr><td>${esc(name)}${d.note?`<div class="note">${esc(d.note)}</div>`:''}
-    ${state.photos[zi+'.'+ii]?`<div class="rphotos">${state.photos[zi+'.'+ii].map(p=>`<img src="${p}">`).join('')}</div>`:''}
-    </td><td class="st ${cls}">${d.status}</td></tr>`;
-   if(d.status==='Attention')actions.push({zone:z[0],name,note:d.note||''});
+let mode = "inspect";
+const state = {};
+Object.keys(MODES).forEach(m => state[m] = { items: {}, photos: {} });
+
+const zonesEl = document.getElementById("zones");
+document.getElementById("mDate").value = new Date().toISOString().slice(0, 10);
+
+function isNoteMode(m) { return m !== "inspect"; }
+function storeKey(m) { return "aureaTool_" + m; }
+
+function render() {
+ const M = MODES[mode];
+ document.getElementById("modeIntro").textContent = M.intro;
+ document.getElementById("overallLabel").textContent = M.overall;
+ document.getElementById("typeWrap").style.display = mode === "inspect" ? "" : "none";
+ document.getElementById("ownerWrap").style.display = isNoteMode(mode) ? "" : "none";
+ document.querySelectorAll(".tabs button").forEach(b => b.classList.toggle("active", b.dataset.mode === mode));
+ zonesEl.innerHTML = "";
+ M.zones.forEach((z, zi) => {
+  const sec = document.createElement("section"); sec.className = "zone" + (zi === 0 ? " open" : "");
+  const h = document.createElement("h2");
+  h.innerHTML = `<span>${z[0]}</span><span class="tally" id="tally${zi}"></span>`;
+  h.onclick = () => sec.classList.toggle("open");
+  const box = document.createElement("div"); box.className = "items";
+  z[1].forEach((def, ii) => {
+   const noteItem = Array.isArray(def);
+   const name = noteItem ? def[0] : def;
+   const hint = noteItem ? def[1] : "What needs attention, and what should happen next.";
+   const chips = (noteItem && def[2]) ? def[2] : null;
+   const key = zi + "." + ii;
+   const d = state[mode].items[key] || {};
+   const it = document.createElement("div");
+   it.className = "item" + (noteItem ? " notes" : (d.status === "Attention" ? " flagged" : ""));
+   it.id = "item" + key;
+   it.innerHTML = `<div class="row"><div class="name">${name}</div>
+    ${noteItem ? "" : `<div class="tri">
+     <button type="button" data-v="OK">OK</button>
+     <button type="button" data-v="Attention">!</button>
+     <button type="button" data-v="N/A">N/A</button></div>`}
+    </div>
+    <div class="detail">
+     ${chips ? `<div class="chips">${chips.map(c => `<button type="button" data-chip="${c}">${c}</button>`).join("")}</div>` : ""}
+     <textarea placeholder="${hint}"></textarea>
+     <div class="photo-row" id="ph${key}">
+      <button type="button" class="addphoto">+ Photo</button>
+      <input type="file" accept="image/*" ${mode === "inspect" ? 'capture="environment"' : ""} multiple hidden>
+     </div>
+    </div>`;
+   const ta = it.querySelector("textarea");
+   ta.value = d.note || "";
+   ta.oninput = () => { state[mode].items[key] = state[mode].items[key] || {}; state[mode].items[key].note = ta.value; save(); };
+   if (chips) {
+    it.querySelectorAll(".chips button").forEach(cb => {
+     const cur = (d.checks || {})[cb.dataset.chip];
+     if (cur) cb.classList.add("on");
+     cb.onclick = () => {
+      state[mode].items[key] = state[mode].items[key] || {};
+      state[mode].items[key].checks = state[mode].items[key].checks || {};
+      const now = !state[mode].items[key].checks[cb.dataset.chip];
+      state[mode].items[key].checks[cb.dataset.chip] = now;
+      cb.classList.toggle("on", now);
+      tally(zi); save();
+     };
+    });
+   }
+   const file = it.querySelector('input[type=file]');
+   it.querySelector(".addphoto").onclick = () => file.click();
+   file.onchange = () => {
+    state[mode].photos[key] = state[mode].photos[key] || [];
+    [...file.files].forEach(f => {
+     const r = new FileReader();
+     r.onload = e => {
+      state[mode].photos[key].push(e.target.result);
+      const img = document.createElement("img"); img.src = e.target.result;
+      document.getElementById("ph" + key).appendChild(img);
+     };
+     r.readAsDataURL(f);
+    });
+    file.value = "";
+   };
+   (state[mode].photos[key] || []).forEach(src => {
+    const img = document.createElement("img"); img.src = src;
+    it.querySelector(".photo-row").appendChild(img);
+   });
+   if (!noteItem) {
+    it.querySelectorAll(".tri button").forEach(b => {
+     if (d.status === b.dataset.v) b.className = ({ OK: "on-ok", Attention: "on-attn", "N/A": "on-na" })[d.status];
+     b.onclick = () => {
+      state[mode].items[key] = state[mode].items[key] || {};
+      state[mode].items[key].status = b.dataset.v;
+      it.querySelectorAll(".tri button").forEach(x => {
+       x.className = (x.dataset.v === b.dataset.v) ? ({ OK: "on-ok", Attention: "on-attn", "N/A": "on-na" })[b.dataset.v] : "";
+      });
+      it.classList.toggle("flagged", b.dataset.v === "Attention");
+      tally(zi); save();
+     };
+    });
+   }
+   box.appendChild(it);
   });
-  if(rows)zonesHtml+=`<div class="zone-block"><h2>${z[0]}</h2><table>${rows}</table></div>`;
+  sec.appendChild(h); sec.appendChild(box); zonesEl.appendChild(sec);
+  tally(zi);
  });
- const dt=mDate.value?new Date(mDate.value+'T12:00:00').toLocaleDateString('en-AU',{day:'numeric',month:'long',year:'numeric'}):'';
- R.innerHTML=`
+ document.getElementById("mOverall").value = (state[mode].meta || {}).overall || "";
+}
+
+function hasContent(m, key) {
+ const d = state[m].items[key] || {};
+ return !!(d.note || (state[m].photos[key] || []).length || Object.values(d.checks || {}).some(Boolean));
+}
+
+function tally(zi) {
+ const M = MODES[mode];
+ const el = document.getElementById("tally" + zi); if (!el) return;
+ const items = M.zones[zi][1];
+ if (isNoteMode(mode)) {
+  let done = 0;
+  items.forEach((_, ii) => { if (hasContent(mode, zi + "." + ii)) done++; });
+  el.textContent = done + "/" + items.length; el.className = "tally";
+ } else {
+  let attn = 0, done = 0;
+  items.forEach((_, ii) => {
+   const s = (state[mode].items[zi + "." + ii] || {}).status;
+   if (s) { done++; if (s === "Attention") attn++; }
+  });
+  el.textContent = attn ? `${done}/${items.length} · ${attn} attention` : `${done}/${items.length}`;
+  el.className = "tally" + (attn ? " warn" : "");
+ }
+}
+
+function save() {
+ try {
+  state[mode].meta = {
+   addr: mAddr.value, owner: mOwner.value, type: mType.value,
+   by: mBy.value, date: mDate.value, overall: mOverall.value,
+  };
+  localStorage.setItem(storeKey(mode), JSON.stringify({ meta: state[mode].meta, items: state[mode].items }));
+ } catch (e) {}
+}
+["mAddr", "mOwner", "mType", "mBy", "mDate", "mOverall"].forEach(id =>
+ document.getElementById(id).addEventListener("input", save));
+
+function restore(m) {
+ try {
+  const d = JSON.parse(localStorage.getItem(storeKey(m)) || "null"); if (!d) return;
+  state[m].items = d.items || {}; state[m].meta = d.meta || {};
+ } catch (e) {}
+}
+Object.keys(MODES).forEach(restore);
+
+function applyMeta() {
+ const meta = state[mode].meta || {};
+ if (meta.addr !== undefined) mAddr.value = meta.addr;
+ if (meta.owner !== undefined) mOwner.value = meta.owner;
+ if (meta.type) mType.value = meta.type;
+ if (meta.by) mBy.value = meta.by;
+ if (meta.date) mDate.value = meta.date;
+}
+
+document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => {
+ save(); mode = b.dataset.mode; applyMeta(); render();
+});
+
+document.getElementById("jsonBtn").onclick = () => {
+ save();
+ const blob = new Blob([localStorage.getItem(storeKey(mode)) || "{}"], { type: "application/json" });
+ const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+ a.download = (mDate.value || "record") + " " + mode + " data.json"; a.click();
+};
+
+document.getElementById("genBtn").onclick = () => {
+ save();
+ const M = MODES[mode];
+ const R = document.getElementById("report");
+ const esc = s => (s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;");
+ const actions = [];
+ let zonesHtml = "";
+ M.zones.forEach((z, zi) => {
+  let rows = "";
+  z[1].forEach((def, ii) => {
+   const noteItem = Array.isArray(def);
+   const name = noteItem ? def[0] : def;
+   const key = zi + "." + ii;
+   const d = state[mode].items[key] || {};
+   const ph = state[mode].photos[key] || [];
+   if (noteItem) {
+    if (!hasContent(mode, key)) return;
+    const ticked = Object.entries(d.checks || {}).filter(([, v]) => v).map(([k]) => k);
+    rows += `<tr><td><strong>${esc(name)}</strong>
+     ${ticked.length ? `<div class="chipline">✓ ${ticked.join(" · ✓ ")}</div>` : ""}
+     ${d.note ? `<div class="note">${esc(d.note)}</div>` : ""}
+     ${ph.length ? `<div class="rphotos">${ph.map(p => `<img src="${p}">`).join("")}</div>` : ""}</td></tr>`;
+   } else {
+    if (!d.status) return;
+    const cls = d.status === "Attention" ? "attn" : (d.status === "OK" ? "okc" : "");
+    rows += `<tr><td>${esc(name)}${d.note ? `<div class="note">${esc(d.note)}</div>` : ""}
+     ${ph.length ? `<div class="rphotos">${ph.map(p => `<img src="${p}">`).join("")}</div>` : ""}</td>
+     <td class="st ${cls}">${d.status}</td></tr>`;
+    if (d.status === "Attention") actions.push({ zone: z[0], name, note: d.note || "" });
+   }
+  });
+  if (rows) zonesHtml += `<div class="zone-block"><h2>${z[0]}</h2><table>${rows}</table></div>`;
+ });
+ const dt = mDate.value ? new Date(mDate.value + "T12:00:00").toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric" }) : "";
+ const metaRows = [
+  isNoteMode(mode) && mOwner.value ? `<div><span>${mode === "review" ? "Prepared for" : "Owner"}</span>${esc(mOwner.value)}</div>` : "",
+  mode === "inspect" ? `<div><span>Inspection type</span>${esc(mType.value)}</div>` : "",
+  `<div><span>Completed by</span>${esc(mBy.value)}</div>`,
+  `<div><span>Date</span>${dt}</div>`,
+ ].join("");
+ const actionsHtml = mode !== "inspect" ? "" :
+  (actions.length
+   ? `<div class="zone-block"><h2>Actions arising (${actions.length})</h2><table>${actions.map(a => `<tr><td><strong>${esc(a.name)}</strong> (${esc(a.zone)})<div class="note">${esc(a.note)}</div></td></tr>`).join("")}</table></div>`
+   : `<h2>Actions arising</h2><p style="font-size:10pt">None. The property presented to standard throughout.</p>`);
+ R.innerHTML = `
   <div class="letterhead"><div class="wm">AUREA</div><div class="wm2">Hosting</div></div>
-  <h1>Property Inspection Report</h1>
+  <h1>${M.title}</h1>
   <div class="addr">${esc(mAddr.value)}</div>
-  <div class="rmeta">
-   <div><span>Inspection type</span>${esc(mType.value)}</div>
-   <div><span>Inspected by</span>${esc(mBy.value)}</div>
-   <div><span>Date</span>${dt}</div>
-  </div>
-  ${mOverall.value?`<h2>Overall condition</h2><p style="font-size:10pt">${esc(mOverall.value)}</p>`:''}
-  ${actions.length?`<div class="actions"><h2>Actions arising (${actions.length})</h2><table>${actions.map(a=>`<tr><td><strong>${esc(a.name)}</strong> (${esc(a.zone)})<div class="note">${esc(a.note)}</div></td></tr>`).join('')}</table></div>`:'<h2>Actions arising</h2><p style="font-size:10pt">None. The property presented to standard throughout.</p>'}
+  <div class="rmeta">${metaRows}</div>
+  ${mOverall.value ? `<h2>${mode === "review" ? "Meeting summary" : mode === "intake" ? "General notes" : "Overall condition"}</h2><p style="font-size:10pt">${esc(mOverall.value)}</p>` : ""}
+  ${actionsHtml}
   ${zonesHtml}
   <div class="foot">6IX SERVICES PTY LTD (ABN 15 669 346 249) trading as Aurea Hosting · noah@aureahosting.com.au · 0404 608 196</div>`;
  window.print();
 };
+
+render(); applyMeta();
 </script>
 </body>
 </html>
