@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Aurea Inspection</title>
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#c8a35d;--gold-text:#9a7a3d;--ink:#172226;--sand:#fffdf9;--rule:#d9d2c4;--teal:#1b7f74;--attn:#b3542e;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Switzer',system-ui,sans-serif;background:var(--sand);color:var(--ink);font-size:16px;line-height:1.5;}
+.wrap{max-width:720px;margin:0 auto;padding:16px 16px 120px;}
+header.app h1{font-family:'Satoshi',sans-serif;font-weight:700;font-size:1.35rem;letter-spacing:.14em;text-align:center;margin:8px 0 2px;}
+header.app .sub{text-align:center;color:var(--gold-text);letter-spacing:.28em;font-size:.7rem;text-transform:uppercase;margin-bottom:18px;}
+.meta{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:14px;margin-bottom:18px;}
+.meta label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-text);margin:10px 0 3px;}
+.meta label:first-child{margin-top:0;}
+.meta input,.meta select{width:100%;padding:10px;border:1px solid var(--rule);border-radius:8px;font:inherit;background:var(--sand);}
+section.zone{background:#fff;border:1px solid var(--rule);border-radius:10px;margin-bottom:12px;overflow:hidden;}
+.zone h2{font-family:'Satoshi',sans-serif;font-size:.95rem;font-weight:700;padding:13px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
+.zone h2 .tally{font-size:.72rem;font-weight:500;color:var(--gold-text);}
+.zone h2 .tally.warn{color:var(--attn);font-weight:700;}
+.zone .items{display:none;border-top:1px solid var(--rule);}
+.zone.open .items{display:block;}
+.item{padding:12px 14px;border-bottom:1px solid #f0ece2;}
+.item:last-child{border-bottom:none;}
+.item .row{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.item .name{font-size:.92rem;flex:1;}
+.tri{display:flex;gap:6px;flex-shrink:0;}
+.tri button{border:1px solid var(--rule);background:var(--sand);border-radius:8px;padding:8px 11px;font:inherit;font-size:.78rem;font-weight:600;color:#8a8578;min-width:44px;min-height:40px;}
+.tri button.on-ok{background:var(--teal);border-color:var(--teal);color:#fff;}
+.tri button.on-attn{background:var(--attn);border-color:var(--attn);color:#fff;}
+.tri button.on-na{background:#8a8578;border-color:#8a8578;color:#fff;}
+.detail{margin-top:10px;display:none;}
+.item.flagged .detail{display:block;}
+.detail textarea{width:100%;min-height:64px;padding:9px;border:1px solid var(--rule);border-radius:8px;font:inherit;font-size:.9rem;background:var(--sand);}
+.detail .photo-row{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.detail .photo-row img{width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--rule);}
+.addphoto{border:1px dashed var(--gold);color:var(--gold-text);background:none;border-radius:8px;padding:10px 12px;font:inherit;font-size:.8rem;}
+.overall{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:14px;margin:6px 0 12px;}
+.overall label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-text);margin-bottom:5px;}
+.overall textarea{width:100%;min-height:84px;padding:10px;border:1px solid var(--rule);border-radius:8px;font:inherit;background:var(--sand);}
+.bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--rule);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:flex;gap:10px;max-width:100%;}
+.bar button{flex:1;padding:14px;border-radius:10px;font:inherit;font-weight:700;border:none;}
+#genBtn{background:var(--ink);color:#fff;}
+#jsonBtn{background:none;border:1px solid var(--rule);color:var(--ink);flex:0 0 auto;padding:14px 16px;font-weight:500;}
+.hint{font-size:.75rem;color:#8a8578;text-align:center;margin:14px 0;}
+/* ---------- report ---------- */
+#report{display:none;}
+@media print{
+ body{background:#fff;}
+ .wrap,.bar{display:none!important;}
+ #report{display:block;font-family:'Switzer',Calibri,sans-serif;color:var(--ink);padding:0 6mm;}
+ #report .letterhead{text-align:center;margin-bottom:6mm;}
+ #report .letterhead .wm{font-family:'Satoshi',sans-serif;font-weight:700;letter-spacing:.2em;font-size:15pt;}
+ #report .letterhead .wm2{letter-spacing:.42em;font-size:7.5pt;color:var(--gold-text);text-transform:uppercase;}
+ #report h1{font-size:13pt;text-align:center;font-weight:600;margin:4mm 0 1mm;}
+ #report .addr{text-align:center;font-size:11pt;margin-bottom:5mm;}
+ #report .rmeta{font-size:9.5pt;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:3mm 0;margin-bottom:5mm;}
+ #report .rmeta div{margin:.6mm 0;}
+ #report .rmeta span{color:var(--gold-text);display:inline-block;min-width:34mm;}
+ #report h2{font-size:10.5pt;color:var(--gold-text);margin:5mm 0 2mm;font-weight:700;page-break-after:avoid;}
+ #report table{width:100%;border-collapse:collapse;font-size:9.5pt;}
+ #report td{padding:1.6mm 1mm;border-bottom:1px solid #f0ece2;vertical-align:top;}
+ #report td.st{width:20mm;font-weight:700;}
+ #report td.st.attn{color:var(--attn);}
+ #report td.st.okc{color:var(--teal);}
+ #report .note{color:#4a463c;font-size:9pt;}
+ #report .rphotos{display:flex;flex-wrap:wrap;gap:3mm;margin:2mm 0;}
+ #report .rphotos img{width:52mm;border-radius:2mm;border:1px solid var(--rule);}
+ #report .actions{margin-top:2mm;}
+ #report .foot{margin-top:8mm;border-top:1px solid var(--rule);padding-top:2.5mm;font-size:8pt;color:#6a6558;text-align:center;}
+ #report .zone-block{page-break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="app"><h1>AUREA</h1><div class="sub">Property Inspection</div></header>
+
+<div class="meta">
+ <label>Property address</label><input id="mAddr" placeholder="e.g. 23 Heysen Crescent, West Lakes">
+ <label>Inspection type</label>
+ <select id="mType"><option>Quarterly formal inspection</option><option>Interim inspection</option><option>Onboarding baseline</option></select>
+ <label>Inspected by</label><input id="mBy" value="Noah Rebuli">
+ <label>Date</label><input id="mDate" type="date">
+</div>
+
+<div id="zones"></div>
+
+<div class="overall">
+ <label>Overall condition and general notes</label>
+ <textarea id="mOverall" placeholder="One honest paragraph on the state of the home."></textarea>
+</div>
+
+<p class="hint">Progress saves automatically on this device (photos excluded). Attention items appear as actions in the report.</p>
+</div>
+
+<div class="bar">
+ <button id="jsonBtn" type="button">Data</button>
+ <button id="genBtn" type="button">Generate report</button>
+</div>
+
+<div id="report"></div>
+
+<script>
+const ZONES=[
+ ["Exterior and grounds",["Facade, gutters and eaves (visual)","Lawns and gardens","Fencing and gates","Driveway and paths","Outdoor furniture","Bin area and bins","Pool area, water and barrier latch"]],
+ ["Entry and access",["Smart lock / lockbox operation","Front door and frame","Exterior lighting","Spare key audit"]],
+ ["Living areas",["Walls, paint and skirting","Flooring and carpets","Sofas and furniture condition","TV and electronics operating","Windows, screens and locks","Blinds and curtains","Heating and cooling operating"]],
+ ["Kitchen",["Oven and cooktop operating","Rangehood and filter","Dishwasher operating","Fridge and freezer","Small appliances (kettle, toaster, coffee)","Benchtops and splashback","Cupboards and drawers","Under-sink plumbing (leaks)"]],
+ ["Bedrooms",["Mattresses and protectors","Bed frames and heads","Wardrobes and hangers","Bedside lamps","Linen stock condition"]],
+ ["Bathrooms",["Grout, seals and silicone","Shower screen and head","Toilets (operation, leaks)","Exhaust fans","Vanity and taps","Hot water at taps"]],
+ ["Laundry",["Washing machine operating","Dryer operating and lint filter","Taps and hoses","Iron and board"]],
+ ["Safety and compliance",["Smoke alarms TESTED","Fire extinguisher in date","Fire blanket present","First aid kit stocked","Switchboard and RCD labelled","Trip hazards","Pool safety compliance (if applicable)"]],
+ ["Consumables and presentation",["Consumables stocked to standard","Compendium present and current","QR guide frame in place","Cleanliness to turnover standard","Styling and presentation"]]
+];
+const state={items:{},photos:{}};
+const zonesEl=document.getElementById('zones');
+document.getElementById('mDate').value=new Date().toISOString().slice(0,10);
+
+ZONES.forEach((z,zi)=>{
+ const sec=document.createElement('section');sec.className='zone'+(zi===0?' open':'');
+ const h=document.createElement('h2');h.innerHTML=`<span>${z[0]}</span><span class="tally" id="tally${zi}"></span>`;
+ h.onclick=()=>sec.classList.toggle('open');
+ const box=document.createElement('div');box.className='items';
+ z[1].forEach((name,ii)=>{
+  const key=zi+'.'+ii;
+  const it=document.createElement('div');it.className='item';it.id='item'+key;
+  it.innerHTML=`<div class="row"><div class="name">${name}</div>
+   <div class="tri">
+    <button type="button" data-v="OK">OK</button>
+    <button type="button" data-v="Attention">!</button>
+    <button type="button" data-v="N/A">N/A</button>
+   </div></div>
+   <div class="detail">
+    <textarea placeholder="What needs attention, and what should happen next." oninput="setNote('${key}',this.value)"></textarea>
+    <div class="photo-row" id="ph${key}">
+     <button type="button" class="addphoto" onclick="document.getElementById('file${key}').click()">+ Photo</button>
+     <input type="file" id="file${key}" accept="image/*" capture="environment" multiple hidden onchange="addPhotos('${key}',this)">
+    </div>
+   </div>`;
+  it.querySelectorAll('.tri button').forEach(b=>{b.onclick=()=>setStatus(key,b.dataset.v,it,zi);});
+  box.appendChild(it);
+ });
+ sec.appendChild(h);sec.appendChild(box);zonesEl.appendChild(sec);
+});
+
+function setStatus(key,v,itemEl,zi){
+ state.items[key]=state.items[key]||{};
+ state.items[key].status=v;
+ itemEl.querySelectorAll('.tri button').forEach(b=>{
+  b.className=(b.dataset.v===v)?({'OK':'on-ok','Attention':'on-attn','N/A':'on-na'})[v]:'';
+ });
+ itemEl.classList.toggle('flagged',v==='Attention');
+ tally(zi);save();
+}
+function setNote(key,val){state.items[key]=state.items[key]||{};state.items[key].note=val;save();}
+function addPhotos(key,input){
+ state.photos[key]=state.photos[key]||[];
+ [...input.files].forEach(f=>{
+  const r=new FileReader();
+  r.onload=e=>{
+   state.photos[key].push(e.target.result);
+   const img=document.createElement('img');img.src=e.target.result;
+   document.getElementById('ph'+key).appendChild(img);
+  };
+  r.readAsDataURL(f);
+ });
+ input.value='';
+}
+function tally(zi){
+ let ok=0,attn=0,done=0,total=ZONES[zi][1].length;
+ ZONES[zi][1].forEach((_,ii)=>{const s=(state.items[zi+'.'+ii]||{}).status;if(s){done++;if(s==='Attention')attn++;else ok++;}});
+ const t=document.getElementById('tally'+zi);
+ t.textContent=attn?`${done}/${total} · ${attn} attention`:`${done}/${total}`;
+ t.className='tally'+(attn?' warn':'');
+}
+function save(){
+ try{localStorage.setItem('aureaInspect',JSON.stringify({
+  meta:{addr:mAddr.value,type:mType.value,by:mBy.value,date:mDate.value,overall:mOverall.value},
+  items:state.items
+ }));}catch(e){}
+}
+['mAddr','mType','mBy','mDate','mOverall'].forEach(id=>document.getElementById(id).addEventListener('input',save));
+(function restore(){
+ try{
+  const d=JSON.parse(localStorage.getItem('aureaInspect')||'null');if(!d)return;
+  mAddr.value=d.meta.addr||'';mType.value=d.meta.type||mType.value;mBy.value=d.meta.by||mBy.value;
+  if(d.meta.date)mDate.value=d.meta.date;mOverall.value=d.meta.overall||'';
+  Object.entries(d.items||{}).forEach(([key,val])=>{
+   state.items[key]=val;
+   const it=document.getElementById('item'+key);if(!it)return;
+   if(val.status){const zi=parseInt(key.split('.')[0]);
+    it.querySelectorAll('.tri button').forEach(b=>{b.className=(b.dataset.v===val.status)?({'OK':'on-ok','Attention':'on-attn','N/A':'on-na'})[val.status]:'';});
+    it.classList.toggle('flagged',val.status==='Attention');tally(zi);}
+   if(val.note)it.querySelector('textarea').value=val.note;
+  });
+ }catch(e){}
+})();
+
+document.getElementById('jsonBtn').onclick=()=>{
+ const blob=new Blob([localStorage.getItem('aureaInspect')||'{}'],{type:'application/json'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+ a.download=(mDate.value||'inspection')+' inspection data.json';a.click();
+};
+
+document.getElementById('genBtn').onclick=()=>{
+ const R=document.getElementById('report');
+ const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+ const actions=[];
+ let zonesHtml='';
+ ZONES.forEach((z,zi)=>{
+  let rows='';
+  z[1].forEach((name,ii)=>{
+   const d=state.items[zi+'.'+ii]||{};if(!d.status)return;
+   const cls=d.status==='Attention'?'attn':(d.status==='OK'?'okc':'');
+   rows+=`<tr><td>${esc(name)}${d.note?`<div class="note">${esc(d.note)}</div>`:''}
+    ${state.photos[zi+'.'+ii]?`<div class="rphotos">${state.photos[zi+'.'+ii].map(p=>`<img src="${p}">`).join('')}</div>`:''}
+    </td><td class="st ${cls}">${d.status}</td></tr>`;
+   if(d.status==='Attention')actions.push({zone:z[0],name,note:d.note||''});
+  });
+  if(rows)zonesHtml+=`<div class="zone-block"><h2>${z[0]}</h2><table>${rows}</table></div>`;
+ });
+ const dt=mDate.value?new Date(mDate.value+'T12:00:00').toLocaleDateString('en-AU',{day:'numeric',month:'long',year:'numeric'}):'';
+ R.innerHTML=`
+  <div class="letterhead"><div class="wm">AUREA</div><div class="wm2">Hosting</div></div>
+  <h1>Property Inspection Report</h1>
+  <div class="addr">${esc(mAddr.value)}</div>
+  <div class="rmeta">
+   <div><span>Inspection type</span>${esc(mType.value)}</div>
+   <div><span>Inspected by</span>${esc(mBy.value)}</div>
+   <div><span>Date</span>${dt}</div>
+  </div>
+  ${mOverall.value?`<h2>Overall condition</h2><p style="font-size:10pt">${esc(mOverall.value)}</p>`:''}
+  ${actions.length?`<div class="actions"><h2>Actions arising (${actions.length})</h2><table>${actions.map(a=>`<tr><td><strong>${esc(a.name)}</strong> (${esc(a.zone)})<div class="note">${esc(a.note)}</div></td></tr>`).join('')}</table></div>`:'<h2>Actions arising</h2><p style="font-size:10pt">None. The property presented to standard throughout.</p>'}
+  ${zonesHtml}
+  <div class="foot">6IX SERVICES PTY LTD (ABN 15 669 346 249) trading as Aurea Hosting · noah@aureahosting.com.au · 0404 608 196</div>`;
+ window.print();
+};
+</script>
+</body>
+</html>
