@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         html += '<div class="intel-card">' +
           '<span class="intel-event">' + e.event + '</span>' +
           '<span class="intel-period">' + e.period + '</span>' +
-          '<span class="intel-uplift">' + e.uplift + '<em>/night</em></span>' +
+          '<span class="intel-uplift">' + e.uplift + '</span>' +
           '<span class="intel-ctx">' + e.ctx + '</span>' +
           '</div>';
         if (i < events.length - 1 || pass === 0) html += sep;
@@ -240,14 +240,14 @@ document.addEventListener('DOMContentLoaded', () => {
       attributionControl: true
     });
     const markers = [
-      { coords: [138.5153,-34.9816], name: 'Glenelg',        desc: 'Beachside, 2BR avg $3,900/mo · WomAdelaide +$175/night' },
+      { coords: [138.5153,-34.9816], name: 'Glenelg',        desc: 'Beachside, priced at a premium · WomAdelaide brings a strong seasonal lift' },
       { coords: [138.5157,-34.9502], name: 'West Beach',     desc: 'Airport proximity meets coastal demand' },
       { coords: [138.4969,-34.9219], name: 'Henley Beach',   desc: 'Premium coastal village with strong weekend demand' },
       { coords: [138.6007,-34.9285], name: 'Adelaide CBD',   desc: 'Business, Fringe, Gather Round driving year-round occupancy' },
       { coords: [138.5884,-34.9499], name: 'Unley',          desc: 'Leafy city-fringe with boutique appeal' },
-      { coords: [138.6297,-34.9211], name: 'Norwood',        desc: 'Vibrant café precinct, 2BR avg $3,600/mo' },
+      { coords: [138.6297,-34.9211], name: 'Norwood',        desc: 'Vibrant café precinct, steady demand all year round' },
       { coords: [138.6456,-34.9387], name: 'Burnside',       desc: 'Upscale residential with Hills proximity premium' },
-      { coords: [138.7140,-35.0003], name: 'Stirling',       desc: 'Hills gateway, 2BR avg $3,800/mo · Tasting Australia' }
+      { coords: [138.7140,-35.0003], name: 'Stirling',       desc: 'Hills gateway, sharp lift around Tasting Australia' }
     ];
     map.on('load', () => {
       map.addSource('coverage-zone', {

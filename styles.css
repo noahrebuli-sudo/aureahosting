@@ -777,6 +777,15 @@ a.chip:hover { opacity: 0.82; }
   vertical-align: baseline;
   margin-left: 4px;
 }
+.perf-number--text {
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(19px, 1.9vw, 23px);
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1.35;
+  margin-bottom: var(--space-4);
+  letter-spacing: -0.01em;
+}
 
 .perf-context {
   font-size: var(--text-sm);
@@ -1453,10 +1462,11 @@ a.chip:hover { opacity: 0.82; }
 .yield-suburbs { font-size: var(--text-xs); color: var(--muted); margin-top: 3px; line-height: 1.4; }
 .yield-avg {
   font-family: 'Switzer', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--gold);
-  font-size: var(--text-base);
-  white-space: nowrap;
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  max-width: 22ch;
 }
 .yield-event { line-height: 1.5; }
 .yield-event-name { font-weight: 500; color: var(--ink-light); font-size: var(--text-sm); }
@@ -2778,6 +2788,7 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
   font-size: clamp(44px, 6vw, 84px);
 }
 .ed-market .perf-number--static .perf-unit { color: rgba(255, 253, 249, 0.6); }
+.ed-market .perf-number--text { color: var(--sand); }
 .ed-market .perf-context {
   color: rgba(255, 253, 249, 0.45);
 }
