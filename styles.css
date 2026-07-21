@@ -529,7 +529,7 @@ a.chip:hover { opacity: 0.82; }
   background: var(--ink);
   overflow: hidden;
   position: relative;
-  min-height: 96px;
+  height: 72px;
 }
 
 .intel-label-col {
@@ -551,73 +551,59 @@ a.chip:hover { opacity: 0.82; }
   line-height: 1.4;
 }
 
-.intel-stage {
+.intel-ticker-mask {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  padding: var(--space-5) var(--space-8);
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 260ms var(--ease-out), transform 260ms var(--ease-out);
-}
-.intel-stage.is-changing {
-  opacity: 0;
-  transform: translateY(6px);
-}
-
-.intel-meta {
+  overflow: hidden;
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  mask-image: linear-gradient(90deg, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%);
+}
+
+.intel-ticker {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+  animation: tickerScroll 45s linear infinite;
+}
+.intel-ticker:hover { animation-play-state: paused; }
+
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.intel-card {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: 0 var(--space-10);
 }
 .intel-event {
   font-family: 'Switzer', sans-serif;
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--white);
-  letter-spacing: -0.005em;
-}
-.intel-dot-sep { color: rgba(255,255,255,0.35); font-size: var(--text-sm); }
-.intel-period {
-  font-size: 11px;
-  color: rgba(255,255,255,0.45);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
 }
 .intel-uplift {
   font-family: 'Switzer', sans-serif;
-  font-size: var(--text-2xl);
+  font-size: var(--text-lg);
   font-weight: 700;
   color: var(--gold);
-  letter-spacing: -0.015em;
-  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
-.intel-ctx {
-  font-size: var(--text-sm);
-  color: rgba(255,255,255,0.55);
+.intel-caption {
+  font-size: 11px;
+  color: rgba(255,255,255,0.62);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
-
-.intel-nav {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding-right: var(--space-6);
+.intel-sep {
+  color: rgba(200,163,93,0.3);
+  font-size: 8px;
+  padding: 0 var(--space-8);
 }
-.intel-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255,255,255,0.2);
-  padding: 0;
-  cursor: pointer;
-  transition: background 200ms, transform 200ms;
-}
-.intel-dot:hover { background: rgba(255,255,255,0.4); }
-.intel-dot.active { background: var(--gold); transform: scale(1.3); }
 
 /* ─── Position Statement ─── */
 .position-section { padding: var(--space-32) 0; }
@@ -933,19 +919,18 @@ a.chip:hover { opacity: 0.82; }
   background: linear-gradient(90deg, var(--gold) 50%, var(--border) 50%);
 }
 
-.coverage-verdict {
-  font-family: 'Switzer', sans-serif;
-  font-size: var(--text-2xl);
-  font-weight: 600;
-  color: var(--ink);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-}
-
 .coverage-suburbs {
   font-size: var(--text-sm);
   color: var(--muted);
   line-height: 1.55;
+}
+
+.coverage-verdict {
+  font-family: 'Switzer', sans-serif;
+  font-size: var(--text-lg);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.6;
 }
 
 .coverage-meta {
@@ -1261,12 +1246,7 @@ a.chip:hover { opacity: 0.82; }
   .result-row { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .intel-strip { min-height: 84px; }
-  .intel-label-col { width: 56px; padding: var(--space-2); }
-  .intel-label-col span { font-size: 8px; }
-  .intel-stage { padding: var(--space-4); }
-  .intel-uplift { font-size: var(--text-xl); }
-  .intel-nav { padding-right: var(--space-3); gap: 6px; }
+  .intel-strip { height: auto; min-height: 60px; }
   .section { padding: var(--space-20) 0; }
   .apply-section { padding: var(--space-16) 0; }
   .hero-ctas { flex-direction: column; align-items: flex-start; gap: var(--space-4); }
@@ -1277,7 +1257,7 @@ a.chip:hover { opacity: 0.82; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .reveal { opacity: 1; transform: none; }
   .rule-line { transform: scaleX(1); }
-  .intel-stage { transition: none; }
+  .intel-ticker { animation: none; }
   .kicker-pulse { animation: none; }
   .cursor-dot { display: none; }
 }
@@ -1755,7 +1735,7 @@ a.chip:hover { opacity: 0.82; }
 
 /* ─── Reduced-motion (item 5) ─── */
 @media (prefers-reduced-motion: reduce) {
-  .intel-stage { transition: none; }
+  .intel-ticker { animation: none; }
   .parallax-bg { transform: none !important; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -2618,35 +2598,34 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
 .ed-chapter-suburbs {
   color: var(--ink-light);
   font-size: var(--text-sm);
-  margin-bottom: var(--space-1);
-}
-.ed-chapter-peaks {
-  color: var(--muted);
-  font-size: var(--text-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: var(--space-1);
-}
-.ed-chapter-demand {
-  color: var(--muted);
-  font-size: var(--text-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 0;
+  margin-bottom: var(--space-3);
 }
 .ed-chapter-statement {
   font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 400;
   color: var(--ink);
   font-size: var(--text-base);
-  line-height: 1.5;
-  padding-top: var(--space-4);
+  line-height: 1.6;
   margin-bottom: var(--space-4);
+}
+.ed-chapter-meta {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  padding-top: var(--space-4);
   border-top: 1px solid var(--border);
+}
+.ed-chapter-meta strong {
+  color: var(--teal);
+  font-weight: 600;
 }
 .ed-chapter-links {
   display: flex;
   flex-wrap: wrap;
   margin-top: auto;
+  padding-top: var(--space-4);
   gap: var(--space-4);
 }
 .ed-chapter-links a {

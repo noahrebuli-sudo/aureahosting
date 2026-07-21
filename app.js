@@ -6,65 +6,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ─── Intel Strip ─── */
   (function renderIntelStrip() {
-    const stage = document.getElementById('intelStage');
-    const nav = document.getElementById('intelNav');
-    if (!stage) return;
+    const ticker = document.getElementById('intelTicker');
+    if (!ticker) return;
     const events = AUREA_DATA.intelEvents;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let idx = 0;
-    let timer = null;
-
-    function fill(i) {
-      const e = events[i];
-      stage.innerHTML =
-        '<div class="intel-meta">' +
+    const sep = '<span class="intel-sep">&#9670;</span>';
+    let html = '';
+    for (let pass = 0; pass < 2; pass++) {
+      events.forEach(function(e, i) {
+        html += '<div class="intel-card">' +
           '<span class="intel-event">' + e.event + '</span>' +
-          '<span class="intel-dot-sep">&middot;</span>' +
-          '<span class="intel-period">' + e.period + '</span>' +
-        '</div>' +
-        '<div class="intel-uplift">' + e.uplift + '</div>' +
-        '<div class="intel-ctx">' + e.ctx + '</div>';
-      if (nav) {
-        nav.querySelectorAll('.intel-dot').forEach(function(d, di) {
-          d.classList.toggle('active', di === i);
-        });
-      }
-    }
-
-    function show(i) {
-      idx = i;
-      if (reduceMotion) { fill(idx); return; }
-      stage.classList.add('is-changing');
-      setTimeout(function() {
-        fill(idx);
-        stage.classList.remove('is-changing');
-      }, 220);
-    }
-
-    function restart() {
-      if (reduceMotion) return;
-      clearInterval(timer);
-      timer = setInterval(function() {
-        show((idx + 1) % events.length);
-      }, 5000);
-    }
-
-    if (nav) {
-      nav.innerHTML = events.map(function(e, i) {
-        return '<button type="button" class="intel-dot' + (i === 0 ? ' active' : '') + '" aria-label="' + e.event + ' intel"></button>';
-      }).join('');
-      nav.querySelectorAll('.intel-dot').forEach(function(dot, i) {
-        dot.addEventListener('click', function() { show(i); restart(); });
+          '<span class="intel-uplift">' + e.uplift + '</span>' +
+          '<span class="intel-caption">' + e.period + ' &middot; ' + e.ctx + '</span>' +
+          '</div>';
+        if (i < events.length - 1 || pass === 0) html += sep;
       });
     }
-
-    fill(0);
-    restart();
-
-    stage.addEventListener('mouseenter', function() { clearInterval(timer); });
-    stage.addEventListener('mouseleave', restart);
-    stage.addEventListener('focusin', function() { clearInterval(timer); });
-    stage.addEventListener('focusout', restart);
+    ticker.innerHTML = html;
   })();
 
   /* ─── Sticky Header ─── */
@@ -444,6 +401,13 @@ document.addEventListener('DOMContentLoaded', () => {
       el.addEventListener('mouseenter', () => cursorDot.classList.add('expanded'));
       el.addEventListener('mouseleave', () => cursorDot.classList.remove('expanded'));
     });
+  }
+
+  /* ─── Intel strip pause on focus ─── */
+  const intelTicker = document.getElementById('intelTicker');
+  if (intelTicker) {
+    intelTicker.addEventListener('focusin',  () => intelTicker.style.animationPlayState = 'paused');
+    intelTicker.addEventListener('focusout', () => intelTicker.style.animationPlayState = 'running');
   }
 
 });
