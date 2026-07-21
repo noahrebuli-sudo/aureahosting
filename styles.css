@@ -371,6 +371,7 @@ a.chip:hover { opacity: 0.82; }
 
 /* ─── FAQ (kept for subpage) ─── */
 .faq-item { border-bottom: 1px solid var(--border); }
+.faq-question-heading { margin: 0; font-size: inherit; font-weight: inherit; }
 .faq-question {
   display: flex; align-items: center; justify-content: space-between;
   padding: var(--space-6) 0; cursor: pointer;
@@ -1593,6 +1594,18 @@ a.chip:hover { opacity: 0.82; }
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-gold);
   z-index: 9999;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ─── Form error region (item 8) ─── */
