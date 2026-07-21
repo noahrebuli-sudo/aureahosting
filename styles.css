@@ -787,6 +787,14 @@ a.chip:hover { opacity: 0.82; }
   letter-spacing: -0.01em;
 }
 
+.perf-caption {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 30ch;
+  line-height: 1.5;
+  margin-bottom: var(--space-2);
+}
+
 .perf-context {
   font-size: var(--text-sm);
   color: #ffffff;
@@ -946,6 +954,12 @@ a.chip:hover { opacity: 0.82; }
   color: var(--ink);
   letter-spacing: -0.02em;
 }
+.coverage-yield-caption {
+  font-size: var(--text-xs);
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: var(--space-2);
+}
 .coverage-yield strong span {
   font-size: var(--text-sm);
   font-weight: 500;
@@ -1008,7 +1022,8 @@ a.chip:hover { opacity: 0.82; }
 .coverage-card-content .coverage-peaks,
 .coverage-card-content .coverage-yield,
 .coverage-card-content .coverage-yield strong,
-.coverage-card-content .coverage-yield span {
+.coverage-card-content .coverage-yield span,
+.coverage-card-content .coverage-yield-caption {
   color: #ffffff !important;
 }
 
@@ -2657,6 +2672,12 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
 .ed-chapter-yield {
   font-family: 'Switzer', -apple-system, sans-serif;
   color: var(--ink);
+  margin-bottom: var(--space-1);
+}
+.ed-chapter-yield-caption {
+  color: var(--muted);
+  font-size: var(--text-xs);
+  line-height: 1.5;
   margin-bottom: var(--space-4);
 }
 .ed-chapter-yield strong {
@@ -2789,6 +2810,9 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
 }
 .ed-market .perf-number--static .perf-unit { color: rgba(255, 253, 249, 0.6); }
 .ed-market .perf-number--text { color: var(--sand); }
+.ed-market .perf-caption {
+  color: rgba(255, 253, 249, 0.6);
+}
 .ed-market .perf-context {
   color: rgba(255, 253, 249, 0.45);
 }
