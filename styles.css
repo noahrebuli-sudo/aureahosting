@@ -2875,6 +2875,19 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
   color: var(--gold-text);
   margin: 0 0 var(--space-6);
 }
+/* Portrait sits between the label and the signature; square corners and a soft
+   shadow match the editorial imagery elsewhere. Its own sand gradient runs a
+   touch lighter than --sand-mid, so the shadow draws the edge deliberately and
+   --sand fills the reserved box while the lazy image loads. */
+.ed-founder .founder-portrait {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  margin: 0 0 var(--space-6);
+  background: var(--sand);
+  box-shadow: var(--shadow-md);
+}
 .ed-founder .founder-letter-body {
   position: relative;
 }
@@ -2917,6 +2930,7 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
   .ed-founder .founder-letter {
     grid-template-columns: 1fr;
   }
+  .ed-founder .founder-portrait { max-width: 200px; }
   .ed-founder .founder-letter-body { padding-top: 42px; }
   .ed-founder .founder-letter-body::before { left: 0; top: 0; }
   .ed-founder .founder-letter-body p { font-size: 18px; }
