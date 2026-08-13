@@ -9,6 +9,7 @@ every message already sent shows a broken image forever.
 | File | Live URL | Referenced from |
 | --- | --- | --- |
 | `noblestr-signature.png` | `https://aureahosting.com.au/assets/email/noblestr-signature.png` | Noble STR email signature (all outgoing mail) |
+| `noah-lockup.png` | `https://aureahosting.com.au/assets/email/noah-lockup.png` | Aurea signature lockup, Noah's email signature (all outgoing mail) |
 
 ## Rules
 
@@ -31,3 +32,19 @@ Sized at 2x for a 200px display width in the signature:
 <img src="https://aureahosting.com.au/assets/email/noblestr-signature.png"
      width="200" alt="Noble STR">
 ```
+
+## noah-lockup.png
+
+300 x 232, PNG (8-bit RGBA), ~58 KB, transparent background. Already optimised —
+do not recompress, convert, or resize it; re-encoding is what silently flattens
+the alpha channel to white. Sized at 2x for a 150px display width in the
+signature:
+
+```html
+<img src="https://aureahosting.com.au/assets/email/noah-lockup.png"
+     width="150" alt="Aurea Hosting">
+```
+
+Transparency does not render in every email client (older Outlook composites it
+onto the message background, which is white in practice). Keep the surrounding
+signature background light so the lockup reads correctly either way.
