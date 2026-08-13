@@ -3084,3 +3084,68 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .ed-cursor-ring { display: none; }
 }
+
+/* =========================================
+   ABOUT PAGE (about.html)
+   ========================================= */
+
+/* Gold hero eyebrow: the base .hero-type-kicker runs teal, this variant
+   carries the gold accent used for the about page label. */
+.hero-type-kicker--gold { color: var(--gold-text); }
+
+/* ─── Photo and story spread ─── */
+.about-story {
+  display: grid;
+  grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
+  gap: var(--space-8) clamp(40px, 5vw, 80px);
+  align-items: start;
+}
+/* Square corners and a soft shadow match the editorial imagery elsewhere;
+   --sand fills the reserved box while the lazy image loads. */
+.about-portrait {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--sand);
+  box-shadow: var(--shadow-md);
+}
+.about-story-heading {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: var(--space-6);
+}
+.about-story-body p {
+  font-family: 'Switzer', -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  color: var(--ink-light);
+  margin-bottom: var(--space-5);
+}
+.about-story-body p:last-child { margin-bottom: 0; }
+
+/* ─── Numbers band: the site perf-stat pattern recoloured for sand ─── */
+.about-numbers .perf-grid { border-top: none; padding-top: 0; }
+.about-numbers .perf-stat { border-right: 1px solid var(--border); }
+.about-numbers .perf-stat:last-child { border-right: none; }
+.about-numbers .perf-number--static {
+  color: var(--gold-text);
+  font-size: clamp(48px, 6vw, 88px);
+  margin-bottom: var(--space-3);
+}
+.about-numbers .perf-context {
+  font-size: var(--text-base);
+  color: var(--ink-light);
+  max-width: 22ch;
+}
+
+@media (max-width: 900px) {
+  .about-story { grid-template-columns: 1fr; }
+  .about-portrait { max-width: 320px; }
+  /* The stacked perf-stat rule draws a white divider for dark bands; on sand
+     it needs the standard border colour instead. */
+  .about-numbers .perf-stat { border-right: none; border-bottom: 1px solid var(--border); }
+  .about-numbers .perf-stat:last-child { border-bottom: none; }
+}
