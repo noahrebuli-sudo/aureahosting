@@ -18,8 +18,9 @@ manager rota.
 
 ## Management fees
 
-Two tiers. Both are inclusive of GST. The management fee is charged on net
-accommodation revenue.
+Two tiers, set out in full on the [fees page](https://aureahosting.com.au/fees).
+Both are inclusive of GST. The management fee is charged on net accommodation
+revenue.
 
 - Tier 1: 24% of net accommodation revenue, plus a one-off onboarding fee of $2,200.
 - Tier 2: 26% of net accommodation revenue, with no onboarding fee.
@@ -42,6 +43,7 @@ them as year-round short-stay listings.
 - [About](https://aureahosting.com.au/about): Who runs Aurea and why the portfolio is capped.
 - [Request an appraisal](https://aureahosting.com.au/contact): Written, property-specific revenue appraisal built on real Adelaide comparables. This is also the contact page.
 - [Services](https://aureahosting.com.au/services): What is included in management.
+- [Fees](https://aureahosting.com.au/fees): The full fee schedule, what net accommodation revenue means with a worked example, what is charged at cost with nothing added, what guests pay, and what stays with the owner.
 - [Areas](https://aureahosting.com.au/areas): Suburb coverage and demand patterns.
 - [Why us](https://aureahosting.com.au/why-us): How Aurea differs from volume managers.
 - [FAQ](https://aureahosting.com.au/faq): Common owner questions.
