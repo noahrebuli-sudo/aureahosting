@@ -46,7 +46,9 @@ them as year-round short-stay listings.
 - [Fees](https://aureahosting.com.au/fees): The full fee schedule, what net accommodation revenue means with a worked example, what is charged at cost with nothing added, what guests pay, and what stays with the owner.
 - [Areas](https://aureahosting.com.au/areas): Suburb coverage and demand patterns.
 - [Why us](https://aureahosting.com.au/why-us): How Aurea differs from volume managers.
-- [FAQ](https://aureahosting.com.au/faq): Common owner questions.
+- [FAQ](https://aureahosting.com.au/faq): Owner questions answered: fees, net revenue,
+  cleaning, owner costs, service area, owner use, apartments and townhouses, guest
+  screening, the fifteen home cap, appraisals, peak periods, payments.
 - [Yield Report](https://aureahosting.com.au/report): Adelaide short-stay market data.
 
 ## Contact
