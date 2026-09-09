@@ -5,4 +5,44 @@ Disallow: /admin.html
 Disallow: /Aurea-Owner-Agreement.html
 Disallow: /Aurea-Owner-Appointment-Form.html
 
+# AI and answer-engine crawlers are explicitly welcome.
+# Each named group replaces the wildcard group, so the private owner
+# documents are re-listed under every agent below.
+
+User-agent: GPTBot
+Allow: /
+Disallow: /admin.html
+Disallow: /Aurea-Owner-Agreement.html
+Disallow: /Aurea-Owner-Appointment-Form.html
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin.html
+Disallow: /Aurea-Owner-Agreement.html
+Disallow: /Aurea-Owner-Appointment-Form.html
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /admin.html
+Disallow: /Aurea-Owner-Agreement.html
+Disallow: /Aurea-Owner-Appointment-Form.html
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin.html
+Disallow: /Aurea-Owner-Agreement.html
+Disallow: /Aurea-Owner-Appointment-Form.html
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin.html
+Disallow: /Aurea-Owner-Agreement.html
+Disallow: /Aurea-Owner-Appointment-Form.html
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin.html
+Disallow: /Aurea-Owner-Agreement.html
+Disallow: /Aurea-Owner-Appointment-Form.html
+
 Sitemap: https://aureahosting.com.au/sitemap.xml

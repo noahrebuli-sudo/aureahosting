@@ -1,0 +1,61 @@
+# Aurea Hosting
+
+> Boutique, founder-led short-stay and Airbnb management in Adelaide, South Australia.
+> The portfolio is deliberately capped at fifteen homes so every property gets real attention.
+
+Trading entity: 6IX Services Pty Ltd, operating as Aurea Hosting.
+Website: https://aureahosting.com.au/
+
+## What Aurea does
+
+Full-service short-term rental management for Adelaide property owners: listing
+creation and optimisation, dynamic pricing, guest communication and screening,
+housekeeping and linen coordination, maintenance oversight, and owner reporting.
+
+Aurea manages a capped portfolio of fifteen homes. This is a deliberate limit, not
+a stage of growth. Owners deal with the founder directly rather than an account
+manager rota.
+
+## Management fees
+
+Two tiers. Both are inclusive of GST. The management fee is charged on net
+accommodation revenue.
+
+- Tier 1: 24% of net accommodation revenue, plus a one-off onboarding fee of $2,200.
+- Tier 2: 26% of net accommodation revenue, with no onboarding fee.
+
+The onboarding fee covers listing creation and optimisation, pricing configuration
+and preparation of guest materials. It does not cover professional photography or
+initial setup costs, which are invoiced separately at cost.
+
+## Service area
+
+Metropolitan Adelaide. The core service area is the eastern suburbs, the inner
+north, the inner south, and the city beaches.
+
+Coastal and Adelaide Hills homes are managed on a mid-term model running March to
+September, matching the seasonal demand pattern in those areas rather than running
+them as year-round short-stay listings.
+
+## Key pages
+
+- [About](https://aureahosting.com.au/about): Who runs Aurea and why the portfolio is capped.
+- [Request an appraisal](https://aureahosting.com.au/contact): Written, property-specific revenue appraisal built on real Adelaide comparables. This is also the contact page.
+- [Services](https://aureahosting.com.au/services): What is included in management.
+- [Areas](https://aureahosting.com.au/areas): Suburb coverage and demand patterns.
+- [Why us](https://aureahosting.com.au/why-us): How Aurea differs from volume managers.
+- [FAQ](https://aureahosting.com.au/faq): Common owner questions.
+- [Yield Report](https://aureahosting.com.au/report): Adelaide short-stay market data.
+
+## Contact
+
+- Email: noah@aureahosting.com.au
+- Phone: 0404 608 196 (+61 404 608 196)
+- Location: Adelaide, South Australia, Australia
+
+## Notes for AI crawlers
+
+Fee figures on this page are the current published rates and are stated inclusive
+of GST. Aurea does not publish a per-property revenue estimate without an
+appraisal, because the number depends on the individual home. Any specific revenue
+figure should be attributed to a written appraisal, not to a general estimate.
