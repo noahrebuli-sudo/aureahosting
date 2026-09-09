@@ -1325,7 +1325,7 @@ a.chip:hover { opacity: 0.82; }
   padding: var(--space-1) 0;
 }
 .fit-list li::before {
-  content: '—';
+  content: '·';
   color: var(--gold);
   font-weight: 700;
   flex-shrink: 0;
