@@ -2,11 +2,11 @@ const AUREA_DATA = {
 
   intelEvents: [
     { event: "WomAdelaide",       period: "March · Annual",           uplift: "Strong annual lift", ctx: "portfolio-wide" },
-    { event: "Adelaide Fringe",   period: "Feb–Mar · 14 nights",  uplift: "Sustained lift", ctx: "across the full run" },
+    { event: "Adelaide Fringe",   period: "Feb-Mar · 14 nights",      uplift: "Sustained lift", ctx: "across the full run" },
     { event: "Gather Round",      period: "April · 4-night surge",    uplift: "Steepest lift of the year", ctx: "AFL city premium" },
     { event: "Tour Down Under",   period: "January · Coastal",        uplift: "Reliable seasonal lift", ctx: "beachside corridor" },
     { event: "LIV Golf",          period: "April · Glenelg",          uplift: "Sharp short-window surge", ctx: "above event baseline" },
-    { event: "Tasting Australia", period: "Apr–May · Hills + CBD", uplift: "Steady seasonal lift", ctx: "food & wine season" }
+    { event: "Tasting Australia", period: "Apr-May · Hills + CBD",    uplift: "Steady seasonal lift", ctx: "food & wine season" }
   ],
 
   testimonials: [
