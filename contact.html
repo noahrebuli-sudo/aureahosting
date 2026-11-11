@@ -148,6 +148,7 @@ src="https://www.facebook.com/tr?id=1027065616568144&ev=PageView&noscript=1"
       <h2>Your application</h2>
       <p class="form-intro">All fields help us assess your property accurately. We don't share your information and we don't follow up with unsolicited sales calls.</p>
       <form id="contact-form" novalidate action="https://formspree.io/f/xkopyjkj" method="POST">
+        <input type="hidden" name="submission_id" id="submission_id" value="">
 
         <div class="form-grid">
           <div class="form-group">
@@ -283,6 +284,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var btn = form.querySelector('[type=submit]');
     btn.textContent = 'Sending…';
     btn.disabled = true;
+    var sid = document.getElementById('submission_id');
+    if (sid && !sid.value) sid.value = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + '-' + Math.random().toString(36).slice(2);
 
     fetch('https://formspree.io/f/xkopyjkj', {
       method: 'POST',
