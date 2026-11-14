@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       clearFormError();
-      /* Validation passed; the inline Formspree handler in contact.html takes over */
+      /* Validation passed; the inline Formspree handler in contact.html takes over. That handler also populates the hidden #submission_id field (crypto.randomUUID with a timestamp fallback) before POSTing - no submission_id logic lives in this file. */
     });
   }
 
