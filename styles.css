@@ -1313,6 +1313,7 @@ a.chip:hover { opacity: 0.82; }
   .perf-grid { grid-template-columns: 1fr; gap: var(--space-10); border-top: none; }
   .perf-stat { border-right: none; padding: 0; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: var(--space-10); }
   .perf-stat:last-child { border-bottom: none; padding-bottom: 0; }
+  .perf-stat:last-child { padding-left: 0; }
   .perf-stat:nth-child(2) { padding-left: 0; }
   .coverage-grid { grid-template-columns: 1fr; }
   .coverage-suburbs, .coverage-verdict { min-height: 0; }

@@ -277,16 +277,41 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactForm) {
     const errorRegion = document.getElementById('form-errors');
 
-    function setFormError(msg) {
+    let erroredField = null;
+
+    /* The single live region is moved under the failing field, so the
+       message shows where the problem is and is still announced. */
+    function setFormError(msg, field) {
       if (!errorRegion) return;
-      errorRegion.textContent = msg;
+      const group = field ? field.closest('.form-group') : null;
+      if (group && errorRegion.parentNode !== group) {
+        group.appendChild(errorRegion);
+        errorRegion.style.marginTop = 'var(--space-2)';
+        errorRegion.style.marginBottom = '0';
+      }
+      errorRegion.textContent = '';
       errorRegion.removeAttribute('hidden');
+      errorRegion.textContent = msg;
+      if (erroredField && erroredField !== field) {
+        erroredField.removeAttribute('aria-invalid');
+        erroredField.removeAttribute('aria-describedby');
+      }
+      if (field) {
+        field.setAttribute('aria-invalid', 'true');
+        field.setAttribute('aria-describedby', 'form-errors');
+        erroredField = field;
+      }
     }
 
     function clearFormError() {
       if (!errorRegion) return;
       errorRegion.textContent = '';
       errorRegion.setAttribute('hidden', '');
+      if (erroredField) {
+        erroredField.removeAttribute('aria-invalid');
+        erroredField.removeAttribute('aria-describedby');
+        erroredField = null;
+      }
     }
 
     /* Clear error as soon as the user starts correcting any field */
@@ -306,31 +331,31 @@ document.addEventListener('DOMContentLoaded', () => {
       const phoneOk      = phoneVal.replace(/\D/g, '').length >= 8;
 
       if (!nameVal && (!emailVal || !emailOk)) {
-        setFormError('Please enter your full name and a valid email address.');
+        setFormError('Please enter your full name and a valid email address.', nameField);
         if (nameField) nameField.focus();
         e.stopImmediatePropagation();
         return;
       }
       if (!nameVal) {
-        setFormError('Please enter your full name.');
+        setFormError('Please enter your full name.', nameField);
         if (nameField) nameField.focus();
         e.stopImmediatePropagation();
         return;
       }
       if (!emailVal || !emailOk) {
-        setFormError('Please enter a valid email address.');
+        setFormError('Please enter a valid email address.', emailField);
         if (emailField) emailField.focus();
         e.stopImmediatePropagation();
         return;
       }
       if (phoneField && !phoneOk) {
-        setFormError('Please enter a phone number we can call you on.');
+        setFormError('Please enter a phone number we can call you on.', phoneField);
         phoneField.focus();
         e.stopImmediatePropagation();
         return;
       }
       if (addressField && !addressVal) {
-        setFormError('Please enter the property address.');
+        setFormError('Please enter the property address.', addressField);
         addressField.focus();
         e.stopImmediatePropagation();
         return;

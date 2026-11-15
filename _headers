@@ -17,3 +17,6 @@
   X-Robots-Tag: noindex
 /Aurea-Owner-Appointment-Form.html
   X-Robots-Tag: noindex
+
+/reports/*
+  X-Robots-Tag: noindex
