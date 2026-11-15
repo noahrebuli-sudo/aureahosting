@@ -8,3 +8,15 @@
 
 /aurea-noah.vcf
   Content-Type: text/vcard; charset=utf-8
+
+/Aurea-Owner-Agreement
+  X-Robots-Tag: noindex
+/Aurea-Owner-Agreement.html
+  X-Robots-Tag: noindex
+/Aurea-Owner-Appointment-Form
+  X-Robots-Tag: noindex
+/Aurea-Owner-Appointment-Form.html
+  X-Robots-Tag: noindex
+
+/reports/*
+  X-Robots-Tag: noindex

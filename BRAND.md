@@ -1,4 +1,4 @@
-# Aurea Hosting — Brand System Reference
+# Aurea Hosting: Brand System Reference
 
 > Extracted from source code. Use this document when creating branded PDFs, Word docs, or slide decks that need to match the website.
 
@@ -88,7 +88,7 @@ To use these fonts in other tools:
 | Line height | 1.1 |
 | Letter spacing | −0.025em |
 
-### Type Scale (Fluid — using `clamp()`)
+### Type Scale (Fluid, using `clamp()`)
 
 All sizes are responsive; values shown are **min → max** across viewport widths.
 
@@ -146,7 +146,7 @@ All sizes are responsive; values shown are **min → max** across viewport width
 | `--space-24` | 6rem | 96px |
 | `--space-32` | 8rem | 128px |
 
-Section padding on the website uses `--space-32` (128px top/bottom). For documents, aim for generous white space — cramped layouts are off-brand.
+Section padding on the website uses `--space-32` (128px top/bottom). For documents, aim for generous white space. Cramped layouts are off-brand.
 
 ### Layout Containers
 
@@ -166,7 +166,7 @@ Section padding on the website uses `--space-32` (128px top/bottom). For documen
 | `--radius-lg` | 24px | Large feature cards |
 | `--radius-pill` | 999px | Buttons, badges, chips |
 
-All buttons use `--radius-pill` — pills, not rounded-rectangles.
+All buttons use `--radius-pill`: pills, not rounded-rectangles.
 
 ### Shadows
 
@@ -178,7 +178,7 @@ All buttons use `--radius-pill` — pills, not rounded-rectangles.
 | `--shadow-xl` | `0 20px 60px rgba(23,34,38, 0.12)` | Hero elements |
 | `--shadow-gold` | `0 4px 24px rgba(200,163,93, 0.22)` | Gold CTA buttons |
 
-Shadows are intentionally soft and low-opacity — avoid heavy drop shadows.
+Shadows are intentionally soft and low-opacity. Avoid heavy drop shadows.
 
 ### Animation / Easing (reference only)
 
@@ -203,7 +203,7 @@ All assets live in `images/`:
 | `images/favicon-192.png` | 128 KB | Android home screen icon |
 | `images/apple-touch-icon.png` | 45 KB | iOS home screen icon (180×180) |
 
-**Use `images/favicon.svg` as the primary logo asset** — it is vector and will scale losslessly to any size.
+**Use `images/favicon.svg` as the primary logo asset.** It is vector and will scale losslessly to any size.
 
 ### Photography
 
@@ -221,13 +221,13 @@ All assets live in `images/`:
 
 ### Icon Library
 
-**Lucide Icons** — loaded via CDN:
+**Lucide Icons**, loaded via CDN:
 
 ```
 https://unpkg.com/lucide@latest/dist/umd/lucide.js
 ```
 
-Lucide is an open-source icon set (MIT licence). For offline or print use, icons can be exported as SVG from [lucide.dev](https://lucide.dev). Use stroke-based (outline) icons only — consistent with Lucide's style.
+Lucide is an open-source icon set (MIT licence). For offline or print use, icons can be exported as SVG from [lucide.dev](https://lucide.dev). Use stroke-based (outline) icons only, consistent with Lucide's style.
 
 ---
 
@@ -243,66 +243,71 @@ Lucide is an open-source icon set (MIT licence). For offline or print use, icons
 
 - Shape: pill (`border-radius: 999px`)
 - Padding: `12px 24px` (default), `16px 40px` (large)
-- Font: Satoshi, weight 500–600, `letter-spacing: 0.01em`
+- Font: Satoshi, weight 500 to 600, `letter-spacing: 0.01em`
 - Gold hover: background `#b8924d`, shadow expands
 
 ---
 
 ## 6. Tone of Voice
 
+House rules as at 16 November 2026. These replace the earlier voice guide. Where older site copy disagrees with this section, this section wins.
+
 ### Brand Positioning
 
-> "Adelaide's most selective short-term rental management."
 > "We manage fewer properties. On purpose."
-> "Most agencies optimise for volume. We optimise for yield."
 
-Aurea Hosting positions itself as a premium, exclusive operator — not competing on price or scale, but on performance and selectivity.
+The slogan stays. Aurea is a small portfolio with a dedicated team. Selectivity is shown by saying plainly who Aurea takes on and who it does not.
 
 ### Voice Characteristics
 
-**Confident, not boastful.** Claims are always backed by specific numbers. Never vague superlatives.
-- ✓ "66% average occupancy across all managed properties"
-- ✗ "Industry-leading occupancy rates"
+**Direct, precise, quietly confident.** Selective, never salesy. No superlatives ("most", "best", "leading", "premium").
 
-**Asset-class language.** Speaks to property owners as investors, not hobbyists.
-- Key terms: *yield*, *revenue lift*, *managed asset*, *dynamic pricing*, *occupancy rate*, *performance statement*
+**Small portfolio, dedicated team.** Say "a small portfolio" and "a dedicated team". Never give a home count or a cap (no "fifteen", "twenty", "15" or "20+" homes). Never say "one person", "one manager", "single point of contact" or "1 point of contact".
 
-**Specific over general.** Suburbs are named, dollar figures are real, timelines are exact.
-- "From day one to live listing in 7 days"
-- "+$1,100 monthly income within 60 days"
-- "<4-minute average guest response time"
+**Experience.** Six years of hosting short stays in Adelaide. Use six everywhere, never five, "5+" or "almost six".
 
-**Selective / exclusive.** Limited intake is a feature, not a constraint.
-- "We take on a limited number of properties each quarter"
-- "Apply to work with us" (not "sign up" or "get started")
+**The next step is always a call.** Never offer a written appraisal, a free appraisal, a revenue figure, a yield estimate, a free report or "what it could earn". The call covers the home and the nightly rates similar homes nearby are achieving. The label for that step is "Request a call".
 
-**Formal-leaning but not stiff.** No slang, no exclamation marks, no emoji. Complete sentences. Minimal jargon — technical terms are explained where they appear.
+**No income or occupancy promises.** No revenue lifts, occupancy percentages or dollar figures about what a home will earn.
 
-**Adelaide-specific.** Local knowledge is core to the brand: event calendar (WOMAdelaide, Fringe, Gather Round, LIV Golf, Tour Down Under, Tasting Australia), suburb names, local pricing benchmarks.
+**Availability.** Say "7 days a week". Never "24/7" or "around the clock".
+
+**Readiness.** Say "ready for guests". Never "guest-ready".
+
+**Fees.** All fees are stated GST inclusive. The fees page stays out of the nav and footer.
+
+**Channels.** Homes are listed on Airbnb, Booking.com, Vrbo and Stayz. Name those four. Never claim a channel count.
+
+**Adelaide-specific.** Name suburbs and events, and check the facts before publishing. WOMADelaide is held in Botanic Park over the March long weekend. LIV Golf Adelaide ended in 2026 and is no longer an event to cite. Hills and Fleurieu homes run as short stays from October to February and take mid-term placements from March to September.
+
+**Formal-leaning but not stiff.** Australian English. No slang, no exclamation marks, no emoji, no em dashes. Complete sentences. Technical terms are explained where they appear.
+
+**Service claims need evidence.** A claim about response times, inspections, dashboards or guest services is used only once Noah has confirmed it is delivered on every home.
 
 ### Recurring Phrases & Terminology
 
 | Phrase | Context |
 |---|---|
-| "Yield optimisation" | Core service description |
-| "Dynamic pricing" | Pricing approach |
-| "50+ channels via Guesty" | Distribution reach |
-| "Real-time owner dashboard" | Reporting feature |
-| "Hotel-grade turnovers" | Cleaning/property service |
-| "From overwhelmed to optimised" | Owner transformation narrative |
-| "No surprises. No unexplained deductions." | Trust/transparency messaging |
-| "Apply to work with us" | CTA (not "sign up") |
+| "We manage fewer properties. On purpose." | Slogan |
+| "A small portfolio and a dedicated team" | Who Aurea is |
+| "Request a call" | The next step for an owner |
+| "7 days a week" | Guest messages and cover |
+| "Ready for guests" | Property readiness |
+| "Airbnb, Booking.com, Vrbo and Stayz" | Where homes are listed |
+| "No surprises. No unexplained deductions." | Trust and transparency |
+| "Apply" | Existing nav and intake label |
 
 ### Do / Don't for Copy
 
 | Do | Don't |
 |---|---|
-| Use exact numbers | Use vague claims ("the best", "industry-leading") |
-| Reference Adelaide suburbs and events | Generic location language ("your area") |
-| Frame owners as investors | Frame owners as hosts or landlords |
-| Use "Apply" for intake CTAs | Use "Sign up" or "Get started" |
-| Short, punchy headings | Long sentence headings |
-| Past-tense testimonial data | Forward promises without evidence |
+| Say "a small portfolio" and "a dedicated team" | Give a home count, or say "one person" or "point of contact" |
+| Make the next step a call | Offer an appraisal, a report, a yield estimate or a revenue figure |
+| Say "7 days a week" | Say "24/7" or "around the clock" |
+| Say "ready for guests" | Say "guest-ready" |
+| Reference Adelaide suburbs and events, checked | Use generic location language ("your area") |
+| State fees GST inclusive | Use superlatives or income promises |
+| Short, plain headings | Long sentence headings |
 
 ---
 
@@ -319,4 +324,4 @@ Aurea Hosting positions itself as a premium, exclusive operator — not competin
 
 ---
 
-*All values extracted directly from `styles.css` and `index.html`. Last updated from source: 2026-04-21.*
+*Visual values extracted directly from `styles.css` and `index.html` on 2026-04-21. Tone of voice updated 2026-11-16.*

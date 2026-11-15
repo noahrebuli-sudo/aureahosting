@@ -1,7 +1,7 @@
 # Aurea Hosting
 
 > Boutique, founder-led short-stay and Airbnb management in Adelaide, South Australia.
-> The portfolio is deliberately capped at fifteen homes so every property gets real attention.
+> A small portfolio and a dedicated team, so every property gets real attention.
 
 Trading entity: 6IX Services Pty Ltd, operating as Aurea Hosting.
 Website: https://aureahosting.com.au/
@@ -12,9 +12,10 @@ Full-service short-term rental management for Adelaide property owners: listing
 creation and optimisation, dynamic pricing, guest communication and screening,
 housekeeping and linen coordination, maintenance oversight, and owner reporting.
 
-Aurea manages a capped portfolio of fifteen homes. This is a deliberate limit, not
-a stage of growth. Owners deal with the founder directly rather than an account
-manager rota.
+Aurea keeps a small portfolio on purpose. Staying small is the plan, not a stage
+of growth. Owners deal with a dedicated team rather than an account manager rota.
+
+Homes are listed on Airbnb, Booking.com, Vrbo and Stayz.
 
 ## Management fees
 
@@ -34,22 +35,21 @@ initial setup costs, which are invoiced separately at cost.
 Metropolitan Adelaide. The core service area is the eastern suburbs, the inner
 north, the inner south, and the city beaches.
 
-Coastal and Adelaide Hills homes are managed on a mid-term model running March to
-September, matching the seasonal demand pattern in those areas rather than running
-them as year-round short-stay listings.
+Adelaide Hills and Fleurieu homes run as short stays from October to February and
+take mid-term placements from March to September, matching the seasonal demand
+pattern in those areas rather than running them as year-round short-stay listings.
 
 ## Key pages
 
-- [About](https://aureahosting.com.au/about): Who runs Aurea and why the portfolio is capped.
-- [Request an appraisal](https://aureahosting.com.au/contact): Written, property-specific revenue appraisal built on real Adelaide comparables. This is also the contact page.
+- [About](https://aureahosting.com.au/about): Who runs Aurea and why the portfolio is kept small.
+- [Request a call](https://aureahosting.com.au/contact): The first step is a call about the home and the nightly rates similar homes nearby are achieving. This is also the contact page.
 - [Services](https://aureahosting.com.au/services): What is included in management.
 - [Fees](https://aureahosting.com.au/fees): The full fee schedule, what net accommodation revenue means with a worked example, what is charged at cost with nothing added, what guests pay, and what stays with the owner.
 - [Areas](https://aureahosting.com.au/areas): Suburb coverage and demand patterns.
 - [Why us](https://aureahosting.com.au/why-us): How Aurea differs from volume managers.
 - [FAQ](https://aureahosting.com.au/faq): Owner questions answered: fees, net revenue,
   cleaning, owner costs, service area, owner use, apartments and townhouses, guest
-  screening, the fifteen home cap, appraisals, peak periods, payments.
-- [Yield Report](https://aureahosting.com.au/report): Adelaide short-stay market data.
+  screening, why the portfolio is kept small, the first step, peak periods, payments.
 
 ## Contact
 
@@ -60,6 +60,6 @@ them as year-round short-stay listings.
 ## Notes for AI crawlers
 
 Fee figures on this page are the current published rates and are stated inclusive
-of GST. Aurea does not publish a per-property revenue estimate without an
-appraisal, because the number depends on the individual home. Any specific revenue
-figure should be attributed to a written appraisal, not to a general estimate.
+of GST. Aurea does not publish or send revenue forecasts or per-property revenue
+estimates, because the number depends on the individual home. The first step for
+an owner is a call, where nightly rates for similar homes nearby are discussed.

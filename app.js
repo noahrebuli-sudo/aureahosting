@@ -239,14 +239,14 @@ document.addEventListener('DOMContentLoaded', () => {
       attributionControl: true
     });
     const markers = [
-      { coords: [138.5153,-34.9816], name: 'Glenelg',        desc: 'Beachside, priced at a premium · WomAdelaide brings a strong seasonal lift' },
+      { coords: [138.5153,-34.9816], name: 'Glenelg',        desc: 'Beachside, priced at a premium · a summer market with a tram to the city' },
       { coords: [138.5157,-34.9502], name: 'West Beach',     desc: 'Airport proximity meets coastal demand' },
       { coords: [138.4969,-34.9219], name: 'Henley Beach',   desc: 'Premium coastal village with strong weekend demand' },
       { coords: [138.6007,-34.9285], name: 'Adelaide CBD',   desc: 'Business, Fringe, Gather Round driving year-round occupancy' },
       { coords: [138.5884,-34.9499], name: 'Unley',          desc: 'Leafy city-fringe with boutique appeal' },
       { coords: [138.6297,-34.9211], name: 'Norwood',        desc: 'Vibrant café precinct, steady demand all year round' },
       { coords: [138.6456,-34.9387], name: 'Burnside',       desc: 'Upscale residential with Hills proximity premium' },
-      { coords: [138.7140,-35.0003], name: 'Stirling',       desc: 'Hills gateway, sharp lift around Tasting Australia' }
+      { coords: [138.7140,-35.0003], name: 'Stirling',       desc: 'Hills gateway, short stay in summer and mid-term through winter' }
     ];
     map.on('load', () => {
       map.addSource('coverage-zone', {
@@ -277,16 +277,41 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactForm) {
     const errorRegion = document.getElementById('form-errors');
 
-    function setFormError(msg) {
+    let erroredField = null;
+
+    /* The single live region is moved under the failing field, so the
+       message shows where the problem is and is still announced. */
+    function setFormError(msg, field) {
       if (!errorRegion) return;
-      errorRegion.textContent = msg;
+      const group = field ? field.closest('.form-group') : null;
+      if (group && errorRegion.parentNode !== group) {
+        group.appendChild(errorRegion);
+        errorRegion.style.marginTop = 'var(--space-2)';
+        errorRegion.style.marginBottom = '0';
+      }
+      errorRegion.textContent = '';
       errorRegion.removeAttribute('hidden');
+      errorRegion.textContent = msg;
+      if (erroredField && erroredField !== field) {
+        erroredField.removeAttribute('aria-invalid');
+        erroredField.removeAttribute('aria-describedby');
+      }
+      if (field) {
+        field.setAttribute('aria-invalid', 'true');
+        field.setAttribute('aria-describedby', 'form-errors');
+        erroredField = field;
+      }
     }
 
     function clearFormError() {
       if (!errorRegion) return;
       errorRegion.textContent = '';
       errorRegion.setAttribute('hidden', '');
+      if (erroredField) {
+        erroredField.removeAttribute('aria-invalid');
+        erroredField.removeAttribute('aria-describedby');
+        erroredField = null;
+      }
     }
 
     /* Clear error as soon as the user starts correcting any field */
@@ -299,22 +324,39 @@ document.addEventListener('DOMContentLoaded', () => {
       const nameVal    = nameField  ? nameField.value.trim()  : '';
       const emailVal   = emailField ? emailField.value.trim() : '';
       const emailOk    = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+      const phoneField   = contactForm.querySelector('#phone');
+      const addressField = contactForm.querySelector('#address');
+      const phoneVal     = phoneField   ? phoneField.value.trim()   : '';
+      const addressVal   = addressField ? addressField.value.trim() : '';
+      const phoneOk      = phoneVal.replace(/\D/g, '').length >= 8;
 
       if (!nameVal && (!emailVal || !emailOk)) {
-        setFormError('Please enter your full name and a valid email address.');
+        setFormError('Please enter your full name and a valid email address.', nameField);
         if (nameField) nameField.focus();
         e.stopImmediatePropagation();
         return;
       }
       if (!nameVal) {
-        setFormError('Please enter your full name.');
+        setFormError('Please enter your full name.', nameField);
         if (nameField) nameField.focus();
         e.stopImmediatePropagation();
         return;
       }
       if (!emailVal || !emailOk) {
-        setFormError('Please enter a valid email address.');
+        setFormError('Please enter a valid email address.', emailField);
         if (emailField) emailField.focus();
+        e.stopImmediatePropagation();
+        return;
+      }
+      if (phoneField && !phoneOk) {
+        setFormError('Please enter a phone number we can call you on.', phoneField);
+        phoneField.focus();
+        e.stopImmediatePropagation();
+        return;
+      }
+      if (addressField && !addressVal) {
+        setFormError('Please enter the property address.', addressField);
+        addressField.focus();
         e.stopImmediatePropagation();
         return;
       }

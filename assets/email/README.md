@@ -1,8 +1,8 @@
-# /assets/email — permanent external-reference assets
+# /assets/email: permanent external-reference assets
 
 **Do not rename, move, or delete anything in this directory.**
 
-Files here are hotlinked from outside the website — email signatures, PDFs, and
+Files here are hotlinked from outside the website: email signatures, PDFs, and
 other places we cannot update retroactively. If a file is renamed or removed,
 every message already sent shows a broken image forever.
 
@@ -20,7 +20,7 @@ every message already sent shows a broken image forever.
 - To update artwork, overwrite the file in place at the same path and same
   dimensions. Do not add a version suffix.
 - Do not add `Disallow` rules covering `/assets/` to `robots.txt`, and do not
-  add auth, Cloudflare Access, or hotlink-protection rules over this path —
+  add auth, Cloudflare Access, or hotlink-protection rules over this path, because
   email clients fetch these images anonymously with a foreign referer.
 
 ## noblestr-signature.png
@@ -35,8 +35,8 @@ Sized at 2x for a 200px display width in the signature:
 
 ## noah-lockup.png
 
-300 x 232, PNG (8-bit RGBA), ~58 KB, transparent background. Already optimised —
-do not recompress, convert, or resize it; re-encoding is what silently flattens
+300 x 232, PNG (8-bit RGBA), ~58 KB, transparent background. Already optimised.
+Do not recompress, convert, or resize it; re-encoding is what silently flattens
 the alpha channel to white. Sized at 2x for a 150px display width in the
 signature:
 
