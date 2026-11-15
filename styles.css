@@ -2406,7 +2406,7 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
   .ed-marquee-track { animation: none; }
 }
 
-/* ─── Appraisal band ─── */
+/* ─── First step band ─── */
 .ed-appraisal {
   background: var(--sand-mid);
   padding: clamp(88px, 14vh, 150px) 0;
@@ -3058,7 +3058,7 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
 }
 
 /* ─── Mobile sticky CTA ─── */
-/* Outer positioner — anchors above the iOS Safari URL bar via dvh.
+/* Outer positioner: anchors above the iOS Safari URL bar via dvh.
    Never carries transform/opacity, so it can't fight the inner slide. */
 .ed-sticky-cta {
   position: fixed;
@@ -3076,7 +3076,7 @@ body.ed-veil-done .ed-hero-progress { opacity: 1; }
     bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
   }
 }
-/* Inner pill — carries the show/hide + dismiss animation only. */
+/* Inner pill: carries the show/hide + dismiss animation only. */
 .ed-sticky-cta-inner {
   display: flex;
   align-items: center;
