@@ -273,6 +273,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ─── Contact Form: validation + accessible error region ─── */
+  /*
+   * submission_id note: app.js does NOT read, set, or validate the hidden
+   * #submission_id input. That field is generated (crypto.randomUUID with a
+   * Date.now fallback) and submitted entirely by the inline script at the
+   * bottom of contact.html.
+   *
+   * Load-order contract: this submit handler must be registered BEFORE the
+   * inline contact.html handler. It is, because app.js is included via
+   * <script src="app.js"> above the inline script. This matters because
+   * e.stopImmediatePropagation() on validation failure prevents the Formspree
+   * fetch from firing. Do not move app.js below the inline script or add
+   * defer/async to it without revisiting this.
+   */
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     const errorRegion = document.getElementById('form-errors');
@@ -320,7 +333,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       clearFormError();
-      /* Validation passed; the inline Formspree handler in contact.html takes over */
+      /* Validation passed; the inline Formspree handler in contact.html takes over.
+         That inline handler is also responsible for populating submission_id
+         (via crypto.randomUUID / Date.now fallback) before building the FormData
+         payload and posting to Formspree. */
     });
   }
 
