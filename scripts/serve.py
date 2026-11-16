@@ -16,7 +16,7 @@ import os
 import sys
 from http import HTTPStatus
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
-from urllib.parse import unquote, urlsplit
+from urllib.parse import unquote
 
 ROOT = os.path.realpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "next"))
 TEXT_TYPES = ("text/", "application/javascript", "application/json", "image/svg+xml", "application/xml")
@@ -29,12 +29,15 @@ mimetypes.add_type("image/avif", ".avif")
 
 def resolve(path):
     """Return a file path inside ROOT for a URL path, or None."""
-    rel = unquote(path).lstrip("/")
-    candidates = ["index.html"] if rel == "" else [rel, rel + ".html"]
-    for c in candidates:
-        full = os.path.realpath(os.path.join(ROOT, c))
-        if (full == ROOT or full.startswith(ROOT + os.sep)) and os.path.isfile(full):
-            return full
+    try:
+        rel = unquote(path).lstrip("/")
+        candidates = ["index.html"] if rel == "" else [rel, rel + ".html"]
+        for c in candidates:
+            full = os.path.realpath(os.path.join(ROOT, c))
+            if (full == ROOT or full.startswith(ROOT + os.sep)) and os.path.isfile(full):
+                return full
+    except ValueError:
+        pass
     return None
 
 
@@ -64,16 +67,21 @@ class Handler(SimpleHTTPRequestHandler):
         return body
 
     def respond(self, head_only):
-        parts = urlsplit(self.path)
-        path = parts.path
+        # Split by hand: urlsplit reads //host/x as a network location and drops the path.
+        raw_path, _, query = self.path.partition("?")
+        path = raw_path.partition("#")[0]
+        refused = path.startswith("//") or path.startswith("/\\")
         # Canonicalise: /x.html and /index go to /x and /.
         clean = None
         if path.endswith(".html"):
             clean = path[:-5]
-        if clean is not None:
+        if clean is not None and not refused:
             if clean.endswith("/index") or clean == "/index" or clean == "index":
                 clean = clean[: -len("index")] or "/"
-            target = (clean or "/") + ("?" + parts.query if parts.query else "")
+            target = (clean or "/") + ("?" + query if query else "")
+            if target.startswith(("//", "/\\")) or not target.startswith("/"):
+                refused = True  # never redirect off-site: answer 404
+        if clean is not None and not refused:
             self.send_response(HTTPStatus.MOVED_PERMANENTLY)
             self.send_header("Location", target)
             self.send_header("Content-Length", "0")
@@ -85,8 +93,11 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_header("Content-Length", "0")
             self.end_headers()
             return
-        full = resolve(path)
-        if full:
+        full = None if refused else resolve(path)
+        if full and os.path.basename(full) == "404.html":
+            full = os.path.join(ROOT, "404.html")
+            status = HTTPStatus.NOT_FOUND
+        elif full:
             status = HTTPStatus.OK
         else:
             full = os.path.join(ROOT, "404.html")
