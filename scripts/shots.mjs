@@ -56,7 +56,7 @@ let bad = 0;
 for (const p of paths) {
   const url = base + p;
   for (const [w, h] of SHOT_SIZES) {
-    const page = await browser.newPage({ viewport: { width: w, height: h } });
+    const page = await browser.newPage({ viewport: { width: w, height: h }, reducedMotion: 'reduce' });
     const res = await page.goto(url, { waitUntil: 'networkidle' });
     await page.evaluate(() => document.fonts.ready);
     const file = join(out, `${slug(p)}-${w}.png`);
