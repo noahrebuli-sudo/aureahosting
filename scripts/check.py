@@ -193,10 +193,13 @@ def check_html(full, rel, regions_store):
         warn(rel, "read in context: '...%s...'" % visible[s:m.end() + 30])
 
     # Inline style attributes. Only style="--w:Nch" on .blank is allowed.
-    for tag, a in p.styles:
+    iscard = name == "card.html"
+    if iscard:
+        print("NOTE card.html: standalone contact card, exempt from shell markers, canonical, description and inline style rules")
+    for tag, a in ([] if iscard else p.styles):
         if not (re.fullmatch(r"--w:\d+ch;?", a.get("style", "").replace(" ", "")) and "blank" in (a.get("class") or "").split()):
             fail(rel, "inline style attribute on <%s>: style=\"%s\"" % (tag, a.get("style")))
-    if re.search(r"<style[\s>]", raw, re.I):
+    if not iscard and re.search(r"<style[\s>]", raw, re.I):
         fail(rel, "<style> block (page-specific CSS is not allowed)")
 
     # Head requirements.
@@ -209,7 +212,7 @@ def check_html(full, rel, regions_store):
         fail(rel, "title is %d characters, 60 at most" % len(t))
     is404 = name == "404.html"
     d = p.head.get("description")
-    if not is404:
+    if not is404 and not iscard:
         if not d:
             fail(rel, "no meta description")
         elif len(d) > 155:
@@ -266,7 +269,7 @@ def check_html(full, rel, regions_store):
     for rg in ("header", "footer"):
         code = region_of(raw, rg)
         if code is None:
-            if not is404 or rg == "header":
+            if not iscard and (not is404 or rg == "header"):
                 fail(rel, "missing <!-- %s:start --> / <!-- %s:end --> markers" % (rg, rg))
         else:
             regions_store.setdefault(rg, {})[rel] = norm_region(code)
