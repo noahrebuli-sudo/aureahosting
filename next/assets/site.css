@@ -1190,6 +1190,10 @@
     .where--small > .map { grid-column: 1 / span 4; }
     .where--small > .where__list { grid-column: 6 / -1; }
   }
+  @media (min-width: 900px) and (max-width: 1199.98px) {
+    .where > .map, .where--small > .map { grid-column: 1 / span 6; }
+    .where > .where__list, .where--small > .where__list { grid-column: 7 / -1; }
+  }
   @media (hover: hover) {
     .where:has([data-area="glenelg"]:hover) .map__dot[data-area="glenelg"],
     .where:has([data-area="brighton"]:hover) .map__dot[data-area="brighton"],
