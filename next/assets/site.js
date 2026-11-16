@@ -1,4 +1,4 @@
-/* Aurea Hosting, site.js. The menu and the form.
+/* Aurea Hosting, site.js. The menu, the form and the click tracker.
    The page is complete without this file. With JavaScript off there is no menu button, the footer nav carries
    navigation, and the form posts straight to Formspree. */
 
@@ -123,7 +123,7 @@
     var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (document.startViewTransition && !calm) document.startViewTransition(swap).updateCallbackDone.then(land, land);
     else { swap(); land(); }
-    // Tags are not loaded on this prototype. When they are, a send is counted once, here.
+    // A send is counted once, here. Both calls are guarded, so nothing throws where tags.js has not loaded them.
     if (window.gtag) window.gtag('event', 'form_submission', { event_category: 'lead', event_label: 'request_a_call' });
     if (window.fbq) window.fbq('track', 'Lead');
   }
@@ -161,3 +161,13 @@
       });
   });
 })();
+
+// One delegated listener for [data-track]. Phone taps count as Contact and phone_click. Guarded, so it never throws.
+document.addEventListener('click', function (e) {
+  var el = e.target.closest && e.target.closest('[data-track]');
+  if (!el || el.getAttribute('data-track') !== 'call') return;
+  try {
+    if (typeof window.fbq === 'function') window.fbq('track', 'Contact');
+    if (typeof window.gtag === 'function') window.gtag('event', 'phone_click');
+  } catch (err) { /* tracking must never block a call */ }
+});
