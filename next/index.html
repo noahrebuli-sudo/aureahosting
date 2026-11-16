@@ -80,7 +80,7 @@
 
 <main id="main">
 
-<!-- 1. HERO. On wheat, in the HTML, visible at first paint. The headline is the LCP element on a phone. The portrait is the one eager image. -->
+<!-- 1. HERO. On wheat, in the HTML, visible at first paint. The headline or the portrait is the LCP element. The portrait is the one eager image. -->
 <section class="hero hero--split band--wheat" aria-labelledby="hero-h">
   <div class="wrap">
     <div class="hero__grid">
@@ -117,8 +117,8 @@
       <div><dt>Guest messages</dt><dd>A reply within minutes, 7&nbsp;days a week</dd></div>
     </dl>
     <p class="rating" hidden data-fact="pending">
-      <!-- CONFIRM WITH NOAH: only if the Noble ruling allows a rating drawn from the homes the team runs. Needs the figure, where it was read and the date. -->
-      <strong class="num">NOAH</strong> <span>Average guest rating across the homes we look after, read on NOAH.</span>
+      <!-- CONFIRM WITH NOAH: only if the Noble ruling allows a rating drawn from the homes the team runs. Needs the figure, where it was read and the date. Format when filled: the figure in the strong, then "Average guest rating across the homes we look after, read on <date>." Empty until then. -->
+      <strong class="num"></strong> <span></span>
     </p>
   </div>
 </section>
@@ -314,13 +314,14 @@
     </div>
     <div class="record" hidden data-fact="pending">
       <!-- CONFIRM WITH NOAH: real figures only, read from Guesty or the portal, with the date read. Medians and shares, never counts of homes, stays or cleans. Remove hidden and data-fact when all three are real. If the date is ever more than 45 days old, put hidden back. -->
+      <!-- CONFIRM WITH NOAH: formats when filled. First cell "4 min". Second cell "N in 100". Last line "As at <date read>. Read from our booking system." Cells stay empty until then. -->
       <h3 class="record__h">The record</h3>
       <dl>
-        <div><dt>Median first reply to a guest</dt><dd class="num">NOAH</dd></div>
-        <div><dt>Cleans checked the same day</dt><dd class="num">NOAH</dd></div>
+        <div><dt>Median first reply to a guest</dt><dd class="num"></dd></div>
+        <div><dt>Cleans checked the same day</dt><dd class="num"></dd></div>
         <div><dt>Double bookings</dt><dd>Zero</dd></div>
       </dl>
-      <p class="record__asat">As at NOAH. Read from our booking system.</p>
+      <p class="record__asat"></p>
     </div>
     <p class="more"><a href="/how-we-run-a-home">Read the standard in full</a></p>
   </div>
@@ -415,9 +416,9 @@
 
 <!-- 5b. HOME QUOTE, built and hidden. -->
 <section class="section band--wheat" hidden data-fact="pending" aria-label="Featured quote">
-  <!-- CONFIRM WITH NOAH: one owner quote with no earnings or performance content, the owner's first name or "Owner", the suburb and the month. When this section is switched on, the people section after it must change from band--wheat to sand, because the two would otherwise be neighbouring wheat bands. -->
+  <!-- CONFIRM WITH NOAH: one owner quote with no earnings or performance content, the owner's first name or "Owner", the suburb and the month. When this section is switched on, the people section after it must change from band--wheat to band--sand2, because the two would otherwise be neighbouring wheat bands. -->
   <div class="wrap">
-    <figure class="quote quote--feature"><blockquote><p>NOAH</p></blockquote><figcaption>NOAH</figcaption></figure>
+    <figure class="quote quote--feature"><blockquote><p></p></blockquote><figcaption></figcaption></figure>
   </div>
 </section>
 
