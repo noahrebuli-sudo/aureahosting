@@ -1482,6 +1482,22 @@
   @media (prefers-reduced-motion: no-preference) and (hover: hover) {
     .more a:hover::after { transform: translateX(var(--s-1)); }
   }
+
+  /* Pass 2. Photographs, tiles and the map. data-sda="off" on <html> switches all of it off. */
+  @keyframes settle { from { opacity: .001; scale: 1.04; } }
+  @media (prefers-reduced-motion: no-preference) {
+    /* A photograph settles as it enters. Uses the scale property so a hover transform can still apply. */
+    @supports (animation-timeline: view()) {
+      :root:not([data-sda="off"]) .plate__frame img { animation: settle linear both; animation-timeline: view(); animation-range: entry 0% entry 60%; }
+    }
+    :root:not([data-sda="off"]) .map__dot { transition: transform var(--dur-fast) var(--ease-out), fill var(--dur-fast) var(--ease-out); }
+    :root:not([data-sda="off"]) .tile .plate__frame img { transition: transform var(--dur-base) var(--ease-out); }
+    /* The portrait carries from the home hero to the About head. The one named transition besides the header. */
+    :root:not([data-sda="off"]) :is(.plate--main img, .page-head--split .plate--blend img) { view-transition-name: founder; }
+  }
+  @media (prefers-reduced-motion: no-preference) and (hover: hover) {
+    :root:not([data-sda="off"]) .tile a:hover .plate__frame img { transform: scale(1.03); }
+  }
 }
 
 @media print {
