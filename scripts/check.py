@@ -41,6 +41,9 @@ BANNED = [
 ]
 # Main's text carried word for word (guide 4.9, 4.10): exempt from these two rules only.
 EXEMPT_FILES = ("privacy.html", "fees.html")
+# Carried legal documents (owner contract pages and their legacy css and js): exempt from the page rules.
+def carried(rel):
+    return (rel.startswith("Aurea-Owner-") and rel.endswith(".html")) or rel.startswith("legacy/")
 EXEMPT_PATTERNS = (r"\bapply\b|\bapplication\b", r"\boptimis")
 FEES_URL = r"(?:https?://(?:www\.)?aureahosting\.com\.au)?/fees"
 WARN_NUMBERS = r"\boccupancy\b|\buplift\b|\b\d+(?:\.\d+)?\s*points?\b"
@@ -309,6 +312,9 @@ def main():
         rel = os.path.relpath(full, ROOT).replace(os.sep, "/")
         if rel.startswith(".."):
             print("skip (outside next/): %s" % full)
+            continue
+        if carried(rel):
+            print("NOTE %s: carried legal document or legacy asset, exempt from page rules" % rel)
             continue
         check_text(full, rel)
         if rel.endswith(".html"):
