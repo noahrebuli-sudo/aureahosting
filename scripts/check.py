@@ -219,8 +219,12 @@ def check_html(full, rel, regions_store):
             fail(rel, "description is %d characters, 155 at most" % len(d))
         if not p.head.get("canonical"):
             fail(rel, "no canonical link")
-    if not re.search(r'<meta\s+name="robots"\s+content="noindex, nofollow"', raw):
-        fail(rel, 'missing <meta name="robots" content="noindex, nofollow">')
+    has_noindex = re.search(r'<meta\s+name="robots"\s+content="noindex', raw)
+    if rel in ('404.html', 'card.html'):
+        if not has_noindex:
+            fail(rel, 'missing <meta name="robots" content="noindex, nofollow">')
+    elif has_noindex:
+        fail(rel, 'indexable page still carries a robots noindex tag')
 
     # Links.
     for tag, k, href, region in p.hrefs:
