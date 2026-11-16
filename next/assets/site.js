@@ -1,5 +1,50 @@
-/* Aurea Hosting, site.js. Form handling only.
-   The page is complete without this file. With JavaScript off the form posts straight to Formspree. */
+/* Aurea Hosting, site.js. The menu and the form.
+   The page is complete without this file. With JavaScript off there is no menu button, the footer nav carries
+   navigation, and the form posts straight to Formspree. */
+
+// Menu. site.js shows the button (it ships hidden), opens the dialog with showModal() and keeps aria-expanded in step.
+(function () {
+  'use strict';
+  var btn = document.querySelector('.menu-btn');
+  var dlg = document.getElementById('site-menu');
+  if (!btn || !dlg || typeof dlg.showModal !== 'function') return;
+
+  btn.hidden = false;
+
+  btn.addEventListener('click', function () {
+    dlg.showModal();
+    btn.setAttribute('aria-expanded', 'true');
+  });
+
+  dlg.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('a, .menu__close');
+    if (el && dlg.contains(el)) dlg.close();
+  });
+
+  // Escape closes natively. Whatever closes it, the button is told and takes focus back.
+  dlg.addEventListener('close', function () {
+    btn.setAttribute('aria-expanded', 'false');
+    btn.focus();
+  });
+
+  // Tab stays inside the dialog.
+  dlg.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') return;
+    var items = dlg.querySelectorAll('a[href], button:not([disabled])');
+    var first = items[0];
+    var last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  // The button is hidden from 1200, so an open menu closes if the window grows past it.
+  if (window.matchMedia) {
+    window.matchMedia('(min-width: 1200px)').addEventListener('change', function (e) {
+      if (e.matches && dlg.open) dlg.close();
+    });
+  }
+})();
+
 (function () {
   'use strict';
   var form = document.getElementById('enquiry');
