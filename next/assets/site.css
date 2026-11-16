@@ -63,6 +63,7 @@
     --font-body: "Satoshi", "Satoshi Fallback", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 
     --t-display: clamp(2.5rem, 11.3vw, 2.875rem);                    /* 44 on a phone, three lines */
+    --t-h1: clamp(2.375rem, 1.771rem + 2.476vw, 4rem);               /* 38 to 64. Page h1 */
     --t-h2: clamp(1.875rem, 1.55rem + 1.3333vw, 2.75rem);            /* 30 to 44 */
     --t-h3: clamp(1.375rem, 1.2357rem + 0.5714vw, 1.75rem);          /* 22 to 28 */
     --t-h4: clamp(1.125rem, 1.0786rem + 0.1905vw, 1.25rem);          /* 18 to 20 */
@@ -75,6 +76,7 @@
     --lh-head: 1.14;
     --lh-body: 1.6;
     --track-display: -0.035em;
+    --track-h1: -0.03em;
     --track-head: -0.022em;
     --measure: 62ch;
 
@@ -163,6 +165,7 @@
   img, svg { display: block; max-width: 100%; }
   img { height: auto; }
   svg { width: 1.5rem; height: 1.5rem; }
+  .sprite { position: absolute; width: 0; height: 0; }
   a { color: var(--teal-text); text-decoration-line: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
   strong { font-weight: 500; color: var(--ink); }
   small { font-size: inherit; }
@@ -279,7 +282,7 @@
 
   /* Hero */
   .hero { padding-block: var(--s-6) var(--s-7); }
-  .hero__kicker { font-size: var(--t-small); font-weight: 500; color: var(--muted); margin-bottom: var(--s-4); }
+  .hero__kicker, .page-head__kicker { font-size: var(--t-small); font-weight: 500; color: var(--muted); margin-bottom: var(--s-4); }
   .hero__h {
     font-size: var(--t-display); line-height: var(--lh-tight); letter-spacing: var(--track-display);
     text-wrap: balance;
@@ -713,6 +716,59 @@
     .site-footer a:hover, .site-nav a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.3em; }
     a:hover { color: var(--ink); }
   }
+
+  /* Page head: the type-only hero for every page except home */
+  .page-head { padding-block: var(--s-6) var(--s-7); }
+  .page-head__h {
+    font-size: var(--t-h1); line-height: 1.05; letter-spacing: var(--track-h1);
+    text-wrap: balance;
+  }
+  .page-head .lead { max-width: 44ch; }
+  .page-head .cta { margin-top: var(--s-5); }
+  @media (min-width: 900px) {
+    .page-head { padding-block: var(--s-8); }
+    .page-head .cta { margin-top: var(--s-6); }
+  }
+
+  /* Breadcrumb: first child of .page-head .wrap on area pages */
+  .crumbs {
+    display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--s-2);
+    margin-bottom: var(--s-3);
+    font-size: var(--t-small); line-height: 1.4; color: var(--muted);
+  }
+  .crumbs a { display: inline-flex; align-items: center; min-height: var(--tap); }
+
+  /* Split: 5 and 7 from 900, stacked below */
+  .split { display: grid; gap: var(--s-6); }
+  @media (min-width: 900px) {
+    .split { grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); align-items: start; }
+    .split__a { grid-column: 1 / span 5; grid-row: 1; }
+    .split__b { grid-column: 7 / -1; grid-row: 1; }
+    .split--flip .split__a { grid-column: 8 / -1; }
+    .split--flip .split__b { grid-column: 1 / span 6; }
+  }
+
+  /* Prose: long text, privacy, FAQ answers, fees */
+  .prose { max-width: var(--measure); }
+  .prose > * + * { margin-top: var(--s-4); }
+  .prose h2 { font-size: var(--t-h3); line-height: var(--lh-head); }
+  .prose h3 { font-size: var(--t-h4); }
+  .prose > h2:not(:first-child) { margin-top: var(--s-7); }
+  .prose > h3:not(:first-child) { margin-top: var(--s-6); }
+  .prose ul > li { position: relative; padding: var(--s-3) 0 var(--s-3) var(--s-5); }
+  .prose ul > li + li { border-top: 1px solid var(--line); }
+  .prose ul > li::before {
+    content: ""; position: absolute; left: 0; top: calc(var(--s-3) + 0.5lh - 0.1875rem);
+    width: 0.375rem; height: 0.375rem; background: var(--ink);
+  }
+
+  /* More: text link out of a section */
+  .more a {
+    display: inline-flex; align-items: center; gap: var(--s-2); min-height: var(--tap);
+    color: var(--ink); font-weight: 500;
+    text-decoration-line: underline; text-decoration-thickness: 1px; text-underline-offset: 0.25em;
+  }
+  .more a::after { content: "\2192"; content: "\2192" / ""; display: inline-block; text-decoration: none; }
 }
 
 /* 5. UTILITIES ------------------------------------------------------------ */
@@ -769,6 +825,12 @@
   @keyframes fade-out { to { opacity: 0; } }
   @keyframes fade-in { from { opacity: 0; } }
   @keyframes nudge { from { opacity: 0; transform: translateY(-4px); } }
+  @media (prefers-reduced-motion: no-preference) {
+    .more a::after { transition: transform var(--dur-fast) var(--ease-out); }
+  }
+  @media (prefers-reduced-motion: no-preference) and (hover: hover) {
+    .more a:hover::after { transform: translateX(var(--s-1)); }
+  }
 }
 
 @media print {
