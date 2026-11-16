@@ -1168,6 +1168,64 @@
     .statement__note { grid-column: 9 / -1; }
   }
 
+  /* ===== Design pass 2 (F4): where, map, tiles, months ===== */
+  /* Where. The drawn map beside the linked list. */
+  .where { display: grid; gap: var(--s-6); }
+  .map { display: grid; gap: var(--s-3); }
+  .map svg { width: 100%; height: auto; max-width: 30rem; }
+  .map figcaption { font-size: var(--t-small); line-height: 1.45; color: var(--muted); max-width: 44ch; }
+  .map__land { fill: var(--wheat); }
+  .map__sea { fill: var(--sea); }
+  .map__coast { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linejoin: round; }
+  .map__hills { fill: none; stroke: var(--brass); stroke-width: 1; opacity: 0.6; }
+  .map__river { fill: none; stroke: var(--teal); stroke-width: 1.25; stroke-linecap: round; }
+  .map__dot { fill: var(--ink); stroke: var(--sand); stroke-width: 2; transform-box: fill-box; transform-origin: center; }
+  .map__dot.is-here { fill: var(--gold); stroke: var(--ink); r: 8px; }
+  .map__name { font-family: var(--font-head); font-weight: 600; font-size: 18px; fill: var(--ink); letter-spacing: -0.01em; }
+  .map__ctx { font-family: var(--font-body); font-size: 15px; fill: var(--ink-2); }
+  @media (min-width: 900px) {
+    .where { grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); align-items: center; }
+    .where > .map { grid-column: 1 / span 5; }
+    .where > .where__list { grid-column: 7 / -1; }
+    .where--small > .map { grid-column: 1 / span 4; }
+    .where--small > .where__list { grid-column: 6 / -1; }
+  }
+  @media (hover: hover) {
+    .where:has([data-area="glenelg"]:hover) .map__dot[data-area="glenelg"],
+    .where:has([data-area="brighton"]:hover) .map__dot[data-area="brighton"],
+    .where:has([data-area="norwood"]:hover) .map__dot[data-area="norwood"],
+    .where:has([data-area="cbd"]:hover) .map__dot[data-area="cbd"],
+    .where:has([data-area="prospect"]:hover) .map__dot[data-area="prospect"],
+    .where:has([data-area="stirling"]:hover) .map__dot[data-area="stirling"] { fill: var(--teal); transform: scale(1.6); }
+  }
+
+  /* Tiles. A linked card for an area: the place photograph, the name, one line, the year in twelve cells. */
+  .tiles { display: grid; gap: var(--s-6) var(--gap); }
+  .tile a { display: grid; gap: var(--s-3); color: inherit; text-decoration: none; }
+  .tile h3 { font-size: var(--t-h3); display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-3); }
+  .tile h3::after { content: "\2192"; content: "\2192" / ""; font-weight: 500; }
+  .tile p { max-width: 38ch; }
+  .tile__type { font-size: var(--t-h2); letter-spacing: -0.03em; line-height: 1; padding: var(--s-5); align-self: end; justify-self: start; color: var(--ink); }
+  .months--mini { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; }
+  .months--mini > i { height: 0.625rem; background: var(--sand-2); border: 1px solid var(--line); }
+  .months--mini > .is-peak { background: var(--ink); border-color: var(--ink); }
+  .months--mini > .is-mid { background: #d1d1cf; background: color-mix(in srgb, var(--ink) 20%, var(--sand)); border-color: transparent; }
+  .months--mini > .has-event { border-top: 3px solid var(--gold); }
+  @media (min-width: 600px) { .tiles { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1200px) { .tiles { grid-template-columns: repeat(3, 1fr); } }
+  @media (hover: hover) { .tile a:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; } }
+
+  /* Months, second version: taller cells, month names from 900, events named under the months they fall in. */
+  .months__bar > li { height: 3.5rem; }
+  .months__rest { display: none; }
+  .months__events { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--s-1); font-size: var(--t-small); color: var(--ink); }
+  .months__events > li { grid-column-end: -1; white-space: nowrap; padding-left: var(--s-2); border-left: 2px solid var(--gold); line-height: 1.5; }
+  .ev--m1 { grid-column-start: 1; } .ev--m2 { grid-column-start: 2; } .ev--m3 { grid-column-start: 3; } .ev--m4 { grid-column-start: 4; }
+  @media (min-width: 900px) {
+    .months__bar > li { height: 4.5rem; font-size: var(--t-h4); }
+    .months__rest { display: inline; }
+  }
+
   /* Kit page only. Remove in X2 with kit.html. Not for use on a site page. */
   .kitgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--kit-w, 8rem), 1fr)); gap: var(--s-3); margin-top: var(--s-4); }
   .kitgrid .plate { gap: var(--s-1); }
