@@ -30,7 +30,7 @@
 @font-face { font-family: "Satoshi Fallback"; src: local("Arial"), local("ArialMT"), local("Liberation Sans"); font-weight: 400; size-adjust: 99.5%; ascent-override: 101.5%; descent-override: 24.1%; line-gap-override: 10%; }
 @font-face { font-family: "Satoshi Fallback"; src: local("Arial"), local("ArialMT"), local("Liberation Sans"); font-weight: 500; size-adjust: 102.3%; ascent-override: 98.7%; descent-override: 23.5%; line-gap-override: 9.8%; }
 
-@layer tokens, base, layout, components, utilities, motion;
+@layer tokens, base, layout, components, bands, utilities, motion;
 
 /* 1. TOKENS --------------------------------------------------------------- */
 @layer tokens {
@@ -91,7 +91,6 @@
     --s-8: 4rem;     /* 64 */
     --s-9: 6rem;     /* 96 */
     --s-10: 9rem;    /* 144 */
-    --section: clamp(3rem, 0.77rem + 9.14vw, 9rem); /* section padding, 48 on a phone to 144 */
     --gutter: 1.25rem;                            /* 20 phone, 40 from 600, 72 from 1200 */
     --wrap: 81rem;                                /* 1296 */
     --gap: 1.5rem;                                /* column gap */
@@ -112,10 +111,47 @@
 
     /* The turnover line. Where on the screen the gold line's head sits, as insets from top and bottom. */
     --tl-band: 62% 37%;
+
+    /* Grounds. Both new grounds are mixes of the four brand colours. No new hue. */
+    --wheat: #f3e9d7;                 /* warm ground. Gold 22 percent in sand */
+    --wheat: color-mix(in srgb, var(--gold) 22%, var(--sand));
+    --wheat-2: #eadbbe;               /* drawn tiles on light grounds. Gold 38 percent in sand */
+    --wheat-2: color-mix(in srgb, var(--gold) 38%, var(--sand));
+    --gulf: #183e3d;                  /* deep green ground. Teal 30 percent in ink */
+    --gulf: color-mix(in srgb, var(--teal) 30%, var(--ink));
+    --sea: #d5dac9;                   /* the gulf on the map. Teal 14 percent in wheat */
+    --sea: color-mix(in srgb, var(--teal) 14%, var(--wheat));
+    --brass: #7a5c22;                 /* gold as text on light grounds. 6.1 to 1 on sand, 5.2 on wheat */
+    --muted-wheat: #4e5d63;           /* captions on wheat. 5.7 to 1 */
+    --on-gulf: var(--sand);           /* 11.5 to 1 on gulf */
+    --on-gulf-2: #ccd3d0;             /* 7.7 to 1 on gulf */
+    --on-gulf-2: color-mix(in srgb, var(--sand) 78%, var(--gulf));
+    --line-light: #e1ddd5;            /* the pass 1 hairline, kept under its own name so paper can reset to it */
+    --line-light: color-mix(in srgb, var(--ink) 13%, var(--sand));
+    --line-on-wheat: #d0c9bb;
+    --line-on-wheat: color-mix(in srgb, var(--ink) 16%, var(--wheat));
+    --line-on-gulf: #42605f;
+    --line-on-gulf: color-mix(in srgb, var(--sand) 18%, var(--gulf));
+
+    /* The voice. Statements, the letter, the second line of the slogan. F8 swaps these four for the serif. */
+    --font-voice: var(--font-head);
+    --voice-weight: 500;
+    --voice-style: normal;
+    --voice-track: -0.02em;
+
+    /* Type. Two new steps. */
+    --t-poster: clamp(2rem, 1.257rem + 3.048vw, 4rem);     /* 32 to 64. One statement per page */
+    --t-fig: clamp(2.5rem, 1.386rem + 4.571vw, 5.5rem);    /* 40 to 88. Numerals in chips */
+
+    /* Space. Section padding tops out at 112, not 144. */
+    --section: clamp(3rem, 1.514rem + 6.095vw, 7rem);
+
+    /* Paper grain. One 160 pixel tile, drawn by the browser. Sits over wheat and gulf only. */
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .09 0 0 0 0 .13 0 0 0 0 .15 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   @media (min-width: 600px) {
-    :root { --gutter: 2.5rem; --t-display: clamp(2.375rem, 6.15vw, 5.75rem); }
+    :root { --gutter: 2.5rem; --t-display: clamp(2.75rem, 6.6vw, 6rem); }
   }
   @media (min-width: 900px) {
     :root { --header-h: 4.5rem; }
@@ -199,6 +235,16 @@
     .section__head > h2 { grid-column: 1 / span 5; }
     .section__head > .lead { grid-column: 7 / -1; max-width: 40ch; }
   }
+
+  .section--tight { padding-block: var(--s-7); }
+  /* Pair. Two short sections side by side from 900. */
+  .pair { display: grid; gap: var(--s-7); }
+  @media (min-width: 900px) {
+    .section--tight { padding-block: var(--s-8); }
+    .pair { grid-template-columns: 1fr 1fr; column-gap: calc(var(--gap) * 3); align-items: start; }
+  }
+  .pair > * > h2 { font-size: var(--t-h3); line-height: var(--lh-head); margin-bottom: var(--s-4); }
+  .pair > * > h2 + .rows { margin-top: var(--s-5); }
 }
 
 /* 4. COMPONENTS ----------------------------------------------------------- */
@@ -988,6 +1034,56 @@
   .checks-d--light .checks { color: var(--ink); border-top-color: var(--line); }
   .checks-d--light .checks li { border-bottom-color: var(--line); }
   .checks-d--light .checks li::before { color: var(--muted); }
+
+  /* ===== Design pass 2 (F1) ===== */
+  /* Voice */
+  .voice, .statement__line, .letter--voice > p:first-child, .quote--feature blockquote p, .tile__type {
+    font-family: var(--font-voice); font-weight: var(--voice-weight); font-style: var(--voice-style); letter-spacing: var(--voice-track);
+  }
+  .hero__h span + span { color: var(--brass); font-family: var(--font-voice); font-weight: var(--voice-weight); font-style: var(--voice-style); }
+
+  /* Kicker with a short gold rule before it */
+  .kick { display: inline-flex; align-items: center; gap: var(--s-2); font-family: var(--font-body); font-size: var(--t-small); font-weight: 500; line-height: 1.4; letter-spacing: 0; color: var(--ink); }
+  .kick::before { content: ""; flex: none; width: 1.5rem; height: 2px; background: var(--gold); }
+
+  /* Numerals take brass */
+  .std__no, .steps__no, .rule__no { color: var(--brass); }
+
+  /* CTA band takes the gulf ground. Footer takes ink. */
+  .cta-band { background: var(--gulf) var(--grain); }
+  .cta-band h2 { font-size: var(--t-poster); line-height: 1.05; letter-spacing: -0.03em; }
+  .site-footer { background: var(--ink); color: var(--on-ink-2); border-top: 0; }
+  .site-footer a, .site-footer .wordmark { color: var(--on-ink); }
+  .site-footer__brand p:last-child { color: var(--gold); font-family: var(--font-voice); font-weight: var(--voice-weight); font-style: var(--voice-style); font-size: var(--t-h3); line-height: 1.2; letter-spacing: var(--voice-track); max-width: 14ch; margin-top: var(--s-3); }
+  .site-footer__legal { color: var(--on-ink-2); border-top-color: var(--line-on-ink); }
+  .site-footer :focus-visible { outline-color: var(--sand); box-shadow: 0 0 0 5px var(--ink), 0 0 0 7px var(--gold); }
+  @media (hover: hover) { .site-footer a:hover { color: var(--on-ink); } }
+}
+
+/* 5. BANDS: a new layer after components ------------------------------------ */
+/* A section takes one ground. Hairlines, captions and text follow the ground. These rules must beat component rules,
+   which is why they have their own layer. Paper (.sheet, .askcard) resets to light inside any band. */
+@layer bands {
+  .band--wheat { background: var(--wheat) var(--grain); --line: var(--line-on-wheat); --muted: var(--muted-wheat); --tile: var(--gulf); --tile-ink: var(--gold); }
+  .band--sand2 { background: var(--sand-2); }
+  .band--gulf { background: var(--gulf) var(--grain); color: var(--on-gulf-2); --line: var(--line-on-gulf); --muted: var(--on-gulf-2); --tile: var(--wheat); --tile-ink: var(--ink); }
+  .turnover { --tile: var(--wheat); --tile-ink: var(--ink); --muted: var(--on-ink-2); }
+  /* F1 addition: the ink band had no text rules for a kicker or a link, which measured 1.0 and 2.6 to 1. */
+  :where(.turnover) :where(.kick):not(:where(.sheet, .askcard) *) { color: var(--on-ink); }
+  :where(.turnover) a:not(.btn):not(:where(.sheet, .askcard) *) { color: var(--on-ink); }
+
+  /* Text on the gulf ground. Zero specificity, and never inside paper. */
+  :where(.band--gulf) :where(h2, h3, h4, strong, dd, .kick, .statement__line, .rule__line):not(:where(.sheet, .askcard) *) { color: var(--on-gulf); }
+  :where(.band--gulf) :where(.lead, p, li, figcaption, dt):not(:where(.sheet, .askcard) *) { color: var(--on-gulf-2); }
+  :where(.band--gulf) a:not(.btn):not(:where(.sheet, .askcard) *) { color: var(--on-gulf); }
+  :where(.band--gulf) :where(.rows, .facts, .steps, .record) { border-top-color: var(--on-gulf-2); }
+  .band--gulf :focus-visible { outline-color: var(--sand); box-shadow: 0 0 0 5px var(--gulf), 0 0 0 7px var(--gold); }
+  .band--gulf .plate__label, .turnover .plate__label { color: var(--ink); }
+  .turnover .plate figcaption { color: var(--on-ink-2); }
+
+  /* Paper resets the ground. A sheet inside any band is still paper. */
+  .sheet, .askcard { --line: var(--line-light); --muted: #56666c; color: var(--ink-2); }
+  :is(.sheet, .askcard) :focus-visible { outline-color: var(--ink); box-shadow: 0 0 0 5px var(--gold); }
 }
 
 /* 5. UTILITIES ------------------------------------------------------------ */
@@ -1077,7 +1173,12 @@
 }
 
 @media print {
-  .site-header, .skip, .docs__hint { display: none; }
-  .turnover { background: none; color: var(--ink-2); }
-  .rise { animation: none; }
+  .site-header, .skip, .docs__hint, .toc, .jump, .cta-band, .menu { display: none; }
+  .band--wheat, .band--gulf, .band--sand2, .turnover, .site-footer, .cta-band, .chip { background: none; color: var(--ink-2); }
+  :is(.band--gulf, .turnover, .site-footer, .cta-band, .chip) :is(h2, h3, h4, strong, dd, p, li, a, figcaption, .kick, .statement__line) { color: var(--ink); }
+  .plate__frame { background: none; border: 1px solid var(--line-light); }
+  .plate--blend img { mix-blend-mode: normal; }
+  .rise, .plate__frame img { animation: none; }
+  .section, .statement { padding-block: var(--s-6); }
+  .rule, .acc__item, .steps > li, .sheet, .plate { break-inside: avoid; }
 }
