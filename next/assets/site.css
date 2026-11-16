@@ -315,7 +315,7 @@
   .btn--block { width: 100%; }
   .btn[disabled] { opacity: 0.6; cursor: progress; }
   @media (hover: hover) {
-    .btn--primary:hover { background: color-mix(in srgb, var(--ink) 86%, var(--sand)); }
+    .btn--primary:hover { background: color-mix(in srgb, var(--ink) 86%, var(--sand)); color: var(--sand); }
     .btn--gold:hover { background: color-mix(in srgb, var(--gold) 86%, var(--sand)); }
   }
 
