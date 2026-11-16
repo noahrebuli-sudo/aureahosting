@@ -204,6 +204,8 @@ def check_html(full, rel, regions_store):
     name = os.path.basename(rel)
     p = Page()
     p.feed(raw)
+    p.close()
+    p.figures.extend(p.fig_stack)  # figures never closed still get checked
     visible = " ".join(p.text) + " " + p.title + " " + " ".join(p.attr_text)
     visible = re.sub(r"\s+", " ", visible)
 
@@ -269,7 +271,9 @@ def check_html(full, rel, regions_store):
         fail(rel, 'indexable page still carries a robots noindex tag')
 
     # Pass 2 rules. (2) img attributes.
-    for a in ([] if iscard else p.imgs):
+    for a in p.imgs:
+        if iscard and (a.get("src") or "").startswith("https://www.facebook.com/tr?"):
+            continue  # the noscript Meta pixel, the one image exempt
         miss = [k for k in ("width", "height", "alt") if k not in a]
         if miss:
             fail(rel, "<img src=%r> missing %s" % (a.get("src"), ", ".join(miss)))
@@ -289,9 +293,15 @@ def check_html(full, rel, regions_store):
     # (4) glyph references name a real symbol.
     gids = glyph_ids()
     for h in p.uses:
-        m = re.match(r"^/assets/glyphs\.svg#(.+)$", h)
-        if m and m.group(1) not in gids:
-            fail(rel, "<use href=%r>: no symbol id %r in assets/glyphs.svg" % (h, m.group(1)))
+        m = re.fullmatch(r"/assets/glyphs\.svg#([A-Za-z0-9_-]+)", h)
+        if m:
+            if m.group(1) not in gids:
+                fail(rel, "<use href=%r>: no symbol id %r in assets/glyphs.svg" % (h, m.group(1)))
+        elif re.fullmatch(r"#[A-Za-z0-9_-]+", h):
+            if h[1:] not in p.ids:
+                fail(rel, "<use href=%r>: no symbol with that id in this page" % h)
+        else:
+            fail(rel, "<use href=%r> must be #id or exactly /assets/glyphs.svg#id" % h)
     # (5) pending facts stay hidden.
     for tag, hidden in p.facts:
         if not hidden:
@@ -304,7 +314,7 @@ def check_html(full, rel, regions_store):
         if (f["slot"] or "").startswith("A") and f["img"] and PUBLIC_PLACE not in ftext:
             fail(rel, 'figure data-slot=%r has an <img> but not "%s"' % (f["slot"], PUBLIC_PLACE))
     # (7) "we manage" outside Glenelg.
-    for m in re.finditer(r"\bwe manage(?! fewer)", visible, re.I):
+    for m in re.finditer(r"\bwe manage\b(?! fewer)", visible, re.I):
         s0 = max(0, m.start() - 25)
         msg = "'we manage' in '...%s...'" % visible[s0:m.end() + 25]
         if rel.startswith("areas/") and name != "glenelg.html":
