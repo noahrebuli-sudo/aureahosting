@@ -82,6 +82,7 @@ class Page(HTMLParser):
         self.head = {}
         self.in_title = False
         self.title = ""
+        self.svg = 0
         self.htmllang = None
         self.region = None
         self.regions = {"header": [], "footer": []}
@@ -104,7 +105,11 @@ class Page(HTMLParser):
             self.htmllang = a.get("lang")
         if tag in ("script", "style"):
             self.skip += 1
-        if tag == "title":
+        if tag == "svg":
+            self.svg += 1
+        # A <title> inside an inline SVG names that drawing. It is not the page title,
+        # and its words are checked as visible text like any other.
+        if tag == "title" and not self.svg:
             self.in_title = True
         if tag == "img":
             self.imgs.append(a)
@@ -156,6 +161,8 @@ class Page(HTMLParser):
     def handle_endtag(self, tag):
         if tag in ("script", "style") and self.skip:
             self.skip -= 1
+        if tag == "svg" and self.svg:
+            self.svg -= 1
         if tag == "title":
             self.in_title = False
         if tag == "figure" and self.fig_stack:
