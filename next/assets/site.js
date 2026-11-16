@@ -1,4 +1,4 @@
-/* Aurea Hosting, next.js. Form handling only.
+/* Aurea Hosting, site.js. Form handling only.
    The page is complete without this file. With JavaScript off the form posts straight to Formspree. */
 (function () {
   'use strict';
