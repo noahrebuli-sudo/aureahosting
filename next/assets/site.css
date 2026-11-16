@@ -1493,7 +1493,7 @@
     :root:not([data-sda="off"]) .map__dot { transition: transform var(--dur-fast) var(--ease-out), fill var(--dur-fast) var(--ease-out); }
     :root:not([data-sda="off"]) .tile .plate__frame img { transition: transform var(--dur-base) var(--ease-out); }
     /* The portrait carries from the home hero to the About head. The one named transition besides the header. */
-    :root:not([data-sda="off"]) :is(.plate--main img, .page-head--split .plate--blend img) { view-transition-name: founder; }
+    :root:not([data-sda="off"]) :is(.hero .plate--main img, .page-head--split .plate--blend img) { view-transition-name: founder; }
   }
   @media (prefers-reduced-motion: no-preference) and (hover: hover) {
     :root:not([data-sda="off"]) .tile a:hover .plate__frame img { transform: scale(1.03); }
