@@ -4,6 +4,7 @@
 Usage: python3 scripts/check.py [path ...]   (default: every file under next/)
 Exit 0 when there are no failures. Warnings never fail the build.
 """
+import html as htmllib
 import os
 import re
 import sys
@@ -28,15 +29,21 @@ BANNED = [
     (r"24/7|24-7|around the clock|day and night|every hour", "banned phrase"),
     (r"guest[- ]ready", "say 'ready for guests'"),
     (r"\bone person\b|\bone manager\b|\bone point of contact\b|\bsingle operator\b|\bsolo\b", "banned phrase"),
-    (r"\b" + NUM + r"\s+(?:homes|properties)\b|\bcapped at\b|\bfifteen\b|\btwenty\b", "home count"),
+    (r"\b" + NUM + r"[+\s]*(?:homes|properties)\b|\bcapped at\b|\bfifteen\b|\btwenty\b", "home count"),
     (r"appraisal|\byield\b|earning potential|could earn|stronger returns|income calendar|revenue estimate|what your home is worth|free report", "banned phrase"),
-    (r"\bpremium\b|\bpremier\b|\bleading\b|\bluxury\b|\bstunning\b|\bnestled\b|world-class|\bunrivalled\b|\bunmatched\b|\bfinest\b|\bexceptional\b|hotel-grade|\bhassle\b|passive income|\bmaximis|\boptimis|\bobsessive\b", "superlative or sales word"),
-    (r"\bassets?\b|\bcorridor\b|\bcohort\b|\bSTR\b|\bintel\b|\bupsell\b|demand rating", "old jargon"),
+    (r"\bpremium\b|\bpremier\b|\bleading\b|\bluxury\b|\bstunning\b|\bnestled\b|world-class|\bunrivalled\b|\bunmatched\b|\bfinest\b|\bexceptional\b|hotel-grade|\bhassle\b|passive income|\bmaximi[sz]|\bobsessive\b", "superlative or sales word"),
+    (r"\boptimis", "superlative or sales word"),
+    (r"\bassets?\b|\bcorridor\b|\bcohort\b|(?-i:\bSTR\b)|\bintel\b|\bupsell\b|demand rating", "old jargon"),
     (r"\bapply\b|\bapplication\b", "'apply' or 'application'"),
     (r"organiz|optimiz|neighbor|favorite|tradeoff", "American spelling"),
     (r"wine on arrival|private chef", "concierge extra not to be mentioned"),
     (r"clause\s+\d|termination|notice period", "contract term"),
 ]
+# Main's text carried word for word (guide 4.9, 4.10): exempt from these two rules only.
+EXEMPT_FILES = ("privacy.html", "fees.html")
+EXEMPT_PATTERNS = (r"\bapply\b|\bapplication\b", r"\boptimis")
+FEES_URL = r"(?:https?://(?:www\.)?aureahosting\.com\.au)?/fees"
+WARN_NUMBERS = r"\boccupancy\b|\buplift\b|\b\d+(?:\.\d+)?\s*points?\b"
 WARN_WORDS = r"\bbest\b|\bforecast|\bguarantee|\balways\b|\bnever\b|\bevery\b"
 EMOJI = re.compile("[\U0001F000-\U0001FAFF☀-➿⬀-⯿️‍]")
 MONEY = re.compile(r"[$%]")
@@ -90,14 +97,16 @@ class Page(HTMLParser):
                     self.attr_text.append(a[k])
         if tag == "link" and a.get("rel") == "canonical":
             self.head["canonical"] = a.get("href", "")
-        for k in ("alt", "title", "aria-label"):
+        if tag == "meta" and (a.get("property") or "") in ("og:title", "og:description") and a.get("content"):
+            self.attr_text.append(a["content"])
+        for k in ("alt", "title", "aria-label", "placeholder", "value"):
             if a.get(k):
                 self.attr_text.append(a[k])
         if tag in ("a", "link", "script", "img", "source", "form"):
             for k in ("href", "src", "action"):
                 if a.get(k) is not None:
                     self.hrefs.append((tag, k, a[k], self.region))
-                    if tag == "a" and k == "href" and re.match(r"^/fees(?:[/?#]|$)", a[k]):
+                    if tag == "a" and k == "href" and re.match(r"^" + FEES_URL + r"(?:[/?#]|$)", a[k]):
                         self.fees_links.append(self.region)
         if tag == "a" and a.get("href", "").startswith("#") and len(a["href"]) > 1:
             self.anchors.append(a["href"][1:])
@@ -154,12 +163,18 @@ def check_html(full, rel, regions_store):
     name = os.path.basename(rel)
     p = Page()
     p.feed(raw)
-    visible = " ".join(p.text) + " " + " ".join(p.attr_text)
+    visible = " ".join(p.text) + " " + p.title + " " + " ".join(p.attr_text)
     visible = re.sub(r"\s+", " ", visible)
 
     # Banned words (3.3), on visible copy and alt/description text, comments excluded.
+    noted = False
     for pat, why in BANNED:
-        for m in re.finditer(pat, visible, re.I if "STR" not in pat else 0):
+        if name in EXEMPT_FILES and pat in EXEMPT_PATTERNS:
+            if re.search(pat, visible, re.I) and not noted:
+                print("NOTE %s: exempt from apply/application and optimis rules (main's text, guide 4.9 and 4.10)" % rel)
+                noted = True
+            continue
+        for m in re.finditer(pat, visible, re.I):
             s = max(0, m.start() - 25)
             fail(rel, "%s: '%s' in '...%s...'" % (why, m.group(0), visible[s:m.end() + 25]))
     if not (rel in ("fees.html", "faq.html")):
@@ -168,8 +183,9 @@ def check_html(full, rel, regions_store):
             fail(rel, "$ or %% outside fees and FAQ cost group: '...%s...'" % visible[s:m.end() + 25])
     elif rel == "faq.html" and MONEY.search(visible):
         warn(rel, "$ or % present: confirm each sits in the cost group")
-    if re.search(r"\bapply\b", visible, re.I) is None:
-        pass
+    for m in re.finditer(WARN_NUMBERS, visible, re.I):
+        s0 = max(0, m.start() - 30)
+        warn(rel, "occupancy, uplift or points figure, read in context: '...%s...'" % visible[s0:m.end() + 30])
     for m in EMOJI.finditer(raw):
         fail(rel, "emoji or pictograph U+%04X" % ord(m.group(0)))
     for m in re.finditer(WARN_WORDS, visible, re.I):
@@ -243,7 +259,7 @@ def check_html(full, rel, regions_store):
             fail(rel, "/fees link outside about and faq")
         for rg in ("header", "footer"):
             rcode = region_of(raw, rg)
-            if rcode and re.search(r'href="/fees(?:[/?#"])', rcode):
+            if rcode and re.search(r'href="' + FEES_URL + r'(?:[/?#"])', rcode):
                 fail(rel, "/fees link inside the %s" % rg)
 
     # Header and footer markers for parity.
@@ -261,8 +277,9 @@ def check_text(full, rel):
         raw = fh.read().decode("utf-8", "replace")
     for ch, label in ((chr(0x2014), "em dash"), (chr(0x2013), "en dash")):
         for n, line in enumerate(raw.split("\n"), 1):
-            if ch in line:
+            if ch in line or ch in htmllib.unescape(line):
                 fail(rel, "%s on line %d" % (label, n))
+
     if not rel.endswith(".html"):
         for m in EMOJI.finditer(raw):
             fail(rel, "emoji or pictograph U+%04X" % ord(m.group(0)))
@@ -290,8 +307,17 @@ def main():
         if rel.endswith(".html"):
             htmls += 1
             check_html(full, rel, regions)
+    # Parity is always measured against next/index.html, even on a single-file run.
+    idx = os.path.join(ROOT, "index.html")
+    if args and os.path.isfile(idx):
+        with open(idx, "rb") as fh:
+            iraw = fh.read().decode("utf-8", "replace")
+        for rg in ("header", "footer"):
+            code = region_of(iraw, rg)
+            if code is not None:
+                regions.setdefault(rg, {}).setdefault("index.html", norm_region(code))
     for rg, pages in regions.items():
-        base_rel = sorted(pages)[0]
+        base_rel = "index.html" if "index.html" in pages else sorted(pages)[0]
         for rel, code in pages.items():
             if code != pages[base_rel]:
                 fail(rel, "%s differs from %s between markers" % (rg, base_rel))
