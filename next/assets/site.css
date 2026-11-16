@@ -372,7 +372,7 @@
   }
   .register dt, .areas span { font-size: var(--t-small); line-height: 1.4; color: var(--muted); }
   .register dd, .areas strong { color: var(--ink); font-weight: 500; line-height: 1.35; font-variant-numeric: tabular-nums; text-wrap: balance; }
-  .areas span { color: var(--ink-2); }
+  .areas span { font-size: var(--t-body); line-height: 1.4; color: var(--ink-2); }
   @container (min-width: 25rem) {
     .register > div, .areas > li {
       flex-basis: 100%;
@@ -788,6 +788,7 @@
     .split--flip .split__a { grid-column: 8 / -1; }
     .split--flip .split__b { grid-column: 1 / span 6; }
   }
+  .split__a > h2 + :not(.steps) { margin-top: var(--s-4); }
 
   /* Prose: long text, privacy, FAQ answers, fees */
   .prose { max-width: var(--measure); }
@@ -845,6 +846,7 @@
 
   /* Steps: the same ruled rhythm as the standard rows. Always open. */
   .steps { container-type: inline-size; border-top: 1px solid var(--ink); }
+  :is(h2, h3) + .steps { margin-top: var(--s-6); }
   .steps > li {
     display: grid; grid-template-columns: 2.5rem 1fr; column-gap: var(--s-2); row-gap: var(--s-1);
     padding-block: var(--s-4); border-bottom: 1px solid var(--line); align-items: baseline;
@@ -899,7 +901,7 @@
   .tier__plus { color: var(--ink-2); }
   @media (min-width: 600px) { .tiers { grid-template-columns: 1fr 1fr; column-gap: var(--gap); } }
   .tiers + .ledger--example { margin-top: var(--s-7); }
-  .ledger--example { margin-top: 0; font-size: var(--t-body); max-width: 44rem; }
+  .ledger--example { margin-top: var(--s-6); font-size: var(--t-body); max-width: 44rem; }
   .ledger--example caption {
     caption-side: top; text-align: left; padding-bottom: var(--s-3); border-bottom: 1px solid var(--ink);
     font-family: var(--font-head); font-weight: 600; font-size: var(--t-h4); letter-spacing: -0.01em; color: var(--ink);
