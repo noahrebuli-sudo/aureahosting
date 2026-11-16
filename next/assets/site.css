@@ -1230,6 +1230,119 @@
     .months__rest { display: inline; }
   }
 
+  /* ===== Design pass 2 (F5): founder, ask card, index, turnover, trust slots, drawn month, documents on gulf ===== */
+  /* F5 fix: a proof item keeps its rows at their own height, so a short item does not drift down beside a tall one. */
+  .proofs > li { align-content: start; }
+  /* Founder: the letter in the voice, a byline with the face, and the team beside it. */
+  .founder { display: grid; gap: var(--s-6); }
+  .letter--voice > p:first-child { font-size: var(--t-h3); line-height: 1.3; max-width: 32ch; text-wrap: balance; }
+  .letter--voice p { max-width: 40ch; }
+  .byline { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-4); margin-top: var(--s-2); }
+  .byline__face { width: 4rem; height: 4rem; object-fit: cover; object-position: 50% 12%; background: var(--wheat-2); }
+  .byline strong { display: block; font-family: var(--font-head); font-weight: 600; font-size: var(--t-h4); letter-spacing: -0.01em; }
+  .byline span { font-size: var(--t-small); color: var(--muted); line-height: 1.3; }
+  .byline a { display: inline-flex; align-items: center; min-height: var(--tap); font-weight: 500; }
+  .founder__team { display: grid; gap: var(--s-4); align-content: start; }
+  @media (min-width: 900px) {
+    .founder { grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); align-items: start; }
+    .founder .letter { grid-column: 1 / span 7; padding-left: 0; font-size: var(--t-lead); }
+    .founder__team { grid-column: 9 / -1; }
+  }
+
+  /* Ask card. Who you will speak to, with the number. */
+  .askcard { display: grid; grid-template-columns: 6.5rem 1fr; gap: var(--s-4); align-items: center; padding: var(--s-4); background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); }
+  .askcard img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 50% 12%; background: var(--wheat-2); }
+  .askcard strong { display: block; font-family: var(--font-head); font-weight: 600; font-size: var(--t-h4); letter-spacing: -0.01em; color: var(--ink); }
+  .askcard p { line-height: 1.45; color: var(--ink-2); }
+  .askcard span { display: block; font-size: var(--t-small); color: var(--muted); }
+  .askcard + h2 { margin-top: var(--s-7); }
+  .askcard a { display: inline-flex; align-items: center; min-height: var(--tap); font-weight: 500; }
+
+  /* Sticky index for long pages, and the evidence plate beside a rule */
+  .toc { display: none; }
+  .rule__fig { margin-top: var(--s-2); max-width: 20rem; }
+  @media (min-width: 1200px) {
+    .with-toc { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); align-items: start; }
+    .toc { display: grid; grid-column: 1 / span 2; position: sticky; top: calc(var(--header-h) + var(--s-6)); border-top: 1px solid var(--ink); }
+    .toc a { display: flex; align-items: center; gap: var(--s-2); min-height: var(--tap); color: var(--ink-2); text-decoration: none; font-size: var(--t-small); font-weight: 500; line-height: 1.3; border-bottom: 1px solid var(--line); }
+    .toc a .num { color: var(--brass); }
+    .with-toc > .toc + * { grid-column: 4 / -1; }
+    .with-toc .rule { grid-template-columns: repeat(9, 1fr); }
+    .with-toc .rule__no { grid-column: 1; }
+    .with-toc .rule__name { grid-column: 2 / span 3; }
+    .with-toc .rule__line, .with-toc .rule__body, .with-toc .rule__check { grid-column: 5 / -1; }
+    .with-toc .rule__fig { grid-column: 1 / span 3; grid-row: 2 / span 2; }
+    .with-toc .acc, .with-toc .prose { width: auto; max-width: 46rem; }
+    .jump--toc { display: none; }
+  }
+  @media (min-width: 900px) and (max-width: 1199.98px) {
+    .rule__fig { grid-column: 2 / span 4; grid-row: 2 / span 2; }
+  }
+  @media (hover: hover) { .toc a:hover { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.3em; } }
+
+  /* Turnover: times at heading size, and a photograph at the stops that have one */
+  .tl__time { font-size: var(--t-h3); }
+  .tl__shot { max-width: 7rem; }
+  /* A plate this small cannot hold a drawing and a label. Under 900 the label stays for screen readers only. */
+  @media (max-width: 899.98px) {
+    .tl__shot .plate__label { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+    .tl__shot .plate__art { width: 56cqw; margin-block: var(--s-2); }
+  }
+  @media (min-width: 900px) {
+    .tl__time { line-height: var(--mark); }
+    .tl__shot { max-width: 16rem; }
+    .tl__shot .plate__frame { aspect-ratio: 4 / 3; }
+  }
+  /* The larger time needs the full desktop track. Between 900 and 1199 it stays at heading-three size. */
+  @media (min-width: 1200px) {
+    .tl__time { font-size: var(--t-h2); letter-spacing: -0.03em; }
+    .tl__time small { font-size: 0.5em; letter-spacing: 0; }
+  }
+  /* "Regularly" is a word, not a time. It never takes the larger size. */
+  .tl__stop--when .tl__time { font-size: var(--t-h3); letter-spacing: 0; }
+
+  /* Trust slots. Built now, shown when Noah supplies the fact. */
+  .record { display: grid; gap: var(--s-4); padding-top: var(--s-5); margin-top: var(--s-7); border-top: 1px solid var(--ink); }
+  .record__h { font-size: var(--t-h4); letter-spacing: -0.01em; }
+  .record dl { display: grid; gap: var(--s-4); }
+  .record dd { font-family: var(--font-head); font-weight: 600; font-size: var(--t-h2); line-height: 1; letter-spacing: -0.03em; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .record dt { font-size: var(--t-small); color: var(--muted); margin-top: var(--s-1); }
+  .record dl > div { display: flex; flex-direction: column-reverse; }
+  .record__asat { font-size: var(--t-small); color: var(--muted); }
+  @media (min-width: 600px) { .record dl { grid-template-columns: repeat(3, 1fr); column-gap: var(--gap); } }
+  .rating { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-2) var(--s-4); padding-block: var(--s-3); border-block: 1px solid var(--line); }
+  .rating strong { font-family: var(--font-head); font-weight: 600; font-size: var(--t-h3); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .rating span { font-size: var(--t-small); color: var(--muted); }
+  .quote--feature { padding-left: 0; border-left: 0; display: grid; gap: var(--s-4); }
+  .quote--feature::before { content: ""; width: 6rem; height: 3px; background: var(--gold); }
+  .quote--feature blockquote p { font-size: var(--t-poster); line-height: 1.12; letter-spacing: -0.03em; max-width: 24ch; }
+  .quote--feature figcaption { margin-top: 0; font-size: var(--t-body); color: var(--ink-2); }
+
+  /* A drawn month, for the dashboard until a real screenshot is supplied */
+  .cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-top: var(--s-4); }
+  .cal > i { aspect-ratio: 1; background: var(--sand-2); }
+  .cal > .is-booked { background: var(--ink); }
+  .cal > .is-owner { background: var(--gold); }
+  .cal__key { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); margin-top: var(--s-4); font-size: var(--t-small); color: var(--ink-2); }
+  .cal__key > li { display: inline-flex; align-items: center; gap: var(--s-2); }
+  .cal__key > li::before { content: ""; width: 1rem; height: 1rem; background: var(--sand-2); }
+  .cal__key > .is-booked::before { background: var(--ink); }
+  .cal__key > .is-owner::before { background: var(--gold); }
+
+  /* F5 fix: backgrounds are dropped in print, which emptied the drawn month and its key. */
+  @media print {
+    .cal > i, .cal__key > li::before { print-color-adjust: exact; -webkit-print-color-adjust: exact; outline: 1px solid var(--line-light); }
+  }
+
+  /* Documents on the gulf ground read as paper on a desk */
+  .receive.band--gulf .sheet, .band--gulf .docs--stack .sheet { border-color: transparent; box-shadow: 0 1.5rem 2.5rem -1.25rem rgb(0 0 0 / 0.55); }
+  .receive.band--gulf .docs { margin-top: var(--s-6); }
+  .receive.band--gulf .docs + .docs { margin-top: var(--s-8); }
+  @media (min-width: 1100px) {
+    .receive.band--gulf .docs:not(.docs--stack) { padding-bottom: var(--s-6); }
+    .receive.band--gulf .docs:not(.docs--stack) > .doc:nth-child(2) { translate: 0 var(--s-6); }
+  }
+
   /* Kit page only. Remove in X2 with kit.html. Not for use on a site page. */
   .kitgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--kit-w, 8rem), 1fr)); gap: var(--s-3); margin-top: var(--s-4); }
   .kitgrid .plate { gap: var(--s-1); }
@@ -1379,5 +1492,5 @@
   .plate--blend img { mix-blend-mode: normal; }
   .rise, .plate__frame img { animation: none; }
   .section, .statement { padding-block: var(--s-6); }
-  .rule, .acc__item, .steps > li, .sheet, .plate { break-inside: avoid; }
+  .rule, .acc__item, .steps > li, .sheet, .plate, .letter--voice > p:first-child { break-inside: avoid; }
 }
