@@ -48,6 +48,19 @@ EXEMPT_PATTERNS = (r"\bapply\b|\bapplication\b", r"\boptimis")
 FEES_URL = r"(?:https?://(?:www\.)?aureahosting\.com\.au)?/fees"
 WARN_NUMBERS = r"\boccupancy\b|\buplift\b|\b\d+(?:\.\d+)?\s*points?\b"
 WARN_WORDS = r"\bbest\b|\bforecast|\bguarantee|\balways\b|\bnever\b|\bevery\b"
+NOINDEX_FILES = ("404.html", "card.html", "kit.html")
+PUBLIC_PLACE = "A public place, not a managed home."
+GLYPHS = os.path.join(ROOT, "assets", "glyphs.svg")
+
+
+def glyph_ids():
+    try:
+        with open(GLYPHS, "rb") as fh:
+            return set(re.findall(r'<symbol\b[^>]*\bid="([^"]+)"', fh.read().decode("utf-8", "replace")))
+    except OSError:
+        return set()
+
+
 EMOJI = re.compile("[\U0001F000-\U0001FAFF☀-➿⬀-⯿️‍]")
 MONEY = re.compile(r"[$%]")
 
@@ -75,6 +88,12 @@ class Page(HTMLParser):
         self.raw_regions = {}
         self.fees_links = []
         self.comments = []
+        self.imgs = []
+        self.srcsets = []
+        self.uses = []
+        self.facts = []
+        self.figures = []
+        self.fig_stack = []
 
     def handle_comment(self, data):
         self.comments.append(data)
@@ -87,6 +106,21 @@ class Page(HTMLParser):
             self.skip += 1
         if tag == "title":
             self.in_title = True
+        if tag == "img":
+            self.imgs.append(a)
+            for f in self.fig_stack:
+                f["img"] = True
+        for k in ("srcset", "imagesrcset"):
+            if a.get(k):
+                self.srcsets.append((tag, k, a[k]))
+        if tag == "use":
+            h = a.get("href") if a.get("href") is not None else a.get("xlink:href")
+            if h is not None:
+                self.uses.append(h)
+        if a.get("data-fact") == "pending":
+            self.facts.append((tag, "hidden" in a))
+        if tag == "figure":
+            self.fig_stack.append({"slot": a.get("data-slot"), "cls": (a.get("class") or "").split(), "img": False, "text": []})
         if "id" in a:
             self.ids.add(a["id"])
         if "style" in a:
@@ -124,12 +158,16 @@ class Page(HTMLParser):
             self.skip -= 1
         if tag == "title":
             self.in_title = False
+        if tag == "figure" and self.fig_stack:
+            self.figures.append(self.fig_stack.pop())
 
     def handle_data(self, data):
         if self.in_title:
             self.title += data
         elif not self.skip:
             self.text.append(data)
+            for f in self.fig_stack:
+                f["text"].append(data)
 
 
 def strip_comments(s):
@@ -166,6 +204,8 @@ def check_html(full, rel, regions_store):
     name = os.path.basename(rel)
     p = Page()
     p.feed(raw)
+    p.close()
+    p.figures.extend(p.fig_stack)  # figures never closed still get checked
     visible = " ".join(p.text) + " " + p.title + " " + " ".join(p.attr_text)
     visible = re.sub(r"\s+", " ", visible)
 
@@ -214,8 +254,9 @@ def check_html(full, rel, regions_store):
     elif len(t) > 60:
         fail(rel, "title is %d characters, 60 at most" % len(t))
     is404 = name == "404.html"
+    iskit = name == "kit.html" and "/" not in rel
     d = p.head.get("description")
-    if not is404 and not iscard:
+    if not is404 and not iscard and not iskit:
         if not d:
             fail(rel, "no meta description")
         elif len(d) > 155:
@@ -223,11 +264,63 @@ def check_html(full, rel, regions_store):
         if not p.head.get("canonical"):
             fail(rel, "no canonical link")
     has_noindex = re.search(r'<meta\s+name="robots"\s+content="noindex', raw)
-    if rel in ('404.html', 'card.html'):
+    if rel in NOINDEX_FILES:
         if not has_noindex:
             fail(rel, 'missing <meta name="robots" content="noindex, nofollow">')
     elif has_noindex:
         fail(rel, 'indexable page still carries a robots noindex tag')
+
+    # Pass 2 rules. (2) img attributes.
+    for a in p.imgs:
+        if iscard and (a.get("src") or "").startswith("https://www.facebook.com/tr?"):
+            continue  # the noscript Meta pixel, the one image exempt
+        miss = [k for k in ("width", "height", "alt") if k not in a]
+        if miss:
+            fail(rel, "<img src=%r> missing %s" % (a.get("src"), ", ".join(miss)))
+    # (3) every srcset URL resolves.
+    for tag, k, val in p.srcsets:
+        for cand in val.split(","):
+            u = cand.strip().split()
+            if not u:
+                continue
+            u = u[0]
+            if re.match(r"^(https?:|data:)", u):
+                continue
+            if not u.startswith("/"):
+                fail(rel, "%s %s URL %r is not root-relative" % (tag, k, u))
+            elif not resolves(u):
+                fail(rel, "%s %s URL %r does not resolve to a file in next/" % (tag, k, u))
+    # (4) glyph references name a real symbol.
+    gids = glyph_ids()
+    for h in p.uses:
+        m = re.fullmatch(r"/assets/glyphs\.svg#([A-Za-z0-9_-]+)", h)
+        if m:
+            if m.group(1) not in gids:
+                fail(rel, "<use href=%r>: no symbol id %r in assets/glyphs.svg" % (h, m.group(1)))
+        elif re.fullmatch(r"#[A-Za-z0-9_-]+", h):
+            if h[1:] not in p.ids:
+                fail(rel, "<use href=%r>: no symbol with that id in this page" % h)
+        else:
+            fail(rel, "<use href=%r> must be #id or exactly /assets/glyphs.svg#id" % h)
+    # (5) pending facts stay hidden.
+    for tag, hidden in p.facts:
+        if not hidden:
+            fail(rel, 'data-fact="pending" on <%s> without hidden' % tag)
+    # (6) place frames and plates.
+    for f in p.figures:
+        ftext = re.sub(r"\s+", " ", "".join(f["text"]))
+        if "plate" in f["cls"] and not f["slot"]:
+            fail(rel, "<figure class=\"%s\"> has no data-slot" % " ".join(f["cls"]))
+        if (f["slot"] or "").startswith("A") and f["img"] and PUBLIC_PLACE not in ftext:
+            fail(rel, 'figure data-slot=%r has an <img> but not "%s"' % (f["slot"], PUBLIC_PLACE))
+    # (7) "we manage" outside Glenelg.
+    for m in re.finditer(r"\bwe manage\b(?! fewer)", visible, re.I):
+        s0 = max(0, m.start() - 25)
+        msg = "'we manage' in '...%s...'" % visible[s0:m.end() + 25]
+        if rel.startswith("areas/") and name != "glenelg.html":
+            fail(rel, msg + " (only the Glenelg page may say it)")
+        else:
+            warn(rel, msg)
 
     # Links.
     for tag, k, href, region in p.hrefs:

@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 // Full-page screenshots and the no-overflow check (guide 5.1 C2).
 //
-// Usage: node scripts/shots.mjs [--out DIR] [--base URL] <path> [<path> ...]
+// Usage: node scripts/shots.mjs [--out DIR] [--base URL] [--sizes 390,1440] <path> [<path> ...]
 //   paths are URL paths such as / /about /areas/glenelg (default: /)
 //   --out   output folder (default: <system temp>/aurea-shots; never inside the repo)
+//   --sizes comma list of screenshot widths (default 390,1440). Height is 844 under 600 wide, else 900
 //   --base  server (default http://localhost:8080, start it with: python3 scripts/serve.py)
 //
 // Needs Playwright. No package.json is committed, so it is found at run time:
@@ -20,10 +21,12 @@ import { join } from 'node:path';
 const args = process.argv.slice(2);
 let out = join(tmpdir(), 'aurea-shots');
 let base = 'http://localhost:8080';
+let sizes = [390, 1440];
 const paths = [];
 for (let i = 0; i < args.length; i++) {
   if (args[i] === '--out') out = args[++i];
   else if (args[i] === '--base') base = args[++i];
+  else if (args[i] === '--sizes') sizes = args[++i].split(',').map((n) => parseInt(n, 10)).filter((n) => n > 0);
   else paths.push(args[i]);
 }
 if (!paths.length) paths.push('/');
@@ -44,7 +47,7 @@ const pw = await loadPlaywright();
 const chromium = pw.chromium || pw.default.chromium;
 mkdirSync(out, { recursive: true });
 
-const SHOT_SIZES = [[390, 844], [1440, 900]];
+const SHOT_SIZES = sizes.map((w) => [w, w < 600 ? 844 : 900]);
 const OVERFLOW_WIDTHS = [390, 600, 768, 900, 1024, 1200, 1440];
 const slug = (p) => (p === '/' ? 'home' : p.replace(/^\/|\/$/g, '').replace(/\//g, '-'));
 
