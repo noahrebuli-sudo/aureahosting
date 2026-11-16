@@ -19,10 +19,10 @@
 
 /* 0. FONTS ---------------------------------------------------------------- */
 /* Switzer for headings (500, 600). Satoshi for body (400, 500). Nothing else. */
-@font-face { font-family: "Switzer"; src: url("../assets/fonts/Switzer-Semibold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
-@font-face { font-family: "Switzer"; src: url("../assets/fonts/Switzer-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
-@font-face { font-family: "Satoshi"; src: url("../assets/fonts/Satoshi-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "Satoshi"; src: url("../assets/fonts/Satoshi-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Switzer"; src: url("/assets/fonts/Switzer-Semibold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Switzer"; src: url("/assets/fonts/Switzer-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Satoshi"; src: url("/assets/fonts/Satoshi-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Satoshi"; src: url("/assets/fonts/Satoshi-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
 
 /* Fallbacks sized to the real fonts (measured from the woff2 files) so the swap does not move text. */
 @font-face { font-family: "Switzer Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"); font-weight: 600; size-adjust: 95.7%; ascent-override: 102.4%; descent-override: 26.1%; line-gap-override: 9.4%; }
