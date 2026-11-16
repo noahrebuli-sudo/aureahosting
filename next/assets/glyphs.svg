@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="g-door" viewBox="0 0 48 48"><path d="M13 42V9a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v33M8 42h32M18 12h12v10H18zM18 27h12v10H18z"/><circle cx="32" cy="25" r="0.9"/></symbol>
+  <symbol id="g-keysafe" viewBox="0 0 48 48"><rect x="8" y="10" width="32" height="28" rx="3"/><circle cx="18" cy="24" r="4.500"/><path d="M22.500 24H33M29 24v4M33 24v3.500"/></symbol>
+  <symbol id="g-bed" viewBox="0 0 48 48"><path d="M6 36V14M6 30h36v6M42 30v-6a4 4 0 0 0-4-4H21v10M6 24h9a4 4 0 0 1 4 4v2"/><path d="M10 20.500a2.500 2.500 0 0 1 5 0"/></symbol>
+  <symbol id="g-linen" viewBox="0 0 48 48"><rect x="8" y="31" width="32" height="8" rx="2.500"/><rect x="10.500" y="22" width="27" height="8" rx="2.500"/><rect x="13" y="13" width="22" height="8" rx="2.500"/><path d="M13 35h6M15.500 26h6M18 17h6"/></symbol>
+  <symbol id="g-phone" viewBox="0 0 48 48"><rect x="14" y="5" width="20" height="38" rx="3.500"/><path d="M18.500 14.500l1.600 1.600 2.900-3.100M26 14.500h4.500M18.500 22l1.600 1.600 2.900-3.100M26 22h4.500M18.500 29.500l1.600 1.600 2.900-3.100M26 29.500h4.500M22 38.500h4"/></symbol>
+  <symbol id="g-photos" viewBox="0 0 48 48"><rect x="7" y="9" width="15" height="13" rx="1"/><rect x="26" y="9" width="15" height="13" rx="1"/><rect x="7" y="26" width="15" height="13" rx="1"/><rect x="26" y="26" width="15" height="13" rx="1"/><path d="M7 19l4.500-4 3.500 3 2.500-2 4.500 3M26 36l4-4 3.500 3.500 3-2.500 4.500 3M11 30h7M11 34h4"/><circle cx="36" cy="14" r="1.500"/></symbol>
+  <symbol id="g-tap" viewBox="0 0 48 48"><path d="M6 17h27a5 5 0 0 1 5 5v4h-6v-4H6zM22 17v-5M16 12h12M35 32c-2 3-3 4.500-3 6a3 3 0 0 0 6 0c0-1.500-1-3-3-6z"/></symbol>
+  <symbol id="g-calendar" viewBox="0 0 48 48"><rect x="8" y="10" width="32" height="30" rx="2"/><path d="M8 18h32M16 6v8M32 6v8M14 25h4M22 25h4M30 25h4M14 32h4M22 32h4"/></symbol>
+  <symbol id="g-note" viewBox="0 0 48 48"><path d="M12 6h17l8 8v28H12zM29 6v8h8M18 22h13M18 28h13M18 34h7"/></symbol>
+  <symbol id="g-wave" viewBox="0 0 48 48"><path d="M4 18c5 0 5-4 10-4s5 4 10 4 5-4 10-4 5 4 10 4M4 27c5 0 5-4 10-4s5 4 10 4 5-4 10-4 5 4 10 4M4 36c5 0 5-4 10-4s5 4 10 4 5-4 10-4 5 4 10 4"/></symbol>
+  <symbol id="g-roof" viewBox="0 0 48 48"><path d="M7 42V23L24 10l17 13v19M4 42h40M20 42V30h8v12M12 28h4v5h-4zM32 28h4v5h-4zM33 17v-6h4v9"/></symbol>
+  <symbol id="g-tower" viewBox="0 0 48 48"><path d="M12 42V11h13v31M25 42V20h10v22M6 42h36M16 17h5M16 23h5M16 29h5M16 35h5M29 26h2M29 32h2M18.500 11V6"/></symbol>
+  <symbol id="g-hills" viewBox="0 0 48 48"><path d="M4 38l11-14 7 8 9-15 13 21M4 42h40M36 12a3 3 0 1 0 0.010 0"/></symbol>
+</svg>
