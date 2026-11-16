@@ -1,0 +1,25 @@
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=63072000; includeSubDomains
+  Content-Security-Policy-Report-Only: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https://www.facebook.com https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://www.google.com.au; connect-src 'self' https://formspree.io https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://www.googletagmanager.com https://connect.facebook.net https://www.facebook.com; form-action 'self' https://formspree.io; worker-src 'self' blob:; frame-src https://www.facebook.com; manifest-src 'self'
+
+/aurea-noah.vcf
+  Content-Type: text/vcard; charset=utf-8
+
+/Aurea-Owner-Agreement
+  X-Robots-Tag: noindex
+/Aurea-Owner-Agreement.html
+  X-Robots-Tag: noindex
+/Aurea-Owner-Appointment-Form
+  X-Robots-Tag: noindex
+/Aurea-Owner-Appointment-Form.html
+  X-Robots-Tag: noindex
+
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=2592000
