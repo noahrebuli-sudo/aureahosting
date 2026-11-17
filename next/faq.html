@@ -222,18 +222,34 @@
 
 <main id="main">
 
-<section class="page-head" aria-labelledby="page-h">
+<section class="page-head page-head--split band--wheat" aria-labelledby="page-h">
   <div class="wrap">
-    <p class="page-head__kicker">Questions</p>
-    <h1 class="page-head__h" id="page-h">Answers for Adelaide owners</h1>
-    <div class="hero__rule" aria-hidden="true"></div>
-    <p class="lead">What it costs, what you still pay, where we work and what the first step is.</p>
+    <div class="page-head__grid">
+      <div class="page-head__text">
+        <p class="page-head__kicker kick">Questions</p>
+        <h1 class="page-head__h" id="page-h">Answers for Adelaide owners</h1>
+        <div class="hero__rule" aria-hidden="true"></div>
+        <p class="lead">What it costs, what you still pay, where we work and what the first step is.</p>
+      </div>
+      <div class="page-head__side">
+        <div class="askcard">
+          <picture>
+            <source type="image/avif" srcset="/images/p/founder-480.avif 480w, /images/p/founder-800.avif 800w" sizes="104px">
+            <img src="/images/p/founder-800.jpg" srcset="/images/p/founder-480.jpg 480w, /images/p/founder-800.jpg 800w" sizes="104px" width="800" height="1200" alt="Noah Rebuli, founder of Aurea Hosting" loading="lazy" decoding="async">
+          </picture>
+          <p><strong>Noah Rebuli</strong> <span>Founder</span> <a href="tel:0404608196" class="num" data-track="call">0404 608 196</a></p>
+        </div>
+        <p class="lead">Not sure? Call <a href="tel:0404608196" class="num" data-track="call">0404 608 196</a> and we will tell you.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="section" aria-label="Questions and answers">
-  <div class="wrap">
-    <nav class="jump" aria-label="Sections"><a href="#cost">Cost</a><a href="#home">Your home</a><a href="#care">Guests and care</a><a href="#start">Getting started</a><a href="#money">Money and statements</a></nav>
+  <div class="wrap with-toc">
+    <nav class="toc" aria-label="Sections"><a href="#cost">Cost</a><a href="#home">Your home</a><a href="#care">Guests and care</a><a href="#start">Getting started</a><a href="#money">Money and statements</a></nav>
+    <div>
+    <nav class="jump jump--toc" aria-label="Sections"><a href="#cost">Cost</a><a href="#home">Your home</a><a href="#care">Guests and care</a><a href="#start">Getting started</a><a href="#money">Money and statements</a></nav>
     <div class="acc">
       <h2 class="acc__group" id="cost">Cost</h2>
       <details class="acc__item">
@@ -308,6 +324,7 @@
         <summary><h3>Can I see my bookings?</h3></summary>
         <div class="acc__a prose"><p>Yes. Every owner has a real-time dashboard that shows bookings as they land.</p></div>
       </details>
+    </div>
     </div>
   </div>
 </section>
