@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Image pipeline for Aurea photographs (guide 3.8). Run by hand, never by a build.
 
-Use: python3 scripts/img.py <slot> <source file> --ratio 4:5 [--focus 50,40] [--no-grade]
+Use: python3 scripts/img.py <slot> <source file> --ratio 4:5 [--focus 50,40] [--no-grade] [--avif-q 55]
 
 Steps, in order: apply the phone's rotation, convert to sRGB, crop to the ratio
 around the focus point, apply the one grade, resize to 480, 800 and 1200 wide,
@@ -76,6 +76,7 @@ def main():
     p.add_argument("--ratio", required=True, help="for example 4:5")
     p.add_argument("--focus", default="50,50", help="percent from left and top")
     p.add_argument("--no-grade", action="store_true", help="studio portrait only")
+    p.add_argument("--avif-q", type=int, default=AVIF_Q, help="AVIF quality, default %d. Lower it only when a frame passes the byte budget" % AVIF_Q)
     a = p.parse_args()
 
     need_avif()
@@ -115,7 +116,7 @@ def main():
         # fresh image, no info dict: pixels only
         clean = Image.new("RGB", rs.size)
         clean.paste(rs)
-        for ext, kw in (("avif", dict(format="AVIF", quality=AVIF_Q)),
+        for ext, kw in (("avif", dict(format="AVIF", quality=a.avif_q)),
                         ("jpg", dict(format="JPEG", quality=JPEG_Q, progressive=True, optimize=True))):
             f = OUT / f"{slot}-{w}.{ext}"
             clean.save(f, **kw)
