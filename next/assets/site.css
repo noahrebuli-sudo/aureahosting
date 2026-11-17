@@ -1116,6 +1116,7 @@
   /* The portrait supports the headline. --pw is its width: the chip hangs off its right edge, clear of the face. */
   .hero__plates { position: relative; --pw: clamp(10rem, 52vw, 14rem); }
   .hero__plates .plate--main .plate__frame { width: var(--pw); aspect-ratio: 4 / 5; }
+  .hero__plates figcaption { text-wrap: pretty; }
   .hero__plates .chip { position: absolute; left: calc(var(--pw) - var(--s-5)); top: calc(var(--pw) * 1.25 - var(--s-5)); translate: 0 -100%; width: 8.5rem; }
   @media (min-width: 900px) {
     .hero--split { padding-block: var(--s-8) 0; }
@@ -1123,10 +1124,10 @@
     .hero--split .hero__text { grid-column: 1 / span 7; padding-bottom: var(--s-6); }
     .hero__plates { grid-column: 9 / -1; justify-self: end; width: 100%; max-width: 19rem; }
     .hero__plates .plate--main .plate__frame { width: auto; }
-    .hero__plates .chip { left: calc(-1 * var(--s-8)); top: auto; bottom: 4.5rem; translate: none; width: 10.5rem; padding: var(--s-5); }
+    .hero__plates .chip { left: auto; right: calc(100% - var(--s-6)); top: auto; bottom: 4.5rem; translate: none; }
   }
   @media (min-width: 1200px) {
-    .hero__plates .chip { left: auto; right: calc(100% - var(--s-6)); }
+    .hero__plates .chip { width: 10.5rem; padding: var(--s-5); }
   }
 
   /* Page head, split. Text and one plate, facts along the foot. */
