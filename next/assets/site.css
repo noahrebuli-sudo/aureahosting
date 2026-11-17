@@ -790,7 +790,7 @@
   .site-footer__brand p:last-child { color: var(--ink); font-size: var(--t-body); }
   .site-footer__nav { display: grid; justify-items: start; align-content: start; }
   .site-footer__contact { grid-column: 1 / -1; display: grid; justify-items: start; align-content: start; }
-  .site-footer a { color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; min-height: var(--tap); }
+  .site-footer a { color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; min-height: var(--tap); min-width: var(--tap); }
   .site-footer__legal { color: var(--muted); padding-top: var(--s-4); border-top: 1px solid var(--line); line-height: 1.5; }
   @media (min-width: 600px) {
     .site-footer { padding-block: var(--s-8) var(--s-7); }
@@ -933,7 +933,7 @@
   /* Jump list: a wrapped row of text links, 48px tall each. */
   .jump { display: flex; flex-wrap: wrap; column-gap: var(--s-5); border-block: 1px solid var(--line); }
   .jump + .acc { margin-top: var(--s-7); }
-  .jump a { display: inline-flex; align-items: center; min-height: var(--tap); font-weight: 500; }
+  .jump a { display: inline-flex; align-items: center; min-height: var(--tap); min-width: var(--tap); font-weight: 500; }
 
   /* Tiers and the worked example (fees). */
   .tiers { display: grid; gap: var(--s-6); }
@@ -1249,6 +1249,7 @@
   .page-head__text > .lead + h2 { margin-top: var(--s-7); }
   .page-head__text > h2 + p { margin-top: var(--s-3); }
   .page-head__grid + .prose, .page-head .cta + .jump { margin-top: var(--s-6); }
+  .prose + .rows { margin-top: var(--s-5); }
   .byline { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-4); margin-top: var(--s-2); }
   .byline__face { width: 4rem; height: 4rem; object-fit: cover; object-position: 50% 12%; background: var(--wheat-2); }
   .byline strong { display: block; font-family: var(--font-head); font-weight: 600; font-size: var(--t-h4); letter-spacing: -0.01em; }
@@ -1527,4 +1528,11 @@
   .section, .statement { padding-block: var(--s-6); }
   .rule, .acc__item, .steps > li, .sheet, .plate, .letter--voice > p:first-child { break-inside: avoid; }
   h2, h3 { break-after: avoid; }
+  .tl__stop, .rows > li { break-inside: avoid; }
+  .btn--primary { background: none; color: var(--ink); border: 1px solid var(--ink); }
+  .hero__plates .chip { position: static; width: auto; }
+  .docs:not(.docs--stack) { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(3, 1fr); gap: var(--s-3); overflow: visible; padding-block: 0; }
+  .docs:not(.docs--stack) .sheet { padding: var(--s-3); }
+  .site-footer { break-inside: avoid; }
+  .site-footer__nav, .site-footer__contact a[href^="/"] { display: none; }
 }
