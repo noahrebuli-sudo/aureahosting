@@ -1229,6 +1229,13 @@
   .months--mini > .is-mid { background: #d1d1cf; background: color-mix(in srgb, var(--ink) 20%, var(--sand)); border-color: transparent; }
   .months--mini > .has-event { border-top: 3px solid var(--gold); }
   @media (min-width: 600px) { .tiles { grid-template-columns: 1fr 1fr; } }
+  /* A tile with a photograph has a caption and a drawn tile has none. Shared rows keep headings and bars level across a row. */
+  @media (min-width: 600px) {
+    @supports (grid-template-rows: subgrid) {
+      .tile { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: var(--s-3); }
+      .tile a { grid-row: 1 / -1; grid-template-rows: subgrid; height: auto; }
+    }
+  }
   @media (min-width: 1200px) { .tiles { grid-template-columns: repeat(3, 1fr); } }
   @media (hover: hover) { .tile a:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; } }
 
