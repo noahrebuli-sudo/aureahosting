@@ -858,7 +858,7 @@
   }
   .more a::after { content: "\2192"; content: "\2192" / ""; display: inline-block; text-decoration: none; }
 
-  /* ---- F3 kit components -------------------------------------------------- */
+  /* ---- F3 components ------------------------------------------------------ */
 
   /* Rule block: the long form of one standard. Number, name, line, body, check. */
   .rule {
@@ -1358,24 +1358,6 @@
     .receive.band--gulf .docs:not(.docs--stack) > .doc:nth-child(2) { translate: 0 var(--s-6); }
   }
 
-  /* Kit page only. Remove in X2 with kit.html. Not for use on a site page. */
-  .kitgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--kit-w, 8rem), 1fr)); gap: var(--s-3); margin-top: var(--s-4); }
-  .kitgrid .plate { gap: var(--s-1); }
-  .kitgrid .plate figcaption { font-size: var(--t-small); color: var(--muted); }
-  .kitgrid--11, .kitgrid--32, .kitgrid--43, .kitgrid--45 { --kit-w: 15rem; }
-  .kitfit { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: start; margin-top: var(--s-4); }
-  .kitfit--240 .plate { width: 240px; }
-  .kitfit--280 .plate { width: 280px; }
-  .kitfit--320 .plate { width: 320px; }
-  .kitsizes { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: end; margin-top: var(--s-4); }
-  .kitsizes .plate { width: 7rem; }
-  .kitsizes .plate__frame { aspect-ratio: 1; }
-  .kitsizes .plate__art { max-width: none; }
-  .kitsizes .kit-80 .plate__art { width: 80px; }
-  .kitsizes .kit-40 { width: 4rem; }
-  .kitsizes .kit-40 .plate__art { width: 40px; }
-  .kitpair { display: grid; gap: var(--s-6); }
-  @media (min-width: 900px) { .kitpair { grid-template-columns: 22rem 1fr; align-items: end; } }
 }
 
 /* 5. BANDS: a new layer after components ------------------------------------ */
