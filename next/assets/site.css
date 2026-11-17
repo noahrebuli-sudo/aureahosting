@@ -1113,16 +1113,20 @@
   .hero--split .hero__rule, .page-head--split .hero__rule, .page-head.band--wheat .hero__rule { width: 6rem; height: 3px; }
   .hero--split .hero__rule { margin-block: var(--s-5); }
   .hero--split .hero__pitch { gap: var(--s-4); }
-  .hero__plates { position: relative; max-width: 24rem; }
-  .hero__plates .plate--main .plate__frame { aspect-ratio: 1; }
-  .hero__plates .chip { position: absolute; right: 0; bottom: 2.75rem; width: 8.5rem; }
+  /* The portrait supports the headline. --pw is its width: the chip hangs off its right edge, clear of the face. */
+  .hero__plates { position: relative; --pw: clamp(10rem, 52vw, 14rem); }
+  .hero__plates .plate--main .plate__frame { width: var(--pw); aspect-ratio: 4 / 5; }
+  .hero__plates .chip { position: absolute; left: calc(var(--pw) - var(--s-5)); top: calc(var(--pw) * 1.25 - var(--s-5)); translate: 0 -100%; width: 8.5rem; }
   @media (min-width: 900px) {
     .hero--split { padding-block: var(--s-8) 0; }
     .hero--split .hero__grid { grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); align-items: end; }
     .hero--split .hero__text { grid-column: 1 / span 7; padding-bottom: var(--s-6); }
-    .hero__plates { grid-column: 9 / -1; max-width: none; }
-    .hero__plates .plate--main .plate__frame { aspect-ratio: 4 / 5; }
-    .hero__plates .chip { right: auto; left: calc(-1 * var(--s-8)); bottom: 4.5rem; width: 10.5rem; padding: var(--s-5); }
+    .hero__plates { grid-column: 9 / -1; justify-self: end; width: 100%; max-width: 19rem; }
+    .hero__plates .plate--main .plate__frame { width: auto; }
+    .hero__plates .chip { left: calc(-1 * var(--s-8)); top: auto; bottom: 4.5rem; translate: none; width: 10.5rem; padding: var(--s-5); }
+  }
+  @media (min-width: 1200px) {
+    .hero__plates .chip { left: auto; right: calc(100% - var(--s-6)); }
   }
 
   /* Page head, split. Text and one plate, facts along the foot. */
@@ -1512,7 +1516,7 @@
   h2, h3 { break-after: avoid; }
   .tl__stop, .rows > li { break-inside: avoid; }
   .btn--primary { background: none; color: var(--ink); border: 1px solid var(--ink); }
-  .hero__plates .chip { position: static; width: auto; }
+  .hero__plates .chip { position: static; width: auto; translate: none; }
   .docs:not(.docs--stack) { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(3, 1fr); gap: var(--s-3); overflow: visible; padding-block: 0; }
   .docs:not(.docs--stack) .sheet { padding: var(--s-3); }
   .site-footer { break-inside: avoid; }
