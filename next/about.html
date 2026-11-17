@@ -19,6 +19,7 @@
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/Switzer-Semibold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" type="image/avif" href="/images/p/founder-800.avif" imagesrcset="/images/p/founder-480.avif 480w, /images/p/founder-800.avif 800w" imagesizes="(min-width: 1200px) 416px, (min-width: 900px) 30vw, (min-width: 600px) 384px, 90vw">
 <link rel="stylesheet" href="/assets/site.css">
 <script src="/assets/site.js" defer></script>
 <script src="/assets/tags.js" defer></script>
@@ -78,38 +79,35 @@
 
 <main id="main">
 
-<section class="page-head" aria-labelledby="page-h">
+<section class="page-head page-head--split band--wheat" aria-labelledby="page-h">
   <div class="wrap">
-    <p class="page-head__kicker">About</p>
-    <h1 class="page-head__h" id="page-h">The people who look after your home</h1>
-    <div class="hero__rule" aria-hidden="true"></div>
-    <p class="lead">A small portfolio and a dedicated team, based in Adelaide.</p>
+    <div class="page-head__grid">
+      <div class="page-head__text">
+        <p class="page-head__kicker kick">About</p>
+        <h1 class="page-head__h" id="page-h">The people who look after your home</h1>
+        <div class="hero__rule" aria-hidden="true"></div>
+        <p class="lead">A small portfolio and a dedicated team, based in Adelaide.</p>
+      </div>
+      <figure class="plate plate--45 plate--blend" data-slot="P16">
+        <div class="plate__frame">
+          <picture>
+            <source type="image/avif" srcset="/images/p/founder-480.avif 480w, /images/p/founder-800.avif 800w" sizes="(min-width: 1200px) 416px, (min-width: 900px) 30vw, (min-width: 600px) 384px, 90vw">
+            <img src="/images/p/founder-800.jpg" srcset="/images/p/founder-480.jpg 480w, /images/p/founder-800.jpg 800w" sizes="(min-width: 1200px) 416px, (min-width: 900px) 30vw, (min-width: 600px) 384px, 90vw" width="800" height="1200" alt="Noah Rebuli, founder of Aurea Hosting" loading="eager" fetchpriority="high" decoding="async">
+          </picture>
+        </div>
+        <figcaption class="plate__who"><strong>Noah Rebuli</strong> Founder <a href="tel:0404608196" class="num" data-track="call">0404 608 196</a></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
 <section class="section" aria-label="From the founder">
   <div class="wrap split">
     <div class="split__a">
-      <figure class="portrait">
-        <img src="/images/founder-noah.jpg" width="800" height="1200" alt="Noah Rebuli, founder of Aurea Hosting" loading="lazy" decoding="async">
-        <figcaption><strong>Noah Rebuli</strong> Founder <a href="tel:0404608196" class="num">0404 608 196</a></figcaption>
-      </figure>
-    </div>
-    <div class="split__b letter">
-      <p>I have been hosting short stays in Adelaide for six years. The homes that hold up are the ones somebody looks at closely and often.</p>
-      <p>You cannot do that across hundreds of homes. So Aurea stays small on purpose, with a dedicated team who know each home and its owner.</p>
-      <p>How we work is written down on this site so you can read it before you call and hold us to it after. If that is how you want your home looked after, give me a call.</p>
-    </div>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="small-h">
-  <div class="wrap split">
-    <div class="split__a">
-      <div class="prose">
-        <h2 id="small-h">Small on purpose</h2>
-        <p>Homes do well when someone looks at them closely and often. That does not stretch across hundreds of homes, so we keep the portfolio small.</p>
-        <p>Your calls go to people who know your home, set its rates and check its cleans.</p>
+      <div class="letter letter--voice">
+        <p>I have been hosting short stays in Adelaide for six years. The homes that hold up are the ones somebody looks at closely and often.</p>
+        <p>You cannot do that across hundreds of homes. So Aurea stays small on purpose, with a dedicated team who know each home and its owner.</p>
+        <p>How we work is written down on this site so you can read it before you call and hold us to it after. If that is how you want your home looked after, give me a call.</p>
       </div>
     </div>
     <div class="split__b">
@@ -119,38 +117,85 @@
         <div><dt>Guest messages</dt><dd>A reply within minutes, 7&nbsp;days a week</dd></div>
         <div><dt>Double bookings</dt><dd>Zero</dd></div>
       </dl>
+      <p class="rating" hidden data-fact="pending">
+        <!-- CONFIRM WITH NOAH: only if the Noble ruling allows a rating drawn from the homes the team runs. Needs the figure, where it was read and the date. Format when filled: the figure in the strong, then "Average guest rating across the homes we look after, read on <date>." Empty until then. -->
+        <strong class="num"></strong> <span></span>
+      </p>
     </div>
   </div>
 </section>
 
-<section class="section receive" aria-labelledby="team-h">
+<section class="statement band--gulf" aria-labelledby="small-h">
+  <div class="wrap statement__in">
+    <h2 class="kick" id="small-h">Small on purpose</h2>
+    <p class="statement__line">Homes do well when someone looks at them closely and often.</p>
+    <div class="statement__note">
+      <p>That does not stretch across hundreds of homes, so we keep the portfolio small.</p>
+      <p>Your calls go to people who know your home, set its rates and check its cleans.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section band--wheat" aria-labelledby="team-h">
   <div class="wrap">
     <div class="section__head">
       <h2 id="team-h">The team</h2>
     </div>
-    <ul class="rows">
+    <ul class="proofs proofs--4">
       <li>
-        <h3>Cleaners</h3>
-        <p>The same cleaners at every changeover, working to a written standard. They photograph the finished home every time.</p>
+        <figure class="plate plate--11" data-slot="P11">
+          <div class="plate__frame">
+            <svg class="plate__art" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="/assets/glyphs.svg#g-linen"/></svg>
+            <p class="plate__label">The same cleaners at every changeover, working to a written standard.</p>
+          </div>
+        </figure>
+        <div>
+          <h3>Cleaners</h3>
+          <p>The same cleaners at every changeover, working to a written standard. They photograph the finished home every time.</p>
+        </div>
       </li>
       <li>
-        <h3>Trades</h3>
-        <p>Plumbers, electricians and air conditioning trades we know by first name and call directly.</p>
+        <figure class="plate plate--11" data-slot="P10">
+          <div class="plate__frame">
+            <svg class="plate__art" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="/assets/glyphs.svg#g-tap"/></svg>
+            <p class="plate__label">Trades we know by first name and call directly.</p>
+          </div>
+        </figure>
+        <div>
+          <h3>Trades</h3>
+          <p>Plumbers, electricians and air conditioning trades we know by first name and call directly.</p>
+        </div>
       </li>
       <li>
-        <h3>Guest messages</h3>
-        <p>Guests get a reply within minutes, 7 days a week.</p>
+        <figure class="plate plate--11" data-slot="P13">
+          <div class="plate__frame">
+            <svg class="plate__art" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="/assets/glyphs.svg#g-phone"/></svg>
+            <p class="plate__label">Guests get a reply within minutes, 7 days a week.</p>
+          </div>
+        </figure>
+        <div>
+          <h3>Guest messages</h3>
+          <p>Guests get a reply within minutes, 7 days a week.</p>
+        </div>
       </li>
       <li>
-        <h3>Pricing</h3>
-        <p>Rates are set by hand and reviewed every week.</p>
+        <figure class="plate plate--11" data-slot="P12">
+          <div class="plate__frame">
+            <svg class="plate__art" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="/assets/glyphs.svg#g-calendar"/></svg>
+            <p class="plate__label">Rates are set by hand and reviewed every week.</p>
+          </div>
+        </figure>
+        <div>
+          <h3>Pricing</h3>
+          <p>Rates are set by hand and reviewed every week.</p>
+        </div>
       </li>
     </ul>
     <p class="more"><a href="/how-we-run-a-home">How we run a home</a></p>
   </div>
 </section>
 
-<section class="section" aria-label="Fees">
+<section class="section section--tight" aria-label="Fees">
   <div class="wrap">
     <div class="prose">
       <p>Two tiers, nothing hidden. Here is <a href="/fees">how our fees work</a>.</p>
