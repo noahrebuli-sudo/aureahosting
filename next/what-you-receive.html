@@ -78,16 +78,26 @@
 
 <main id="main">
 
-<section class="page-head" aria-labelledby="page-h">
+<section class="page-head page-head--split band--wheat" aria-labelledby="page-h">
   <div class="wrap">
-    <p class="page-head__kicker">For owners</p>
-    <h1 class="page-head__h" id="page-h">What you receive</h1>
-    <div class="hero__rule" aria-hidden="true"></div>
-    <p class="lead">Three documents and one dashboard, set out the way an owner gets them. Names and amounts are left blank.</p>
+    <div class="page-head__grid">
+      <div class="page-head__text">
+        <p class="page-head__kicker kick">For owners</p>
+        <h1 class="page-head__h" id="page-h">What you receive</h1>
+        <div class="hero__rule" aria-hidden="true"></div>
+        <p class="lead">Three documents and one dashboard, set out the way an owner gets them. Names and amounts are left blank.</p>
+      </div>
+      <figure class="plate plate--45" data-slot="P09">
+        <div class="plate__frame">
+          <svg class="plate__art" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="/assets/glyphs.svg#g-note"/></svg>
+          <p class="plate__label">A fault note says what it is, what happens next and whether you need to act.</p>
+        </div>
+      </figure>
+    </div>
   </div>
 </section>
 
-<section class="section" aria-label="Three sample documents">
+<section class="section band--gulf" aria-label="Three sample documents">
   <div class="docs docs--stack">
 
     <div class="split">
@@ -189,21 +199,31 @@
   </div>
 </section>
 
-<section class="section receive" aria-labelledby="dash-h">
-  <div class="wrap">
-    <div class="section__head">
+<section class="section" aria-labelledby="dash-h">
+  <div class="wrap split">
+    <div class="split__a prose">
       <h2 id="dash-h">Your bookings, as they land</h2>
       <p class="lead">Every owner has a real-time dashboard. Open it at any time and see your bookings as they land. You do not have to ask us or wait for the statement.</p>
+    </div>
+    <div class="split__b">
+      <figure class="doc">
+        <div class="sheet">
+          <div class="sheet__head"><p class="sheet__title">Your calendar</p><p class="sheet__kind">A drawing</p></div>
+          <p class="cal" aria-hidden="true"><i></i><i></i><i class="is-booked"></i><i class="is-booked"></i><i class="is-booked"></i><i></i><i></i><i class="is-booked"></i><i class="is-booked"></i><i></i><i></i><i class="is-booked"></i><i class="is-booked"></i><i class="is-booked"></i><i class="is-booked"></i><i></i><i></i><i class="is-owner"></i><i class="is-owner"></i><i class="is-owner"></i><i></i><i></i><i class="is-booked"></i><i class="is-booked"></i><i class="is-booked"></i><i class="is-booked"></i><i class="is-booked"></i><i></i><i></i><i></i><i class="is-booked"></i><i class="is-booked"></i><i></i><i></i><i></i></p>
+          <ul class="cal__key"><li class="is-booked">Booked</li><li class="is-owner">Your dates</li><li>Open</li></ul>
+        </div>
+        <figcaption>Drawn for this page. Your dashboard shows your own bookings.</figcaption>
+      </figure>
+      <!-- CONFIRM WITH NOAH: replace this drawing with a real screenshot of the owner dashboard, names and amounts hidden (design pass 2 guide N10). -->
     </div>
   </div>
 </section>
 
-<section class="section" aria-labelledby="not-h">
-  <div class="wrap">
-    <div class="section__head">
-      <h2 id="not-h">What we do not send</h2>
-      <p class="lead">An earnings estimate before we have spoken. Every home is different, and a figure given before we know yours would be a guess. We talk nightly rates on the phone once we know the home.</p>
-    </div>
+<section class="statement band--wheat" aria-labelledby="not-h">
+  <div class="wrap statement__in">
+    <h2 class="kick" id="not-h">What we do not send</h2>
+    <p class="statement__line">We do not send an earnings estimate.</p>
+    <div class="statement__note"><p>Every home is different, and a figure given before we know yours would be a guess. We talk nightly rates on the phone once we know the home.</p></div>
   </div>
 </section>
 
