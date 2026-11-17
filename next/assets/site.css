@@ -1531,7 +1531,8 @@
   .tl__stop, .rows > li { break-inside: avoid; }
   .btn--primary { background: none; color: var(--ink); border: 1px solid var(--ink); }
   .hero__plates .chip { position: static; width: auto; }
-  .docs { display: grid; grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(3, 1fr); gap: var(--s-3); overflow: visible; padding: 0; }
-  .docs .sheet { padding: var(--s-3); }
+  .docs:not(.docs--stack) { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(3, 1fr); gap: var(--s-3); overflow: visible; padding-block: 0; }
+  .docs:not(.docs--stack) .sheet { padding: var(--s-3); }
+  .site-footer { break-inside: avoid; }
   .site-footer__nav, .site-footer__contact a[href^="/"] { display: none; }
 }
