@@ -1183,13 +1183,15 @@
   .map figcaption { font-size: var(--t-small); line-height: 1.45; color: var(--muted); max-width: 44ch; }
   .map__land { fill: var(--wheat); }
   .map__sea { fill: var(--sea); }
-  .map__coast { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linejoin: round; }
-  .map__hills { fill: none; stroke: var(--brass); stroke-width: 1; opacity: 0.6; }
-  .map__river { fill: none; stroke: var(--teal); stroke-width: 1.25; stroke-linecap: round; }
-  .map__dot { fill: var(--ink); stroke: var(--sand); stroke-width: 2; transform-box: fill-box; transform-origin: center; }
-  .map__dot.is-here { fill: var(--gold); stroke: var(--ink); r: 8px; }
-  .map__name { font-family: var(--font-head); font-weight: 600; font-size: 18px; fill: var(--ink); letter-spacing: -0.01em; }
-  .map__ctx { font-family: var(--font-body); font-size: 15px; fill: var(--ink-2); }
+  .map__coast { fill: none; stroke: var(--ink); stroke-width: 1.25; stroke-linejoin: round; stroke-linecap: round; }
+  .map__zone { fill: var(--gulf); stroke: var(--gulf); stroke-width: 3; stroke-linejoin: round; }
+  .map__dot { fill: var(--sand); stroke: var(--gulf); stroke-width: 2; transform-box: fill-box; transform-origin: center; }
+  .map__dot.is-here { fill: var(--gold); stroke: var(--sand); r: 8px; }
+  .map__name { font-family: var(--font-head); font-weight: 600; font-size: 16px; fill: var(--on-gulf); letter-spacing: -0.01em; }
+  .map__name--sea { fill: var(--ink); }
+  .map__ctx { font-family: var(--font-body); font-size: 14px; fill: var(--ink-2); }
+  .map__in { fill: var(--on-gulf-2); }
+  .map__gulf { font-style: italic; fill: var(--muted); }
   @media (min-width: 900px) {
     .where { grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); align-items: center; }
     .where > .map { grid-column: 1 / span 5; }
@@ -1208,14 +1210,14 @@
     .where:has([data-area=norwood]:hover) .map__dot[data-area=norwood],
     .where:has([data-area=cbd]:hover) .map__dot[data-area=cbd],
     .where:has([data-area=prospect]:hover) .map__dot[data-area=prospect],
-    .where:has([data-area=stirling]:hover) .map__dot[data-area=stirling] { fill: var(--teal); transform: scale(1.6); }
+    .where:has([data-area=stirling]:hover) .map__dot[data-area=stirling] { fill: var(--gold); transform: scale(1.6); }
   }
   .where:has([data-area=glenelg]:focus-visible) .map__dot[data-area=glenelg],
   .where:has([data-area=brighton]:focus-visible) .map__dot[data-area=brighton],
   .where:has([data-area=norwood]:focus-visible) .map__dot[data-area=norwood],
   .where:has([data-area=cbd]:focus-visible) .map__dot[data-area=cbd],
   .where:has([data-area=prospect]:focus-visible) .map__dot[data-area=prospect],
-  .where:has([data-area=stirling]:focus-visible) .map__dot[data-area=stirling] { fill: var(--teal); transform: scale(1.6); }
+  .where:has([data-area=stirling]:focus-visible) .map__dot[data-area=stirling] { fill: var(--gold); transform: scale(1.6); }
 
   /* Tiles. A linked card for an area: the place photograph, the name, one line, the year in twelve cells. */
   .tiles { display: grid; gap: var(--s-6) var(--gap); }
