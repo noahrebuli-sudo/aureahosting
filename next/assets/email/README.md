@@ -16,7 +16,9 @@ every message already sent shows a broken image forever.
 - Paths are permanent. Never rename a file or this directory.
 - Never route these through a bundler, image pipeline, or anything that hashes
   or rewrites filenames. Cloudflare Pages serves this directory verbatim from
-  the repo root, which is what keeps the URL stable across deploys.
+  the site root (`next/` since the 17 Nov 2026 cutover), which is what keeps the URL stable across deploys.
+- If the build output directory ever changes again, move this folder with it. The 17 Nov cutover
+  left it behind at the repo root and every signature image broke until it was moved.
 - To update artwork, overwrite the file in place at the same path and same
   dimensions. Do not add a version suffix.
 - Do not add `Disallow` rules covering `/assets/` to `robots.txt`, and do not
